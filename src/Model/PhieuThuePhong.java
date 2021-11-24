@@ -11,11 +11,12 @@ public class PhieuThuePhong extends AbsTable{
     private java.sql.Timestamp thoiGianDong ;
     private String tenKhachHang;
     private int tinhTrang;
+    private int giaNgayLe;
 
     public PhieuThuePhong() {
     }
 
-    public PhieuThuePhong(Integer idPhieuThuePhong, String SDT, Integer idPhong, Timestamp thoiGianMo, Timestamp thoiGianDong, String tenKhachHang, int tinhTrang) {
+    public PhieuThuePhong(Integer idPhieuThuePhong, String SDT, Integer idPhong, Timestamp thoiGianMo, Timestamp thoiGianDong, String tenKhachHang, int tinhTrang, int giaNgayLe) {
         this.idPhieuThuePhong = idPhieuThuePhong;
         this.SDT = SDT;
         this.idPhong = idPhong;
@@ -23,6 +24,7 @@ public class PhieuThuePhong extends AbsTable{
         this.thoiGianDong = thoiGianDong;
         this.tenKhachHang = tenKhachHang;
         this.tinhTrang = tinhTrang;
+        this.giaNgayLe = giaNgayLe;
     }
 
     public Integer getIdPhieuThuePhong() {
@@ -79,6 +81,14 @@ public class PhieuThuePhong extends AbsTable{
 
     public void setTinhTrang(int tinhTrang) {
         this.tinhTrang = tinhTrang;
+    }
+
+    public int getGiaNgayLe() {
+        return giaNgayLe;
+    }
+
+    public void setGiaNgayLe(int giaNgayLe) {
+        this.giaNgayLe = giaNgayLe;
     }
     
     @Override

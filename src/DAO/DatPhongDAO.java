@@ -37,9 +37,9 @@ public class DatPhongDAO extends AbsDAO<Phong>{
                             + "where tinhTrangPhong = N'Phòng còn trống' and a.idLoaiPhong = '"+idLoaiPhong+"' ");
     }
     
-    public List<Object[]> getGiaPhong(int idLoaiPhong) {
+    public List<Object[]> getGiaPhong(int idLoaiPhong, int idPhong) {
         return getRawValues("select a.idPhong,a.idLoaiPhong,tenPhong,tinhTrangPhong,tenLoaiPhong,soKhachMax,giaGio,thoiGianMo from Phong a "
                             + "join loaiPhong b on a.idLoaiPhong = b.idLoaiPhong join phieuThuePhong c on c.idPhong = a.idPhong "
-                            + "where a.idLoaiPhong = '"+idLoaiPhong+"' ");
+                            + "where a.idLoaiPhong = '"+idLoaiPhong+"' and a.idPhong = "+idPhong+" ");
     }
 }

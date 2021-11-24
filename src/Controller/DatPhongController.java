@@ -78,7 +78,7 @@ public class DatPhongController {
         return datPhongDAO.getPhongTrong(idLoaiPhong);
     }
     
-    public List<Object[]> getGiaPhong(int idLoaiPhong){
-        return datPhongDAO.getGiaPhong(idLoaiPhong);
+    public List<Object[]> getGiaPhong(int idLoaiPhong, int idPhong){
+        return datPhongDAO.getGiaPhong(idLoaiPhong, idPhong);
     }
 }

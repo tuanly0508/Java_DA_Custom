@@ -3,6 +3,12 @@
 use DuAn1
 go
 
+create table giaNgayLe(
+	idGiaNgayLe int identity primary key,
+	tenGia varchar(5) not null,
+	tinhTrang bit not null
+)
+
 create table GioDatTruoc(
 	idGioDatTruoc int identity primary key,
 	tenHinhThuc nvarchar(50) not null
@@ -126,7 +132,8 @@ create table phieuThuePhong(
 	thoiGianMo datetime not null,
 	thoiGianDong datetime null,
 	tenKhachHang nvarchar(50) null,
-	tinhTrang bit not null
+	tinhTrang bit not null,
+	giaNgayLe bit not null
 )
 
 create table hoaDon(
@@ -201,9 +208,14 @@ update phieuThuePhong set idPhong = 6 where idPhong = 1 and tinhTrang = 1
 
 select a.idPhong,a.idLoaiPhong,tenPhong,tinhTrangPhong,tenLoaiPhong,soKhachMax,giaGio,thoiGianMo from Phong a join loaiPhong b on a.idLoaiPhong = b.idLoaiPhong join phieuThuePhong c on c.idPhong = a.idPhong where a.idLoaiPhong = 2
 
+select count(*) isGiaNgayLe from phieuThuePhong where idPhong = 9 and giaNgayLe = 1 
+
+select a.idPhong,a.idLoaiPhong,tenPhong,tinhTrangPhong,tenLoaiPhong,soKhachMax,giaGio,thoiGianMo, DATEDIFF(DD,GETDATE(),thoiGianMo) tgsd 
+from Phong a join loaiPhong b 
+on a.idLoaiPhong = b.idLoaiPhong join phieuThuePhong c on c.idPhong = a.idPhong where a.idLoaiPhong = 1
 
 
-
+SELECT DATEDIFF(YY,'2000-05-20','2011-10-07');
 
 
 insert into GioDatTruoc values (N'Chọn ...')

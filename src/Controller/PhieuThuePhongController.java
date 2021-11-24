@@ -3,6 +3,7 @@ package Controller;
 import DAO.PhieuThuePhongDAO;
 import GUI_DatPhong.DatPhongPnl;
 import Model.PhieuThuePhong;
+import java.util.List;
 
 public class PhieuThuePhongController {
     DatPhongPnl view;
@@ -19,5 +20,10 @@ public class PhieuThuePhongController {
     
     public void chuyenPhieuThuePhong(int idPhongMuonDoi, int idPhongCanDoi) {
         phieuThuePhongDAO.chuyenPhieuThuePhong(idPhongMuonDoi, idPhongCanDoi);
+    }
+    
+    public List<Object[]> getThongTinGiaNgayLe(int idPhong){
+        List<Object[]> phongs = phieuThuePhongDAO.getThongTinGiaNgayLe(idPhong);
+        return phongs;
     }
 }

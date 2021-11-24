@@ -2,6 +2,7 @@ package GUI_Main;
 
 import GUI_Menu.EventMenu;
 import Controller.DatPhongController;
+import Controller.GiaNgayLeController;
 import Controller.HoaDonController;
 import Controller.KhachHangController;
 import Controller.PhieuDatPhongController;
@@ -28,6 +29,7 @@ public class Main extends javax.swing.JFrame {
         KhachHangController khachHangController = new KhachHangController(datPhongPnl);
         DatPhongController datPhongController = new DatPhongController(datPhongPnl);
         HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
+        GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
         
         EventMenu event = new EventMenu() {
             @Override
