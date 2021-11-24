@@ -1039,7 +1039,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         phieuDatPhong = new PhieuDatPhong(0,SDT,phongHienTai,idDatTruoc,null,1,tenKhach);
         phieuDatPhongController.insert(phieuDatPhong);
         datPhongController.updateTinhTrangPhong("Phòng đặt trước",phongHienTai);        
-        button.setBackground(new Color(204,102,255));
+        button.setBackground(new Color(255,195,137));
+        reLoadPhong();
         setPhongDatTruoc();
     }//GEN-LAST:event_btnDatTruocActionPerformed
 
@@ -1263,6 +1264,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         loadTableSuDungDV(null);
         cbxDatTruoc.setSelectedIndex(0);
         btnBaoTri.setVisible(true);
+        btnTamTinh.setEnabled(false);
+        btnThanhToan.setEnabled(false);
     }
     
     public void setPhongBaoTri() {
@@ -1274,6 +1277,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnDatTruoc.setVisible(false);
         cbxDatTruoc.setVisible(false);
         btnHuyDatTruoc.setVisible(false);
+        btnTamTinh.setEnabled(false);
+        btnThanhToan.setEnabled(false);
     }
     
     public void setPhongDatTruoc() {
@@ -1294,6 +1299,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 cbxDatTruoc.setSelectedIndex(i);
             }
         }
+        btnTamTinh.setEnabled(false);
+        btnThanhToan.setEnabled(false);
     }
     
     public void setCombobox() {
