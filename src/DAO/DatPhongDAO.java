@@ -5,12 +5,16 @@ import Model.Phong;
 import java.util.List;
 
 public class DatPhongDAO extends AbsDAO<Phong>{
+    
     public List<Object[]> getAllLoaiPhong() {
         return getRawValues("select * from Phong a join loaiPhong b on a.idLoaiPhong = b.idLoaiPhong");
     }
     
     public List<Object[]> getLoaiPhongId(int idLoaiPhong) {
-        return getRawValues("select * from Phong a join loaiPhong b on a.idLoaiPhong = b.idLoaiPhong where a.idLoaiPhong = '"+idLoaiPhong+"' ");
+        return getRawValues("select a.idPhong,tenPhong,tinhTrangPhong,a.idLoaiPhong,convert(varchar, thoiGianMo, 8) thoiGianMo \n" +
+                            "from Phong a join loaiPhong lp on a.idLoaiPhong = lp.idLoaiPhong\n" +
+                            "left join phieuThuePhong ptp on a.idPhong=ptp.idPhong \n" +
+                            "where lp.idLoaiPhong=1 and ptp.tinhTrang="+idLoaiPhong+" or ptp.tinhTrang is null ");
     }
     
     public List<Object[]> getLoaiPhongTT(String tinhTrang) {
@@ -23,9 +27,10 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     }
     
     public List<Object[]> getThongTinPhong(int idPhong) {
-        return getRawValues("select idPhieuThuePhong,SDTKhachHang,idPhong,thoiGianMo,thoiGianDong,tenKhachHang from phieuThuePhong "
-                + "where idPhong = '"+idPhong+"' and tinhTrang = 1 ");
-    }  
+        return getRawValues("select idPhieuThuePhong,SDTKhachHang,idPhong, convert(varchar, thoiGianMo, 8) thoiGianMo,thoiGianDong,tenKhachHang from phieuThuePhong "
+                + "where idPhong = '"+idPhong+"' and tinhTrang = 1");
+    }
+    
     
     public List<Object[]> getPhongDatTruoc(int idPhong) {
         return getRawValues("select idPhieuDatPhong,SDTKhachHang,idPhong,thoiGianDat,ghiChu,tinhTrang,tenKhach from phieuDatPhong "
@@ -42,4 +47,10 @@ public class DatPhongDAO extends AbsDAO<Phong>{
                             + "join loaiPhong b on a.idLoaiPhong = b.idLoaiPhong join phieuThuePhong c on c.idPhong = a.idPhong "
                             + "where a.idLoaiPhong = '"+idLoaiPhong+"' and a.idPhong = "+idPhong+" ");
     }
+    
+    public List<Object[]> getInfoPhong() {
+        return getRawValues("select p.idPhong,tenPhong,tinhTrangPhong,idLoaiPhong,convert(varchar, thoiGianMo, 8) thoiGianMo from phong p left join phieuThuePhong ptp on p.idPhong=ptp.idPhong \n" +
+                            "where ptp.tinhTrang=1 or ptp.tinhTrang is null ");
+    }
+    
 }
