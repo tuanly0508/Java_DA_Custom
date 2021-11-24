@@ -38,6 +38,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private HoaDonController hoaDonController;
     private boolean isSDT = false;
     private Button button;
+    private PhongRender phongRender;
     private DoiPhongDlg doiPhongDialog;
     PhieuThuePhong phieuThuePhong = new PhieuThuePhong();
     PhieuDatPhong phieuDatPhong = new PhieuDatPhong();
@@ -77,31 +78,51 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnThanhToan.setEnabled(false);
     }   
     
-    public void loadPhong(List<Phong> data) {
-        for (Phong phong : data) {
-            loadPhongBtn(phong.getId(), phong.getTenPhong(), phong.getTinhTrangPhong(), phong.getIdLoaiPhong());
+    public void loadPhong(List<Object[]> fullInfo) {
+        for(int i=0;i<fullInfo.size();i++){
+            String thoiGianMo ="....................";
+            if(!String.valueOf(fullInfo.get(i)[4]).equals("null")){
+                thoiGianMo=String.valueOf(fullInfo.get(i)[4]);
+            }
+            loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
+                    String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[0].toString()),thoiGianMo);
         }
+
     }
     
-    public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong) {
-        Button btnphong = new Button(tenPhong);
-        btnphong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnphong.setPreferredSize(new Dimension(80,10));
-        btnphong.setFont(new java.awt.Font("Segoe UI Light", 1, 12));
-        btnphong.setForeground(new java.awt.Color(255,255,255));
+    public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo) {
+
+//        Button btnphong = new Button(tenPhong);
+//        btnphong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+//        btnphong.setPreferredSize(new Dimension(80,10));
+//        btnphong.setFont(new java.awt.Font("Segoe UI Light", 1, 12));
+//        btnphong.setForeground(new java.awt.Color(255,255,255));
+//        List<Object[]> data = datPhongController.getThongTinPhong(idPhong);
+        
+        PhongRender p = new PhongRender();
+        p.lblTenPhong.setText(tenPhong);
+        p.txtGioMo.setText(thoiGianMo);
+        p.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+//        p.setPreferredSize(new Dimension(80,30));
+        p.setFont(new java.awt.Font("Segoe UI Light", 1, 12));
+        p.setForeground(new java.awt.Color(255,255,255));
+        
+        
         if (ttPhong.equals("Phòng còn trống")) {
-            btnphong.setBackground(new Color(0,204,204));
+            p.setBackground(new Color(0,204,204));
         }else if (ttPhong.equals("Đang hoạt động")) {
-            btnphong.setBackground(new Color(255,92,92));
+//            
+            p.setBackground(new Color(255,92,92));
+            
         }else if (ttPhong.equals("Phòng đặt trước")) {
-            btnphong.setBackground(new Color(255,195,137));
+            p.setBackground(new Color(255,195,137));
         }else {
-            btnphong.setBackground(new Color(153,153,153));
+            p.setBackground(new Color(153,153,153));
         }        
-        btnphong.addMouseListener(new MouseAdapter() {
+        p.addMouseListener(new MouseAdapter() {
         @Override
             public void mouseClicked(MouseEvent e) {
-                button = btnphong;
+                phongRender = p;
                 phongHienTai = idPhong;
                 loaiPhongHienTai = idLoaiPhong;
                 tenPhongHienTai = tenPhong;
@@ -129,7 +150,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 }
             }                    
         });        
-        panelPhong.add(btnphong); 
+        panelPhong.add(p); 
         panelPhong.revalidate();
         panelPhong.repaint();
     }
@@ -923,15 +944,16 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void rdbAllPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAllPhongActionPerformed
         if (rdbAllPhong.isSelected()) {
             panelPhong.removeAll();
-            List<Object[]> data = datPhongController.getAllLoaiPhong();
-            for (int i = 0; i <= data.size()-1; i++) {
-                Integer idPhong = Integer.parseInt(data.get(i) [0].toString()) ;
-                Integer idLoaiPhong = Integer.parseInt(data.get(i)[1].toString());
-                String tenPhong = data.get(i) [2].toString();
-                String ttPhong = data.get(i) [3].toString();
-                
-                loadPhongBtn(idPhong,tenPhong,ttPhong,idLoaiPhong);                                 
-            }           
+            datPhongController.loadListPhong();
+//            List<Object[]> data = datPhongController.getAllLoaiPhong();
+//            for (int i = 0; i <= data.size()-1; i++) {
+//                Integer idPhong = Integer.parseInt(data.get(i) [0].toString()) ;
+//                Integer idLoaiPhong = Integer.parseInt(data.get(i)[1].toString());
+//                String tenPhong = data.get(i) [2].toString();
+//                String ttPhong = data.get(i) [3].toString();
+//                
+//                loadPhongBtn(idPhong,tenPhong,ttPhong,idLoaiPhong);                                 
+//            }           
         }
     }//GEN-LAST:event_rdbAllPhongActionPerformed
 
@@ -939,13 +961,14 @@ public class DatPhongPnl extends javax.swing.JPanel {
         if (rdbPhongThuong.isSelected()) {
             panelPhong.removeAll();
             List<Object[]> data = datPhongController.getLoaiPhongId(1);
-            for (int i = 0; i <= data.size()-1; i++) {
-                Integer idPhong = Integer.parseInt(data.get(i) [0].toString()) ;
-                Integer idLoaiPhong = Integer.parseInt(data.get(i)[1].toString());
-                String tenPhong = data.get(i) [2].toString();
-                String ttPhong = data.get(i) [3].toString();
-                loadPhongBtn(idPhong,tenPhong,ttPhong, idLoaiPhong);                                 
-            }           
+            for(int i=0;i<data.size();i++){
+                String thoiGianMo ="....................";
+                if(!String.valueOf(data.get(i)[4]).equals("null")){
+                    thoiGianMo=String.valueOf(data.get(i)[4]);
+                }
+                loadPhongBtn(Integer.parseInt(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), 
+                        String.valueOf(data.get(i)[2]), Integer.parseInt(data.get(i)[0].toString()),thoiGianMo);
+            } 
         }
     }//GEN-LAST:event_rdbPhongThuongActionPerformed
 
@@ -953,13 +976,14 @@ public class DatPhongPnl extends javax.swing.JPanel {
         if (rdbPhongVip.isSelected()) {
             panelPhong.removeAll();
             List<Object[]> data = datPhongController.getLoaiPhongId(2);
-            for (int i = 0; i <= data.size()-1; i++) {
-                Integer idPhong = Integer.parseInt(data.get(i) [0].toString()) ;
-                Integer idLoaiPhong = Integer.parseInt(data.get(i)[1].toString());
-                String tenPhong = data.get(i) [2].toString();
-                String ttPhong = data.get(i) [3].toString();
-                loadPhongBtn(idPhong,tenPhong,ttPhong,idLoaiPhong);
-            }           
+            for(int i=0;i<data.size();i++){
+                String thoiGianMo ="....................";
+                if(!String.valueOf(data.get(i)[4]).equals("null")){
+                    thoiGianMo=String.valueOf(data.get(i)[4]);
+                }
+                loadPhongBtn(Integer.parseInt(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), 
+                        String.valueOf(data.get(i)[2]), Integer.parseInt(data.get(i)[0].toString()),thoiGianMo);
+            }            
         }
     }//GEN-LAST:event_rdbPhongVipActionPerformed
 
@@ -967,13 +991,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
         if (rdbPhongTrong.isSelected()) {
             panelPhong.removeAll();
             List<Object[]> data = datPhongController.getLoaiPhongTT("Phòng còn trống");
-            for (int i = 0; i <= data.size()-1; i++) {
-                Integer idPhong = Integer.parseInt(data.get(i) [0].toString()) ;
-                Integer idLoaiPhong = Integer.parseInt(data.get(i)[1].toString());
-                String tenPhong = data.get(i) [2].toString();
-                String ttPhong = data.get(i) [3].toString();
-                loadPhongBtn(idPhong,tenPhong,ttPhong,idLoaiPhong);
-            }           
+            for(int i=0;i<data.size();i++){
+                String thoiGianMo ="....................";
+                if(!String.valueOf(data.get(i)[4]).equals("null")){
+                    thoiGianMo=String.valueOf(data.get(i)[4]);
+                }
+                loadPhongBtn(Integer.parseInt(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), String.valueOf(data.get(i)[2]), Integer.getInteger(data.get(i)[3].toString()),thoiGianMo);
+            }          
         }
     }//GEN-LAST:event_rdbPhongTrongActionPerformed
 
@@ -981,27 +1005,28 @@ public class DatPhongPnl extends javax.swing.JPanel {
         if (rdbPhongAct.isSelected()) {
             panelPhong.removeAll();
             List<Object[]> data = datPhongController.getLoaiPhongTT("Đang hoạt động");
-            for (int i = 0; i <= data.size()-1; i++) {
-                Integer idPhong = Integer.parseInt(data.get(i) [0].toString()) ;
-                Integer idLoaiPhong = Integer.parseInt(data.get(i)[1].toString());
-                String tenPhong = data.get(i) [2].toString();
-                String ttPhong = data.get(i) [3].toString();
-                loadPhongBtn(idPhong,tenPhong,ttPhong,idLoaiPhong);
-            }           
+            for(int i=0;i<data.size();i++){
+                String thoiGianMo ="....................";
+                if(!String.valueOf(data.get(i)[4]).equals("null")){
+                    thoiGianMo=String.valueOf(data.get(i)[4]);
+                }
+            loadPhongBtn(Integer.getInteger(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), String.valueOf(data.get(i)[2]), Integer.getInteger(data.get(i)[3].toString()),thoiGianMo);
+            }        
         }
     }//GEN-LAST:event_rdbPhongActActionPerformed
 
     private void rdbPhongBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongBookActionPerformed
+        
         if (rdbPhongBook.isSelected()) {
             panelPhong.removeAll();
             List<Object[]> data = datPhongController.getLoaiPhongTT("Phòng đặt trước");
-            for (int i = 0; i <= data.size()-1; i++) {
-                Integer idPhong = Integer.parseInt(data.get(i) [0].toString()) ;
-                Integer idLoaiPhong = Integer.parseInt(data.get(i)[1].toString());
-                String tenPhong = data.get(i) [2].toString();
-                String ttPhong = data.get(i) [3].toString();
-                loadPhongBtn(idPhong,tenPhong,ttPhong,idLoaiPhong);
-            }           
+            for(int i=0;i<data.size();i++){
+                String thoiGianMo ="....................";
+                if(!String.valueOf(data.get(i)[4]).equals("null")){
+                    thoiGianMo=String.valueOf(data.get(i)[4]);
+                }
+            loadPhongBtn(Integer.getInteger(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), String.valueOf(data.get(i)[2]), Integer.getInteger(data.get(i)[3].toString()),thoiGianMo);
+            }         
         }
     }//GEN-LAST:event_rdbPhongBookActionPerformed
 
