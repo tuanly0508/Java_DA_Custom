@@ -13,6 +13,7 @@ import GUI_Dialog.GiaNgayLeDlg;
 import Help.ChuyenDoi;
 import Model.GiaNgayLe;
 import Model.GioDatTruoc;
+import Model.HoaDon;
 import Model.KhachHang;
 import Model.PhieuDatPhong;
 import Model.PhieuThuePhong;
@@ -23,6 +24,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
@@ -31,6 +34,7 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class DatPhongPnl extends javax.swing.JPanel {
@@ -463,7 +467,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             panelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -675,6 +679,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         btnThanhToan.setBackground(new java.awt.Color(120, 225, 220));
         btnThanhToan.setText("Thanh toán");
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
 
         btnTamTinh.setBackground(new java.awt.Color(120, 225, 220));
         btnTamTinh.setText("Tạm tính");
@@ -712,7 +721,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTamTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1072,7 +1080,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }        
         phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
         datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
-        button.setBackground(new Color(255,0,0));
+        phongRender.setBackground(new Color(255,0,0));
         setPhongHoatDong();
         reLoadPhong();
         setThongTinPhong(phongHienTai);           
@@ -1090,7 +1098,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         phieuDatPhong = new PhieuDatPhong(0,SDT,phongHienTai,idDatTruoc,null,1,tenKhach);
         phieuDatPhongController.insert(phieuDatPhong);
         datPhongController.updateTinhTrangPhong("Phòng đặt trước",phongHienTai);        
-        button.setBackground(new Color(255,195,137));
+        phongRender.setBackground(new Color(255,195,137));
         reLoadPhong();
         setPhongDatTruoc();
     }//GEN-LAST:event_btnDatTruocActionPerformed
@@ -1184,6 +1192,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         } 
         
         List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();
+        
         tienNgayLe = Double.parseDouble(gia.get(0)[1].toString());
         
         List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);        
@@ -1277,6 +1286,100 @@ public class DatPhongPnl extends javax.swing.JPanel {
         loadTable(giaNgayLeDialog.tblGiaNgayLe, data);
         giaNgayLeDialog.setVisible(true);
     }//GEN-LAST:event_btnGiaNgayLeActionPerformed
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        TinhTienFrm tinhTienFrm= new TinhTienFrm(null,true);
+        tinhTienFrm.txtTongTien.setText(ChuyenDoi.SoString(tongTien));
+        tinhTienFrm.txtKhachDua.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                double khachDua = ChuyenDoi.SoDouble(tinhTienFrm.txtKhachDua.getText());
+                tinhTienFrm.txtKhachDua.setText(ChuyenDoi.SoString(khachDua));
+                double traLai = khachDua-tongTien;
+                if(traLai>0){
+                    tinhTienFrm.txtTraLai.setText(ChuyenDoi.SoString(traLai));  
+                }else{
+                    tinhTienFrm.txtTraLai.setText("0");  
+                }           
+            }
+        });
+        tinhTienFrm.btnThanhToanIn.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    int idPhieuThuePhong = phieuThuePhongController.layIdPhieuThuePhong(phongHienTai);
+                    System.out.println(idPhieuThuePhong);
+                            
+//                            List<Object[]> data2 = phongController.getIdPhieuThue(phongHienTai);
+//                            List<Object[]> data3 = phongController.layIdHoaDonDichVu(phongHienTai);
+//                            HoaDon hd = new HoaDon();
+//                            if(tienDichVu==0){
+//                                hd = new HoaDon(0,(int) data2.get(0)[0],null,tienPhong,tienDichVu,phuThu);
+//                            }else{
+//                                hd = new HoaDon(0,(int) data2.get(0)[0],(int) data3.get(0)[0],tienPhong,tienDichVu,phuThu);
+//                            }
+//                            System.out.println(hd.getIdPhieuThue()+"   "+hd.getIdHoaDonDichVu()+"   "+tienPhong+"    "+tienDichVu);
+//                            hoaDonController.insert(hd);            
+//                            phongController.offPhieuThuePhong((int)data2.get(0)[0]);
+//                            phongController.updateTinhTrangPhong("Phòng trống", phongHienTai);
+//                            if(tienDichVu!=0){
+//                                phongController.offHoaDonDichVu(phongHienTai);
+//                            }
+//
+//                            List<Object[]> ttHoaDon = phongController.getIdHoaDon((int) data2.get(0)[0]);
+//                            System.out.println((int)ttHoaDon.get(0)[0]);
+//                            if(tienDichVu!=0){
+//                                XuatHoaDon((int)ttHoaDon.get(0)[0],"src/panel/HoaDon.jrxml");
+//                            }else{
+//                                XuatHoaDon((int)ttHoaDon.get(0)[0],"src/panel/HoaDonKhongDichVu.jrxml");
+//                            }
+//
+//                            tongTien=0.0;
+//                            tienGio = 0.0;
+//                            tienDichVu = 0.0;
+//                            tienPhuThu=0.0;
+//                            reLoadPhong();
+//                            setNull();
+//                            setNullTamTinh();
+//                            phongHienTai=UNDEFINED_CONDITION;
+//                            tinhTienFrm.setVisible(false);
+//                                            
+                }});
+            
+            tinhTienFrm.btnThanhToan.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+//                    System.out.println("Thanh toán");
+//                    List<Object[]> data2 = phongController.getIdPhieuThue(phongHienTai);
+//                    List<Object[]> data3 = phongController.layIdHoaDonDichVu(phongHienTai);
+//                    HoaDon hd = new HoaDon();
+//                    
+//                    if(tienDichVu==0){
+//                        hd = new HoaDon(0,(int) data2.get(0)[0],null,tienPhong,tienDichVu,phuThu);
+//                    }else{
+//                        hd = new HoaDon(0,(int) data2.get(0)[0],(int) data3.get(0)[0],tienPhong,tienDichVu,phuThu);
+//                    }                                       
+//                    hoaDonController.insert(hd);         
+//                    System.out.println((int)data2.get(0)[0]);
+//                    phongController.offPhieuThuePhong((int)data2.get(0)[0]);
+//                    phongController.updateTinhTrangPhong("Phòng trống", phongHienTai);
+//                    
+//                    if(tienDichVu!=0){
+//                        phongController.offHoaDonDichVu(phongHienTai);
+//                    }
+//                    tongTien=0.0;
+//                    tienPhong = 0.0;
+//                    tienDichVu = 0.0;
+//                    phuThu=0.0;
+//                    reLoadPhong();
+//                    setNullValue();
+//                    phongHienTai=UNDEFINED_CONDITION;
+//                    tt.setVisible(false);
+                }});
+//            tt.setLocationRelativeTo(null);
+//            tt.setVisible(true);
+        
+        
+        tinhTienFrm.setVisible(true);
+    }//GEN-LAST:event_btnThanhToanActionPerformed
 
     public void themDichVu(Table table) {
         table.addMouseListener(new MouseAdapter() {

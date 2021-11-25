@@ -2,9 +2,14 @@ package DAO;
 
 import Help.DBConnection;
 import Model.HoaDon;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class HoaDonDAO extends AbsDAO<HoaDon>{
     public List<Object[]> checkHoaDonPhong(int idPhong){
@@ -32,4 +37,5 @@ public class HoaDonDAO extends AbsDAO<HoaDon>{
         String query = "update hoaDonDichVu set idPhong = ? where idPhong = ? and trangThai = 1";
         DBConnection.executeUpdate(query, idPhongMuonDoi, idPhongCanDoi);
     }
+    
 }
