@@ -12,6 +12,6 @@ public class PhieuDatPhongDAO extends AbsDAO<PhieuDatPhong>{
     
     public List<Object[]> getPhieuDatPhong(int idPhong) {
         return getRawValues("select idPhieuDatPhong,idPhong,tenKhach,SDTKhachHang,b.tenHinhThuc from phieuDatPhong a join GioDatTruoc b "
-                            + "on a.thoiGianDat = b.idGioDatTruoc where idPhong = "+idPhong+" ");
+                            + "on a.thoiGianDat = b.idGioDatTruoc where idPhong = "+idPhong+" and tinhTrang = 1 ");
     }
 }
