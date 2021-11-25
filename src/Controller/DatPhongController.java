@@ -21,7 +21,6 @@ public class DatPhongController {
     }
      
     public void loadListPhong() {
-//        List<Phong> phongs = datPhongDAO.getAll();
         List<Object[]> fullInfoPhong = datPhongDAO.getInfoPhong();
         view.loadPhong(fullInfoPhong);
     }    

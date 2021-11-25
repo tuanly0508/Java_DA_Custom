@@ -3,13 +3,15 @@ package Model;
 public class GiaNgayLe extends AbsTable{
     private Integer idGiaNgayLe;
     private String tenGiaNgayLe;
+    private Integer trangThai;
 
     public GiaNgayLe() {
     }
 
-    public GiaNgayLe(Integer idGiaNgayLe, String tenGiaNgayLe) {
+    public GiaNgayLe(Integer idGiaNgayLe, String tenGiaNgayLe, Integer trangThai) {
         this.idGiaNgayLe = idGiaNgayLe;
         this.tenGiaNgayLe = tenGiaNgayLe;
+        this.trangThai = trangThai;
     }
 
     public Integer getIdGiaNgayLe() {
@@ -26,6 +28,14 @@ public class GiaNgayLe extends AbsTable{
 
     public void setTenGiaNgayLe(String tenGiaNgayLe) {
         this.tenGiaNgayLe = tenGiaNgayLe;
+    }
+
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
     }
     
     @Override

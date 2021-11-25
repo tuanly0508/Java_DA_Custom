@@ -155,7 +155,7 @@ insert into loaiPhong values (N'Phòng vip',20,150000)
 insert into phong values (1,N'Phòng 1',N'Phòng còn trống')
 insert into phong values (1,N'Phòng 2',N'Phòng còn trống')
 insert into phong values (1,N'Phòng 3',N'Phòng còn trống')
-insert into phong values (1,N'Phòng 4',N'Đang dọn dẹp')
+insert into phong values (1,N'Phòng 4',N'Phòng còn trống')
 insert into phong values (2,N'Phòng 5',N'Đang bảo trì')
 insert into phong values (1,N'Phòng 6',N'Phòng còn trống')
 insert into phong values (1,N'Phòng 7',N'Phòng còn trống')
@@ -214,11 +214,20 @@ select a.idPhong,a.idLoaiPhong,tenPhong,tinhTrangPhong,tenLoaiPhong,soKhachMax,g
 from Phong a join loaiPhong b 
 on a.idLoaiPhong = b.idLoaiPhong join phieuThuePhong c on c.idPhong = a.idPhong where a.idLoaiPhong = 1
 
+select idPhieuDatPhong,idPhong,SDTKhachHang,tenKhach,b.tenHinhThuc from phieuDatPhong a join GioDatTruoc b on a.thoiGianDat = b.idGioDatTruoc where idPhong = 2
 
-SELECT DATEDIFF(YY,'2000-05-20','2011-10-07');
+select p.idPhong,tenPhong,tinhTrangPhong,idLoaiPhong,convert(varchar, thoiGianMo, 8) thoiGianMo, a.tinhTrang from phong p left join 
+phieuThuePhong ptp on p.idPhong=ptp.idPhong left join phieuDatPhong a on a.idPhong=p.idPhong where ptp.tinhTrang=1 or ptp.tinhTrang is null
+and a.tinhTrang=1 or a.tinhTrang is null
+
+select * from phieuDatPhong
+
+select a.idPhong,a.idLoaiPhong,tenPhong,tinhTrangPhong,tenLoaiPhong,soKhachMax,giaGio,thoiGianMo from Phong a join loaiPhong b 
+on a.idLoaiPhong = b.idLoaiPhong join phieuThuePhong c on c.idPhong = a.idPhong where a.idLoaiPhong = 1 and a.idPhong = 2 
 
 
-insert into GioDatTruoc values (N'Chọn ...')
+
+insert into GioDatTruoc values (N'Chọn')
 insert into GioDatTruoc values ('10h')
 insert into GioDatTruoc values ('10h30')
 insert into GioDatTruoc values ('11h')

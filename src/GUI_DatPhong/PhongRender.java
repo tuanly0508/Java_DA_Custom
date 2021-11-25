@@ -30,8 +30,7 @@ public class PhongRender extends javax.swing.JPanel {
         lblTenPhong = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtGioMo = new javax.swing.JLabel();
-        lblDatTruoc = new javax.swing.JLabel();
-        txtDatTruoc = new javax.swing.JLabel();
+        btnDatTruoc = new GUI.Button();
 
         lblTenPhong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTenPhong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -43,9 +42,7 @@ public class PhongRender extends javax.swing.JPanel {
         txtGioMo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtGioMo.setText("....................");
 
-        lblDatTruoc.setText("Đặt trước:");
-
-        txtDatTruoc.setText("....................");
+        btnDatTruoc.setText("Đặt trước");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,16 +51,14 @@ public class PhongRender extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblTenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDatTruoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGioMo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtGioMo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,19 +69,16 @@ public class PhongRender extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(txtGioMo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDatTruoc)
-                    .addComponent(txtDatTruoc))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addComponent(btnDatTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public GUI.Button btnDatTruoc;
     private javax.swing.JLabel jLabel2;
-    public javax.swing.JLabel lblDatTruoc;
     public javax.swing.JLabel lblTenPhong;
-    public javax.swing.JLabel txtDatTruoc;
     public javax.swing.JLabel txtGioMo;
     // End of variables declaration//GEN-END:variables
 }
