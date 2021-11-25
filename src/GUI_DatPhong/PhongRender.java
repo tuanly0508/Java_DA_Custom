@@ -30,10 +30,10 @@ public class PhongRender extends javax.swing.JPanel {
         lblTenPhong = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtGioMo = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblDatTruoc = new javax.swing.JLabel();
         txtDatTruoc = new javax.swing.JLabel();
 
-        lblTenPhong.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTenPhong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTenPhong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenPhong.setText("TÊN PHÒNG");
         lblTenPhong.setPreferredSize(new java.awt.Dimension(68, 20));
@@ -43,7 +43,7 @@ public class PhongRender extends javax.swing.JPanel {
         txtGioMo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtGioMo.setText("....................");
 
-        jLabel4.setText("Đặt trước:");
+        lblDatTruoc.setText("Đặt trước:");
 
         txtDatTruoc.setText("....................");
 
@@ -55,15 +55,15 @@ public class PhongRender extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblTenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDatTruoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtGioMo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,7 +75,7 @@ public class PhongRender extends javax.swing.JPanel {
                     .addComponent(txtGioMo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(lblDatTruoc)
                     .addComponent(txtDatTruoc))
                 .addGap(0, 21, Short.MAX_VALUE))
         );
@@ -84,7 +84,7 @@ public class PhongRender extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel lblDatTruoc;
     public javax.swing.JLabel lblTenPhong;
     public javax.swing.JLabel txtDatTruoc;
     public javax.swing.JLabel txtGioMo;
