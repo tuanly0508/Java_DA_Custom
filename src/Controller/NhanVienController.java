@@ -20,7 +20,7 @@ public class NhanVienController {
     public NhanVienController(QuenMatKhau view) {
         this.view = view;
         view.setController(this);
-    }    
+    }
     
     public List<Object[]> timEmail(String email) {
         List<Object[]> nhanViens = nhanVienDAO.timEmail(email);
