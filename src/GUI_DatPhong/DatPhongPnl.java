@@ -424,12 +424,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
         panelP.setBackground(new java.awt.Color(255, 255, 255));
 
         panelPhong.setBackground(new java.awt.Color(255, 255, 255));
+        panelPhong.setMaximumSize(new java.awt.Dimension(349, 530));
+        panelPhong.setMinimumSize(new java.awt.Dimension(349, 530));
+        panelPhong.setPreferredSize(new java.awt.Dimension(349, 530));
 
         javax.swing.GroupLayout panelPhongLayout = new javax.swing.GroupLayout(panelPhong);
         panelPhong.setLayout(panelPhongLayout);
         panelPhongLayout.setHorizontalGroup(
             panelPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 329, Short.MAX_VALUE)
+            .addGap(0, 349, Short.MAX_VALUE)
         );
         panelPhongLayout.setVerticalGroup(
             panelPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,7 +529,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rdbAllPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rdbPhongTrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(roundPanel2Layout.createSequentialGroup()
                                 .addComponent(rdbPhongAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -802,7 +805,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
         );
 
         spnSoLuong.setBackground(Color.WHITE);

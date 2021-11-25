@@ -2,11 +2,13 @@ package GUI_Main;
 
 import GUI_Menu.EventMenu;
 import Controller.DatPhongController;
+import Controller.DichVuController;
 import Controller.GiaNgayLeController;
 import Controller.HoaDonController;
 import Controller.KhachHangController;
 import Controller.PhieuDatPhongController;
 import Controller.PhieuThuePhongController;
+import GUI_DICHVU.DichVuPnl;
 import GUI_DatPhong.DatPhongPnl;
 import GUI_Login.Login;
 import GUI_ThongKe.ThongKePnl;
@@ -15,6 +17,7 @@ import java.awt.Component;
 public class Main extends javax.swing.JFrame {
     
     private DatPhongPnl datPhongPnl;
+    private DichVuPnl dichVuPnl;
 
     public Main() {
         initComponents();    
@@ -24,11 +27,13 @@ public class Main extends javax.swing.JFrame {
     
     public void init() {
         datPhongPnl = new DatPhongPnl();
+        dichVuPnl =  new DichVuPnl();
         PhieuThuePhongController phieuThuePhongController = new PhieuThuePhongController(datPhongPnl);
         PhieuDatPhongController phieuDatPhongController = new PhieuDatPhongController(datPhongPnl);
         KhachHangController khachHangController = new KhachHangController(datPhongPnl);
         DatPhongController datPhongController = new DatPhongController(datPhongPnl);
         HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
+        DichVuController dichVuController = new DichVuController(dichVuPnl);
         GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
         
         EventMenu event = new EventMenu() {
@@ -43,7 +48,7 @@ public class Main extends javax.swing.JFrame {
                 }else if (index == 3) {
                     System.out.println("hi");
                 }else if (index == 4) {
-                    System.out.println("hi");
+                    showForm(dichVuPnl);
                 }else if (index == 5) {
                     System.out.println("hi");
                 }else if (index == 6) {
