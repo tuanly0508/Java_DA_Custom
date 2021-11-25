@@ -84,7 +84,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
         panelPhong.revalidate();
         panelPhong.repaint();
         btnDoiPhong.setVisible(false);        
-        btnHuyDatTruoc.setVisible(false);
         txtThoiGianMo.setVisible(false);
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
@@ -92,26 +91,23 @@ public class DatPhongPnl extends javax.swing.JPanel {
     
     public void loadPhong(List<Object[]> fullInfo,List<Object[]> time,List<Object[]> ttpdp) {
         for(int i=0;i<=fullInfo.size()-1;i++){
-            String thoiGianMo ="....................";
+            String thoiGianMo ="....................";            
             Integer trangThai = 0;
+            if (String.valueOf(ttpdp.get(i)[1]).equals("null")) {  
+                trangThai = 0;
+            }else if (String.valueOf(ttpdp.get(i)[1]).equals("false")) {
+                trangThai = 0;
+            }else trangThai = 1;
+            
             for(int y=0;y<=time.size()-1;y++){
                 if(String.valueOf(fullInfo.get(i)[0]).equals(String.valueOf(time.get(y)[0]))){
                     thoiGianMo=String.valueOf(time.get(y)[1]);
                 }
-            }
-            for (int j = 0; j < ttpdp.size(); j++) {
-                System.out.println(ttpdp.get(j)[5]);
-//                if (String.valueOf(ttpdp.get(j)[5]).equals("null") || String.valueOf(ttpdp.get(j)[5]).equals("false")) {  
-//                    trangThai = 0;
-//                }
-                if (String.valueOf(ttpdp.get(j)[5]).equals("true")) {  
-                    trangThai = 1;
-                }
-            }
+            }           
             loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
-            String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo,trangThai);
+            String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo, trangThai);
         }
-    }
+    }    
     
     public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo, Integer trangThai) {  
         PhongRender p = new PhongRender();
@@ -120,9 +116,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
         p.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         p.setFont(new java.awt.Font("Segoe UI Light", 1, 12));
         p.setForeground(new java.awt.Color(255,255,255));
+        
         if (trangThai == 1) {
             p.btnDatTruoc.setBackground(new Color(255,195,137));
-        }
+        }       
+        
         if (ttPhong.equals("Phòng còn trống")) {
             p.setBackground(new Color(0,204,204));
         }else if (ttPhong.equals("Đang hoạt động")) {           
@@ -285,13 +283,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         txtThoiGianMo = new GUI.TextField();
         txtTenKhach = new GUI.TextField();
-        btnDatTruoc = new GUI.Button();
         btnMoPhong = new GUI.Button();
         rdbGiaNgayLe = new GUI.BtnRadioCus();
         btnDoiPhong = new GUI.Button();
-        btnHuyDatTruoc = new GUI.Button();
         txtSDT = new GUI.TextField();
-        cbxDatTruoc = new javax.swing.JComboBox<>();
         btnBaoTri = new GUI.Button();
         btnHuyBaoTri = new GUI.Button();
         btnGiaNgayLe = new GUI.Button();
@@ -641,15 +636,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
         txtTenKhach.setLabelText("Tên khách hàng");
         roundPanel3.add(txtTenKhach, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 190, 50));
 
-        btnDatTruoc.setBackground(new java.awt.Color(120, 225, 220));
-        btnDatTruoc.setText("Đặt trước");
-        btnDatTruoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDatTruocActionPerformed(evt);
-            }
-        });
-        roundPanel3.add(btnDatTruoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 82, 44));
-
         btnMoPhong.setBackground(new java.awt.Color(120, 225, 220));
         btnMoPhong.setText("Mở phòng");
         btnMoPhong.addActionListener(new java.awt.event.ActionListener() {
@@ -672,15 +658,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
         });
         roundPanel3.add(btnDoiPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 82, 44));
 
-        btnHuyDatTruoc.setBackground(new java.awt.Color(120, 225, 220));
-        btnHuyDatTruoc.setText("Hủy");
-        btnHuyDatTruoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyDatTruocActionPerformed(evt);
-            }
-        });
-        roundPanel3.add(btnHuyDatTruoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 82, 44));
-
         txtSDT.setLabelText("Số điện thoại");
         txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -688,11 +665,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
             }
         });
         roundPanel3.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 190, 50));
-
-        cbxDatTruoc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbxDatTruoc.setOpaque(false);
-        roundPanel3.add(cbxDatTruoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 80, 30));
-        cbxDatTruoc.setBackground(Color.WHITE);
 
         btnBaoTri.setBackground(new java.awt.Color(120, 225, 220));
         btnBaoTri.setText("Bảo trì");
@@ -1159,22 +1131,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
         setThongTinPhong(phongHienTai);           
     }//GEN-LAST:event_btnMoPhongActionPerformed
 
-    private void btnDatTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatTruocActionPerformed
-        String tenKhach = txtTenKhach.getText();
-        String SDT = txtSDT.getText();
-        GioDatTruoc myCbb = (GioDatTruoc) cbxDatTruoc.getSelectedItem();
-        Integer idDatTruoc = myCbb.getId();        
-        if (isSDT == false) {
-            khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,"Thường",0,null);
-            khachHangController.insert(khachHang);
-        }
-        phieuDatPhong = new PhieuDatPhong(0,SDT,phongHienTai,idDatTruoc,null,1,tenKhach);
-        phieuDatPhongController.insert(phieuDatPhong);
-        datPhongController.updateTinhTrangPhong("Phòng đặt trước",phongHienTai);        
-        reLoadPhong();
-        setPhongDatTruoc();
-    }//GEN-LAST:event_btnDatTruocActionPerformed
-
     private void btnDoiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiPhongActionPerformed
         if (doiPhongDialog == null) {
             doiPhongDialog = new DoiPhongDlg(null,true);                                 
@@ -1223,19 +1179,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
             txtTenKhach.setEditable(true);
         }
     }//GEN-LAST:event_txtSDTKeyReleased
-
-    private void btnHuyDatTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDatTruocActionPerformed
-        phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
-        datPhongController.updateTinhTrangPhong("Phòng còn trống",phongHienTai);
-        reLoadPhong();
-        phongRender.setBackground(new Color(0,204,204));
-        cbxDatTruoc.setSelectedIndex(0);
-        txtSDT.setText("");
-        txtTenKhach.setText("");
-        btnHuyDatTruoc.setVisible(false);
-        btnDatTruoc.setVisible(true);
-        lblTenPhong.setForeground(new Color(0,204,204));
-    }//GEN-LAST:event_btnHuyDatTruocActionPerformed
 
     private void btnHuyBaoTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBaoTriActionPerformed
         datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
@@ -1574,14 +1517,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
     }
     
     public void setPhongHoatDong() {
-        btnHuyDatTruoc.setVisible(false);
         lblTenPhong.setForeground(new Color(255,92,92));
         btnMoPhong.setVisible(false);
         btnDoiPhong.setVisible(true);
-        btnDatTruoc.setVisible(false);
         txtThoiGianMo.setVisible(true);
-        txtThoiGianMo.setEditable(false);
-        cbxDatTruoc.setVisible(false);              
+        txtThoiGianMo.setEditable(false);             
         btnHuyBaoTri.setVisible(false);
         btnBaoTri.setVisible(false);
         rdbGiaNgayLe.setVisible(false);
@@ -1590,14 +1530,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
     public void setPhongTrong() {
         rdbGiaNgayLe.setVisible(true);
         lblTenPhong.setForeground(new Color(0,204,204));
-        btnDatTruoc.setVisible(true);
-        btnHuyDatTruoc.setVisible(false);
         btnMoPhong.setVisible(true);
         btnDoiPhong.setVisible(false);
         txtThoiGianMo.setVisible(false);
-        cbxDatTruoc.setVisible(true);
         loadTableSuDungDV(null);
-        cbxDatTruoc.setSelectedIndex(0);
         btnBaoTri.setVisible(true);
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
@@ -1609,18 +1545,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnMoPhong.setVisible(false);
         rdbGiaNgayLe.setVisible(false);
         lblTenPhong.setForeground(new Color(153,153,153));
-        btnDatTruoc.setVisible(false);
-        cbxDatTruoc.setVisible(false);
-        btnHuyDatTruoc.setVisible(false);
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
     }
     
     public void setPhongDatTruoc() {
         lblTenPhong.setForeground(new Color(255,195,137));
-        btnDatTruoc.setVisible(false);
-        btnHuyDatTruoc.setVisible(true);
-        cbxDatTruoc.setVisible(true);
         btnHuyBaoTri.setVisible(false);
         btnBaoTri.setVisible(false);
         btnMoPhong.setVisible(true);
@@ -1628,12 +1558,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
         List<Object[]> data = datPhongController.getPhongDatTruoc(phongHienTai);
         txtTenKhach.setText(data.get(0)[6].toString());
         txtSDT.setText(data.get(0)[1].toString());
-        for (int i=0; i<cbxDatTruoc.getItemCount();i++){
-            GioDatTruoc c= (GioDatTruoc) cbxDatTruoc.getItemAt(i);
-            if(c.getIdGioDatTruoc().equals(data.get(0)[3])){
-                cbxDatTruoc.setSelectedIndex(i);
-            }
-        }
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
     }
@@ -1679,11 +1603,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.RoundPanel body;
     private GUI.Button btnBaoTri;
-    private GUI.Button btnDatTruoc;
     private GUI.Button btnDoiPhong;
     private GUI.Button btnGiaNgayLe;
     private GUI.Button btnHuyBaoTri;
-    private GUI.Button btnHuyDatTruoc;
     private GUI.Button btnMoPhong;
     private GUI.Button btnTamTinh;
     private GUI.Button btnThanhToan;
@@ -1693,7 +1615,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private GUI.Button button6;
     private GUI.Button button7;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<GioDatTruoc> cbxDatTruoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
