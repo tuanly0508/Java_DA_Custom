@@ -14,6 +14,7 @@ import GUI_Dialog.GiaNgayLeDlg;
 import Help.ChuyenDoi;
 import Model.GiaNgayLe;
 import Model.GioDatTruoc;
+import Model.HoaDon;
 import Model.KhachHang;
 import Model.PhieuDatPhong;
 import Model.PhieuThuePhong;
@@ -101,6 +102,21 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo);
         }
     }
+    
+//    for(int i=0;i<fullInfo.size();i++){
+//            String thoiGianMo ="....................";
+//            Integer trangThai = 0;
+//            if(!String.valueOf(fullInfo.get(i)[4]).equals("null")){
+//                thoiGianMo=String.valueOf(fullInfo.get(i)[4]);
+//            }
+//            if (String.valueOf(fullInfo.get(i)[5]).equals("null")) {  
+//                trangThai = 0;
+//            }else if (String.valueOf(fullInfo.get(i)[5]).equals("false")) {
+//                trangThai = 0;
+//            }else trangThai = 1;            
+//            loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
+//                    String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo,trangThai);
+//        }
     
     public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo, Integer trangThai) {  
         PhongRender p = new PhongRender();
