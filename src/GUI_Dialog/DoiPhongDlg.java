@@ -1,4 +1,4 @@
-package GUI_DoiPhong;
+package GUI_Dialog;
 
 import GUI.ScrollBar;
 import java.awt.Color;

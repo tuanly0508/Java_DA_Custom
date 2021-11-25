@@ -3,12 +3,15 @@ package GUI_DatPhong;
 import GUI.Table;
 import GUI.ScrollBar;
 import Controller.DatPhongController;
+import Controller.GiaNgayLeController;
 import Controller.HoaDonController;
 import Controller.KhachHangController;
 import Controller.PhieuDatPhongController;
 import Controller.PhieuThuePhongController;
-import GUI_DoiPhong.DoiPhongDlg;
+import GUI_Dialog.DoiPhongDlg;
+import GUI_Dialog.GiaNgayLeDlg;
 import Help.ChuyenDoi;
+import Model.GiaNgayLe;
 import Model.GioDatTruoc;
 import Model.KhachHang;
 import Model.PhieuDatPhong;
@@ -36,22 +39,27 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private KhachHangController khachHangController;
     private DatPhongController datPhongController;
     private HoaDonController hoaDonController;
+    private GiaNgayLeController giaNgayLeController;
     private boolean isSDT = false;
     private Button button;
     private PhongRender phongRender;
     private DoiPhongDlg doiPhongDialog;
+    private GiaNgayLeDlg giaNgayLeDialog;
     PhieuThuePhong phieuThuePhong = new PhieuThuePhong();
     PhieuDatPhong phieuDatPhong = new PhieuDatPhong();
+    GiaNgayLe giaNgayLe = new GiaNgayLe();
     KhachHang khachHang = new KhachHang();
     int phongHienTai = UNDEFINED_CONDITION;
     int loaiPhongHienTai = UNDEFINED_CONDITION;
     int phongCanDoi = UNDEFINED_CONDITION;
     int click1 = UNDEFINED_CONDITION;
+    int idGiaNgayLe = UNDEFINED_CONDITION;
     String tenPhongHienTai = TOOL_TIP_TEXT_KEY;
     Double tienDichVu = 0.0;
     Double tienGio = 0.0;
     Double tienPhuThu = 0.0;
     Double tongTien = 0.0;
+    Double tienNgayLe = 0.0;
 
     public DatPhongPnl() {
         initComponents();
@@ -199,6 +207,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         cbxDatTruoc = new javax.swing.JComboBox<>();
         btnBaoTri = new GUI.Button();
         btnHuyBaoTri = new GUI.Button();
+        btnGiaNgayLe = new GUI.Button();
         roundPanel4 = new GUI.RoundPanel();
         jLabel10 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -624,7 +633,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 txtSDTKeyReleased(evt);
             }
         });
-        roundPanel3.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 200, 50));
+        roundPanel3.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 190, 50));
 
         cbxDatTruoc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbxDatTruoc.setOpaque(false);
@@ -648,6 +657,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
             }
         });
         roundPanel3.add(btnHuyBaoTri, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 50, 30));
+
+        btnGiaNgayLe.setBackground(new java.awt.Color(120, 225, 220));
+        btnGiaNgayLe.setText("Giá ngày lễ");
+        btnGiaNgayLe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiaNgayLeActionPerformed(evt);
+            }
+        });
+        roundPanel3.add(btnGiaNgayLe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 30));
 
         roundPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -694,6 +712,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTamTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1044,15 +1063,19 @@ public class DatPhongPnl extends javax.swing.JPanel {
             khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,"Thường",0,null);
             khachHangController.insert(khachHang);
         }
-        phieuThuePhong = new PhieuThuePhong(0,SDT,phongHienTai,thoiGianMo,null,tenKhach,1);
-        phieuThuePhongController.insert(phieuThuePhong);
+        if (rdbGiaNgayLe.isSelected()) {
+            phieuThuePhong = new PhieuThuePhong(0,SDT,phongHienTai,thoiGianMo,null,tenKhach,1,1);
+            phieuThuePhongController.insert(phieuThuePhong);
+        }else {
+            phieuThuePhong = new PhieuThuePhong(0,SDT,phongHienTai,thoiGianMo,null,tenKhach,1,0);
+            phieuThuePhongController.insert(phieuThuePhong);
+        }        
         phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
         datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
         button.setBackground(new Color(255,0,0));
         setPhongHoatDong();
         reLoadPhong();
-        setThongTinPhong(phongHienTai);     
-        cbxDatTruoc.setVisible(false);
+        setThongTinPhong(phongHienTai);           
     }//GEN-LAST:event_btnMoPhongActionPerformed
 
     private void btnDatTruocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatTruocActionPerformed
@@ -1149,6 +1172,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBaoTriActionPerformed
 
     private void btnTamTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTamTinhActionPerformed
+        tienDichVu = 0.0;
         String PhuThuThem = txtTienPhuThu.getText();       
         if (!PhuThuThem.equals("")) {
             tienPhuThu = Double.parseDouble(PhuThuThem);
@@ -1157,21 +1181,102 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }        
         for(int i=0;i<=tblSuDungDichVu.getRowCount()-1;i++){
             tienDichVu += ChuyenDoi.SoDouble(tblSuDungDichVu.getValueAt(i, 5).toString()) ;
-        }                        
-        List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai);       
-        Double giaThue = Double.valueOf(data.get(0)[6].toString());
-        Date now = new Date();
-        Timestamp thoiGian = (Timestamp) data.get(0)[7];
-        Date thoiGianMo = (Date) thoiGian;
-        long thoiGianSuDung = now.getTime()-thoiGianMo.getTime();        
-        long gioSuDung = thoiGianSuDung / (60 * 60 * 1000);
-        long phutSuDung = thoiGianSuDung / (60 * 1000) % 60;        
-        tienGio = (giaThue/60) * ((gioSuDung*60)+phutSuDung);
-        txtTienDichVu.setText(tienDichVu.toString());
-        txtTienGio.setText(tienGio.toString());
-        tongTien = tienGio+tienDichVu+tienPhuThu;
-        txtTongTien.setText(tongTien.toString());
+        } 
+        
+        List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();
+        tienNgayLe = Double.parseDouble(gia.get(0)[1].toString());
+        
+        List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);        
+        for (int i = 0; i < data.size(); i++) {
+            Double giaThue = Double.valueOf(data.get(i)[6].toString());
+            Date now = new Date();
+            Timestamp thoiGian = (Timestamp) data.get(i)[7];
+            Date thoiGianMo = (Date) thoiGian;
+
+            long thoiGianSuDung = now.getTime()-thoiGianMo.getTime();  
+            long gioSuDung = thoiGianSuDung / (60 * 1000 * 60);
+            long phutSuDung = thoiGianSuDung / (60 * 1000) % 60;
+            
+            List<Object[]> phieuThuePhong = phieuThuePhongController.getThongTinGiaNgayLe(phongHienTai);
+            if (phieuThuePhong.get(0)[0].toString().equals("1")) {
+                System.out.println(gioSuDung);
+                System.out.println(phutSuDung);
+                tienGio = (((giaThue/60)+((giaThue/60)*tienNgayLe/100)) * ((gioSuDung*60)+phutSuDung));
+                txtTienDichVu.setText(tienDichVu.toString());
+                txtTienGio.setText(tienGio.toString());
+                tongTien = tienGio+tienDichVu+tienPhuThu;
+                txtTongTien.setText(tongTien.toString());
+            }else {
+                System.out.println(gioSuDung);
+                System.out.println(phutSuDung);
+                tienGio = (giaThue/60) * ((gioSuDung*60)+phutSuDung);
+                txtTienDichVu.setText(tienDichVu.toString());
+                txtTienGio.setText(tienGio.toString());
+                tongTien = tienGio+tienDichVu+tienPhuThu;
+                txtTongTien.setText(tongTien.toString());
+            }
+        }            
     }//GEN-LAST:event_btnTamTinhActionPerformed
+
+    private void btnGiaNgayLeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaNgayLeActionPerformed
+        List<Object[]> data = giaNgayLeController.getGiaNgayLe();
+        if (giaNgayLeDialog == null) {
+            giaNgayLeDialog = new GiaNgayLeDlg(null,true);        
+                       
+            giaNgayLeDialog.tblGiaNgayLe.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    DefaultTableModel p = (DefaultTableModel) giaNgayLeDialog.tblGiaNgayLe.getModel();
+                    int click = giaNgayLeDialog.tblGiaNgayLe.getSelectedRow();
+                    String id = giaNgayLeDialog.tblGiaNgayLe.getValueAt(click, 0).toString();
+                    idGiaNgayLe = Integer.parseInt(id);
+                    giaNgayLeDialog.txtGiaNgayLe.setText(giaNgayLeDialog.tblGiaNgayLe.getValueAt(click, 1).toString()+" %");
+                }
+            });
+            giaNgayLeDialog.btnThemGia.addActionListener(new AbstractAction(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String txt = giaNgayLeDialog.txtGia.getText();
+                    loadTable(giaNgayLeDialog.tblGiaNgayLe, data);
+                    if(txt.equals(data.get(0)[1].toString())) {
+                        giaNgayLeDialog.lblErr.setText("Giá đã tồn tại");
+                    }else{
+                        giaNgayLe = new GiaNgayLe(0,txt);
+                        giaNgayLeController.insert(giaNgayLe);
+                    }    
+                    List<Object[]> data = giaNgayLeController.getGiaNgayLe();
+                    loadTable(giaNgayLeDialog.tblGiaNgayLe, data);
+                }
+            });
+            giaNgayLeDialog.txtGia.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    giaNgayLeDialog.lblErr.setText("");
+                }
+            });
+            giaNgayLeDialog.txtGiaNgayLe.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    giaNgayLeDialog.lblErr2.setText("Chọn giá từ bảng");
+                }
+            });
+            giaNgayLeDialog.btnDatGia.addActionListener(new AbstractAction(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (giaNgayLeDialog.txtGiaNgayLe.getText().equals("")) {
+                        giaNgayLeDialog.lblErr2.setText("Chọn giá từ bảng");
+                    }else {
+                        giaNgayLeController.updateTTAllGiaNgayLe(0);
+                        giaNgayLeController.updateTTGiaNgayLe(1, idGiaNgayLe);
+                        giaNgayLeDialog.lblErr2.setText("Đặt giá thành công");
+                        giaNgayLeDialog.lblErr2.setForeground(Color.MAGENTA);
+                    }
+                }
+            });           
+        }       
+        loadTable(giaNgayLeDialog.tblGiaNgayLe, data);
+        giaNgayLeDialog.setVisible(true);
+    }//GEN-LAST:event_btnGiaNgayLeActionPerformed
 
     public void themDichVu(Table table) {
         table.addMouseListener(new MouseAdapter() {
@@ -1275,9 +1380,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnDatTruoc.setVisible(false);
         txtThoiGianMo.setVisible(true);
         txtThoiGianMo.setEditable(false);
-        cbxDatTruoc.setVisible(false);                    
+        cbxDatTruoc.setVisible(false);              
         btnHuyBaoTri.setVisible(false);
         btnBaoTri.setVisible(false);
+        rdbGiaNgayLe.setVisible(false);
     }
     
     public void setPhongTrong() {
@@ -1364,12 +1470,17 @@ public class DatPhongPnl extends javax.swing.JPanel {
     public void setController (PhieuDatPhongController phieuDatPhongController) {
         this.phieuDatPhongController = phieuDatPhongController;
     }
+    
+    public void setController (GiaNgayLeController giaNgayLeController) {
+        this.giaNgayLeController = giaNgayLeController;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.RoundPanel body;
     private GUI.Button btnBaoTri;
     private GUI.Button btnDatTruoc;
     private GUI.Button btnDoiPhong;
+    private GUI.Button btnGiaNgayLe;
     private GUI.Button btnHuyBaoTri;
     private GUI.Button btnHuyDatTruoc;
     private GUI.Button btnMoPhong;
