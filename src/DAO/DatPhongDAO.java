@@ -56,4 +56,7 @@ public class DatPhongDAO extends AbsDAO<Phong>{
         return getRawValues("select idPhong,convert(varchar, thoiGianMo, 8) thoiGianMo from phieuThuePhong where tinhTrang=1");
     }
     
+    public List<Object[]> getTinhTrangPDP(){
+        return getRawValues("select * from phieuDatPhong a right join phong b on a.idPhong=b.idPhong");
+    }
 }

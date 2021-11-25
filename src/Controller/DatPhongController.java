@@ -23,7 +23,8 @@ public class DatPhongController {
     public void loadListPhong() {
         List<Object[]> fullInfoPhong = datPhongDAO.getInfoPhong();
         List<Object[]> infoOpen = datPhongDAO.getTimeOpen();
-        view.loadPhong(fullInfoPhong,infoOpen);
+        List<Object[]> getTinhTrangPDP = datPhongDAO.getTinhTrangPDP();
+        view.loadPhong(fullInfoPhong,infoOpen,getTinhTrangPDP);
     }    
     
     public List<Object[]> getAllDichVu(){

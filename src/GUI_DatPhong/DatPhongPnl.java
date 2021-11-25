@@ -90,33 +90,28 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnThanhToan.setEnabled(false);
     }   
     
-    public void loadPhong(List<Object[]> fullInfo,List<Object[]> time) {
+    public void loadPhong(List<Object[]> fullInfo,List<Object[]> time,List<Object[]> ttpdp) {
         for(int i=0;i<=fullInfo.size()-1;i++){
-                String thoiGianMo ="....................";
-                for(int y=0;y<=time.size()-1;y++){
-                    if(String.valueOf(fullInfo.get(i)[0]).equals(String.valueOf(time.get(y)[0]))){
-                        thoiGianMo=String.valueOf(time.get(y)[1]);
-                    }
+            String thoiGianMo ="....................";
+            Integer trangThai = 0;
+            for(int y=0;y<=time.size()-1;y++){
+                if(String.valueOf(fullInfo.get(i)[0]).equals(String.valueOf(time.get(y)[0]))){
+                    thoiGianMo=String.valueOf(time.get(y)[1]);
                 }
-                loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
-                String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo);
+            }
+            for (int j = 0; j < ttpdp.size(); j++) {
+                System.out.println(ttpdp.get(j)[5]);
+//                if (String.valueOf(ttpdp.get(j)[5]).equals("null") || String.valueOf(ttpdp.get(j)[5]).equals("false")) {  
+//                    trangThai = 0;
+//                }
+                if (String.valueOf(ttpdp.get(j)[5]).equals("true")) {  
+                    trangThai = 1;
+                }
+            }
+            loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
+            String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo,trangThai);
         }
     }
-    
-//    for(int i=0;i<fullInfo.size();i++){
-//            String thoiGianMo ="....................";
-//            Integer trangThai = 0;
-//            if(!String.valueOf(fullInfo.get(i)[4]).equals("null")){
-//                thoiGianMo=String.valueOf(fullInfo.get(i)[4]);
-//            }
-//            if (String.valueOf(fullInfo.get(i)[5]).equals("null")) {  
-//                trangThai = 0;
-//            }else if (String.valueOf(fullInfo.get(i)[5]).equals("false")) {
-//                trangThai = 0;
-//            }else trangThai = 1;            
-//            loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
-//                    String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo,trangThai);
-//        }
     
     public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo, Integer trangThai) {  
         PhongRender p = new PhongRender();

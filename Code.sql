@@ -218,12 +218,22 @@ select idPhieuDatPhong,idPhong,SDTKhachHang,tenKhach,b.tenHinhThuc from phieuDat
 
 select p.idPhong,tenPhong,tinhTrangPhong,idLoaiPhong,convert(varchar, thoiGianMo, 8) thoiGianMo, a.tinhTrang from phong p left join 
 phieuThuePhong ptp on p.idPhong=ptp.idPhong left join phieuDatPhong a on a.idPhong=p.idPhong where ptp.tinhTrang=1 or ptp.tinhTrang is null
-and a.tinhTrang=1 or a.tinhTrang is null
 
 select * from phieuDatPhong
 
 select a.idPhong,a.idLoaiPhong,tenPhong,tinhTrangPhong,tenLoaiPhong,soKhachMax,giaGio,thoiGianMo from Phong a join loaiPhong b 
 on a.idLoaiPhong = b.idLoaiPhong join phieuThuePhong c on c.idPhong = a.idPhong where a.idLoaiPhong = 1 and a.idPhong = 2 
+
+select p.idPhong,tenPhong,tinhTrangPhong,idLoaiPhong,convert(varchar, thoiGianMo, 8) thoiGianMo, a.tinhTrang from phong p 
+left join phieuThuePhong ptp on p.idPhong=ptp.idPhong left join phieuDatPhong a on a.idPhong=p.idPhong where ptp.tinhTrang=1 or 
+ptp.tinhTrang is null 
+
+select * from phieuDatPhong a right join phong b on a.idPhong=b.idPhong
+
+select * from phong a left join phieuDatPhong b on a.idPhong=b.idPhong
+
+select idPhieuDatPhong,idPhong,tenKhach,SDTKhachHang,b.tenHinhThuc from phieuDatPhong a join GioDatTruoc b 
+on a.thoiGianDat = b.idGioDatTruoc where idPhong = 2 and tinhTrang = 1 
 
 
 
