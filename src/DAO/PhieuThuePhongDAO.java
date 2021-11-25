@@ -5,6 +5,7 @@ import Model.PhieuThuePhong;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.sql.Timestamp;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,15 +20,20 @@ public class PhieuThuePhongDAO extends AbsDAO<PhieuThuePhong>{
     }
     
     public int layIdPhieuThuePhong(int idPhong){
-        String query = "select idPhieuThuePhong from phieuThuePhong where idPhong = "+idPhong+" and thoigiandong is null";
+        String query = "select idPhieuThuePhong from phieuThuePhong where idPhong = "+idPhong+" and thoiGianDong is null";
         ResultSet rs = DBConnection.executeQuery(query);
         int idPhieuThue =0;
         try {
-            idPhieuThue=rs.getInt("idPhieuThuePhong");
-            System.out.println(idPhieuThue);
+            while (rs.next()) {
+                idPhieuThue=rs.getInt("idPhieuThuePhong");
+            }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(new JFrame(),ex.getMessage());
         }
         return idPhieuThue;
+    }
+    
+    public void dongPhieuThuePhong(int idPhieuThue,Timestamp timeNow){
+        String query = "update phieuThuePhong set thoiGianDong=?,tinhtrang=0 where idPhieuThuePhong =?";
+        DBConnection.executeUpdate(query,timeNow,idPhieuThue);
     }
 }

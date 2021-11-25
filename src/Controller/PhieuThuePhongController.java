@@ -3,6 +3,8 @@ package Controller;
 import DAO.PhieuThuePhongDAO;
 import GUI_DatPhong.DatPhongPnl;
 import Model.PhieuThuePhong;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public class PhieuThuePhongController {
@@ -29,5 +31,10 @@ public class PhieuThuePhongController {
     
     public int layIdPhieuThuePhong(int idPhong){
         return phieuThuePhongDAO.layIdPhieuThuePhong(idPhong);
+    }
+    
+    public void dongPhieuThuePhong(int idPhieuThue){
+        Timestamp timeNow = new Timestamp(new Date().getTime());
+        phieuThuePhongDAO.dongPhieuThuePhong(idPhieuThue,timeNow);
     }
 }

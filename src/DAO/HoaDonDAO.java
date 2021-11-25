@@ -38,4 +38,8 @@ public class HoaDonDAO extends AbsDAO<HoaDon>{
         DBConnection.executeUpdate(query, idPhongMuonDoi, idPhongCanDoi);
     }
     
+    public void offHoaDonDichVu(int idHoaDonDichVu){
+        String query = "update hoaDonDichVu set trangthai=0 where idHoaDonDichVu=?";
+        DBConnection.executeUpdate(query, idHoaDonDichVu);
+    }
 }

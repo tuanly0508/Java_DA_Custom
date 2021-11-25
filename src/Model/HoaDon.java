@@ -7,24 +7,34 @@ public class HoaDon extends AbsTable{
     private Integer idHoaDonDichVu;
     private Integer idPhieuThuePhong;
     private Double tienPhong;
+    private Double tienDichVu;
     private Double tongTien;
     private String ghiChu;
-    private int trangThai;
 
     public HoaDon() {
     }
 
-    public HoaDon(Integer idHoaDon, Integer idNhanVien, Integer idHoaDonDichVu, Integer idPhieuThuePhong, Double tienPhong, Double tongTien, String ghiChu, int trangThai) {
+    public HoaDon(Integer idHoaDon, Integer idNhanVien, Integer idHoaDonDichVu, Integer idPhieuThuePhong, Double tienPhong, Double tienDichVu, Double tongTien, String ghiChu) {
         this.idHoaDon = idHoaDon;
         this.idNhanVien = idNhanVien;
         this.idHoaDonDichVu = idHoaDonDichVu;
         this.idPhieuThuePhong = idPhieuThuePhong;
         this.tienPhong = tienPhong;
+        this.tienDichVu = tienDichVu;
         this.tongTien = tongTien;
         this.ghiChu = ghiChu;
-        this.trangThai = trangThai;
     }
 
+    public Double getTienDichVu() {
+        return tienDichVu;
+    }
+
+    public void setTienDichVu(Double tienDichVu) {
+        this.tienDichVu = tienDichVu;
+    }
+
+    
+    
     public Integer getIdHoaDon() {
         return idHoaDon;
     }
@@ -81,14 +91,6 @@ public class HoaDon extends AbsTable{
         this.ghiChu = ghiChu;
     }
 
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
-    
     @Override
     public int getId() {
         return idHoaDon;

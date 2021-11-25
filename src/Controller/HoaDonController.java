@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.HoaDonDAO;
 import GUI_DatPhong.DatPhongPnl;
+import Model.HoaDon;
 import java.util.List;
 
 public class HoaDonController {
@@ -22,9 +23,9 @@ public class HoaDonController {
         hoaDonDAO.taoHoaDonDichVu(idPhong);
     }
     
-    public List<Object[]> getIdHoaDonDichVu(int idPhong){
+    public int getIdHoaDonDichVu(int idPhong){
         List<Object[]> phongs = hoaDonDAO.getIdHoaDonDichVu(idPhong);
-        return phongs;
+        return (int) phongs.get(0)[0];
     }
     
     public void themChiTietDichVu(int idHoaDon,int idDichVu,int soLan){
@@ -33,5 +34,13 @@ public class HoaDonController {
     
     public void chuyenHoaDonDichVu(int idPhongMuonDoi, int idPhongCanDoi) {
         hoaDonDAO.chuyenHoaDonDichVu(idPhongMuonDoi, idPhongCanDoi);
+    }
+    
+    public void insert(HoaDon hoadon){
+        hoaDonDAO.insert(hoadon);
+    }
+    
+    public void offHoaDonDichVu(int idHoaDonDichVu){
+        hoaDonDAO.offHoaDonDichVu(idHoaDonDichVu);
     }
 }

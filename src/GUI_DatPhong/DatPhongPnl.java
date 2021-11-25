@@ -90,14 +90,16 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnThanhToan.setEnabled(false);
     }   
     
-    public void loadPhong(List<Object[]> fullInfo) {
-        for(int i=0;i<fullInfo.size();i++){
-            String thoiGianMo ="....................";
-            if(!String.valueOf(fullInfo.get(i)[4]).equals("null")){
-                thoiGianMo=String.valueOf(fullInfo.get(i)[4]);
-            }
-            loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
-                    String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo);
+    public void loadPhong(List<Object[]> fullInfo,List<Object[]> time) {
+        for(int i=0;i<=fullInfo.size()-1;i++){
+                String thoiGianMo ="....................";
+                for(int y=0;y<=time.size()-1;y++){
+                    if(String.valueOf(fullInfo.get(i)[0]).equals(String.valueOf(time.get(y)[0]))){
+                        thoiGianMo=String.valueOf(time.get(y)[1]);
+                    }
+                }
+                loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
+                String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo);
         }
     }
     
@@ -130,7 +132,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 lblTenPhong.setText(tenPhong);
                 System.out.println(loaiPhongHienTai);
                             
-                
                 if (ttPhong.equals("Phòng còn trống")) {
                     setNull();
                     setNullTamTinh();
@@ -1294,6 +1295,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         TinhTienFrm tinhTienFrm= new TinhTienFrm(null,true);
         tinhTienFrm.txtTongTien.setText(ChuyenDoi.SoString(tongTien));
         tinhTienFrm.txtKhachDua.addKeyListener(new KeyAdapter() {
+            @Override
             public void keyReleased(KeyEvent e) {
                 double khachDua = ChuyenDoi.SoDouble(tinhTienFrm.txtKhachDua.getText());
                 tinhTienFrm.txtKhachDua.setText(ChuyenDoi.SoString(khachDua));
@@ -1308,11 +1310,38 @@ public class DatPhongPnl extends javax.swing.JPanel {
         tinhTienFrm.btnThanhToanIn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
+                    
                     int idPhieuThuePhong = phieuThuePhongController.layIdPhieuThuePhong(phongHienTai);
-                    System.out.println(idPhieuThuePhong);
-                            
-//                            List<Object[]> data2 = phongController.getIdPhieuThue(phongHienTai);
-//                            List<Object[]> data3 = phongController.layIdHoaDonDichVu(phongHienTai);
+                    int idHoaDonDichVu=0;
+                    HoaDon hd = new HoaDon();
+                    if(tienDichVu==0){
+                        hd = new HoaDon(0,2,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,"");
+                    }else{
+                        idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
+                        hd = new HoaDon(0,2,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,"");
+                    }
+                    hoaDonController.insert(hd);
+                    
+                    //đóng phiếu thuê phòng
+                    phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
+                    //Cập nhật lại tình trạng phòng
+                    datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
+                    //Đóng hoá đơn dịch vụ nếu có
+                    if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
+                    //reloadTable dịch vụ
+                    clearTable(tblSuDungDichVu);
+                    
+                    tongTien=0.0;
+                    tienGio = 0.0;
+                    tienDichVu = 0.0;
+                    tienPhuThu=0.0;
+                    reLoadPhong();
+                    setNull();
+                    setNullTamTinh();
+                    phongHienTai=UNDEFINED_CONDITION;
+                    tinhTienFrm.setVisible(false);
+
+
 //                            HoaDon hd = new HoaDon();
 //                            if(tienDichVu==0){
 //                                hd = new HoaDon(0,(int) data2.get(0)[0],null,tienPhong,tienDichVu,phuThu);
@@ -1396,8 +1425,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         if(!list.get(0)[0].toString().equals("1")){
                             hoaDonController.taoHoaDonDichVu(phongHienTai);
                         }
-                        List<Object[]> data = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                        int idHoaDon = (int) data.get(0)[0];
+                        int idHoaDon = hoaDonController.getIdHoaDonDichVu(phongHienTai);
                         hoaDonController.themChiTietDichVu(idHoaDon,(int) table.getValueAt(click1,0), (int) spnSoLuong.getValue());
                         List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
                         loadTableSuDungDV(data2);
@@ -1452,6 +1480,14 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 model.addRow(objects);
             }
         }
+    }
+    
+    public void clearTable(Table table){
+        DefaultTableModel model = (DefaultTableModel) table.getModel(); 
+        model.setRowCount(0);
+//        for (int i = table.getRowCount()-1; i >= 0; i--) {
+//                model.removeRow(i);
+//        } 
     }
     
     public void loadTableSuDungDV(List<Object[]> data) {

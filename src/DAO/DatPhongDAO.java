@@ -49,9 +49,11 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     }
     
     public List<Object[]> getInfoPhong() {
-        return getRawValues("select p.idPhong,tenPhong,tinhTrangPhong,idLoaiPhong,convert(varchar, thoiGianMo, 8) thoiGianMo, "
-                            + "a.tinhTrang from phong p left join phieuThuePhong ptp on p.idPhong=ptp.idPhong left join phieuDatPhong a "
-                            + "on a.idPhong=p.idPhong where ptp.tinhTrang=1 or ptp.tinhTrang is null ");
+        return getRawValues("select idPhong,tenPhong,tinhTrangPhong,idLoaiPhong from phong");
+    }
+    
+    public List<Object[]> getTimeOpen(){
+        return getRawValues("select idPhong,convert(varchar, thoiGianMo, 8) thoiGianMo from phieuThuePhong where tinhTrang=1");
     }
     
 }
