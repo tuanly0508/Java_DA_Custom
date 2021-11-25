@@ -16,11 +16,9 @@ import Model.GioDatTruoc;
 import Model.KhachHang;
 import Model.PhieuDatPhong;
 import Model.PhieuThuePhong;
-import Model.Phong;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -95,18 +93,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
             loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
                     String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[0].toString()),thoiGianMo);
         }
-
     }
     
-    public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo) {
-
-//        Button btnphong = new Button(tenPhong);
-//        btnphong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//        btnphong.setPreferredSize(new Dimension(80,10));
-//        btnphong.setFont(new java.awt.Font("Segoe UI Light", 1, 12));
-//        btnphong.setForeground(new java.awt.Color(255,255,255));
-//        List<Object[]> data = datPhongController.getThongTinPhong(idPhong);
-        
+    public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo) {        
         PhongRender p = new PhongRender();
         p.lblTenPhong.setText(tenPhong);
         p.txtGioMo.setText(thoiGianMo);
@@ -118,10 +107,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         
         if (ttPhong.equals("Phòng còn trống")) {
             p.setBackground(new Color(0,204,204));
-        }else if (ttPhong.equals("Đang hoạt động")) {
-//            
-            p.setBackground(new Color(255,92,92));
-            
+        }else if (ttPhong.equals("Đang hoạt động")) {           
+            p.setBackground(new Color(255,92,92));            
         }else if (ttPhong.equals("Phòng đặt trước")) {
             p.setBackground(new Color(255,195,137));
         }else {
@@ -146,6 +133,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     setThongTinPhong(phongHienTai);
                     btnTamTinh.setEnabled(true);
                     btnThanhToan.setEnabled(true);
+                    p.txtDatTruoc.setVisible(false);
+                    
                 }else if (ttPhong.equals("Phòng đặt trước")) {
                     loadTableSuDungDV(null);
                     setNullTamTinh();

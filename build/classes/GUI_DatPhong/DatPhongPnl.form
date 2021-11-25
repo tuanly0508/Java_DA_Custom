@@ -876,7 +876,6 @@
                           <Component id="jLabel10" max="32767" attributes="0"/>
                           <Component id="jSeparator4" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="54" max="32767" attributes="0"/>
                               <Component id="btnTamTinh" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnThanhToan" min="-2" pref="82" max="-2" attributes="0"/>
