@@ -210,6 +210,25 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             }
                         }                       
                     });
+                    
+                    datPhongDialog.btnMoPhong.addActionListener(new AbstractAction(){
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            
+                        }
+                    });
+                    
+//                    datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
+//                       @Override
+//                       public void mouseClicked(MouseEvent e) { 
+//                            DefaultTableModel p = (DefaultTableModel) datPhongDialog.tblDatPhong.getModel();
+//                            int click = datPhongDialog.tblDatPhong.getSelectedRow();
+//                            Integer idPhongMuonDoi = (Integer) datPhongDialog.tblDatPhong.getValueAt(click, 0);
+//                            phongHienTai = idPhongMuonDoi;
+//                            datPhongDialog.txtTenKhach.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 2));
+//                            datPhongDialog.txtSDT.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 3));
+//                       } 
+//                    });
                 }                          
                 loadTable(datPhongDialog.tblDatPhong, data);
                 datPhongDialog.lblTenPhongDlg.setText(tenPhong.toUpperCase());
