@@ -26,4 +26,8 @@ public class PhieuThuePhongController {
         List<Object[]> phongs = phieuThuePhongDAO.getThongTinGiaNgayLe(idPhong);
         return phongs;
     }
+    
+    public int layIdPhieuThuePhong(int idPhong){
+        return phieuThuePhongDAO.layIdPhieuThuePhong(idPhong);
+    }
 }
