@@ -26,4 +26,8 @@ public class PhieuDatPhongController {
         List<Object[]> phongs = pdpdao.getPhieuDatPhong(idPhong);
         return phongs;
     }
+    
+    public PhieuDatPhong getIdGioDatTruoc (Integer id) {
+        return pdpdao.getById(id);
+    }
 }

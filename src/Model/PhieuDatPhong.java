@@ -2,7 +2,7 @@ package Model;
 
 public class PhieuDatPhong extends AbsTable{
     private Integer idPhieuDatPhong;
-    private String SDT;
+    private String SDTKhachHang;
     private Integer idPhong;
     private int thoiGianDat;
     private String ghiChu;
@@ -12,9 +12,9 @@ public class PhieuDatPhong extends AbsTable{
     public PhieuDatPhong() {
     }
 
-    public PhieuDatPhong(Integer idPhieuDatPhong, String SDT, Integer idPhong, int thoiGianDat, String ghiChu, Integer tinhTrang, String tenKhach) {
+    public PhieuDatPhong(Integer idPhieuDatPhong, String SDTKhachHang, Integer idPhong, int thoiGianDat, String ghiChu, Integer tinhTrang, String tenKhach) {
         this.idPhieuDatPhong = idPhieuDatPhong;
-        this.SDT = SDT;
+        this.SDTKhachHang = SDTKhachHang;
         this.idPhong = idPhong;
         this.thoiGianDat = thoiGianDat;
         this.ghiChu = ghiChu;
@@ -30,12 +30,12 @@ public class PhieuDatPhong extends AbsTable{
         this.idPhieuDatPhong = idPhieuDatPhong;
     }
 
-    public String getSDT() {
-        return SDT;
+    public String getSDTKhachHang() {
+        return SDTKhachHang;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public void setSDTKhachHang(String SDTKhachHang) {
+        this.SDTKhachHang = SDTKhachHang;
     }
 
     public Integer getIdPhong() {

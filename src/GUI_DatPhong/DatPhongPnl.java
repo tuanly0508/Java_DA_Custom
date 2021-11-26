@@ -24,13 +24,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -163,11 +161,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
         
         p.btnDatTruoc.addActionListener(new AbstractAction(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {              
                 List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(idPhong);
                 if (datPhongDialog == null) {
                     datPhongDialog = new DatPhongDlg(null,true);
-                    setCombobox(datPhongDialog.cbxDatTruoc);
+                    setCombobox(datPhongDialog.cbxDatTruoc);                    
                     
                     datPhongDialog.btnHuy.addActionListener(new AbstractAction(){
                         @Override
@@ -219,36 +217,62 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     datPhongDialog.btnMoPhong.addActionListener(new AbstractAction(){
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            
+                            Timestamp thoiGianMo = null;
+                            Date date = new Date();         
+                            thoiGianMo=new Timestamp(date.getTime());
+                            String tenKhach = datPhongDialog.txtTenKhach.getText();
+                            String SDT = datPhongDialog.txtSDT.getText();
+
+                            if (isSDT == false) {
+                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,"Thường",0,null);
+                                khachHangController.insert(khachHang);
+                            }
+                            if (datPhongDialog.rdbGiaNgayLe.isSelected()) {
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,idPhong,thoiGianMo,null,tenKhach,1,1);
+                                phieuThuePhongController.insert(phieuThuePhong);
+                            }else {
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,idPhong,thoiGianMo,null,tenKhach,1,0);
+                                phieuThuePhongController.insert(phieuThuePhong);
+                            }        
+                            phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, idPhong);
+                            datPhongController.updateTinhTrangPhong("Đang hoạt động",idPhong);
+                            p.btnDatTruoc.setBackground(new Color(255,0,0));
+                            setPhongHoatDong();
+                            reLoadPhong();
+                            setThongTinPhong(phongHienTai);  
                         }
                     });
                     
-//                    datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
-//                       @Override
-//                       public void mouseClicked(MouseEvent e) { 
-//                            DefaultTableModel p = (DefaultTableModel) datPhongDialog.tblDatPhong.getModel();
-//                            int click = datPhongDialog.tblDatPhong.getSelectedRow();
-//                            Integer idPhongMuonDoi = (Integer) datPhongDialog.tblDatPhong.getValueAt(click, 0);
-//                            phongHienTai = idPhongMuonDoi;
-//                            datPhongDialog.txtTenKhach.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 2));
-//                            datPhongDialog.txtSDT.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 3));
-//                       } 
-//                    });
+                    datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
+                       @Override
+                       public void mouseClicked(MouseEvent e) { 
+                            DefaultTableModel p = (DefaultTableModel) datPhongDialog.tblDatPhong.getModel();
+                            int click = datPhongDialog.tblDatPhong.getSelectedRow();
+                            datPhongDialog.txtTenKhach.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 2));
+                            datPhongDialog.txtSDT.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 3));
+                            
+                            PhieuDatPhong pdp = phieuDatPhongController.getIdGioDatTruoc((Integer) datPhongDialog.tblDatPhong.getValueAt(click, 0));                           
+                            for (int i = 0; i < datPhongDialog.cbxDatTruoc.getItemCount(); i++) {
+                                GioDatTruoc g = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getItemAt(i);
+                                if(g.getIdGioDatTruoc().equals(pdp.getThoiGianDat())){
+                                    datPhongDialog.cbxDatTruoc.setSelectedIndex(i);
+                                }
+                            }
+                       } 
+                    });
                 }                          
                 loadTable(datPhongDialog.tblDatPhong, data);
+                datPhongDialog.txtTenKhach.setText("");
+                datPhongDialog.txtSDT.setText("");
+                datPhongDialog.cbxDatTruoc.setSelectedIndex(0);
                 datPhongDialog.lblTenPhongDlg.setText(tenPhong.toUpperCase());
                 datPhongDialog.setVisible(true);
             }
-        });
-        
+        });        
         panelPhong.add(p); 
         panelPhong.revalidate();
         panelPhong.repaint();
-    }
-    
-    public void PhongDatTruoc() {
-        
-    }
+    }   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1478,18 +1502,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
             for (int i = table.getRowCount()-1; i >= 0; i--) {
                 model.removeRow(i);
             }      
-            for (Object[] objects : data) {
+            data.forEach(objects -> {
                 model.addRow(objects);
-            }
+            });
         }
     }
     
     public void clearTable(Table table){
         DefaultTableModel model = (DefaultTableModel) table.getModel(); 
         model.setRowCount(0);
-//        for (int i = table.getRowCount()-1; i >= 0; i--) {
-//                model.removeRow(i);
-//        } 
     }
     
     public void loadTableSuDungDV(List<Object[]> data) {
@@ -1502,9 +1523,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
             for (int i = tblSuDungDichVu.getRowCount()-1; i >= 0; i--) {
                 model.removeRow(i);
             }      
-            for (Object[] objects : data) {
+            data.forEach(objects -> {
                 model.addRow(objects);
-            }
+            });
         }
     }
     
@@ -1565,9 +1586,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
     public void setCombobox(JComboBox cbx) {
         List<GioDatTruoc> data= datPhongController.getGioDatTruoc();
         cbx.removeAllItems();
-        for (GioDatTruoc gioDatTruoc : data) {
+        data.forEach(gioDatTruoc -> {
             cbx.addItem(gioDatTruoc);
-        }
+        });
     }
     
     public void setDisable() {

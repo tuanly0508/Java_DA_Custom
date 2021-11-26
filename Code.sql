@@ -228,7 +228,7 @@ select p.idPhong,tenPhong,tinhTrangPhong,idLoaiPhong,convert(varchar, thoiGianMo
 left join phieuThuePhong ptp on p.idPhong=ptp.idPhong left join phieuDatPhong a on a.idPhong=p.idPhong where ptp.tinhTrang=1 or 
 ptp.tinhTrang is null 
 
-select * from phieuDatPhong a right join phong b on a.idPhong=b.idPhong
+select distinct b.idPhong,tinhTrang,tenPhong from phieuDatPhong a right join phong b on a.idPhong = b.idPhong
 
 select * from phong a left join phieuDatPhong b on a.idPhong=b.idPhong
 
