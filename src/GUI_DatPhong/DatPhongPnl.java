@@ -26,14 +26,23 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class DatPhongPnl extends javax.swing.JPanel {
     private PhieuThuePhongController phieuThuePhongController;
@@ -1141,10 +1150,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
             khachHangController.insert(khachHang);
         }
         if (rdbGiaNgayLe.isSelected()) {
-            phieuThuePhong = new PhieuThuePhong(0,SDT,phongHienTai,thoiGianMo,null,tenKhach,1,1);
+            phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,1);
             phieuThuePhongController.insert(phieuThuePhong);
         }else {
-            phieuThuePhong = new PhieuThuePhong(0,SDT,phongHienTai,thoiGianMo,null,tenKhach,1,0);
+            phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,0);
             phieuThuePhongController.insert(phieuThuePhong);
         }        
         phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
@@ -1333,6 +1342,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 }           
             }
         });
+        
+        
         tinhTienFrm.btnThanhToanIn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -1341,10 +1352,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     int idHoaDonDichVu=0;
                     HoaDon hd = new HoaDon();
                     if(tienDichVu==0){
-                        hd = new HoaDon(0,2,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,"");
+                        hd = new HoaDon(0,2,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu);
                     }else{
                         idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                        hd = new HoaDon(0,2,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,"");
+                        hd = new HoaDon(0,2,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu);
                     }
                     hoaDonController.insert(hd);
                     
@@ -1356,6 +1367,19 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
                     //reloadTable dịch vụ
                     clearTable(tblSuDungDichVu);
+                    
+                    
+                    //In hoá đơn
+                    int idHoaDon = hoaDonController.layIdHoaDon(idPhieuThuePhong);
+                    System.out.println("idPhieuThue la:" +idPhieuThuePhong);
+                    System.out.println("idHoaDon là: "+ idHoaDon);
+                    XuatHoaDon(idHoaDon,"src/GUI_DatPhong/HoaDonDayDu.jrxml");
+//                            if(tienDichVu!=0){
+//                                XuatHoaDon((int)ttHoaDon.get(0)[0],"src/panel/HoaDon.jrxml");
+//                            }else{
+//                                XuatHoaDon((int)ttHoaDon.get(0)[0],"src/panel/HoaDonKhongDichVu.jrxml");
+//                            }
+                    
                     
                     tongTien=0.0;
                     tienGio = 0.0;
@@ -1528,6 +1552,24 @@ public class DatPhongPnl extends javax.swing.JPanel {
             });
         }
     }
+    
+    
+    
+    public void XuatHoaDon(int idHoaDon,String duongDanFile){
+        try {
+            Hashtable map = new Hashtable();
+            JasperReport report = JasperCompileManager.compileReport(duongDanFile);
+            
+            map.put("idHoaDon", idHoaDon);
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost;database=DuAn1;", "sa", "123456");
+            JasperPrint p = JasperFillManager.fillReport(report,  map, connection );
+            JasperViewer.viewReport(p, false);
+            JasperExportManager.exportReportToPdfFile(p, "test.pdf");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     
     public void CssTable(JScrollPane table) {
         JPanel p = new JPanel();

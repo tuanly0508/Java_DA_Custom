@@ -42,4 +42,17 @@ public class HoaDonDAO extends AbsDAO<HoaDon>{
         String query = "update hoaDonDichVu set trangthai=0 where idHoaDonDichVu=?";
         DBConnection.executeUpdate(query, idHoaDonDichVu);
     }
+    
+    public int layIdHoaDon(int idPhieuThue){
+        String query = "select idHoaDon from HoaDon where idPhieuThuePhong="+idPhieuThue+"";
+        ResultSet rs = DBConnection.executeQuery(query);
+        int idHoaDon =0;
+        try {
+            while (rs.next()) {
+                idHoaDon=rs.getInt("idHoaDon");
+            }
+        } catch (SQLException ex) {
+        }
+        return idHoaDon;
+    }
 }

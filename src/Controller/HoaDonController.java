@@ -43,4 +43,8 @@ public class HoaDonController {
     public void offHoaDonDichVu(int idHoaDonDichVu){
         hoaDonDAO.offHoaDonDichVu(idHoaDonDichVu);
     }
+    
+    public int layIdHoaDon(int idPhieuThuePhong){
+        return hoaDonDAO.layIdHoaDon(idPhieuThuePhong);
+    }
 }
