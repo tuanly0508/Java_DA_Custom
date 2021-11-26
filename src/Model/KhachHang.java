@@ -7,20 +7,18 @@ public class KhachHang extends AbsTable{
     private String tenKhach;
     private Double tienNo;
     private Double tienSuDung;
-    private String loaiKhachHang;
     private Integer traSau;
     private String ghiChu;
 
     public KhachHang() {
     }
 
-    public KhachHang(Integer idKhachHang, String SDT, String tenKhach, Double tienNo, Double tienSuDung, String loaiKhachHang, Integer traSau, String ghiChu) {
+    public KhachHang(Integer idKhachHang, String SDT, String tenKhach, Double tienNo, Double tienSuDung, Integer traSau, String ghiChu) {
         this.idKhachHang = idKhachHang;
         this.SDT = SDT;
         this.tenKhach = tenKhach;
         this.tienNo = tienNo;
         this.tienSuDung = tienSuDung;
-        this.loaiKhachHang = loaiKhachHang;
         this.traSau = traSau;
         this.ghiChu = ghiChu;
     }
@@ -65,14 +63,6 @@ public class KhachHang extends AbsTable{
         this.tienSuDung = tienSuDung;
     }
 
-    public String getLoaiKhachHang() {
-        return loaiKhachHang;
-    }
-
-    public void setLoaiKhachHang(String loaiKhachHang) {
-        this.loaiKhachHang = loaiKhachHang;
-    }
-
     public Integer getTraSau() {
         return traSau;
     }
@@ -88,9 +78,7 @@ public class KhachHang extends AbsTable{
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
-
-       
-
+    
     @Override
     public int getId() {
         return idKhachHang;

@@ -213,7 +213,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         @Override
                         public void keyReleased(KeyEvent e) {
                             String SDT = datPhongDialog.txtSDT.getText();
-                            List<Object[]> data = khachHangController.getThongTinKH(SDT);
+                            List<Object[]> data = datPhongController.getThongTinKH(SDT);
                             if (data.size()<=0) {
                                 datPhongDialog.txtTenKhach.setText("");
                             } else {
@@ -234,8 +234,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             String SDT = datPhongDialog.txtSDT.getText();
 
                             if (isSDT == false) {
-                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,"Thường",0,null);
-                                khachHangController.insert(khachHang);
+                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
+                                datPhongController.insert(khachHang);
                             }
                             if (datPhongDialog.rdbGiaNgayLe.isSelected()) {
                                 phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,1);                              
@@ -1147,8 +1147,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         String SDT = txtSDT.getText();
                 
         if (isSDT == false) {
-            khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,"Thường",0,null);
-            khachHangController.insert(khachHang);
+            khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
+            datPhongController.insert(khachHang);
         }
         if (rdbGiaNgayLe.isSelected()) {
             phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,1);
@@ -1204,7 +1204,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
     private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
         String SDT = txtSDT.getText();
-        List<Object[]> data = khachHangController.getThongTinKH(SDT);
+        List<Object[]> data = datPhongController.getThongTinKH(SDT);
         if (data.size()<=0) {
             txtTenKhach.setText("");
         } else {
@@ -1645,9 +1645,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         this.phieuThuePhongController = phieuThuePhongController;
     }
     
-    public void setController (KhachHangController khachHangController) {
-        this.khachHangController = khachHangController;
-    }
+
     
     public void setController (HoaDonController hoaDonController) {
         this.hoaDonController = hoaDonController;

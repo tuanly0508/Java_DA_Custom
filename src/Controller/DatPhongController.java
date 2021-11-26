@@ -3,13 +3,16 @@ package Controller;
 import DAO.DatPhongDAO;
 import DAO.DichVuDAO;
 import DAO.GioDatTruocDAO;
+import DAO.KhachHangDAO;
 import GUI_DatPhong.DatPhongPnl;
 import Model.GioDatTruoc;
+import Model.KhachHang;
 import java.util.List;
 
 public class DatPhongController {
     DatPhongPnl view;
     DatPhongDAO datPhongDAO = new DatPhongDAO();
+    KhachHangDAO khachHangDAO = new KhachHangDAO();
     DichVuDAO dichVuDAO = new DichVuDAO();
     GioDatTruocDAO gioDatTruocDAO = new GioDatTruocDAO();
 
@@ -83,4 +86,12 @@ public class DatPhongController {
         return datPhongDAO.getGiaPhong(idLoaiPhong, idPhong);
     }
     
+    public List<Object[]> getThongTinKH(String SDT) {
+        List<Object[]> lists = khachHangDAO.getThongTinKH(SDT);
+        return lists;
+    }
+    
+        public void insert(KhachHang kh){
+        khachHangDAO.insert(kh);
+    }
 }

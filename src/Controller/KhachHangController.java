@@ -1,25 +1,16 @@
 package Controller;
 
 import DAO.KhachHangDAO;
-import GUI_DatPhong.DatPhongPnl;
+import GUI_KhachHang.KhachHangPnl;
 import Model.KhachHang;
 import java.util.List;
 
 public class KhachHangController {
-    DatPhongPnl view;
+    KhachHangPnl view;
     KhachHangDAO khachHangDAO = new KhachHangDAO();
 
-    public KhachHangController(DatPhongPnl view) {
+    public KhachHangController(KhachHangPnl view) {
         this.view = view;
         view.setController(this);
-    }
-
-    public List<Object[]> getThongTinKH(String SDT) {
-        List<Object[]> lists = khachHangDAO.getThongTinKH(SDT);
-        return lists;
-    }
-    
-    public void insert(KhachHang kh){
-        khachHangDAO.insert(kh);
     }
 }
