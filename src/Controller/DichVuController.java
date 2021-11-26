@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.DichVuDAO;
-import GUI_DICHVU.DichVuPnl;
+import GUI_DichVu.DichVuPnl;
 
 public class DichVuController {
     DichVuDAO dichVuDAO =new DichVuDAO();

@@ -57,6 +57,7 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     }
     
     public List<Object[]> getTinhTrangPDP(){
-        return getRawValues("select distinct b.idPhong,tinhTrang,tenPhong from phieuDatPhong a right join phong b on a.idPhong = b.idPhong");
+        return getRawValues("select DISTINCT b.idPhong,tinhTrang,tenPhong from phieuDatPhong a right join phong b on a.idPhong = b.idPhong "
+                            + "where tinhTrang = 1");
     }
 }

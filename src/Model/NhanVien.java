@@ -4,38 +4,36 @@ import java.sql.Date;
 
 public class NhanVien extends AbsTable{
     private Integer idNhanVien;
-    private String hoTen;
+    private String hoTenNhanVien;
     private String CMND;
-    private String SDT;
+    private String soDienThoai;
     private String diaChi;
-    private Double luong;
-    private java.sql.Date ngayVaoLam;
-    private String gioiTinh;
+    private Double gioiTinh;
     private String email;
     private String verifyCode;
     private String pass;
     private String quyenHan;
-    private byte[] hinhAnh;
     private String trangThai;
-
+    private java.sql.Date ngaySinh;
+    private java.sql.Date ngayVaoLam;
+   
     public NhanVien() {
     }
 
-    public NhanVien(Integer idNhanVien, String hoTen, String CMND, String SDT, String diaChi, Double luong, Date ngayVaoLam, String gioiTinh, String email, String verifyCode, String pass, String quyenHan, byte[] hinhAnh, String trangThai) {
+    public NhanVien(Integer idNhanVien, String hoTenNhanVien, String CMND, String soDienThoai, String diaChi, Double gioiTinh, String email, String verifyCode, String pass, String quyenHan, String trangThai, Date ngaySinh, Date ngayVaoLam) {
         this.idNhanVien = idNhanVien;
-        this.hoTen = hoTen;
+        this.hoTenNhanVien = hoTenNhanVien;
         this.CMND = CMND;
-        this.SDT = SDT;
+        this.soDienThoai = soDienThoai;
         this.diaChi = diaChi;
-        this.luong = luong;
-        this.ngayVaoLam = ngayVaoLam;
         this.gioiTinh = gioiTinh;
         this.email = email;
         this.verifyCode = verifyCode;
         this.pass = pass;
         this.quyenHan = quyenHan;
-        this.hinhAnh = hinhAnh;
         this.trangThai = trangThai;
+        this.ngaySinh = ngaySinh;
+        this.ngayVaoLam = ngayVaoLam;
     }
 
     public Integer getIdNhanVien() {
@@ -46,12 +44,12 @@ public class NhanVien extends AbsTable{
         this.idNhanVien = idNhanVien;
     }
 
-    public String getHoTen() {
-        return hoTen;
+    public String getHoTenNhanVien() {
+        return hoTenNhanVien;
     }
 
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public void setHoTenNhanVien(String hoTenNhanVien) {
+        this.hoTenNhanVien = hoTenNhanVien;
     }
 
     public String getCMND() {
@@ -62,12 +60,12 @@ public class NhanVien extends AbsTable{
         this.CMND = CMND;
     }
 
-    public String getSDT() {
-        return SDT;
+    public String getSoDienThoai() {
+        return soDienThoai;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
 
     public String getDiaChi() {
@@ -78,27 +76,11 @@ public class NhanVien extends AbsTable{
         this.diaChi = diaChi;
     }
 
-    public Double getLuong() {
-        return luong;
-    }
-
-    public void setLuong(Double luong) {
-        this.luong = luong;
-    }
-
-    public Date getNgayVaoLam() {
-        return ngayVaoLam;
-    }
-
-    public void setNgayVaoLam(Date ngayVaoLam) {
-        this.ngayVaoLam = ngayVaoLam;
-    }
-
-    public String getGioiTinh() {
+    public Double getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(String gioiTinh) {
+    public void setGioiTinh(Double gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 
@@ -134,14 +116,6 @@ public class NhanVien extends AbsTable{
         this.quyenHan = quyenHan;
     }
 
-    public byte[] getHinhAnh() {
-        return hinhAnh;
-    }
-
-    public void setHinhAnh(byte[] hinhAnh) {
-        this.hinhAnh = hinhAnh;
-    }
-
     public String getTrangThai() {
         return trangThai;
     }
@@ -150,6 +124,22 @@ public class NhanVien extends AbsTable{
         this.trangThai = trangThai;
     }
 
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public Date getNgayVaoLam() {
+        return ngayVaoLam;
+    }
+
+    public void setNgayVaoLam(Date ngayVaoLam) {
+        this.ngayVaoLam = ngayVaoLam;
+    }
+    
     @Override
     public int getId() {
         return idNhanVien;

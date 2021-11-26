@@ -5,7 +5,6 @@ import DAO.DichVuDAO;
 import DAO.GioDatTruocDAO;
 import GUI_DatPhong.DatPhongPnl;
 import Model.GioDatTruoc;
-import Model.Phong;
 import java.util.List;
 
 public class DatPhongController {

@@ -235,7 +235,10 @@ select * from phong a left join phieuDatPhong b on a.idPhong=b.idPhong
 select idPhieuDatPhong,idPhong,tenKhach,SDTKhachHang,b.tenHinhThuc from phieuDatPhong a join GioDatTruoc b 
 on a.thoiGianDat = b.idGioDatTruoc where idPhong = 2 and tinhTrang = 1 
 
+select DISTINCT b.idPhong,tinhTrang,tenPhong from phieuDatPhong a right join phong b on a.idPhong = b.idPhong 
+where tinhTrang = 1
 
+update phieuDatPhong set tinhTrang = default where idPhong = 3 and thoiGianDat = 5
 
 insert into GioDatTruoc values (N'Chọn')
 insert into GioDatTruoc values ('10h')

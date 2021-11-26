@@ -1,6 +1,6 @@
 package GUI_QuenMatKhau;
 
-import Controller.NhanVienController;
+import Controller.QuenMatKhauController;
 import GUI_Login.Login;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -15,14 +15,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class QuenMatKhau extends javax.swing.JFrame {
-    private NhanVienController nhanVienController;  
+    private QuenMatKhauController quenMatKhauController;  
     private Login lg;
     
     public QuenMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
         lg = new Login();
-        nhanVienController = new NhanVienController(this);
+        quenMatKhauController = new QuenMatKhauController(this);
         btnDone.setVisible(false);
         btnSearch.setVisible(true);
         btnFail.setVisible(false);
@@ -217,7 +217,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackLoginActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        List<Object[]> data = nhanVienController.timEmail(txtEmail.getText());
+        List<Object[]> data = quenMatKhauController.timEmail(txtEmail.getText());
         
         if(data.size()>0 && data.get(0)[0].toString().equals(txtEmail.getText())) {
             btnDone.setVisible(true);
@@ -225,12 +225,12 @@ public class QuenMatKhau extends javax.swing.JFrame {
             btnFail.setVisible(false);
             
             String abc = generateRandomString();
-            nhanVienController.updateCode(txtEmail.getText(),abc);
+            quenMatKhauController.updateCode(txtEmail.getText(),abc);
             Object[] info = new Object[3];
             info[0]=txtEmail.getText();
             info[1]="ResetPass";
             info[2]=abc;
-            nhanVienController.sendMail(info);
+            quenMatKhauController.sendMail(info);
         
             lblErrEmail.setForeground(Color.magenta);
             lblErrEmail.setText("<html>Email hợp lệ. Kiểm tra email <a href=\\\"\\\">tại đây</a></html>");
@@ -255,7 +255,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailMouseClicked
 
     private void txtCodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCodeMouseClicked
-        List<Object[]> data = nhanVienController.timEmail(txtEmail.getText());
+        List<Object[]> data = quenMatKhauController.timEmail(txtEmail.getText());
         if(data.size()<=0) {  
             lblErrEmail.setText("Vui lòng kiểm tra email"); 
         }else {
@@ -268,7 +268,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
     private void btnSearchCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCodeActionPerformed
         String code = txtCode.getText();
-        List<Object[]> data = nhanVienController.getCode(txtEmail.getText());
+        List<Object[]> data = quenMatKhauController.getCode(txtEmail.getText());
         if(data.size()>0 && data.get(0)[0].toString().equals(code)){
             btnDoneCode.setVisible(true);
             btnSearchCode.setVisible(false);
@@ -288,15 +288,15 @@ public class QuenMatKhau extends javax.swing.JFrame {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         String pass = new String(txtPass.getPassword());
         String rePass = new String(txtRePass.getPassword());
-        List<Object[]> data = nhanVienController.timEmail(txtEmail.getText());
-        List<Object[]> dataCode = nhanVienController.getCode(txtEmail.getText());
+        List<Object[]> data = quenMatKhauController.timEmail(txtEmail.getText());
+        List<Object[]> dataCode = quenMatKhauController.getCode(txtEmail.getText());
         if(data.size()<=0) {  
             lblErrEmail.setText("Vui lòng kiểm tra email");
         }else if(dataCode.size()>0 && dataCode.get(0)[0].toString().equals(txtEmail.getText())){           
         }else if(!pass.equals(rePass)){
             lblErrRePass.setText("Mật khẩu không khớp");
         }else if(pass.equals(rePass)){
-            nhanVienController.updatePass(txtEmail.getText(),pass);
+            quenMatKhauController.updatePass(txtEmail.getText(),pass);
             JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công!");
             this.dispose();
             lg.setVisible(true);
@@ -304,8 +304,8 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     private void txtPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassMouseClicked
-        List<Object[]> data = nhanVienController.timEmail(txtEmail.getText());
-        List<Object[]> dataCode = nhanVienController.getCode(txtEmail.getText());
+        List<Object[]> data = quenMatKhauController.timEmail(txtEmail.getText());
+        List<Object[]> dataCode = quenMatKhauController.getCode(txtEmail.getText());
         if(data.size()<=0) {  
             lblErrEmail.setText("Vui lòng kiểm tra email");
         }else if(dataCode.size()>0 && dataCode.get(0)[0].toString().equals(txtCode.getText())){           
@@ -313,8 +313,8 @@ public class QuenMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPassMouseClicked
 
     private void txtRePassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRePassMouseClicked
-        List<Object[]> data = nhanVienController.timEmail(txtEmail.getText());
-        List<Object[]> dataCode = nhanVienController.getCode(txtEmail.getText());
+        List<Object[]> data = quenMatKhauController.timEmail(txtEmail.getText());
+        List<Object[]> dataCode = quenMatKhauController.getCode(txtEmail.getText());
         if(data.size()<=0) {  
             lblErrEmail.setText("Vui lòng kiểm tra email");
         }else if(dataCode.size()>0 && dataCode.get(0)[0].toString().equals(txtCode.getText())){           
@@ -347,8 +347,8 @@ public class QuenMatKhau extends javax.swing.JFrame {
         }
     }
     
-    public void setController (NhanVienController nhanVienController) {
-        this.nhanVienController = nhanVienController;
+    public void setController (QuenMatKhauController quenMatKhauController) {
+        this.quenMatKhauController = quenMatKhauController;
     }
     
     /**

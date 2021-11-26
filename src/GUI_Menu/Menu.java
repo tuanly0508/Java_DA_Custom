@@ -23,14 +23,18 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ImageIcon(getClass().getResource("/icon/check-list.png")), "Đặt phòng hát", 0);
         addMenu(new ImageIcon(getClass().getResource("/icon/analysis.png")), "Thống kê", 1);
         addMenu(new ImageIcon(getClass().getResource("/icon/teamwork.png")), "Nhân viên", 2);
-        addMenu(new ImageIcon(getClass().getResource("/icon/home.png")), "Quản lý phòng", 3);
-        addMenu(new ImageIcon(getClass().getResource("/icon/delivery-man.png")), "Nhà cung cấp", 4);
-        addMenu(new ImageIcon(getClass().getResource("/icon/products.png")), "Dịch vụ", 5);
-        addMenu(new ImageIcon(getClass().getResource("/icon/import.png")), "Nhập hàng", 6);
-        addMenu(new ImageIcon(getClass().getResource("/icon/customer.png")), "Khách hàng", 7);
+        addMenu(new ImageIcon(getClass().getResource("/icon/products.png")), "Dịch vụ", 3);
+        addMenu(new ImageIcon(getClass().getResource("/icon/import.png")), "Nhập hàng", 4);
+        addMenu(new ImageIcon(getClass().getResource("/icon/customer.png")), "Khách hàng", 5);
         addEmpty();
         addEmpty();
-        addMenu(new ImageIcon(getClass().getResource("/icon/logout.png")), "Đăng xuất", 8);
+        addEmpty();
+        addEmpty();
+        addEmpty();
+        addEmpty();
+        addEmpty();
+        addEmpty();
+        addMenu(new ImageIcon(getClass().getResource("/icon/logout.png")), "Đăng xuất", 6);
     }
 
     private void addEmpty() {
