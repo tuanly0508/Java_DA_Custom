@@ -8,11 +8,13 @@ import Controller.HoaDonController;
 import Controller.KhachHangController;
 import Controller.NhanVienController;
 import Controller.PhieuDatPhongController;
+import Controller.PhieuNhapHangController;
 import Controller.PhieuThuePhongController;
 import GUI_DichVu.DichVuPnl;
 import GUI_DatPhong.DatPhongPnl;
 import GUI_Login.Login;
 import GUI_NhanVien.NhanVienPnl;
+import GUI_NhapHang.NhapHangPnl;
 import GUI_ThongKe.ThongKePnl;
 import java.awt.Component;
 
@@ -20,6 +22,7 @@ public class Main extends javax.swing.JFrame {
     private DatPhongPnl datPhongPnl;
     private DichVuPnl dichVuPnl;
     private NhanVienPnl nhanVienPnl;
+    private NhapHangPnl nhapHangPnl;
     
     public Main() {
         initComponents();    
@@ -31,6 +34,7 @@ public class Main extends javax.swing.JFrame {
         datPhongPnl = new DatPhongPnl();
         dichVuPnl =  new DichVuPnl();
         nhanVienPnl = new NhanVienPnl();
+        nhapHangPnl = new NhapHangPnl();
         PhieuThuePhongController phieuThuePhongController = new PhieuThuePhongController(datPhongPnl);
         PhieuDatPhongController phieuDatPhongController = new PhieuDatPhongController(datPhongPnl);
         KhachHangController khachHangController = new KhachHangController(datPhongPnl);
@@ -39,6 +43,7 @@ public class Main extends javax.swing.JFrame {
         DichVuController dichVuController = new DichVuController(dichVuPnl);
         GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
         NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
+        PhieuNhapHangController phieuNhapHangController = new PhieuNhapHangController(nhapHangPnl);
         
         EventMenu event = new EventMenu() {
             @Override
@@ -50,9 +55,9 @@ public class Main extends javax.swing.JFrame {
                 }else if (index == 2) {
                     showForm(new NhanVienPnl());
                 }else if (index == 3) {
-                    System.out.println("hi");
-                }else if (index == 4) {
                     showForm(dichVuPnl);
+                }else if (index == 4) {
+                    showForm(nhapHangPnl);
                 }else if (index == 5) {
                     System.out.println("hi");
                 }else if (index == 6) {
