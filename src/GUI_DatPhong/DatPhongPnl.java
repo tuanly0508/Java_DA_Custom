@@ -237,10 +237,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
                                 khachHangController.insert(khachHang);
                             }
                             if (datPhongDialog.rdbGiaNgayLe.isSelected()) {
-                                phieuThuePhong = new PhieuThuePhong(0,SDT,idPhong,thoiGianMo,null,tenKhach,1,1);
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,2,idPhong,thoiGianMo,null,tenKhach,1,1);                              
                                 phieuThuePhongController.insert(phieuThuePhong);
                             }else {
-                                phieuThuePhong = new PhieuThuePhong(0,SDT,idPhong,thoiGianMo,null,tenKhach,1,0);
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,2,idPhong,thoiGianMo,null,tenKhach,1,0);
                                 phieuThuePhongController.insert(phieuThuePhong);
                             }        
                             phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, idPhong);
