@@ -313,7 +313,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         DonViTinh donViTinh =(DonViTinh) cbxDonViTinh.getSelectedItem();
         Integer idDonViTinh = donViTinh.getIdDonViTinh();
         
-        DichVu dv = new DichVu(0,idDanhMuc,idDonViTinh,tenDichVu,Integer.parseInt(soLuongCon),Double.parseDouble(giaBan));
+        DichVu dv = new DichVu(0,idDanhMuc,idDonViTinh,tenDichVu,Integer.parseInt(soLuongCon),Double.parseDouble(giaBan),true);
         dichVuController.themDichVu(dv);
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -372,7 +372,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                 DonViTinh donViTinh =(DonViTinh) cbxDonViTinh.getSelectedItem();
                 Integer idDonViTinh = donViTinh.getIdDonViTinh();
                 int idDichVu = (Integer)tblDichVu.getValueAt(chonDong, 0);
-                DichVu dv = new DichVu(idDichVu,idDanhMuc,idDonViTinh,tenDichVu,Integer.parseInt(soLuongCon),ChuyenDoi.SoDouble(giaBan));
+                DichVu dv = new DichVu(idDichVu,idDanhMuc,idDonViTinh,tenDichVu,Integer.parseInt(soLuongCon),ChuyenDoi.SoDouble(giaBan),true);
                 dichVuController.suaDichVu(dv);
             }
         }

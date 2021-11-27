@@ -106,7 +106,7 @@
             <Component class="GUI.Button" name="btnDichVu">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="dc" green="e1" red="78" type="rgb"/>
+                  <Color blue="cb" green="a0" red="53" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="D&#x1eca;CH V&#x1ee4;"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

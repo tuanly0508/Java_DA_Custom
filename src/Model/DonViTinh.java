@@ -12,14 +12,26 @@ package Model;
 public class DonViTinh extends AbsTable {
     private Integer idDonViTinh ;
     private String tenDonVi ;
+    private Boolean tinhTrang ;
 
     public DonViTinh() {
     }
 
-    public DonViTinh(Integer idDonViTinh, String tenDonVi) {
+    public DonViTinh(Integer idDonViTinh, String tenDonVi, Boolean tinhTrang) {
         this.idDonViTinh = idDonViTinh;
         this.tenDonVi = tenDonVi;
+        this.tinhTrang = tinhTrang;
     }
+
+    public Boolean getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(Boolean tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
+
+    
 
     public Integer getIdDonViTinh() {
         return idDonViTinh;

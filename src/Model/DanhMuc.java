@@ -12,14 +12,25 @@ package Model;
 public class DanhMuc extends AbsTable{
     private Integer idDanhMuc ;
     private String tenDanhMuc ;
+    private Boolean tinhTrang ;
 
     public DanhMuc() {
     }
 
-    public DanhMuc(Integer idDanhMuc, String tenDanhMuc) {
+    public DanhMuc(Integer idDanhMuc, String tenDanhMuc, Boolean tinhTrang) {
         this.idDanhMuc = idDanhMuc;
         this.tenDanhMuc = tenDanhMuc;
+        this.tinhTrang = tinhTrang;
     }
+
+    public Boolean getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(Boolean tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
+
 
     public Integer getIdDanhMuc() {
         return idDanhMuc;

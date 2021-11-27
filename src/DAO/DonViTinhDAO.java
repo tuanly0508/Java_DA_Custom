@@ -5,12 +5,21 @@
  */
 package DAO;
 
+import Help.DBConnection;
 import Model.DonViTinh;
+import java.util.List;
 
 /**
  *
  * @author Administrator
  */
 public class DonViTinhDAO extends AbsDAO<DonViTinh>{
+    public List<Object[]> layDanhSachDonViTinh() {
+        return getRawValues("select * from DonViTinh where tinhTrang =1");
+    }
     
+    public void xoaTamThoiDonViTinh(int idDonVi){
+        String query = "update donViTinh set tinhTrang=0 where idDonviTinh =?";
+        DBConnection.executeUpdate(query, idDonVi);
+    }
 }

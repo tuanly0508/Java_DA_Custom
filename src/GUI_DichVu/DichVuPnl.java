@@ -7,6 +7,7 @@ package GUI_DichVu;
 
 import Controller.DichVuController;
 import Help.ChuyenDoi;
+import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -25,6 +26,7 @@ public class DichVuPnl extends javax.swing.JPanel {
     public static JPanel show ;
     QlDichVuPnl dichVu;
     private QlDichVuPnl quanDichVuPnl;
+    private DanhmucVaDonViPnl danhmucVaDonViPnl;
     
     public DichVuPnl() {
         initComponents();
@@ -64,7 +66,7 @@ public class DichVuPnl extends javax.swing.JPanel {
 
         roundPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnDichVu.setBackground(new java.awt.Color(120, 225, 220));
+        btnDichVu.setBackground(new java.awt.Color(83, 160, 203));
         btnDichVu.setText("DỊCH VỤ");
         btnDichVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDichVu.addActionListener(new java.awt.event.ActionListener() {
@@ -142,9 +144,11 @@ public class DichVuPnl extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDanhMucDVTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhMucDVTActionPerformed
-        DanhmucVaDonViPnl danhMuc = new DanhmucVaDonViPnl();
-        ShowPanel(noiDungPnl, danhMuc);    
-        
+        danhmucVaDonViPnl = new DanhmucVaDonViPnl();
+        DichVuController quanLyDichVuController = new DichVuController(danhmucVaDonViPnl);
+        ShowPanel(noiDungPnl, danhmucVaDonViPnl);
+        btnDanhMucDVT.setBackground(new Color(83,160,203));
+        btnDichVu.setBackground(new Color(120,225,220));
     }//GEN-LAST:event_btnDanhMucDVTActionPerformed
 
     private void btnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDichVuActionPerformed
@@ -155,8 +159,10 @@ public class DichVuPnl extends javax.swing.JPanel {
         quanDichVuPnl = new QlDichVuPnl();
         DichVuController quanLyDichVuController = new DichVuController(quanDichVuPnl);
         ShowPanel(noiDungPnl, quanDichVuPnl);
+        btnDichVu.setBackground(new Color(83,160,203));
+        btnDanhMucDVT.setBackground(new Color(120,225,220));
     }
-    
+
 
     
     
