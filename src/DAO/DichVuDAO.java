@@ -15,6 +15,11 @@ public class DichVuDAO extends AbsDAO<DichVu>{
                             "join danhMuc dm on dm.idDanhMuc=a.idDanhMuc where a.tinhTrang=1");
     }
     
+    public List<Object[]> timDichVu(String tenDichVu) {
+        return getRawValues("select idDichVu,tenDichVu,tenDanhMuc, tenDonVi,soluongcon, format(gia,'#,#') gia from dichVu a \n" +
+                            "join donViTinh b on a.idDonViTinh = b.idDonViTinh\n" +
+                            "join danhMuc dm on dm.idDanhMuc=a.idDanhMuc where a.tinhTrang=1 and tenDichVu like N'%"+tenDichVu+"%'");
+    }
     
     public List<Object[]> getDichVuId(int idDanhMuc) {
         return getRawValues("select idDichVu,tenDichVu, tenDonVi, gia from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where idDanhMuc = '"+idDanhMuc+"' ");
@@ -27,6 +32,7 @@ public class DichVuDAO extends AbsDAO<DichVu>{
                 + "hd.idHoaDonDichVu=ctdv.idHoaDonDichVu join DichVu dv on ctdv.idDichVu=dv.idDichVu join donViTinh dvt on "
                 + "dvt.idDonViTinh=dv.idDonViTinh where idphong= '"+idPhong+"' and trangThai=1 order by ngaySuDung");
     }
+    
     
     public void xoaTamThoiDichVu(int idDichVu){
         String query = "update DichVu set tinhTrang=0 where idDichVu =?";

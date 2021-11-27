@@ -94,7 +94,6 @@ public class QlDichVuPnl extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(218, 232, 232));
         setMaximumSize(null);
-        setMinimumSize(null);
         setName(""); // NOI18N
 
         roundPanel1.setBackground(new java.awt.Color(218, 232, 232));
@@ -133,6 +132,12 @@ public class QlDichVuPnl extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("DANH SÁCH DỊCH VỤ");
+
+        txtTimNhanVien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimNhanVienKeyReleased(evt);
+            }
+        });
 
         button3.setBackground(new java.awt.Color(120, 225, 220));
         button3.setText("File");
@@ -378,6 +383,10 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void txtTimNhanVienKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimNhanVienKeyReleased
+        dichVuController.timDichVu(txtTimNhanVien.getText());
+    }//GEN-LAST:event_txtTimNhanVienKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
