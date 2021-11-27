@@ -6,12 +6,20 @@ import java.util.List;
 
 public class DichVuDAO extends AbsDAO<DichVu>{
     public List<Object[]> getAllDichVu() {
-        return getRawValues("select idDichVu,tenDichVu, tenDonVi, gia from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh");
+        return getRawValues("select idDichVu,tenDichVu, tenDonVi, gia,soluongcon from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh");
     }
+    
+    public List<Object[]> layDanhSachDichVu() {
+        return getRawValues("select idDichVu,tenDichVu,tenDanhMuc, tenDonVi,soluongcon, format(gia,'#,#') gia from dichVu a \n" +
+                            "join donViTinh b on a.idDonViTinh = b.idDonViTinh\n" +
+                            "join danhMuc dm on dm.idDanhMuc=a.idDanhMuc");
+    }
+    
     
     public List<Object[]> getDichVuId(int idDanhMuc) {
         return getRawValues("select idDichVu,tenDichVu, tenDonVi, gia from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where idDanhMuc = '"+idDanhMuc+"' ");
     }
+    
     
     public List<Object[]> layChiTietDichVu(int idPhong) {
         return getRawValues("select hd.idHoaDonDichVu,dv.tenDichVu,dvt.tenDonVi,FORMAT(ctdv.gioSuDung ,'dd/MM/yyyy HH:mm:ss') ngaySuDung,"
