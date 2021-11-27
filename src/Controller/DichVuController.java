@@ -82,6 +82,11 @@ public class DichVuController {
         loadListDichVu();
     }
     
+    public void timDichVu(String dichVu) {
+        List<Object[]> dichVus = dichVuDAO.timDichVu(dichVu);
+        qlDichVuView.viewTableDichVu(dichVus);
+    }
+    
     public void themDanhMuc(DanhMuc danhMuc){
         danhMucDAO.insert(danhMuc);
         loadListDanhMuc();
