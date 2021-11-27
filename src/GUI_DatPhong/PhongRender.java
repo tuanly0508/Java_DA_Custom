@@ -1,11 +1,13 @@
 package GUI_DatPhong;
 
 public class PhongRender extends javax.swing.JPanel {
+    public Integer idPhong;
     
-    public PhongRender() {
+    public PhongRender(int idPhong) {
         initComponents();
+        this.idPhong = idPhong;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -59,7 +61,7 @@ public class PhongRender extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public GUI.Button btnDatTruoc;
+    GUI.Button btnDatTruoc;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JLabel lblTenPhong;
     public javax.swing.JLabel txtGioMo;

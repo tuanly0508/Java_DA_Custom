@@ -16,7 +16,7 @@ public class DatPhongDlg extends javax.swing.JDialog {
         jScrollPane1.getVerticalScrollBar().setBackground(Color.WHITE);
         jScrollPane1.getViewport().setBackground(Color.WHITE);       
         jScrollPane1.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);        
     }
 
     @SuppressWarnings("unchecked")

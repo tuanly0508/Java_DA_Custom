@@ -147,8 +147,6 @@ create table hoaDon(
 	trangThai bit not null
 )
 
-
-
 insert into loaiPhong values (N'Phòng thường',10,80000)
 insert into loaiPhong values (N'Phòng vip',20,150000)
 
