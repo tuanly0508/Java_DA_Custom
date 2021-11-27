@@ -141,7 +141,7 @@ public class DichVuPnl extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDanhMucDVTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhMucDVTActionPerformed
-        DanhmucVaDonVi danhMuc = new DanhmucVaDonVi();
+        DanhmucVaDonViPnl danhMuc = new DanhmucVaDonViPnl();
         ShowPanel(noiDungPnl, danhMuc);    
         
     }//GEN-LAST:event_btnDanhMucDVTActionPerformed
@@ -155,6 +155,7 @@ public class DichVuPnl extends javax.swing.JPanel {
         DichVuController quanLyDichVuController = new DichVuController(quanDichVuPnl);
         ShowPanel(noiDungPnl, quanDichVuPnl);
     }
+    
 
     
     
