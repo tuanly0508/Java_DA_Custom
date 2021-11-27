@@ -18,7 +18,7 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     }
     
     public List<Object[]> getLoaiPhongTT(String tinhTrang) {
-        return getRawValues("select * from Phong a join loaiPhong b on a.idLoaiPhong = b.idLoaiPhong where a.tinhTrangPhong = N'"+tinhTrang+"' ");
+        return getRawValues("select idPhong,tenPhong,tinhTrangPhong,idLoaiPhong from phong where tinhTrangPhong = N'"+tinhTrang+"'");
     }
     
     public void updateTinhTrangPhong(String trangThai,int idPhong) {
@@ -49,7 +49,11 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     }
     
     public List<Object[]> getInfoPhong() {
-        return getRawValues("select idPhong,tenPhong,tinhTrangPhong,idLoaiPhong from phong");
+        return getRawValues("select idPhong,tenPhong,tinhTrangPhong,idLoaiPhong from phong ");
+    }
+    
+    public List<Object[]> getFullInfoLoaiPhong(int idLoaiPhong) {
+        return getRawValues("select idPhong,tenPhong,tinhTrangPhong,idLoaiPhong from phong where idLoaiPhong = "+idLoaiPhong+"");
     }
     
     public List<Object[]> getTimeOpen(){

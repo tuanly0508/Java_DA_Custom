@@ -238,6 +238,8 @@ where tinhTrang = 1
 
 update phieuDatPhong set tinhTrang = default where idPhong = 3 and thoiGianDat = 5
 
+select * from phieuDatPhong where tinhTrang=1
+
 insert into GioDatTruoc values (N'Chọn')
 insert into GioDatTruoc values ('10h')
 insert into GioDatTruoc values ('10h30')
