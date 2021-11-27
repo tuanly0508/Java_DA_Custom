@@ -12,6 +12,7 @@ import Controller.PhieuNhapHangController;
 import Controller.PhieuThuePhongController;
 import GUI_DichVu.DichVuPnl;
 import GUI_DatPhong.DatPhongPnl;
+import GUI_DichVu.QlDichVuPnl;
 import GUI_KhachHang.KhachHangPnl;
 import GUI_Login.Login;
 import GUI_NhanVien.NhanVienPnl;
@@ -25,6 +26,7 @@ public class Main extends javax.swing.JFrame {
     private NhanVienPnl nhanVienPnl;
     private NhapHangPnl nhapHangPnl;
     private KhachHangPnl khachHangPnl;
+//    private QlDichVuPnl quanDichVuPnl;
     
     public Main() {
         initComponents();    
@@ -38,6 +40,7 @@ public class Main extends javax.swing.JFrame {
         nhanVienPnl = new NhanVienPnl();
         nhapHangPnl = new NhapHangPnl();
         khachHangPnl = new KhachHangPnl();
+//        quanDichVuPnl = new QlDichVuPnl();
         PhieuThuePhongController phieuThuePhongController = new PhieuThuePhongController(datPhongPnl);
         PhieuDatPhongController phieuDatPhongController = new PhieuDatPhongController(datPhongPnl);
         KhachHangController khachHangController = new KhachHangController(khachHangPnl);
@@ -47,6 +50,7 @@ public class Main extends javax.swing.JFrame {
         GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
         NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
         PhieuNhapHangController phieuNhapHangController = new PhieuNhapHangController(nhapHangPnl);
+//        DichVuController quanLyDichVuController = new DichVuController(quanDichVuPnl);
         
         EventMenu event = new EventMenu() {
             @Override
