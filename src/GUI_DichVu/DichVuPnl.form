@@ -50,8 +50,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="roundPanel2" alignment="1" max="32767" attributes="0"/>
-                      <Component id="noiDungPnl" alignment="0" max="32767" attributes="0"/>
+                      <Component id="roundPanel2" max="32767" attributes="0"/>
+                      <Component id="noiDungPnl" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -63,7 +63,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="roundPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="noiDungPnl" max="32767" attributes="0"/>
+                  <Component id="noiDungPnl" pref="758" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -84,7 +85,7 @@
                       <Component id="btnDichVu" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnDanhMucDVT" min="-2" pref="202" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="844" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
