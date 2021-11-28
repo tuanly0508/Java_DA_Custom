@@ -3,11 +3,25 @@ package View_ThongKe;
 import Controller.ThongKeController;
 import swing.ScrollBar;
 import Help.ChuyenDoi;
+import Help.XuatExcel;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Frame;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ThongKePnl extends javax.swing.JPanel {
     private ThongKeController thongKeController;
@@ -46,6 +60,7 @@ public class ThongKePnl extends javax.swing.JPanel {
         roundPanel3 = new swing.RoundPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblThongKe = new swing.Table();
+        button11 = new swing.Button();
         roundPanel4 = new swing.RoundPanel();
         chart = new View_ThongKe.Chart();
         roundPanel5 = new swing.RoundPanel();
@@ -157,20 +172,34 @@ public class ThongKePnl extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tblThongKe);
 
+        button11.setBorder(null);
+        button11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel (1).png"))); // NOI18N
+        button11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout roundPanel3Layout = new javax.swing.GroupLayout(roundPanel3);
         roundPanel3.setLayout(roundPanel3Layout);
         roundPanel3Layout.setHorizontalGroup(
             roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                    .addGroup(roundPanel3Layout.createSequentialGroup()
+                        .addComponent(button11, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         roundPanel3Layout.setVerticalGroup(
             roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
+                .addGap(18, 18, 18)
+                .addComponent(button11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -331,6 +360,11 @@ public class ThongKePnl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnThongKeActionPerformed
 
+    private void button11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button11ActionPerformed
+        XuatExcel.xuat(tblThongKe);
+    }//GEN-LAST:event_button11ActionPerformed
+
+    
     public void setValueSum(Double phong , Double dichVu ,Double phuThu, Double tong){
         lblTienGio.setText(ChuyenDoi.SoString(phong)+" đ");
         lblTienDichVu.setText(ChuyenDoi.SoString(dichVu)+" đ");
@@ -385,6 +419,7 @@ public class ThongKePnl extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.Button btnThongKe;
+    private swing.Button button11;
     private javax.swing.JComboBox<String> cbxLoaiHinh;
     private View_ThongKe.Chart chart;
     private javax.swing.JLabel jLabel1;

@@ -267,7 +267,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             setThongTinPhong(p.idPhong);
                             setNullDatPhongDiaglog();
                             p.idPhong = 0;
-                        }                              
+                        }
                     }
                 });
                 
