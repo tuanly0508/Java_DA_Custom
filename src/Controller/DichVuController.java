@@ -3,9 +3,9 @@ package Controller;
 import DAO.DanhMucDAO;
 import DAO.DichVuDAO;
 import DAO.DonViTinhDAO;
-import GUI_DichVu.DanhmucVaDonViPnl;
-import GUI_DichVu.DichVuPnl;
-import GUI_DichVu.QlDichVuPnl;
+import View_DichVu.DanhmucVaDonViPnl;
+import View_DichVu.DichVuPnl;
+import View_DichVu.QlDichVuPnl;
 import Model.DanhMuc;
 import Model.DichVu;
 import Model.DonViTinh;
@@ -43,6 +43,11 @@ public class DichVuController {
     public void loadListDichVu() {     
         List<Object[]> dichVus = dichVuDAO.layDanhSachDichVu();
         qlDichVuView.viewTableDichVu(dichVus);
+    }
+    
+    public List<Object[]> getListDichVu(){
+        List<Object[]> dichVus = dichVuDAO.layDanhSachDichVu();
+        return dichVus;
     }
     
     public void loadListDanhMuc(){

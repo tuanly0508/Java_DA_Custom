@@ -235,7 +235,7 @@ where tinhTrang = 1
 
 update phieuDatPhong set tinhTrang = default where idPhong = 3 and thoiGianDat = 5
 
-select * from phieuDatPhong where tinhTrang=1
+select SDTKhachHang, tenKhachHang,tienNo,tienSuDung, traSau, ghiChu from khachHang where SDTKhachHang like '0941790508'
 
 insert into GioDatTruoc values (N'Chọn')
 insert into GioDatTruoc values ('10h')

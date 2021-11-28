@@ -55,4 +55,14 @@ public class HoaDonDAO extends AbsDAO<HoaDon>{
         }
         return idHoaDon;
     }
+    
+    public List<Object[]> getListHoaDonDV(int idPhong){
+        String  query = "select idHoaDonDichVu from hoaDonDichVu where idPhong ="+idPhong+" and trangthai=1";
+        return getRawValues(query);
+    }
+    
+    public void updateTienDichVu(Double tongTien,int idHoaDonDichVu){
+        String query = "update HoaDonDichVu set tongTienDV = ? where idHoaDonDichVu =?";
+        DBConnection.executeUpdate(query,tongTien,idHoaDonDichVu);
+    }
 }

@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.PhieuThuePhongDAO;
-import GUI_DatPhong.DatPhongPnl;
+import View_DatPhong.DatPhongPnl;
 import Model.PhieuThuePhong;
 import java.sql.Timestamp;
 import java.util.Date;

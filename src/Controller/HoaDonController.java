@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.HoaDonDAO;
-import GUI_DatPhong.DatPhongPnl;
+import View_DatPhong.DatPhongPnl;
 import Model.HoaDon;
 import java.util.List;
 
@@ -46,5 +46,14 @@ public class HoaDonController {
     
     public int layIdHoaDon(int idPhieuThuePhong){
         return hoaDonDAO.layIdHoaDon(idPhieuThuePhong);
+    }
+    
+    public List<Object[]> layIdHoaDonDichVu(int idPhong){
+        List<Object[]> phongs = hoaDonDAO.getListHoaDonDV(idPhong);
+        return phongs;
+    }
+    
+    public void updateTienHoaDonDV(Double tien , int idHoaDon){
+        hoaDonDAO.updateTienDichVu(tien, idHoaDon);
     }
 }

@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.PhieuDatPhongDAO;
-import GUI_DatPhong.DatPhongPnl;
+import View_DatPhong.DatPhongPnl;
 import Model.PhieuDatPhong;
 import java.util.List;
 

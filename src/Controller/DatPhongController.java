@@ -4,7 +4,7 @@ import DAO.DatPhongDAO;
 import DAO.DichVuDAO;
 import DAO.GioDatTruocDAO;
 import DAO.KhachHangDAO;
-import GUI_DatPhong.DatPhongPnl;
+import View_DatPhong.DatPhongPnl;
 import Model.GioDatTruoc;
 import Model.KhachHang;
 import java.util.List;
@@ -91,9 +91,9 @@ public class DatPhongController {
         return lists;
     }
     
-//    public void insert(KhachHang kh){
-//        khachHangDAO.insert(kh);
-//    }
+    public void insertKhachHang(String SDT, String tenKhach, Double tienNo, Double tienSuDung, Integer traSau, String ghiChu, Integer tinhTrang){
+        khachHangDAO.insertKhachHang(SDT, tenKhach, tienNo, tienSuDung, traSau, ghiChu, tinhTrang);
+    }  
         
     public List<Object[]> getTTPhieuDatPhong() {   
         List<Object[]> getTinhTrangPDP = datPhongDAO.getTinhTrangPDP();
