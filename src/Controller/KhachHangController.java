@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.KhachHangDAO;
 import GUI_KhachHang.KhachHangPnl;
+import Model.KhachHang;
 import java.util.List;
 
 public class KhachHangController {
