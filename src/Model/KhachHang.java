@@ -13,7 +13,7 @@ public class KhachHang{
     public KhachHang() {
     }
 
-    public KhachHang(String SDTKhachHang, String tenKhachHang, Double tienNo, Double tienSuDung, Integer traSau, String ghiChu, Boolean tinhTrang) {
+    public KhachHang(String SDTKhachHang, String tenKhachHang, Double tienNo, Double tienSuDung, Boolean traSau, String ghiChu, Boolean tinhTrang) {
         this.SDTKhachHang = SDTKhachHang;
         this.tenKhachHang = tenKhachHang;
         this.tienNo = tienNo;

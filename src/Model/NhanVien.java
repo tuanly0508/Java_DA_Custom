@@ -20,7 +20,7 @@ public class NhanVien extends AbsTable{
     public NhanVien() {
     }
 
-    public NhanVien(Integer idNhanVien, String hoTenNhanVien, String CMND, String soDienThoai, String diaChi, Double gioiTinh, String email, String vertifyCode, String matKhau, String quyenHan, String trangThai, Date ngaySinh, Date ngayVaoLam) {
+    public NhanVien(Integer idNhanVien, String hoTenNhanVien, String CMND, String soDienThoai, String diaChi, String gioiTinh, String email, String vertifyCode, String matKhau, String quyenHan, String trangThai, Date ngaySinh, Date ngayVaoLam) {
         this.idNhanVien = idNhanVien;
         this.hoTenNhanVien = hoTenNhanVien;
         this.CMND = CMND;

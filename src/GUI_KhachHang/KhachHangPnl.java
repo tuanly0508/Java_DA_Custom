@@ -233,78 +233,78 @@ public class KhachHangPnl extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        int chonDong = tblKhachHang.getSelectedRow();
-        if (chonDong == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
-        } else {
-            int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
-            if(update == JOptionPane.YES_OPTION){
-                String SDTKhachHang = txtSDT.getText();
-                String tenKhachHang = txtTenKhach.getText();
-                Double tienNo = Double.parseDouble(txtTienNo.getText());
-                Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
-                Boolean no = true;
-                if(rdbNo.isSelected()){
-                    no = true;
-                }else if(rdbKhongNo.isSelected()){
-                    no = false;
-                }
-                String ghiChu = txtGhiChu.getText();
-                Integer idKhachHang = (Integer) tblKhachHang.getValueAt(chonDong, 0);
-                khachHangController.update(idKhachHang, SDTKhachHang, tenKhachHang, tienNo, tienSuDung, no, ghiChu);
-                JOptionPane.showMessageDialog(new Frame(),"Update success !!!");
-            }
-        }
+//        int chonDong = tblKhachHang.getSelectedRow();
+//        if (chonDong == -1) {
+//            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+//        } else {
+//            int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
+//            if(update == JOptionPane.YES_OPTION){
+//                String SDTKhachHang = txtSDT.getText();
+//                String tenKhachHang = txtTenKhach.getText();
+//                Double tienNo = Double.parseDouble(txtTienNo.getText());
+//                Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
+//                Boolean no = true;
+//                if(rdbNo.isSelected()){
+//                    no = true;
+//                }else if(rdbKhongNo.isSelected()){
+//                    no = false;
+//                }
+//                String ghiChu = txtGhiChu.getText();
+//                Integer idKhachHang = (Integer) tblKhachHang.getValueAt(chonDong, 0);
+//                khachHangController.update(idKhachHang, SDTKhachHang, tenKhachHang, tienNo, tienSuDung, no, ghiChu);
+//                JOptionPane.showMessageDialog(new Frame(),"Update success !!!");
+//            }
+//        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        String SDTKhachHang = txtSDT.getText();
-        String tenKhachHang = txtTenKhach.getText();
-        Double tienNo = Double.parseDouble(txtTienNo.getText());
-        Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
-        Boolean no = true;
-        if(rdbNo.isSelected()){
-            no = true;
-        }else if(rdbKhongNo.isSelected()){
-            no = false;
-        }
-        String ghiChu = txtGhiChu.getText();
-        khachHangController.insert(SDTKhachHang, tenKhachHang, tienNo, tienSuDung, no, ghiChu);        
+//        String SDTKhachHang = txtSDT.getText();
+//        String tenKhachHang = txtTenKhach.getText();
+//        Double tienNo = Double.parseDouble(txtTienNo.getText());
+//        Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
+//        Boolean no = true;
+//        if(rdbNo.isSelected()){
+//            no = true;
+//        }else if(rdbKhongNo.isSelected()){
+//            no = false;
+//        }
+//        String ghiChu = txtGhiChu.getText();
+//        khachHangController.insert(SDTKhachHang, tenKhachHang, tienNo, tienSuDung, no, ghiChu);        
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
-        DefaultTableModel ml = (DefaultTableModel) tblKhachHang.getModel();
-        int click = tblKhachHang.getSelectedRow();
-        KhachHang kh = khachHangController.getByIdKhachHang((Integer) tblKhachHang.getValueAt(click, 0));
-        txtSDT.setText((String) tblKhachHang.getValueAt(click, 1));
-        txtTenKhach.setText((String) tblKhachHang.getValueAt(click, 2));
-        txtTienNo.setText(tblKhachHang.getValueAt(click, 3).toString());
-        txtTienSuDung.setText(tblKhachHang.getValueAt(click, 4).toString());
-        
-        if(tblKhachHang.getValueAt(click, 5).toString().equals(false)){                        
-            rdbKhongNo.setSelected(true);
-        }else{
-            rdbNo.setSelected(true);
-        }
-        txtGhiChu.setText((String) tblKhachHang.getValueAt(click, 6));        
+//        DefaultTableModel ml = (DefaultTableModel) tblKhachHang.getModel();
+//        int click = tblKhachHang.getSelectedRow();
+//        KhachHang kh = khachHangController.getByIdKhachHang((Integer) tblKhachHang.getValueAt(click, 0));
+//        txtSDT.setText((String) tblKhachHang.getValueAt(click, 1));
+//        txtTenKhach.setText((String) tblKhachHang.getValueAt(click, 2));
+//        txtTienNo.setText(tblKhachHang.getValueAt(click, 3).toString());
+//        txtTienSuDung.setText(tblKhachHang.getValueAt(click, 4).toString());
+//        
+//        if(tblKhachHang.getValueAt(click, 5).toString().equals(false)){                        
+//            rdbKhongNo.setSelected(true);
+//        }else{
+//            rdbNo.setSelected(true);
+//        }
+//        txtGhiChu.setText((String) tblKhachHang.getValueAt(click, 6));        
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        int dongXoa = tblKhachHang.getSelectedRow();
-        if (dongXoa == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa !","Thông báo", JOptionPane.ERROR_MESSAGE);
-        } else {
-            int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION) {
-                int[] vt = tblKhachHang.getSelectedRows();
-            List<Integer> idStaffs  = new ArrayList<>();
-            for (int i = vt.length-1; i >= 0; i--) {
-                idStaffs.add((Integer)tblKhachHang.getValueAt(vt[i], 0));
-            }
-            khachHangController.delete(idStaffs);
-            khachHangController.loadList();
-            }
-        }  
+//        int dongXoa = tblKhachHang.getSelectedRow();
+//        if (dongXoa == -1) {
+//            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa !","Thông báo", JOptionPane.ERROR_MESSAGE);
+//        } else {
+//            int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
+//            if (click == JOptionPane.YES_OPTION) {
+//                int[] vt = tblKhachHang.getSelectedRows();
+//            List<Integer> idStaffs  = new ArrayList<>();
+//            for (int i = vt.length-1; i >= 0; i--) {
+//                idStaffs.add((Integer)tblKhachHang.getValueAt(vt[i], 0));
+//            }
+//            khachHangController.delete(idStaffs);
+//            khachHangController.loadList();
+//            }
+//        }  
     }//GEN-LAST:event_btnXoaActionPerformed
 
     public void viewTableStaff(List<Object[]> data) {
