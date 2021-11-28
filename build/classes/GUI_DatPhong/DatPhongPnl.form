@@ -60,7 +60,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="roundPanel4" max="32767" attributes="0"/>
-                      <Component id="roundPanel1" max="32767" attributes="0"/>
+                      <Component id="jPanel7" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -72,7 +72,7 @@
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="roundPanel1" max="32767" attributes="0"/>
+                          <Component id="jPanel7" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="roundPanel4" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -424,7 +424,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel10" pref="360" max="32767" attributes="0"/>
+                          <Component id="jLabel10" max="32767" attributes="0"/>
                           <Component id="jSeparator4" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btnTamTinh" min="-2" pref="82" max="-2" attributes="0"/>
@@ -586,7 +586,7 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="473" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -846,14 +846,14 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="541" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
             </Container>
           </SubComponents>
         </Container>
-        <Container class="GUI.RoundPanel" name="roundPanel1">
+        <Container class="GUI.RoundPanel" name="jPanel7">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -971,7 +971,7 @@
                         <Component class="GUI.Table" name="tblAllDichVu">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="4" rowCount="11">
+                              <Table columnCount="4" rowCount="0">
                                 <Column editable="true" title="id" type="java.lang.Object"/>
                                 <Column editable="true" title="D&#x1ecb;ch v&#x1ee5;" type="java.lang.Object"/>
                                 <Column editable="true" title="&#x110;VT" type="java.lang.Object"/>
