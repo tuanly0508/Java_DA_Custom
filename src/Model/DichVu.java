@@ -7,18 +7,29 @@ public class DichVu extends AbsTable{
     private String tenDichVu;
     private Integer soLuongCon;
     private Double gia;
+    private Boolean tinhTrang;
 
     public DichVu() {
     }
 
-    public DichVu(Integer idDichVu, Integer idDanhMuc, Integer idDonViTinh, String tenDichVu, Integer soLuongCon, Double gia) {
+    public DichVu(Integer idDichVu, Integer idDanhMuc, Integer idDonViTinh, String tenDichVu, Integer soLuongCon, Double gia, Boolean tinhTrang) {
         this.idDichVu = idDichVu;
         this.idDanhMuc = idDanhMuc;
         this.idDonViTinh = idDonViTinh;
         this.tenDichVu = tenDichVu;
         this.soLuongCon = soLuongCon;
         this.gia = gia;
+        this.tinhTrang = tinhTrang;
     }
+
+    public Boolean getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(Boolean tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
+
 
     public Integer getIdDichVu() {
         return idDichVu;

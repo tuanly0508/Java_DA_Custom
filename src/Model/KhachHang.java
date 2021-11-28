@@ -1,8 +1,7 @@
 package Model;
 
-public class KhachHang extends AbsTable{
+public class KhachHang{
     
-    private Integer idKhachHang;
     private String SDTKhachHang;
     private String tenKhachHang;
     private Double tienNo;
@@ -14,8 +13,7 @@ public class KhachHang extends AbsTable{
     public KhachHang() {
     }
 
-    public KhachHang(Integer idKhachHang, String SDTKhachHang, String tenKhachHang, Double tienNo, Double tienSuDung, Boolean traSau, String ghiChu, Boolean tinhTrang) {
-        this.idKhachHang = idKhachHang;
+    public KhachHang(String SDTKhachHang, String tenKhachHang, Double tienNo, Double tienSuDung, Integer traSau, String ghiChu, Boolean tinhTrang) {
         this.SDTKhachHang = SDTKhachHang;
         this.tenKhachHang = tenKhachHang;
         this.tienNo = tienNo;
@@ -23,22 +21,6 @@ public class KhachHang extends AbsTable{
         this.traSau = traSau;
         this.ghiChu = ghiChu;
         this.tinhTrang = tinhTrang;
-    }
-
-    public Boolean getTinhTrang() {
-        return tinhTrang;
-    }
-
-    public void setTinhTrang(Boolean tinhTrang) {
-        this.tinhTrang = tinhTrang;
-    }
-
-    public Integer getIdKhachHang() {
-        return idKhachHang;
-    }
-
-    public void setIdKhachHang(Integer idKhachHang) {
-        this.idKhachHang = idKhachHang;
     }
 
     public String getSDTKhachHang() {
@@ -91,10 +73,11 @@ public class KhachHang extends AbsTable{
         this.ghiChu = ghiChu;
     }
 
-    
-    
-    @Override
-    public int getId() {
-        return idKhachHang;
+    public Boolean getTinhTrang() {
+        return tinhTrang;
     }
+
+    public void setTinhTrang(Boolean tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }  
 }

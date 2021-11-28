@@ -83,7 +83,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         CssTable(jScrollPane2);
         CssTable(jScrollPane5);
         CssTable(jScrollPane6);
-        GridLayout layout = new GridLayout(5,2);
+        GridLayout layout = new GridLayout(4,1);
         layout.setHgap(5);
         layout.setVgap(5);
         panelPhong.setLayout(layout);
@@ -95,34 +95,24 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnThanhToan.setEnabled(false);
     }   
     
-    public void loadPhong(List<Object[]> fullInfo,List<Object[]> time,List<Object[]> ttpdp) {
-        for(int i=0;i<=fullInfo.size()-1;i++){
-            String thoiGianMo ="....................";      
-                       
-            for(int y=0;y<=time.size()-1;y++){
-                if(String.valueOf(fullInfo.get(i)[0]).equals(String.valueOf(time.get(y)[0]))){
-                    thoiGianMo=String.valueOf(time.get(y)[1]);
-                }
-            }           
-            loadPhongBtn(Integer.parseInt(fullInfo.get(i)[0].toString()), String.valueOf(fullInfo.get(i)[1]), 
-            String.valueOf(fullInfo.get(i)[2]), Integer.parseInt(fullInfo.get(i)[3].toString()),thoiGianMo, ttpdp);
-        }
+    public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
+        loadPanelPhong(data, data2, data3);
     }    
     
     public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo, List<Object[]> tt) {  
-        PhongRender p = new PhongRender();
+        PhongRender p = new PhongRender(idPhong);
         p.lblTenPhong.setText(tenPhong);
         p.txtGioMo.setText(thoiGianMo);
         p.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         p.setFont(new java.awt.Font("Segoe UI Light", 1, 12));
         p.setForeground(new java.awt.Color(255,255,255));
 
-        for (int i = 0; i < tt.size(); i++) {
+        for (int i = 0; i < tt.size(); i++) {           
             if (tt.get(i)[0].equals(idPhong)) {
-                p.btnDatTruoc.setBackground(new Color(255,195,137));
-            }
+                p.btnDatTruoc.setBackground(new Color(255,195,137));  
+            }     
         }
-                     
+                    
         if (ttPhong.equals("Phòng còn trống")) {
             p.setBackground(new Color(0,204,204));
         }else if (ttPhong.equals("Đang hoạt động")) {           
@@ -161,129 +151,143 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     setPhongBaoTri();
                 }  
             }                    
-        }); 
-
+        });           
+        
         p.btnDatTruoc.addActionListener(new AbstractAction(){
             @Override
             public void actionPerformed(ActionEvent e) {  
-                
-                List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(phongHienTai);
-                if (datPhongDialog == null) {
+                if (datPhongDialog == null) {                   
                     datPhongDialog = new DatPhongDlg(null,true);
                     setCombobox(datPhongDialog.cbxDatTruoc);                    
-                    System.out.println(idPhong);
-                    datPhongDialog.btnHuy.addActionListener(new AbstractAction(){
-                        @Override
-                        public void actionPerformed(ActionEvent e) {  
-                            System.out.println(idPhong);
-//                            GioDatTruoc g =(GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
-//                            Integer idGioDatTruoc = g.getIdGioDatTruoc();
-//                            
-//                            phieuDatPhongController.updateNullPhieuDatPhong(0, idPhong,idGioDatTruoc);
-//                            p.btnDatTruoc.setBackground(new Color(255,255,255));
-//                            reLoadPhong();
-//                            List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(idPhong);           
-//                            loadTable(datPhongDialog.tblDatPhong, data);
-                        }
-                    });
-                    
-                    datPhongDialog.btnDatTruoc.addActionListener(new AbstractAction(){
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-//                            String tenKhach = datPhongDialog.txtTenKhach.getText();
-//                            String SDT = datPhongDialog.txtSDT.getText();
-//                            GioDatTruoc myCbb = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
-//                            Integer idDatTruoc = myCbb.getId();        
-//                            if (isSDT == false) {
-//                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,"Thường",0,null);
-//                                khachHangController.insert(khachHang);
-//                            }
-//                            phieuDatPhong = new PhieuDatPhong(0,SDT,idPhong,idDatTruoc,null,1,tenKhach);
-//                            phieuDatPhongController.insert(phieuDatPhong);        
-//                            reLoadPhong();
-//                            List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(idPhong);
-//                            loadTable(datPhongDialog.tblDatPhong, data);
-//                            datPhongDialog.txtSDT.setText("");
-//                            datPhongDialog.txtTenKhach.setText("");
-//                            datPhongDialog.cbxDatTruoc.setSelectedIndex(0);
-                        }
-                    });
-                    
-                    datPhongDialog.txtSDT.addKeyListener(new KeyAdapter(){
-                        @Override
-                        public void keyReleased(KeyEvent e) {
-                            String SDT = datPhongDialog.txtSDT.getText();
-                            List<Object[]> data = datPhongController.getThongTinKH(SDT);
-                            if (data.size()<=0) {
-                                datPhongDialog.txtTenKhach.setText("");
-                            } else {
-                                isSDT=true;
-                                datPhongDialog.txtTenKhach.setText(data.get(0)[2].toString());
-                                datPhongDialog.txtTenKhach.setEditable(true);
-                            }
-                        }                       
-                    });
-                    
-                    datPhongDialog.btnMoPhong.addActionListener(new AbstractAction(){
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            Timestamp thoiGianMo = null;
-                            Date date = new Date();         
-                            thoiGianMo=new Timestamp(date.getTime());
-                            String tenKhach = datPhongDialog.txtTenKhach.getText();
-                            String SDT = datPhongDialog.txtSDT.getText();
+                }         
+                       
+                datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) { 
+                         DefaultTableModel p = (DefaultTableModel) datPhongDialog.tblDatPhong.getModel();
+                         int click = datPhongDialog.tblDatPhong.getSelectedRow();
+                         datPhongDialog.txtTenKhach.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 2));
+                         datPhongDialog.txtSDT.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 3));
 
+                         PhieuDatPhong pdp = phieuDatPhongController.getIdGioDatTruoc((Integer) datPhongDialog.tblDatPhong.getValueAt(click, 0));                           
+                         for (int i = 0; i < datPhongDialog.cbxDatTruoc.getItemCount(); i++) {
+                             GioDatTruoc g = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getItemAt(i);
+                             if(g.getIdGioDatTruoc().equals(pdp.getThoiGianDat())){
+                                 datPhongDialog.cbxDatTruoc.setSelectedIndex(i);
+                             }
+                         }
+                    } 
+                });
+
+                datPhongDialog.btnHuy.addActionListener(new AbstractAction(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {  
+                        for (int i = 0; i < tt.size(); i++) {           
+                            if (tt.get(i)[0].equals(p.idPhong)) {
+                                GioDatTruoc g =(GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
+                                Integer idGioDatTruoc = g.getIdGioDatTruoc();
+
+                                phieuDatPhongController.updateNullPhieuDatPhong(0, p.idPhong,idGioDatTruoc);
+                                p.btnDatTruoc.setBackground(new Color(255,255,255));
+                                reLoadPhong();
+                                List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(idPhong);           
+                                loadTable(datPhongDialog.tblDatPhong, data);
+                                setNullDatPhongDiaglog();
+                                p.idPhong =0;
+                            }
+                        }                                                           
+                    }                        
+                });
+  
+                datPhongDialog.txtSDT.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                        String SDT = datPhongDialog.txtSDT.getText();
+                        List<Object[]> data = datPhongController.getThongTinKH(SDT);
+                        if (data.size()<=0) {
+                            datPhongDialog.txtTenKhach.setText("");
+                        } else {
+                            isSDT=true;
+                            datPhongDialog.txtTenKhach.setText(data.get(0)[2].toString());
+                            datPhongDialog.txtTenKhach.setEditable(true);
+                        }
+                    }                       
+                });
+                
+                datPhongDialog.btnDatTruoc.addActionListener(new AbstractAction(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String tenKhach = datPhongDialog.txtTenKhach.getText();
+                        String SDT = datPhongDialog.txtSDT.getText();
+                        GioDatTruoc myCbb = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
+                        Integer idDatTruoc = myCbb.getId();                              
+                        
+                        if (p.idPhong != 0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
+                            System.out.println(p.idPhong);
                             if (isSDT == false) {
-//                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
-                                datPhongController.insert(khachHang);
+                                khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
+                                //datPhongController.insert(khachHang);
+                            }
+                            phieuDatPhong = new PhieuDatPhong(0,SDT,p.idPhong,idDatTruoc,null,1,tenKhach);
+                            phieuDatPhongController.insert(phieuDatPhong);        
+                            reLoadPhong();
+                            List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(p.idPhong);
+                            loadTable(datPhongDialog.tblDatPhong, data);
+                            setNullDatPhongDiaglog();
+                            p.idPhong = 0;
+                        }                                                      
+                    }
+                });
+                
+                datPhongDialog.btnMoPhong.addActionListener(new AbstractAction(){
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Timestamp thoiGianMo = null;
+                        Date date = new Date();         
+                        thoiGianMo=new Timestamp(date.getTime());
+                        String tenKhach = datPhongDialog.txtTenKhach.getText();
+                        String SDT = datPhongDialog.txtSDT.getText();
+
+                        if (p.idPhong !=0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
+                            if (isSDT == false) {
+                                khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
+                                //datPhongController.insert(khachHang);
                             }
                             if (datPhongDialog.rdbGiaNgayLe.isSelected()) {
-                                phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,1);                              
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,2,p.idPhong,thoiGianMo,null,tenKhach,1,1);                              
                                 phieuThuePhongController.insert(phieuThuePhong);
                             }else {
-                                phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,0);
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,2,p.idPhong,thoiGianMo,null,tenKhach,1,0);
                                 phieuThuePhongController.insert(phieuThuePhong);
                             }        
-                            phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
-                            datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
+                            phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, p.idPhong);
+                            datPhongController.updateTinhTrangPhong("Đang hoạt động",p.idPhong);
+                            List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(p.idPhong);
+                            loadTable(datPhongDialog.tblDatPhong, data);
                             p.btnDatTruoc.setBackground(new Color(255,0,0));
                             setPhongHoatDong();
                             reLoadPhong();
-                            setThongTinPhong(phongHienTai);  
-                        }
-                    });
-                    
-                    datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
-                       @Override
-                       public void mouseClicked(MouseEvent e) { 
-                            DefaultTableModel p = (DefaultTableModel) datPhongDialog.tblDatPhong.getModel();
-                            int click = datPhongDialog.tblDatPhong.getSelectedRow();
-                            datPhongDialog.txtTenKhach.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 2));
-                            datPhongDialog.txtSDT.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 3));
-                            
-                            PhieuDatPhong pdp = phieuDatPhongController.getIdGioDatTruoc((Integer) datPhongDialog.tblDatPhong.getValueAt(click, 0));                           
-                            for (int i = 0; i < datPhongDialog.cbxDatTruoc.getItemCount(); i++) {
-                                GioDatTruoc g = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getItemAt(i);
-                                if(g.getIdGioDatTruoc().equals(pdp.getThoiGianDat())){
-                                    datPhongDialog.cbxDatTruoc.setSelectedIndex(i);
-                                }
-                            }
-                       } 
-                    });
-                }                          
+                            setThongTinPhong(p.idPhong);
+                            setNullDatPhongDiaglog();
+                            p.idPhong = 0;
+                        }                              
+                    }
+                });
+                
+                List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(idPhong);
                 loadTable(datPhongDialog.tblDatPhong, data);
                 datPhongDialog.txtTenKhach.setText("");
                 datPhongDialog.txtSDT.setText("");
                 datPhongDialog.cbxDatTruoc.setSelectedIndex(0);
-                datPhongDialog.lblTenPhongDlg.setText(tenPhongHienTai.toUpperCase());
+                datPhongDialog.lblTenPhongDlg.setText(tenPhong.toUpperCase());
                 datPhongDialog.setVisible(true);
             }
-        });        
+        });                 
         panelPhong.add(p); 
         panelPhong.revalidate();
         panelPhong.repaint();
     }   
-     
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -310,8 +314,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         rdbPhongThuong = new GUI.BtnRadioCus();
         rdbAllPhong = new GUI.BtnRadioCus();
         rdbPhongTrong = new GUI.BtnRadioCus();
-        rdbPhongAct = new GUI.BtnRadioCus();
-        rdbPhongBook = new GUI.BtnRadioCus();
+        rdbPhongDangHoatDong = new GUI.BtnRadioCus();
+        rdbBaoTri = new GUI.BtnRadioCus();
         roundPanel3 = new GUI.RoundPanel();
         lblTenPhong = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -407,9 +411,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,10 +460,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel4Layout.setVerticalGroup(
@@ -507,10 +511,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel5Layout.setVerticalGroup(
@@ -592,21 +596,21 @@ public class DatPhongPnl extends javax.swing.JPanel {
             }
         });
 
-        rdbPhongAct.setBackground(new java.awt.Color(255, 0, 0));
-        buttonGroup1.add(rdbPhongAct);
-        rdbPhongAct.setText("Đang hoạt động");
-        rdbPhongAct.addActionListener(new java.awt.event.ActionListener() {
+        rdbPhongDangHoatDong.setBackground(new java.awt.Color(255, 0, 0));
+        buttonGroup1.add(rdbPhongDangHoatDong);
+        rdbPhongDangHoatDong.setText("Hoạt động");
+        rdbPhongDangHoatDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbPhongActActionPerformed(evt);
+                rdbPhongDangHoatDongActionPerformed(evt);
             }
         });
 
-        rdbPhongBook.setBackground(new java.awt.Color(204, 0, 204));
-        buttonGroup1.add(rdbPhongBook);
-        rdbPhongBook.setText("Đặt trước");
-        rdbPhongBook.addActionListener(new java.awt.event.ActionListener() {
+        rdbBaoTri.setBackground(new java.awt.Color(204, 0, 204));
+        buttonGroup1.add(rdbBaoTri);
+        rdbBaoTri.setText("Bảo trì");
+        rdbBaoTri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbPhongBookActionPerformed(evt);
+                rdbBaoTriActionPerformed(evt);
             }
         });
 
@@ -614,25 +618,23 @@ public class DatPhongPnl extends javax.swing.JPanel {
         roundPanel2.setLayout(roundPanel2Layout);
         roundPanel2Layout.setHorizontalGroup(
             roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel2Layout.createSequentialGroup()
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(roundPanel2Layout.createSequentialGroup()
                         .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rdbAllPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rdbPhongTrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rdbPhongDangHoatDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rdbPhongThuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
                         .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(roundPanel2Layout.createSequentialGroup()
-                                .addComponent(rdbPhongAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rdbPhongBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(roundPanel2Layout.createSequentialGroup()
-                                .addComponent(rdbPhongThuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(rdbPhongVip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(rdbBaoTri, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rdbPhongVip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         roundPanel2Layout.setVerticalGroup(
@@ -650,8 +652,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdbPhongTrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdbPhongAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdbPhongBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rdbPhongDangHoatDong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdbBaoTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -962,7 +964,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         );
         panelPhongLayout.setVerticalGroup(
             panelPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 541, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelPLayout = new javax.swing.GroupLayout(panelP);
@@ -1014,7 +1016,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     .addGroup(bodyLayout.createSequentialGroup()
                         .addComponent(roundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(roundPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bodyLayout.createSequentialGroup()
@@ -1067,77 +1069,59 @@ public class DatPhongPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_rdbAllPhongActionPerformed
 
     private void rdbPhongThuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongThuongActionPerformed
-//        if (rdbPhongThuong.isSelected()) {
-//            panelPhong.removeAll();
-//            List<Object[]> data = datPhongController.getLoaiPhongId(1);
-//            for(int i=0;i<data.size();i++){
-//                String thoiGianMo ="....................";
-//                if(!String.valueOf(data.get(i)[4]).equals("null")){
-//                    thoiGianMo=String.valueOf(data.get(i)[4]);
-//                }
-//                loadPhongBtn(Integer.parseInt(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), 
-//                        String.valueOf(data.get(i)[2]), Integer.parseInt(data.get(i)[0].toString()),thoiGianMo);
-//            } 
-//        }
+        if (rdbPhongThuong.isSelected()) {
+            panelPhong.removeAll();
+            List<Object[]> data = datPhongController.fullInfoLoaiPhong(1);
+            List<Object[]> data2 = datPhongController.infoOpen();
+            List<Object[]> data3 = datPhongController.getTTPhieuDatPhong();
+            loadPanelPhong(data, data2, data3);
+        }
     }//GEN-LAST:event_rdbPhongThuongActionPerformed
 
     private void rdbPhongVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongVipActionPerformed
-//        if (rdbPhongVip.isSelected()) {
-//            panelPhong.removeAll();
-//            List<Object[]> data = datPhongController.getLoaiPhongId(2);
-//            for(int i=0;i<data.size();i++){
-//                String thoiGianMo ="....................";
-//                if(!String.valueOf(data.get(i)[4]).equals("null")){
-//                    thoiGianMo=String.valueOf(data.get(i)[4]);
-//                }
-//                loadPhongBtn(Integer.parseInt(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), 
-//                        String.valueOf(data.get(i)[2]), Integer.parseInt(data.get(i)[0].toString()),thoiGianMo,Integer.parseInt(data.get(i)[5].toString()));
-//            }            
-//        }
+        if (rdbPhongVip.isSelected()) {
+            panelPhong.removeAll();
+            List<Object[]> data = datPhongController.fullInfoLoaiPhong(2);
+            List<Object[]> data2 = datPhongController.infoOpen();
+            List<Object[]> data3 = datPhongController.getTTPhieuDatPhong();
+            loadPanelPhong(data, data2, data3);
+        }
     }//GEN-LAST:event_rdbPhongVipActionPerformed
 
     private void rdbPhongTrongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongTrongActionPerformed
-//        if (rdbPhongTrong.isSelected()) {
-//            panelPhong.removeAll();
-//            List<Object[]> data = datPhongController.getLoaiPhongTT("Phòng còn trống");
-//            for(int i=0;i<data.size();i++){
-//                String thoiGianMo ="....................";
-//                if(!String.valueOf(data.get(i)[4]).equals("null")){
-//                    thoiGianMo=String.valueOf(data.get(i)[4]);
-//                }
-//                loadPhongBtn(Integer.parseInt(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), String.valueOf(data.get(i)[2]), Integer.getInteger(data.get(i)[3].toString()),thoiGianMo);
-//            }          
-//        }
+        if (rdbPhongTrong.isSelected()) {
+            panelPhong.removeAll();
+            String tinhTrangPhong = "Phòng còn trống";
+            List<Object[]> data = datPhongController.getLoaiPhongTT(tinhTrangPhong);
+            List<Object[]> data2 = datPhongController.infoOpen();
+            List<Object[]> data3 = datPhongController.getTTPhieuDatPhong();
+            loadPanelPhong(data, data2, data3);          
+        }
     }//GEN-LAST:event_rdbPhongTrongActionPerformed
 
-    private void rdbPhongActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongActActionPerformed
-//        if (rdbPhongAct.isSelected()) {
-//            panelPhong.removeAll();
-//            List<Object[]> data = datPhongController.getLoaiPhongTT("Đang hoạt động");
-//            for(int i=0;i<data.size();i++){
-//                String thoiGianMo ="....................";
-//                if(!String.valueOf(data.get(i)[4]).equals("null")){
-//                    thoiGianMo=String.valueOf(data.get(i)[4]);
-//                }
-//            loadPhongBtn(Integer.getInteger(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), String.valueOf(data.get(i)[2]), Integer.getInteger(data.get(i)[3].toString()),thoiGianMo);
-//            }        
-//        }
-    }//GEN-LAST:event_rdbPhongActActionPerformed
+    private void rdbPhongDangHoatDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongDangHoatDongActionPerformed
+        if (rdbPhongDangHoatDong.isSelected()) {
+            System.out.println("Hoạt động");
+            panelPhong.removeAll();
+            String tinhTrangPhong = "Đang hoạt động";
+            List<Object[]> data = datPhongController.getLoaiPhongTT(tinhTrangPhong);
+            List<Object[]> data2 = datPhongController.infoOpen();
+            List<Object[]> data3 = datPhongController.getTTPhieuDatPhong();
+            loadPanelPhong(data, data2, data3);        
+        }
+    }//GEN-LAST:event_rdbPhongDangHoatDongActionPerformed
 
-    private void rdbPhongBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongBookActionPerformed
-        
-//        if (rdbPhongBook.isSelected()) {
-//            panelPhong.removeAll();
-//            List<Object[]> data = datPhongController.getLoaiPhongTT("Phòng đặt trước");
-//            for(int i=0;i<data.size();i++){
-//                String thoiGianMo ="....................";
-//                if(!String.valueOf(data.get(i)[4]).equals("null")){
-//                    thoiGianMo=String.valueOf(data.get(i)[4]);
-//                }
-//            loadPhongBtn(Integer.getInteger(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), String.valueOf(data.get(i)[2]), Integer.getInteger(data.get(i)[3].toString()),thoiGianMo);
-//            }         
-//        }
-    }//GEN-LAST:event_rdbPhongBookActionPerformed
+    private void rdbBaoTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbBaoTriActionPerformed
+        if (rdbBaoTri.isSelected()) {
+            System.out.println("Bảo trì");
+            panelPhong.removeAll();
+            String tinhTrangPhong = "Đang bảo trì";
+            List<Object[]> data = datPhongController.getLoaiPhongTT(tinhTrangPhong);
+            List<Object[]> data2 = datPhongController.infoOpen();
+            List<Object[]> data3 = datPhongController.getTTPhieuDatPhong();
+            loadPanelPhong(data, data2, data3);        
+        }
+    }//GEN-LAST:event_rdbBaoTriActionPerformed
 
     private void btnMoPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoPhongActionPerformed
         Timestamp thoiGianMo = null;
@@ -1147,8 +1131,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         String SDT = txtSDT.getText();
                 
         if (isSDT == false) {
-//            khachHang = new KhachHang(0,SDTKhachHang,tenKhachHang,0.0,0.0,0,null);
-            datPhongController.insert(khachHang);
+            khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
+            //datPhongController.insert(khachHang);
         }
         if (rdbGiaNgayLe.isSelected()) {
             phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,1);
@@ -1487,13 +1471,33 @@ public class DatPhongPnl extends javax.swing.JPanel {
         });
     }
     
+    public void loadPanelPhong(List<Object[]> data, List<Object[]> data2, List<Object[]> data3) {
+        for(int i=0;i<=data.size()-1;i++){
+            String thoiGianMo ="....................";      
+
+            for(int y=0;y<=data2.size()-1;y++){
+                if(String.valueOf(data.get(i)[0]).equals(String.valueOf(data2.get(y)[0]))){
+                    thoiGianMo=String.valueOf(data2.get(y)[1]);
+                }
+            }           
+            loadPhongBtn(Integer.parseInt(data.get(i)[0].toString()), String.valueOf(data.get(i)[1]), 
+            String.valueOf(data.get(i)[2]), Integer.parseInt(data.get(i)[3].toString()),thoiGianMo, data3);
+        }
+    }
+    
     public void setThongTinPhong(int idPhong) {
-        List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
+        List<Object[]> data2 = datPhongController.layChiTietDichVu(idPhong);
         loadTableSuDungDV(data2);
-        List<Object[]> data = datPhongController.getThongTinPhong(phongHienTai);
+        List<Object[]> data = datPhongController.getThongTinPhong(idPhong);
         txtTenKhach.setText(data.get(0)[5].toString());
         txtSDT.setText(data.get(0)[1].toString());
         txtThoiGianMo.setText(data.get(0)[3].toString());
+    }
+    
+    public void setNullDatPhongDiaglog() {
+        datPhongDialog.txtSDT.setText("");
+        datPhongDialog.txtTenKhach.setText("");
+        datPhongDialog.cbxDatTruoc.setSelectedIndex(0);
     }
     
     public void setNull() {
@@ -1645,8 +1649,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
         this.phieuThuePhongController = phieuThuePhongController;
     }
     
-
-    
     public void setController (HoaDonController hoaDonController) {
         this.hoaDonController = hoaDonController;
     }
@@ -1699,9 +1701,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private GUI.RoundPanel panelP;
     private GUI.RoundPanel panelPhong;
     private GUI.BtnRadioCus rdbAllPhong;
+    private GUI.BtnRadioCus rdbBaoTri;
     private GUI.BtnRadioCus rdbGiaNgayLe;
-    private GUI.BtnRadioCus rdbPhongAct;
-    private GUI.BtnRadioCus rdbPhongBook;
+    private GUI.BtnRadioCus rdbPhongDangHoatDong;
     private GUI.BtnRadioCus rdbPhongThuong;
     private GUI.BtnRadioCus rdbPhongTrong;
     private GUI.BtnRadioCus rdbPhongVip;

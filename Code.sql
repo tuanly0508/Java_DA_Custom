@@ -16,12 +16,14 @@ create table GioDatTruoc(
 
 create table donViTinh(
 	idDonViTinh int identity primary key,
-	tenDonVi nvarchar(50) not null
+	tenDonVi nvarchar(50) not null,
+	tinhTrang bit not null
 )
 
 create table danhMuc(
 	idDanhMuc int identity primary key,
-	tenDanhMuc nvarchar(50) not null
+	tenDanhMuc nvarchar(50) not null,
+	tinhTrang bit not null
 )
 
 create table dichVu(
@@ -30,14 +32,16 @@ create table dichVu(
 	idDonViTinh int not null foreign key references donViTinh,
 	tenDichVu nvarchar(50) not null,
 	soLuongCon int not null,
-	gia float not null
+	gia float not null,
+	tinhTrang bit not null
 )
 
 create table nhaCungCap(
 	idNhaCungCap int identity primary key,
 	tenNhaCungCap nvarchar(100) not null,
-	SDTNhaCungCap nvarchar(11) not null check (len (SDTNhaCungCap) between 10 and 11) unique,
-	diaChi nvarchar(100)
+	SDTNhaCungCap nvarchar(11) not null,
+	diaChi nvarchar(100) not null,
+	tinhTrang bit not null
 )
 
 create table phieuNhapDichVu(
@@ -60,7 +64,6 @@ create table chiTietPhieuNhap(
 create table loaiPhong(
 	idLoaiPhong int identity primary key,
 	tenLoaiPhong nvarchar(30) not null,
-	soKhachMax int not null,
 	giaGio float not null
 )
 
@@ -74,8 +77,8 @@ create table phong(
 create table nhanVien(
 	idNhanVien int identity primary key,
 	hoTenNhanVien nvarchar(50) not null,
-	CMND int not null check (len (CMND) = 9) unique,
-	soDienThoai nvarchar(11) not null check (len (soDienThoai) between 10 and 11) unique,
+	CMND varchar(12) not null ,
+	soDienThoai nvarchar(11) not null,
 	diaChi nvarchar(100) not null,
 	gioiTinh nvarchar(5) not null,
 	email varchar(100) not null,
@@ -88,38 +91,36 @@ create table nhanVien(
 )
 
 create table khachHang(
-	idKhachHang int identity primary key,
-	SDTKhachHang varchar(11)  check (len (SDTKhachHang) between 10 and 11),
+	SDTKhachHang nvarchar(11) primary key,
 	tenKhachHang nvarchar(50) not null,
 	tienNo float null,
 	tienSuDung float null,
-	loaiKhachHang nvarchar(20) not null,
 	traSau bit null,
-	ghiChu nvarchar(250) null
+	ghiChu nvarchar(250) null,
+	tinhTrang bit not null
 )
 
 create table phieuDatPhong(
 	idPhieuDatPhong int identity primary key,
-	SDTKhachHang varchar(11) check (len (SDTKhachHang) between 10 and 11) not null,
+	SDTKhachHang nvarchar(10) not null,
 	idPhong int not null foreign key references phong,
 	thoiGianDat int not null foreign key references GioDatTruoc,
 	ghiChu nvarchar(250) null,
 	tinhTrang bit not null,
-	tenKhach nvarchar(50) null
+	tenKhach nvarchar(50) not null
 )
-
 
 create table hoaDonDichVu(
 	idHoaDonDichVu int identity primary key,
-	idPhong int not null foreign key references phong,
+	idPhong int foreign key references phong,
 	tongTienDV float not null,
-	trangThai nvarchar(50),
+	trangThai bit,
 	thoiGianDat datetime not null
 )
 
 create table chiTietDichVuSuDung(
-	idDichVu int not null foreign key references dichVu,
-	idHoaDonDichVu int not null foreign key references hoaDonDichVu,
+	idDichVu int foreign key references dichVu,
+	idHoaDonDichVu int foreign key references hoaDonDichVu,
 	soLuong int not null,
 	gioSuDung datetime not null,
 	gia float not null
@@ -127,57 +128,51 @@ create table chiTietDichVuSuDung(
 
 create table phieuThuePhong(
 	idPhieuThuePhong int identity primary key,
-	SDTKhachHang varchar(11) check (len (SDTKhachHang) between 10 and 11) null,
+	SDTKhachHang nvarchar(10) not null,
+	idNhanVien int foreign key references NhanVien,
 	idPhong int foreign key references phong,
 	thoiGianMo datetime not null,
 	thoiGianDong datetime null,
-	tenKhachHang nvarchar(50) null,
+	tenKhachHang nvarchar(50) not null,
 	tinhTrang bit not null,
 	giaNgayLe bit not null
 )
 
 create table hoaDon(
 	idHoaDon int identity primary key,
-	idNhanVien int not null foreign key references nhanVien,
-	idHoaDonDichVu int not null foreign key references hoaDonDichVu,
-	idPhieuThuePhong int not null foreign key references phieuThuePhong,
+	idNhanVien int foreign key references nhanVien,
+	idHoaDonDichVu int foreign key references hoaDonDichVu,
+	idPhieuThuePhong int foreign key references phieuThuePhong,
 	tienPhong float not null,
+	tienDichVu float ,
 	tongTien float not null,
-	ghiChu nvarchar(150) null,
-	trangThai bit not null
+	phuThu float
 )
 
-
-
-insert into loaiPhong values (N'Phòng thường',10,80000)
-insert into loaiPhong values (N'Phòng vip',20,150000)
+insert into loaiPhong values (N'Phòng thường',80000)
+insert into loaiPhong values (N'Phòng vip',150000)
 
 insert into phong values (1,N'Phòng 1',N'Phòng còn trống')
 insert into phong values (1,N'Phòng 2',N'Phòng còn trống')
 insert into phong values (1,N'Phòng 3',N'Phòng còn trống')
 insert into phong values (1,N'Phòng 4',N'Phòng còn trống')
 insert into phong values (2,N'Phòng 5',N'Đang bảo trì')
-insert into phong values (1,N'Phòng 6',N'Phòng còn trống')
-insert into phong values (1,N'Phòng 7',N'Phòng còn trống')
-insert into phong values (1,N'Phòng 8',N'Phòng còn trống')
-insert into phong values (1,N'Phòng 9',N'Phòng còn trống')
-insert into phong values (2,N'Phòng 10',N'Phòng còn trống')
 
-insert into danhMuc values (N'Đồ uống')
-insert into danhMuc values (N'Bim bim')
-insert into danhMuc values (N'Thuốc lá')
+insert into danhMuc values (N'Đồ uống',1)
+insert into danhMuc values (N'Bim bim',1)
+insert into danhMuc values (N'Thuốc lá',1)
 
-insert into donViTinh values (N'chai')
-insert into donViTinh values (N'gói')
+insert into donViTinh values (N'chai',1)
+insert into donViTinh values (N'gói',1)
 
-insert into dichVu values (1,1,N'Sting',50,10000)
-insert into dichVu values (1,1,N'Redbull',50,15000)
-insert into dichVu values (2,2,N'Oshi cay',50,10000)
-insert into dichVu values (2,2,N'Ostart cay',50,10000)
-insert into dichVu values (3,2,N'Thuốc ngựa',50,10000)
-insert into dichVu values (3,2,N'555',50,10000)
+insert into dichVu values (1,1,N'Sting',50,10000,1)
+insert into dichVu values (1,1,N'Redbull',50,15000,1)
+insert into dichVu values (2,2,N'Oshi cay',50,10000,1)
+insert into dichVu values (2,2,N'Ostart cay',50,10000,1)
+insert into dichVu values (3,2,N'Thuốc ngựa',50,10000,1)
+insert into dichVu values (3,2,N'555',50,10000,1)
 
-insert into khachHang values ('0941790508',N'Trần Tuấn Anh',0,999999,N'Vip',1,null)
+insert into khachHang values ('0941790508',N'Trần Tuấn Anh',0,999999,1,null,1)
 
 
 select tenDichVu, tenDonVi, gia from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where idDanhMuc = 2
@@ -239,6 +234,8 @@ select DISTINCT b.idPhong,tinhTrang,tenPhong from phieuDatPhong a right join pho
 where tinhTrang = 1
 
 update phieuDatPhong set tinhTrang = default where idPhong = 3 and thoiGianDat = 5
+
+select * from phieuDatPhong where tinhTrang=1
 
 insert into GioDatTruoc values (N'Chọn')
 insert into GioDatTruoc values ('10h')

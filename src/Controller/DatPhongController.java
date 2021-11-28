@@ -91,7 +91,22 @@ public class DatPhongController {
         return lists;
     }
     
-        public void insert(KhachHang kh){
-        khachHangDAO.insert(kh);
+//    public void insert(KhachHang kh){
+//        khachHangDAO.insert(kh);
+//    }
+        
+    public List<Object[]> getTTPhieuDatPhong() {   
+        List<Object[]> getTinhTrangPDP = datPhongDAO.getTinhTrangPDP();
+        return getTinhTrangPDP;
+    }
+    
+    public List<Object[]> fullInfoLoaiPhong(int idLoaiPhong) {
+        List<Object[]> fullInfoPhong = datPhongDAO.getFullInfoLoaiPhong(idLoaiPhong);
+        return fullInfoPhong;
+    }
+    
+    public List<Object[]> infoOpen() {
+        List<Object[]> infoOpen = datPhongDAO.getTimeOpen();
+        return infoOpen;
     }
 }
