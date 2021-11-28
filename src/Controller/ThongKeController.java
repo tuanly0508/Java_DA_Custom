@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.ThongKeDAO;
-import GUI_ThongKe.ThongKePnl;
+import View_ThongKe.ThongKePnl;
 import java.util.List;
 
 public class ThongKeController {

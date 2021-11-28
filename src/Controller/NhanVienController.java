@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.NhanVienDAO;
-import GUI_NhanVien.NhanVienPnl;
+import View_NhanVien.NhanVienPnl;
 import Model.NhanVien;
 import java.util.List;
 

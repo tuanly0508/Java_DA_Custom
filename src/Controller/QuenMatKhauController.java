@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.QuenMatKhauDAO;
-import GUI_QuenMatKhau.QuenMatKhau;
+import View_Login.QuenMatKhau;
 import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;

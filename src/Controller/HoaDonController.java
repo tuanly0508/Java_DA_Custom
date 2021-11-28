@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.HoaDonDAO;
-import GUI_DatPhong.DatPhongPnl;
+import View_DatPhong.DatPhongPnl;
 import Model.HoaDon;
 import java.util.List;
 

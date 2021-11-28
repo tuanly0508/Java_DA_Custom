@@ -1,5 +1,6 @@
 package swing;
 
+import swing.*;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;

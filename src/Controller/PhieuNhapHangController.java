@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.PhieuNhapHangDAO;
-import GUI_NhapHang.NhapHangPnl;
+import View_NhapHang.NhapHangPnl;
 
 public class PhieuNhapHangController {
     PhieuNhapHangDAO phieuNhapHangDAO = new PhieuNhapHangDAO();
