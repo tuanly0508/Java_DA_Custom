@@ -36,6 +36,11 @@ public class NhanVienController {
         }        
         loadList();
     }
+    
+    public void xoaNhanVien(int idNhanVien){
+        nhanVienDao.deleteNhanVienTam(idNhanVien);
+        loadList();
+    }
 
     public void update(int idNhanVien,String hoTenNhanVien,String CMND, String soDienThoai, String diaChi, String gioiTinh, String email, String trangThai, java.sql.Date ngaySinh, java.sql.Date ngayVao){
         NhanVien nhanVien = new NhanVien(idNhanVien,hoTenNhanVien,CMND,soDienThoai,diaChi,gioiTinh,email,"khong","123123","User",trangThai,ngaySinh,ngayVao);
