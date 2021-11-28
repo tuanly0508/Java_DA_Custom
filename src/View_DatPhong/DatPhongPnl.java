@@ -1340,7 +1340,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     int idHoaDon = hoaDonController.layIdHoaDon(idPhieuThuePhong);
                     System.out.println("idPhieuThue la:" +idPhieuThuePhong);
                     System.out.println("idHoaDon là: "+ idHoaDon);
-                    XuatHoaDon(idHoaDon,"src/GUI_DatPhong/HoaDonDayDu.jrxml");
+                    XuatHoaDon(idHoaDon,"src/View_DatPhong/HoaDonDayDu.jrxml");
 //                            if(tienDichVu!=0){
 //                                XuatHoaDon((int)ttHoaDon.get(0)[0],"src/panel/HoaDon.jrxml");
 //                            }else{
