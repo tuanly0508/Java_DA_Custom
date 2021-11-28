@@ -26,6 +26,12 @@ public class Table extends JTable {
             }
         });
     }
+    
+    @Override
+    public boolean isCellEditable(int row, int column) {
+       //all cells false
+       return false;
+    }
 
     public void addRow(Object[] row) {
         DefaultTableModel model = (DefaultTableModel) getModel();

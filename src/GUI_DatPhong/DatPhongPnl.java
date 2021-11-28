@@ -21,6 +21,7 @@ import Model.PhieuThuePhong;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -36,6 +37,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -847,17 +849,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         tblDoUong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "id", "Dịch vụ", "ĐVT", "Giá"
@@ -898,17 +890,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         tblBimbim.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "id", "Dịch vụ", "ĐVT", "Giá"
@@ -1440,34 +1422,29 @@ public class DatPhongPnl extends javax.swing.JPanel {
         tinhTienFrm.setVisible(true);
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
-    public void themDichVu(Table table) {
+    public void themDichVu(JTable table) {
         table.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {                
-                btnThemDichVu.addActionListener(new AbstractAction(){
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        click1 = table.getSelectedRow();
-                        List<Object[]> list = hoaDonController.checkHoaDonPhong(phongHienTai);
-                        if(!list.get(0)[0].toString().equals("1")){
-                            hoaDonController.taoHoaDonDichVu(phongHienTai);
-                        }
-                        int idHoaDon = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                        hoaDonController.themChiTietDichVu(idHoaDon,(int) table.getValueAt(click1,0), (int) spnSoLuong.getValue());
-                        
-                        List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
-                        loadTableSuDungDV(data2);
-                        table.getSelectionModel().clearSelection();
+            public void mousePressed(MouseEvent mouseEvent) {
+                if (mouseEvent.getClickCount() == 2 ) {
+                    click1 = table.getSelectedRow(); 
+                    List<Object[]> list = hoaDonController.checkHoaDonPhong(phongHienTai);
+                    if(!list.get(0)[0].toString().equals("1")){
+                        hoaDonController.taoHoaDonDichVu(phongHienTai);
                     }
-                });
+                    int idHoaDon = hoaDonController.getIdHoaDonDichVu(phongHienTai);
+                    hoaDonController.themChiTietDichVu(idHoaDon,(int) table.getValueAt(click1,0), 1);
+
+                    List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
+                    loadTableSuDungDV(data2);
+                }
             }
         });
-    }
+    }    
     
     public void loadPanelPhong(List<Object[]> data, List<Object[]> data2, List<Object[]> data3) {
         for(int i=0;i<=data.size()-1;i++){
             String thoiGianMo ="....................";      
-
             for(int y=0;y<=data2.size()-1;y++){
                 if(String.valueOf(data.get(i)[0]).equals(String.valueOf(data2.get(y)[0]))){
                     thoiGianMo=String.valueOf(data2.get(y)[1]);

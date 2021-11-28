@@ -24,11 +24,7 @@ public class ThongKePnl extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         jScrollPane2.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        
-        chart.addLegend("Tiền giờ", new Color(245, 189, 135));
-        chart.addLegend("Dịch vụ", new Color(135, 189, 245));
-        chart.addLegend("Phụ thu", new Color(189, 135, 245));
-        
+
         jdcTuNgay.setDateFormatString("dd-MM-yyyy");
         jdcDenNgay.setDateFormatString("dd-MM-yyyy");
     }
@@ -52,6 +48,7 @@ public class ThongKePnl extends javax.swing.JPanel {
         tblThongKe = new GUI.Table();
         roundPanel4 = new GUI.RoundPanel();
         chart = new GUI_ThongKe.Chart();
+        chart1 = new GUI_ThongKe.Chart();
         roundPanel5 = new GUI.RoundPanel();
         jLabel1 = new javax.swing.JLabel();
         lblTienGio = new javax.swing.JLabel();
@@ -59,12 +56,11 @@ public class ThongKePnl extends javax.swing.JPanel {
         lblTienPhuThu = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblTienDichVu = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        lblLoiNhuan = new javax.swing.JLabel();
         lblTongTien = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         roundPanel1.setBackground(new java.awt.Color(218, 232, 232));
 
@@ -112,7 +108,7 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxLoaiHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -168,7 +164,7 @@ public class ThongKePnl extends javax.swing.JPanel {
             roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
                 .addContainerGap())
         );
         roundPanel3Layout.setVerticalGroup(
@@ -187,8 +183,13 @@ public class ThongKePnl extends javax.swing.JPanel {
             roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel4Layout.createSequentialGroup()
+                    .addContainerGap(20, Short.MAX_VALUE)
+                    .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         roundPanel4Layout.setVerticalGroup(
             roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,6 +197,11 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(roundPanel4Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         roundPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -221,13 +227,6 @@ public class ThongKePnl extends javax.swing.JPanel {
         lblTienDichVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTienDichVu.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText("LỢI NHUẬN :");
-
-        lblLoiNhuan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblLoiNhuan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-
         lblTongTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTongTien.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
@@ -240,27 +239,23 @@ public class ThongKePnl extends javax.swing.JPanel {
         roundPanel5Layout.setHorizontalGroup(
             roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTienGio, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(105, 105, 105)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblTienDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(126, 126, 126)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblTienPhuThu, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblLoiNhuan, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         roundPanel5Layout.setVerticalGroup(
             roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,10 +265,8 @@ public class ThongKePnl extends javax.swing.JPanel {
                     .addComponent(lblTienPhuThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addComponent(lblTienGio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addComponent(lblTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addComponent(lblLoiNhuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTienDichVu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -287,12 +280,13 @@ public class ThongKePnl extends javax.swing.JPanel {
             .addGroup(roundPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(roundPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
-                        .addComponent(roundPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(roundPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(roundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(roundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, roundPanel1Layout.createSequentialGroup()
+                            .addComponent(roundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(roundPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(roundPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         roundPanel1Layout.setVerticalGroup(
@@ -309,16 +303,7 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(roundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        add(roundPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
@@ -327,15 +312,34 @@ public class ThongKePnl extends javax.swing.JPanel {
         java.util.Date StartingDate1 = jdcDenNgay.getDate();
         java.sql.Date denNgay = new java.sql.Date(StartingDate1.getTime());
         if (cbxLoaiHinh.getSelectedIndex() == 0) {
-            System.out.println("ok");
-        }else if (cbxLoaiHinh.getSelectedIndex() == 1) {
-            List<Object[]> dichVus = thongKeController.bieuDoDichVu(tuNgay,denNgay);
+            List<Object[]> data = thongKeController.tableDoanhThu(tuNgay,denNgay);
+            viewTableThongKe(data);
+            List<Object[]> data2 = thongKeController.bieuDoDoanhThu(tuNgay,denNgay);
             chart.clear();
-            for (int i = 0; i <= dichVus.size()-1; i++) {
-                Integer SoLuong = Integer.parseInt(dichVus.get(i)[1].toString()); 
-                chart.addData(new ModelChart(dichVus.get(i)[2].toString()+"/"+dichVus.get(i)[3].toString(),new double[]{SoLuong}));
+            for (int i = 0; i <= data2.size()-1; i++) {
+                Double tienGio = Double.parseDouble(data2.get(i)[2].toString());
+                Double dichVu = Double.parseDouble(data2.get(i)[3].toString());
+                Double phuThu1 = Double.parseDouble(data2.get(i)[4].toString());  
+                chart.addData(new ModelChart(data2.get(i)[0].toString()+"/"+data2.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu1}));
             }
             chart.start();
+        }else if (cbxLoaiHinh.getSelectedIndex() == 1) {
+            chart.setVisible(false);
+            chart1.setVisible(true);
+            chart1.clear();
+            chart1.addLegend("Tiền giờ", new Color(245, 189, 135));
+            List<Object[]> dichVus = thongKeController.bieuDoDichVu(tuNgay,denNgay);
+//            for (int i = 0; i <= dichVus.size()-1; i++) {
+//                chart.addLegend(dichVus.get(i)[0].toString(), new Color(245, 189, 135));
+//                System.out.println(dichVus.get(i)[0].toString());
+//            }
+
+            for (int i = 0; i <= dichVus.size()-1; i++) {
+                Double SoLuong = Double.parseDouble(dichVus.get(i)[1].toString()); 
+                System.out.println(SoLuong);
+                chart1.addData(new ModelChart(dichVus.get(i)[2].toString()+"/"+dichVus.get(i)[3].toString(),new double[]{SoLuong}));
+            }
+            chart1.start();
         }
     }//GEN-LAST:event_btnThongKeActionPerformed
 
@@ -358,6 +362,9 @@ public class ThongKePnl extends javax.swing.JPanel {
     }
     
     public void bieuDoDefault(List<Object[]> data) {
+        chart.addLegend("Tiền giờ", new Color(245, 189, 135));
+        chart.addLegend("Dịch vụ", new Color(135, 189, 245));
+        chart.addLegend("Phụ thu", new Color(189, 135, 245));
         chart.clear();
         for (int i = 0; i <= data.size()-1; i++) {
             Double tienGio = Double.parseDouble(data.get(i)[2].toString());
@@ -392,6 +399,7 @@ public class ThongKePnl extends javax.swing.JPanel {
     private GUI.Button btnThongKe;
     private javax.swing.JComboBox<String> cbxLoaiHinh;
     private GUI_ThongKe.Chart chart;
+    private GUI_ThongKe.Chart chart1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -399,12 +407,10 @@ public class ThongKePnl extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser jdcDenNgay;
     private com.toedter.calendar.JDateChooser jdcTuNgay;
-    private javax.swing.JLabel lblLoiNhuan;
     private javax.swing.JLabel lblTienDichVu;
     private javax.swing.JLabel lblTienGio;
     private javax.swing.JLabel lblTienPhuThu;

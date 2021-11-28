@@ -26,6 +26,16 @@ public class ThongKeController {
         view.bieuDoDefault(khoangs);
     }
     
+    public List<Object[]> tableDoanhThu(java.sql.Date tuNgay, java.sql.Date denNgay) {
+        List<Object[]> khoangs = thongKeDAO.tableDoanhThu(tuNgay, denNgay); 
+        return khoangs;
+    }
+    
+    public List<Object[]> bieuDoDoanhThu(java.sql.Date tuNgay, java.sql.Date denNgay) {
+        List<Object[]> khoangs = thongKeDAO.bieuDoDoanhThu(tuNgay, denNgay); 
+        return khoangs;
+    }
+    
     public List<Object[]> bieuDoDichVu(java.sql.Date tuNgay, java.sql.Date denNgay) {
         List<Object[]> khoangs = thongKeDAO.bieuDoDichVu(tuNgay, denNgay); 
         return khoangs;
