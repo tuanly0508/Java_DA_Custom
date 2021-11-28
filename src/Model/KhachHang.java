@@ -63,8 +63,6 @@ public class KhachHang{
         this.traSau = traSau;
     }
 
-
-
     public String getGhiChu() {
         return ghiChu;
     }

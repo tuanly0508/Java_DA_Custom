@@ -43,7 +43,7 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     }
     
     public List<Object[]> getGiaPhong(int idLoaiPhong, int idPhong) {
-        return getRawValues("select a.idPhong,a.idLoaiPhong,tenPhong,tinhTrangPhong,tenLoaiPhong,soKhachMax,giaGio,thoiGianMo from Phong a "
+        return getRawValues("select a.idPhong,a.idLoaiPhong,tenPhong,tinhTrangPhong,tenLoaiPhong,giaGio,thoiGianMo from Phong a "
                             + "join loaiPhong b on a.idLoaiPhong = b.idLoaiPhong join phieuThuePhong c on c.idPhong = a.idPhong "
                             + "where a.idLoaiPhong = '"+idLoaiPhong+"' and a.idPhong = "+idPhong+" ");
     }

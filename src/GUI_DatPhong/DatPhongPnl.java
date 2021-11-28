@@ -208,7 +208,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             datPhongDialog.txtTenKhach.setText("");
                         } else {
                             isSDT=true;
-                            datPhongDialog.txtTenKhach.setText(data.get(0)[2].toString());
+                            datPhongDialog.txtTenKhach.setText(data.get(0)[1].toString());
                             datPhongDialog.txtTenKhach.setEditable(true);
                         }
                     }                       
@@ -225,8 +225,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         if (p.idPhong != 0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
                             System.out.println(p.idPhong);
                             if (isSDT == false) {
-//                                khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
-                                //datPhongController.insert(khachHang);
+                                datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
                             }
                             phieuDatPhong = new PhieuDatPhong(0,SDT,p.idPhong,idDatTruoc,null,1,tenKhach);
                             phieuDatPhongController.insert(phieuDatPhong);        
@@ -247,17 +246,16 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         thoiGianMo=new Timestamp(date.getTime());
                         String tenKhach = datPhongDialog.txtTenKhach.getText();
                         String SDT = datPhongDialog.txtSDT.getText();
-
+                        List<Object[]> khachHang = datPhongController.getThongTinKH(SDT);
                         if (p.idPhong !=0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
-                            if (isSDT == false) {
-//                                khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
-                                //datPhongController.insert(khachHang);
+                            if (!SDT.equals(khachHang.get(0)[0])){
+                                datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
                             }
                             if (datPhongDialog.rdbGiaNgayLe.isSelected()) {
-                                phieuThuePhong = new PhieuThuePhong(0,SDT,2,p.idPhong,thoiGianMo,null,tenKhach,1,1);                              
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,1,p.idPhong,thoiGianMo,null,tenKhach,1,1);                              
                                 phieuThuePhongController.insert(phieuThuePhong);
                             }else {
-                                phieuThuePhong = new PhieuThuePhong(0,SDT,2,p.idPhong,thoiGianMo,null,tenKhach,1,0);
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,1,p.idPhong,thoiGianMo,null,tenKhach,1,0);
                                 phieuThuePhongController.insert(phieuThuePhong);
                             }        
                             phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, p.idPhong);
@@ -1131,14 +1129,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
         String SDT = txtSDT.getText();
                 
         if (isSDT == false) {
-//            khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
-            //datPhongController.insert(khachHang);
+            datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
         }
         if (rdbGiaNgayLe.isSelected()) {
-            phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,1);
+            phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,1);
             phieuThuePhongController.insert(phieuThuePhong);
         }else {
-            phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,0);
+            phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
             phieuThuePhongController.insert(phieuThuePhong);
         }        
         phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
@@ -1193,7 +1190,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             txtTenKhach.setText("");
         } else {
             isSDT=true;
-            txtTenKhach.setText(data.get(0)[2].toString());
+            txtTenKhach.setText(data.get(0)[1].toString());
             txtTenKhach.setEditable(true);
         }
     }//GEN-LAST:event_txtSDTKeyReleased
@@ -1227,9 +1224,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
         tienNgayLe = Double.parseDouble(gia.get(0)[1].toString());       
         List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);          
         for (int i = 0; i < data.size(); i++) {
-            Double giaThue = Double.valueOf(data.get(i)[6].toString());
+            Double giaThue = Double.valueOf(data.get(i)[5].toString());
             Date now = new Date();
-            Timestamp thoiGian = (Timestamp) data.get(i)[7];
+            Timestamp thoiGian = (Timestamp) data.get(i)[6];
             Date thoiGianMo = (Date) thoiGian;
             long thoiGianSuDung = now.getTime()-thoiGianMo.getTime();  
             long gioSuDung = thoiGianSuDung / (60 * 1000 * 60);
@@ -1326,8 +1323,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     tinhTienFrm.txtTraLai.setText("0");  
                 }           
             }
-        });
-        
+        });       
         
         tinhTienFrm.btnThanhToanIn.addMouseListener(new MouseAdapter() {
                 @Override
@@ -1337,10 +1333,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     int idHoaDonDichVu=0;
                     HoaDon hd = new HoaDon();
                     if(tienDichVu==0){
-                        hd = new HoaDon(0,2,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu);
+                        hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu);
                     }else{
                         idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                        hd = new HoaDon(0,2,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu);
+                        hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu);
                     }
                     hoaDonController.insert(hd);
                     
