@@ -3,24 +3,34 @@ package Model;
 public class KhachHang extends AbsTable{
     
     private Integer idKhachHang;
-    private String SDT;
-    private String tenKhach;
+    private String SDTKhachHang;
+    private String tenKhachHang;
     private Double tienNo;
     private Double tienSuDung;
-    private Integer traSau;
+    private Boolean traSau;
     private String ghiChu;
+    private Boolean tinhTrang;
 
     public KhachHang() {
     }
 
-    public KhachHang(Integer idKhachHang, String SDT, String tenKhach, Double tienNo, Double tienSuDung, Integer traSau, String ghiChu) {
+    public KhachHang(Integer idKhachHang, String SDTKhachHang, String tenKhachHang, Double tienNo, Double tienSuDung, Boolean traSau, String ghiChu, Boolean tinhTrang) {
         this.idKhachHang = idKhachHang;
-        this.SDT = SDT;
-        this.tenKhach = tenKhach;
+        this.SDTKhachHang = SDTKhachHang;
+        this.tenKhachHang = tenKhachHang;
         this.tienNo = tienNo;
         this.tienSuDung = tienSuDung;
         this.traSau = traSau;
         this.ghiChu = ghiChu;
+        this.tinhTrang = tinhTrang;
+    }
+
+    public Boolean getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(Boolean tinhTrang) {
+        this.tinhTrang = tinhTrang;
     }
 
     public Integer getIdKhachHang() {
@@ -31,20 +41,20 @@ public class KhachHang extends AbsTable{
         this.idKhachHang = idKhachHang;
     }
 
-    public String getSDT() {
-        return SDT;
+    public String getSDTKhachHang() {
+        return SDTKhachHang;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public void setSDTKhachHang(String SDTKhachHang) {
+        this.SDTKhachHang = SDTKhachHang;
     }
 
-    public String getTenKhach() {
-        return tenKhach;
+    public String getTenKhachHang() {
+        return tenKhachHang;
     }
 
-    public void setTenKhach(String tenKhach) {
-        this.tenKhach = tenKhach;
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
     }
 
     public Double getTienNo() {
@@ -63,13 +73,15 @@ public class KhachHang extends AbsTable{
         this.tienSuDung = tienSuDung;
     }
 
-    public Integer getTraSau() {
+    public Boolean getTraSau() {
         return traSau;
     }
 
-    public void setTraSau(Integer traSau) {
+    public void setTraSau(Boolean traSau) {
         this.traSau = traSau;
     }
+
+
 
     public String getGhiChu() {
         return ghiChu;
@@ -78,6 +90,8 @@ public class KhachHang extends AbsTable{
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
+
+    
     
     @Override
     public int getId() {

@@ -56,7 +56,7 @@ public class Main extends javax.swing.JFrame {
                 }else if (index == 1) {
                     showForm(new ThongKePnl());
                 }else if (index == 2) {
-                    showForm(new NhanVienPnl());
+                    showForm(nhanVienPnl);
                 }else if (index == 3) {
                     showForm(dichVuPnl);
                 }else if (index == 4) {

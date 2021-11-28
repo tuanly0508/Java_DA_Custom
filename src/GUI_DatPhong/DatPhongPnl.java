@@ -234,7 +234,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             String SDT = datPhongDialog.txtSDT.getText();
 
                             if (isSDT == false) {
-                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
+//                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
                                 datPhongController.insert(khachHang);
                             }
                             if (datPhongDialog.rdbGiaNgayLe.isSelected()) {
@@ -1147,7 +1147,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         String SDT = txtSDT.getText();
                 
         if (isSDT == false) {
-            khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
+//            khachHang = new KhachHang(0,SDTKhachHang,tenKhachHang,0.0,0.0,0,null);
             datPhongController.insert(khachHang);
         }
         if (rdbGiaNgayLe.isSelected()) {
