@@ -6,7 +6,6 @@ import DAO.GioDatTruocDAO;
 import DAO.KhachHangDAO;
 import View_DatPhong.DatPhongPnl;
 import Model.GioDatTruoc;
-import Model.KhachHang;
 import java.util.List;
 
 public class DatPhongController {
@@ -108,5 +107,14 @@ public class DatPhongController {
     public List<Object[]> infoOpen() {
         List<Object[]> infoOpen = datPhongDAO.getTimeOpen();
         return infoOpen;
+    }
+    
+    public List<Object[]> getIdHoaDonDichVu(int idPhong) {
+        List<Object[]> phongs = datPhongDAO.getIdHoaDonDichVu(idPhong);
+        return phongs;
+    }
+    
+    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu) {
+        datPhongDAO.updateSoLuongSuDungDichVu(soLuong,idDichVu);
     }
 }

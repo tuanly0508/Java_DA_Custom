@@ -642,9 +642,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblSuDungDichVu);
         if (tblSuDungDichVu.getColumnModel().getColumnCount() > 0) {
-            tblSuDungDichVu.getColumnModel().getColumn(0).setMinWidth(0);
-            tblSuDungDichVu.getColumnModel().getColumn(0).setPreferredWidth(0);
-            tblSuDungDichVu.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblSuDungDichVu.getColumnModel().getColumn(0).setMinWidth(40);
+            tblSuDungDichVu.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblSuDungDichVu.getColumnModel().getColumn(0).setMaxWidth(40);
             tblSuDungDichVu.getColumnModel().getColumn(2).setMinWidth(45);
             tblSuDungDichVu.getColumnModel().getColumn(2).setPreferredWidth(45);
             tblSuDungDichVu.getColumnModel().getColumn(2).setMaxWidth(45);
@@ -664,6 +664,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         btnThemDichVu.setBackground(new java.awt.Color(255, 252, 252));
         btnThemDichVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus_1.png"))); // NOI18N
+        btnThemDichVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDichVuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout roundPanel5Layout = new javax.swing.GroupLayout(roundPanel5);
         roundPanel5.setLayout(roundPanel5Layout);
@@ -1427,8 +1432,20 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
     private void tblSuDungDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuDungDichVuMouseClicked
         int click = tblSuDungDichVu.getSelectedRow();
-        
+        spnSoLuong.setValue(tblSuDungDichVu.getValueAt(click, 4));       
     }//GEN-LAST:event_tblSuDungDichVuMouseClicked
+
+    private void btnThemDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDichVuActionPerformed
+        int click = tblSuDungDichVu.getSelectedRow();
+        List<Object[]> data = datPhongController.getIdHoaDonDichVu(phongHienTai);
+        Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;
+        System.out.println(tblSuDungDichVu.getValueAt(click, 0));
+//        if(data.get(0)[1].equals(phongHienTai)) {
+//            datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 0));
+//            List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
+//            loadTableSuDungDV(data2);    
+//        }               
+    }//GEN-LAST:event_btnThemDichVuActionPerformed
 
     public void themDichVu(JTable table) {
         table.addMouseListener(new MouseAdapter() {
