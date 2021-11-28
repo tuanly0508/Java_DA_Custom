@@ -392,14 +392,9 @@ public class NhanVienPnl extends javax.swing.JPanel {
         } else {        
             int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
             if (click == JOptionPane.YES_OPTION) {
-            int[] vt = tblNhanVien.getSelectedRows();
-            List<Integer> idStaffs  = new ArrayList<>();
-            for (int i = vt.length-1; i >= 0; i--) {
-                idStaffs.add((Integer)tblNhanVien.getValueAt(vt[i], 0));
+                nhanVienController.xoaNhanVien((Integer)tblNhanVien.getValueAt(dongXoa, 0));
             }
-            nhanVienController.delete(idStaffs);
-            nhanVienController.loadList();
-            }
+            JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
         }
     }//GEN-LAST:event_bntXoaActionPerformed
 
