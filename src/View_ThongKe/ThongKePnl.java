@@ -184,23 +184,13 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel4Layout.createSequentialGroup()
-                    .addContainerGap(20, Short.MAX_VALUE)
-                    .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
         );
         roundPanel4Layout.setVerticalGroup(
             roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(roundPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
 
         roundPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -280,12 +270,11 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(roundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, roundPanel1Layout.createSequentialGroup()
-                            .addComponent(roundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(roundPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addComponent(roundPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(roundPanel1Layout.createSequentialGroup()
+                        .addComponent(roundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(roundPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(roundPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         roundPanel1Layout.setVerticalGroup(
@@ -323,22 +312,22 @@ public class ThongKePnl extends javax.swing.JPanel {
             }
             chart.start();
         }else if (cbxLoaiHinh.getSelectedIndex() == 1) {
-            chart.setVisible(false);
-            chart1.setVisible(true);
-            chart1.clear();
-            chart1.addLegend("Tiền giờ", new Color(245, 189, 135));
-            List<Object[]> dichVus = thongKeController.bieuDoDichVu(tuNgay,denNgay);
+//            chart.setVisible(false);
+//            chart1.setVisible(true);
+//            chart1.clear();
+//            chart1.addLegend("Tiền giờ", new Color(245, 189, 135));
+//            List<Object[]> dichVus = thongKeController.bieuDoDichVu(tuNgay,denNgay);
+////            for (int i = 0; i <= dichVus.size()-1; i++) {
+////                chart.addLegend(dichVus.get(i)[0].toString(), new Color(245, 189, 135));
+////                System.out.println(dichVus.get(i)[0].toString());
+////            }
+//
 //            for (int i = 0; i <= dichVus.size()-1; i++) {
-//                chart.addLegend(dichVus.get(i)[0].toString(), new Color(245, 189, 135));
-//                System.out.println(dichVus.get(i)[0].toString());
+//                Double SoLuong = Double.parseDouble(dichVus.get(i)[1].toString()); 
+//                System.out.println(SoLuong);
+//                chart1.addData(new ModelChart(dichVus.get(i)[2].toString()+"/"+dichVus.get(i)[3].toString(),new double[]{SoLuong}));
 //            }
-
-            for (int i = 0; i <= dichVus.size()-1; i++) {
-                Double SoLuong = Double.parseDouble(dichVus.get(i)[1].toString()); 
-                System.out.println(SoLuong);
-                chart1.addData(new ModelChart(dichVus.get(i)[2].toString()+"/"+dichVus.get(i)[3].toString(),new double[]{SoLuong}));
-            }
-            chart1.start();
+//            chart1.start();
         }
     }//GEN-LAST:event_btnThongKeActionPerformed
 

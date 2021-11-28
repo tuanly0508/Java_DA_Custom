@@ -3,7 +3,6 @@ package View_DatPhong;
 import swing.Table;
 import swing.ScrollBar;
 import Controller.DatPhongController;
-import Controller.DichVuController;
 import Controller.GiaNgayLeController;
 import Controller.HoaDonController;
 import Controller.PhieuDatPhongController;
@@ -21,7 +20,6 @@ import Model.PhieuThuePhong;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -637,6 +635,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 "id", "Dịch vụ", "ĐVT", "Ngày sử dụng", "SL", "Thành tiền"
             }
         ));
+        tblSuDungDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSuDungDichVuMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblSuDungDichVu);
         if (tblSuDungDichVu.getColumnModel().getColumnCount() > 0) {
             tblSuDungDichVu.getColumnModel().getColumn(0).setMinWidth(0);
@@ -1422,6 +1425,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
         tinhTienFrm.setVisible(true);
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
+    private void tblSuDungDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuDungDichVuMouseClicked
+        int click = tblSuDungDichVu.getSelectedRow();
+        
+    }//GEN-LAST:event_tblSuDungDichVuMouseClicked
+
     public void themDichVu(JTable table) {
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -1531,8 +1539,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     public void XuatHoaDon(int idHoaDon,String duongDanFile){
         try {
             Hashtable map = new Hashtable();
-            JasperReport report = JasperCompileManager.compileReport(duongDanFile);
-            
+            JasperReport report = JasperCompileManager.compileReport(duongDanFile);            
             map.put("idHoaDon", idHoaDon);
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost;database=DuAn1;", "sa", "123456");
             JasperPrint p = JasperFillManager.fillReport(report,  map, connection );
