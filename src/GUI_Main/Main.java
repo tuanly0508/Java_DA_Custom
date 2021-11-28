@@ -10,9 +10,9 @@ import Controller.NhanVienController;
 import Controller.PhieuDatPhongController;
 import Controller.PhieuNhapHangController;
 import Controller.PhieuThuePhongController;
+import Controller.ThongKeController;
 import GUI_DichVu.DichVuPnl;
 import GUI_DatPhong.DatPhongPnl;
-import GUI_DichVu.QlDichVuPnl;
 import GUI_KhachHang.KhachHangPnl;
 import GUI_Login.Login;
 import GUI_NhanVien.NhanVienPnl;
@@ -26,6 +26,7 @@ public class Main extends javax.swing.JFrame {
     private NhanVienPnl nhanVienPnl;
     private NhapHangPnl nhapHangPnl;
     private KhachHangPnl khachHangPnl;
+    private ThongKePnl thongKePnl;
     
     public Main() {
         initComponents();    
@@ -34,20 +35,23 @@ public class Main extends javax.swing.JFrame {
     }
     
     public void init() {
+        khachHangPnl = new KhachHangPnl();
         datPhongPnl = new DatPhongPnl();
-        dichVuPnl =  new DichVuPnl();
         nhanVienPnl = new NhanVienPnl();
         nhapHangPnl = new NhapHangPnl();
-        khachHangPnl = new KhachHangPnl();
+        thongKePnl = new ThongKePnl();
+        dichVuPnl =  new DichVuPnl();
+        
         PhieuThuePhongController phieuThuePhongController = new PhieuThuePhongController(datPhongPnl);
         PhieuDatPhongController phieuDatPhongController = new PhieuDatPhongController(datPhongPnl);
-        KhachHangController khachHangController = new KhachHangController(khachHangPnl);
-        DatPhongController datPhongController = new DatPhongController(datPhongPnl);
-        HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
-        DichVuController dichVuController = new DichVuController(dichVuPnl);
-        GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
-        NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
         PhieuNhapHangController phieuNhapHangController = new PhieuNhapHangController(nhapHangPnl);
+        KhachHangController khachHangController = new KhachHangController(khachHangPnl);
+        GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
+        DatPhongController datPhongController = new DatPhongController(datPhongPnl);
+        NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
+        ThongKeController thongKeController = new ThongKeController(thongKePnl);
+        HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
+        DichVuController dichVuController = new DichVuController(dichVuPnl);       
         
         EventMenu event = new EventMenu() {
             @Override
@@ -55,7 +59,7 @@ public class Main extends javax.swing.JFrame {
                 if (index == 0) {
                     showForm(datPhongPnl);
                 }else if (index == 1) {
-                    showForm(new ThongKePnl());
+                    showForm(thongKePnl);
                 }else if (index == 2) {
                     showForm(new NhanVienPnl());
                 }else if (index == 3) {
