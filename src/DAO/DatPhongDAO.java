@@ -64,4 +64,14 @@ public class DatPhongDAO extends AbsDAO<Phong>{
         return getRawValues("select DISTINCT b.idPhong,tinhTrang,tenPhong from phieuDatPhong a right join phong b on a.idPhong = b.idPhong "
                             + "where tinhTrang = 1");
     }
+    
+    public List<Object[]> getIdHoaDonDichVu(int idPhong){
+        return getRawValues("select idDichVu, idPhong from chiTietDichVuSuDung a join hoaDonDichVu b on a.idHoaDonDichVu = b.idHoaDonDichVu "
+                            + "where b.idPhong = "+idPhong+" and b.trangThai = 1");
+    }
+    
+    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu) {
+        String query = "update chiTietDichVuSuDung set soLuong = ? where idDichVu = ?";
+        DBConnection.executeUpdate(query,soLuong, idDichVu);
+    }
 }
