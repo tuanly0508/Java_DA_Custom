@@ -25,15 +25,19 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import static java.lang.System.in;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -1448,11 +1452,35 @@ public class DatPhongPnl extends javax.swing.JPanel {
         List<Object[]> data = datPhongController.getIdHoaDonDichVu(phongHienTai);
         Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;        
         
-        if(data.get(0)[1].equals(phongHienTai)) {            
-            datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), 
-                    Timestamp.valueOf(tblSuDungDichVu.getValueAt(click, 3).toString()) ); 
-            List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
-            loadTableSuDungDV(data2);                        
+//        try {
+//            java.util.Date temp = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.SSSSSS").parse("2012-07-10 14:58:00.000000");
+//        } catch (ParseException ex) {
+//            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+//        try {
+//            System.out.println(tblSuDungDichVu.getValueAt(click, 3).toString());
+//            Date thisDate = dateFormat.parse(tblSuDungDichVu.getValueAt(click, 3).toString());
+//            
+//        } catch (ParseException ex) {
+//            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            
+        try {
+            
+            java.util.Date d = sdf.parse(tblSuDungDichVu.getValueAt(click, 3).toString());
+            LocalDateTime ldt = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
+            Timestamp time = Timestamp.valueOf(ldt);
+
+            if(data.get(0)[1].equals(phongHienTai)) {
+                datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6),time); 
+                List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
+                loadTableSuDungDV(data2);  
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnThemDichVuActionPerformed
 
