@@ -3,6 +3,7 @@ package GUI_DatPhong;
 import GUI.Table;
 import GUI.ScrollBar;
 import Controller.DatPhongController;
+import Controller.DichVuController;
 import Controller.GiaNgayLeController;
 import Controller.HoaDonController;
 import Controller.KhachHangController;
@@ -379,17 +380,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         tblAllDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "id", "Dịch vụ", "ĐVT", "Giá"
@@ -1219,10 +1210,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
         for(int i=0;i<=tblSuDungDichVu.getRowCount()-1;i++){
             tienDichVu += ChuyenDoi.SoDouble(tblSuDungDichVu.getValueAt(i, 5).toString()) ;
-        }        
-        List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();       
+        }
+        
+        List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();      
+        
         tienNgayLe = Double.parseDouble(gia.get(0)[1].toString());       
-        List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);          
+        List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);       
+        
         for (int i = 0; i < data.size(); i++) {
             Double giaThue = Double.valueOf(data.get(i)[5].toString());
             Date now = new Date();
@@ -1245,7 +1239,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 tongTien = tienGio+tienDichVu+tienPhuThu;
                 txtTongTien.setText(tongTien.toString());
             }
-        }            
+        }
+        //update lại tiền dịch vụ
+        List <Object[]> data2 = hoaDonController.layIdHoaDonDichVu(phongHienTai);
+        if(data2.size()==0){
+        }else{
+            hoaDonController.updateTienHoaDonDV(tienDichVu,(Integer.valueOf(data2.get(0)[0].toString())));
+        }
     }//GEN-LAST:event_btnTamTinhActionPerformed
 
     private void btnGiaNgayLeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaNgayLeActionPerformed
@@ -1458,6 +1458,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         }
                         int idHoaDon = hoaDonController.getIdHoaDonDichVu(phongHienTai);
                         hoaDonController.themChiTietDichVu(idHoaDon,(int) table.getValueAt(click1,0), (int) spnSoLuong.getValue());
+                        
                         List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
                         loadTableSuDungDV(data2);
                         table.getSelectionModel().clearSelection();

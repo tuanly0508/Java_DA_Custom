@@ -45,6 +45,11 @@ public class DichVuController {
         qlDichVuView.viewTableDichVu(dichVus);
     }
     
+    public List<Object[]> getListDichVu(){
+        List<Object[]> dichVus = dichVuDAO.layDanhSachDichVu();
+        return dichVus;
+    }
+    
     public void loadListDanhMuc(){
         List<Object[]> dichVus = danhMucDAO.layDanhSachDanhMuc();
         List<Object[]> donViTinhs = donViTinhDAO.layDanhSachDonViTinh();
