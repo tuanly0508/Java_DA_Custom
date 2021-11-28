@@ -1,50 +1,42 @@
 package Model;
 
-public class KhachHang extends AbsTable{
+public class KhachHang{
     
-    private Integer idKhachHang;
-    private String SDT;
-    private String tenKhach;
+    private String SDTKhachHang;
+    private String tenKhachHang;
     private Double tienNo;
     private Double tienSuDung;
     private Integer traSau;
     private String ghiChu;
+    private Boolean tinhTrang;
 
     public KhachHang() {
     }
 
-    public KhachHang(Integer idKhachHang, String SDT, String tenKhach, Double tienNo, Double tienSuDung, Integer traSau, String ghiChu) {
-        this.idKhachHang = idKhachHang;
-        this.SDT = SDT;
-        this.tenKhach = tenKhach;
+    public KhachHang(String SDTKhachHang, String tenKhachHang, Double tienNo, Double tienSuDung, Integer traSau, String ghiChu, Boolean tinhTrang) {
+        this.SDTKhachHang = SDTKhachHang;
+        this.tenKhachHang = tenKhachHang;
         this.tienNo = tienNo;
         this.tienSuDung = tienSuDung;
         this.traSau = traSau;
         this.ghiChu = ghiChu;
+        this.tinhTrang = tinhTrang;
     }
 
-    public Integer getIdKhachHang() {
-        return idKhachHang;
+    public String getSDTKhachHang() {
+        return SDTKhachHang;
     }
 
-    public void setIdKhachHang(Integer idKhachHang) {
-        this.idKhachHang = idKhachHang;
+    public void setSDTKhachHang(String SDTKhachHang) {
+        this.SDTKhachHang = SDTKhachHang;
     }
 
-    public String getSDT() {
-        return SDT;
+    public String getTenKhachHang() {
+        return tenKhachHang;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
-    }
-
-    public String getTenKhach() {
-        return tenKhach;
-    }
-
-    public void setTenKhach(String tenKhach) {
-        this.tenKhach = tenKhach;
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
     }
 
     public Double getTienNo() {
@@ -78,9 +70,12 @@ public class KhachHang extends AbsTable{
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
-    
-    @Override
-    public int getId() {
-        return idKhachHang;
+
+    public Boolean getTinhTrang() {
+        return tinhTrang;
     }
+
+    public void setTinhTrang(Boolean tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }  
 }

@@ -225,8 +225,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         if (p.idPhong != 0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
                             System.out.println(p.idPhong);
                             if (isSDT == false) {
-                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
-                                datPhongController.insert(khachHang);
+                                khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
+                                //datPhongController.insert(khachHang);
                             }
                             phieuDatPhong = new PhieuDatPhong(0,SDT,p.idPhong,idDatTruoc,null,1,tenKhach);
                             phieuDatPhongController.insert(phieuDatPhong);        
@@ -250,8 +250,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
                         if (p.idPhong !=0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
                             if (isSDT == false) {
-                                khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
-                                datPhongController.insert(khachHang);
+                                khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
+                                //datPhongController.insert(khachHang);
                             }
                             if (datPhongDialog.rdbGiaNgayLe.isSelected()) {
                                 phieuThuePhong = new PhieuThuePhong(0,SDT,2,p.idPhong,thoiGianMo,null,tenKhach,1,1);                              
@@ -1131,8 +1131,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         String SDT = txtSDT.getText();
                 
         if (isSDT == false) {
-            khachHang = new KhachHang(0,SDT,tenKhach,0.0,0.0,0,null);
-            datPhongController.insert(khachHang);
+            khachHang = new KhachHang(SDT,tenKhach,0.0,0.0,0,null,true);
+            //datPhongController.insert(khachHang);
         }
         if (rdbGiaNgayLe.isSelected()) {
             phieuThuePhong = new PhieuThuePhong(0,SDT,2,phongHienTai,thoiGianMo,null,tenKhach,1,1);

@@ -91,9 +91,9 @@ public class DatPhongController {
         return lists;
     }
     
-    public void insert(KhachHang kh){
-        khachHangDAO.insert(kh);
-    }
+//    public void insert(KhachHang kh){
+//        khachHangDAO.insert(kh);
+//    }
         
     public List<Object[]> getTTPhieuDatPhong() {   
         List<Object[]> getTinhTrangPDP = datPhongDAO.getTinhTrangPDP();

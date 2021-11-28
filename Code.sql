@@ -39,7 +39,7 @@ create table dichVu(
 create table nhaCungCap(
 	idNhaCungCap int identity primary key,
 	tenNhaCungCap nvarchar(100) not null,
-	SDTNhaCungCap nvarchar(10) not null,
+	SDTNhaCungCap nvarchar(11) not null,
 	diaChi nvarchar(100) not null,
 	tinhTrang bit not null
 )
@@ -76,9 +76,9 @@ create table phong(
 
 create table nhanVien(
 	idNhanVien int identity primary key,
-	soDienThoai nvarchar(10) not null,
 	hoTenNhanVien nvarchar(50) not null,
-	CMND varchar(12) not null ,	
+	CMND varchar(12) not null ,
+	soDienThoai nvarchar(11) not null,
 	diaChi nvarchar(100) not null,
 	gioiTinh nvarchar(5) not null,
 	email varchar(100) not null,
@@ -91,13 +91,13 @@ create table nhanVien(
 )
 
 create table khachHang(
-	SDTKhachHang nvarchar(10),
+	SDTKhachHang nvarchar(11) primary key,
 	tenKhachHang nvarchar(50) not null,
 	tienNo float null,
 	tienSuDung float null,
-	loaiKhachHang nvarchar(20) not null,
 	traSau bit null,
-	ghiChu nvarchar(250) null
+	ghiChu nvarchar(250) null,
+	tinhTrang bit not null
 )
 
 create table phieuDatPhong(
@@ -172,7 +172,7 @@ insert into dichVu values (2,2,N'Ostart cay',50,10000,1)
 insert into dichVu values (3,2,N'Thuốc ngựa',50,10000,1)
 insert into dichVu values (3,2,N'555',50,10000,1)
 
-insert into khachHang values ('0941790508',N'Trần Tuấn Anh',0,999999,N'Vip',1,null)
+insert into khachHang values ('0941790508',N'Trần Tuấn Anh',0,999999,1,null,1)
 
 
 select tenDichVu, tenDonVi, gia from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where idDanhMuc = 2

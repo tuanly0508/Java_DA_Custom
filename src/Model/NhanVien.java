@@ -10,8 +10,8 @@ public class NhanVien extends AbsTable{
     private String diaChi;
     private Double gioiTinh;
     private String email;
-    private String verifyCode;
-    private String pass;
+    private String vertifyCode;
+    private String matKhau;
     private String quyenHan;
     private String trangThai;
     private java.sql.Date ngaySinh;
@@ -20,7 +20,7 @@ public class NhanVien extends AbsTable{
     public NhanVien() {
     }
 
-    public NhanVien(Integer idNhanVien, String hoTenNhanVien, String CMND, String soDienThoai, String diaChi, Double gioiTinh, String email, String verifyCode, String pass, String quyenHan, String trangThai, Date ngaySinh, Date ngayVaoLam) {
+    public NhanVien(Integer idNhanVien, String hoTenNhanVien, String CMND, String soDienThoai, String diaChi, Double gioiTinh, String email, String vertifyCode, String matKhau, String quyenHan, String trangThai, Date ngaySinh, Date ngayVaoLam) {
         this.idNhanVien = idNhanVien;
         this.hoTenNhanVien = hoTenNhanVien;
         this.CMND = CMND;
@@ -28,8 +28,8 @@ public class NhanVien extends AbsTable{
         this.diaChi = diaChi;
         this.gioiTinh = gioiTinh;
         this.email = email;
-        this.verifyCode = verifyCode;
-        this.pass = pass;
+        this.vertifyCode = vertifyCode;
+        this.matKhau = matKhau;
         this.quyenHan = quyenHan;
         this.trangThai = trangThai;
         this.ngaySinh = ngaySinh;
@@ -92,20 +92,20 @@ public class NhanVien extends AbsTable{
         this.email = email;
     }
 
-    public String getVerifyCode() {
-        return verifyCode;
+    public String getVertifyCode() {
+        return vertifyCode;
     }
 
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode;
+    public void setVertifyCode(String vertifyCode) {
+        this.vertifyCode = vertifyCode;
     }
 
-    public String getPass() {
-        return pass;
+    public String getMatKhau() {
+        return matKhau;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
     public String getQuyenHan() {
