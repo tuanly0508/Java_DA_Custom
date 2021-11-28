@@ -6,6 +6,7 @@ import Controller.DichVuController;
 import Controller.GiaNgayLeController;
 import Controller.HoaDonController;
 import Controller.KhachHangController;
+import Controller.NhaCungCapController;
 import Controller.NhanVienController;
 import Controller.PhieuDatPhongController;
 import Controller.PhieuNhapHangController;

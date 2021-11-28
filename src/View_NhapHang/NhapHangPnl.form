@@ -579,22 +579,22 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane3" alignment="1" pref="570" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="txtSDT" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="textField8" min="-2" pref="123" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtNhaCungCap" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="textField9" min="-2" pref="123" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtDiaChi" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="textField10" min="-2" pref="123" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtTienNo" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="textField12" min="-2" pref="123" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnXoa" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="button7" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnSua" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="button6" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnThem" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="button5" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel3" max="32767" attributes="0"/>
@@ -617,16 +617,16 @@
                       <Component id="jScrollPane3" min="-2" pref="184" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtSDT" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNhaCungCap" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDiaChi" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTienNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textField8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textField9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textField10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textField12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnThem" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="btnSua" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="btnXoa" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="button5" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="button6" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="button7" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -653,13 +653,12 @@
                 <Component class="swing.Table" name="table3">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="6">
+                      <Table columnCount="5" rowCount="6">
                         <Column editable="true" title="STT" type="java.lang.Object"/>
                         <Column editable="true" title="T&#xea;n nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object"/>
                         <Column editable="true" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.Object"/>
                         <Column editable="true" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.Object"/>
-                        <Column editable="true" title="Ti&#x1ec1;n N&#x1ee3;" type="java.lang.Object"/>
-                        <Column editable="true" title="Tr&#x1ea1;ng Th&#xe1;i" type="java.lang.Object"/>
+                        <Column editable="true" title="Ti&#x1ec1;n n&#x1ee3;" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -689,20 +688,12 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="0" minWidth="0" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
                       </TableColumnModel>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblNhaCungCapMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -737,9 +728,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
-              </Events>
             </Component>
             <Component class="swing.Button" name="button6">
               <Properties>
@@ -748,9 +736,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaActionPerformed"/>
-              </Events>
             </Component>
             <Component class="swing.Button" name="button7">
               <Properties>
@@ -759,9 +744,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
-              </Events>
             </Component>
             <Component class="swing.TextField" name="textField12">
               <Properties>
