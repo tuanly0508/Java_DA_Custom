@@ -242,8 +242,15 @@ public class NhanVienPnl extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblNhanVien);
         if (tblNhanVien.getColumnModel().getColumnCount() > 0) {
+            tblNhanVien.getColumnModel().getColumn(0).setMinWidth(0);
+            tblNhanVien.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblNhanVien.getColumnModel().getColumn(0).setMaxWidth(0);
             tblNhanVien.getColumnModel().getColumn(7).setMinWidth(0);
+            tblNhanVien.getColumnModel().getColumn(7).setPreferredWidth(0);
             tblNhanVien.getColumnModel().getColumn(7).setMaxWidth(0);
+            tblNhanVien.getColumnModel().getColumn(8).setMinWidth(0);
+            tblNhanVien.getColumnModel().getColumn(8).setPreferredWidth(0);
+            tblNhanVien.getColumnModel().getColumn(8).setMaxWidth(0);
         }
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
