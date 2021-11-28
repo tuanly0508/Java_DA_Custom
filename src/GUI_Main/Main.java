@@ -11,6 +11,7 @@ import Controller.PhieuDatPhongController;
 import Controller.PhieuNhapHangController;
 import Controller.PhieuThuePhongController;
 import Controller.ThongKeController;
+import Controller.NhaCungCapController;
 import GUI_DichVu.DichVuPnl;
 import GUI_DatPhong.DatPhongPnl;
 import GUI_KhachHang.KhachHangPnl;
@@ -51,7 +52,8 @@ public class Main extends javax.swing.JFrame {
         NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
         ThongKeController thongKeController = new ThongKeController(thongKePnl);
         HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
-        DichVuController dichVuController = new DichVuController(dichVuPnl);       
+        DichVuController dichVuController = new DichVuController(dichVuPnl);
+        NhaCungCapController nhaCungCapController = new NhaCungCapController(nhapHangPnl);
         
         EventMenu event = new EventMenu() {
             @Override
