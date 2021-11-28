@@ -17,15 +17,15 @@ public class NhaCungCapController {
     NhapHangPnl view;
     public NhaCungCapController(NhapHangPnl view){
         this.view = view;
-//        loadList();
-//        view.setControllerNhaCungCap(this);
+        loadList();
+        view.setControllerNhaCungCap(this);
     }
     
     NhaCungCapDAO nhaCungCapDAO = new NhaCungCapDAO();
 
     public void loadList(){
         List<Object[]> nhaCungCaps = nhaCungCapDAO.getDataStaff();
-//        view.viewTableStaff(nhaCungCaps);      
+        view.viewTableStaff(nhaCungCaps);      
     }  
     
     public void insert(String tenNhaCungCap, String SDTNhaCungCap, String diaChi, Double tienNo){
