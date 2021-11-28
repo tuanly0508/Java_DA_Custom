@@ -4,7 +4,7 @@ import DAO.DatPhongDAO;
 import DAO.DichVuDAO;
 import DAO.GioDatTruocDAO;
 import DAO.KhachHangDAO;
-import GUI_DatPhong.DatPhongPnl;
+import View_DatPhong.DatPhongPnl;
 import Model.GioDatTruoc;
 import Model.KhachHang;
 import java.util.List;

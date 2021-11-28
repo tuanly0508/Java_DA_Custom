@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.KhachHangDAO;
-import GUI_KhachHang.KhachHangPnl;
+import View_KhachHang.KhachHangPnl;
 import Model.KhachHang;
 import java.util.List;
 
