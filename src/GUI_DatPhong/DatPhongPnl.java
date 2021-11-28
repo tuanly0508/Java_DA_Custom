@@ -3,6 +3,7 @@ package GUI_DatPhong;
 import GUI.Table;
 import GUI.ScrollBar;
 import Controller.DatPhongController;
+import Controller.DichVuController;
 import Controller.GiaNgayLeController;
 import Controller.HoaDonController;
 import Controller.PhieuDatPhongController;
@@ -337,7 +338,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         panelP = new GUI.RoundPanel();
         panelPhong = new GUI.RoundPanel();
-        roundPanel1 = new GUI.RoundPanel();
+        jPanel7 = new GUI.RoundPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jtpDichVuAll = new javax.swing.JTabbedPane();
@@ -577,7 +578,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             .addGroup(roundPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel4Layout.createSequentialGroup()
                         .addComponent(btnTamTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -683,7 +684,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane1))
         );
 
         spnSoLuong.setBackground(Color.WHITE);
@@ -765,7 +766,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         );
         panelPhongLayout.setVerticalGroup(
             panelPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 541, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelPLayout = new javax.swing.GroupLayout(panelP);
@@ -785,7 +786,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        roundPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -807,17 +808,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         tblAllDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "id", "Dịch vụ", "ĐVT", "Giá"
@@ -954,21 +945,21 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         jtpDichVuAll.addTab("Bim bim", jPanel5);
 
-        javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
-        roundPanel1.setLayout(roundPanel1Layout);
-        roundPanel1Layout.setHorizontalGroup(
-            roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jtpDichVuAll)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
-        roundPanel1Layout.setVerticalGroup(
-            roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundPanel1Layout.createSequentialGroup()
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -995,7 +986,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(roundPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(roundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         bodyLayout.setVerticalGroup(
@@ -1004,7 +995,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 .addGap(7, 7, 7)
                 .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bodyLayout.createSequentialGroup()
-                        .addComponent(roundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(roundPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bodyLayout.createSequentialGroup()
@@ -1215,10 +1206,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
         for(int i=0;i<=tblSuDungDichVu.getRowCount()-1;i++){
             tienDichVu += ChuyenDoi.SoDouble(tblSuDungDichVu.getValueAt(i, 5).toString()) ;
-        }        
-        List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();       
+        }
+        
+        List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();      
+        
         tienNgayLe = Double.parseDouble(gia.get(0)[1].toString());       
-        List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);          
+        List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);       
+        
         for (int i = 0; i < data.size(); i++) {
             Double giaThue = Double.valueOf(data.get(i)[5].toString());
             Date now = new Date();
@@ -1241,7 +1235,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 tongTien = tienGio+tienDichVu+tienPhuThu;
                 txtTongTien.setText(tongTien.toString());
             }
-        }            
+        }
+        //update lại tiền dịch vụ
+        List <Object[]> data2 = hoaDonController.layIdHoaDonDichVu(phongHienTai);
+        if(data2.size()==0){
+        }else{
+            hoaDonController.updateTienHoaDonDV(tienDichVu,(Integer.valueOf(data2.get(0)[0].toString())));
+        }
     }//GEN-LAST:event_btnTamTinhActionPerformed
 
     private void btnGiaNgayLeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaNgayLeActionPerformed
@@ -1454,6 +1454,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         }
                         int idHoaDon = hoaDonController.getIdHoaDonDichVu(phongHienTai);
                         hoaDonController.themChiTietDichVu(idHoaDon,(int) table.getValueAt(click1,0), (int) spnSoLuong.getValue());
+                        
                         List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
                         loadTableSuDungDV(data2);
                         table.getSelectionModel().clearSelection();
@@ -1679,6 +1680,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private GUI.RoundPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
@@ -1698,7 +1700,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private GUI.BtnRadioCus rdbPhongThuong;
     private GUI.BtnRadioCus rdbPhongTrong;
     private GUI.BtnRadioCus rdbPhongVip;
-    private GUI.RoundPanel roundPanel1;
     private GUI.RoundPanel roundPanel2;
     private GUI.RoundPanel roundPanel3;
     private GUI.RoundPanel roundPanel4;

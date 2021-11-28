@@ -10,12 +10,26 @@ import Help.ChuyenDoi;
 import Model.DanhMuc;
 import Model.DichVu;
 import Model.DonViTinh;
+import java.awt.Desktop;
 import java.awt.Frame;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import static javax.swing.JComponent.UNDEFINED_CONDITION;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -77,7 +91,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         tblDichVu = new GUI.Table();
         jLabel4 = new javax.swing.JLabel();
         txtTimNhanVien = new swing.TextInput();
-        button3 = new GUI.Button();
+        btnXuatDanhSach = new GUI.Button();
         roundPanel4 = new GUI.RoundPanel();
         jLabel10 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -139,8 +153,13 @@ public class QlDichVuPnl extends javax.swing.JPanel {
             }
         });
 
-        button3.setBackground(new java.awt.Color(120, 225, 220));
-        button3.setText("File");
+        btnXuatDanhSach.setBackground(new java.awt.Color(120, 225, 220));
+        btnXuatDanhSach.setText("File");
+        btnXuatDanhSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatDanhSachActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout roundPanel3Layout = new javax.swing.GroupLayout(roundPanel3);
         roundPanel3.setLayout(roundPanel3Layout);
@@ -155,7 +174,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTimNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundPanel3Layout.createSequentialGroup()
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXuatDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -169,7 +188,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXuatDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -388,12 +407,95 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         dichVuController.timDichVu(txtTimNhanVien.getText());
     }//GEN-LAST:event_txtTimNhanVienKeyReleased
 
+    private void btnXuatDanhSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatDanhSachActionPerformed
+
+        try{
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+           
+            if(saveFile != null){
+                saveFile = new File(saveFile.toString()+".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("customer");
+
+                Row rowCol = sheet.createRow(0);
+                for(int i=0;i<tblDichVu.getColumnCount();i++){
+                    Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(tblDichVu.getColumnName(i));
+                }
+               
+                for(int j=0;j<tblDichVu.getRowCount();j++){
+                    Row row = sheet.createRow(j+1);
+                    for(int k=0;k<tblDichVu.getColumnCount();k++){
+                        Cell cell = row.createCell(k);
+                        if(tblDichVu.getValueAt(j, k)!=null){
+                            cell.setCellValue(tblDichVu.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn mở file vừa xuất ?", "Thông báo",JOptionPane.YES_NO_OPTION);
+                if (clickLuu == JOptionPane.YES_OPTION) {
+                    openFile(saveFile.toString());
+                }
+
+           }else{
+               JOptionPane.showMessageDialog(null,"Error al generar archivo");
+           }
+       }catch(FileNotFoundException e){
+           System.out.println(e);
+       }catch(IOException io){
+           System.out.println(io);
+       }
+    }//GEN-LAST:event_btnXuatDanhSachActionPerformed
+
+    public void exportExcel(JTable table) {
+        JFileChooser chooser = new JFileChooser();
+        int i = chooser.showSaveDialog(chooser);
+        if (i == JFileChooser.APPROVE_OPTION) {
+         File file = chooser.getSelectedFile();
+         try {
+          FileWriter out = new FileWriter(file + ".xls");
+          BufferedWriter bwrite = new BufferedWriter(out);
+          DefaultTableModel model = (DefaultTableModel) table.getModel();
+          // ten Cot
+          for (int j = 0; j < table.getColumnCount(); j++) {
+           bwrite.write(model.getColumnName(j) + "\t");
+          }
+          bwrite.write("\n");
+          // Lay du lieu dong
+          for (int j = 0; j < table.getRowCount(); j++) {
+           for (int k = 0; k < table.getColumnCount(); k++) {
+            bwrite.write(model.getValueAt(j, k) + "\t");
+           }
+           bwrite.write("\n");
+          }
+          bwrite.close();
+          JOptionPane.showMessageDialog(null, "Lưu file thành công!");
+         } catch (Exception e2) {
+          JOptionPane.showMessageDialog(null, "Lỗi khi lưu file!");
+         }
+        }
+       }
+    
+    public void openFile(String file){
+        try{
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        }catch(IOException ioe){
+            System.out.println(ioe);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public GUI.Button btnSua;
     public GUI.Button btnThem;
     public GUI.Button btnXoa;
-    private GUI.Button button3;
+    private GUI.Button btnXuatDanhSach;
     public javax.swing.JComboBox<DanhMuc> cbxDanhMuc;
     public javax.swing.JComboBox<DonViTinh> cbxDonViTinh;
     private javax.swing.JLabel jLabel1;
