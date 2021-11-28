@@ -16,4 +16,10 @@ public class ThongKeDAO extends AbsDAO{
                             + "where thoiGianDong between CONVERT(datetime, replace(GETDATE(),DATEPART(dd,GETDATE()),01), 121) and GETDATE() "
                             + "group by MONTH(thoiGianDong), YEAR(thoiGianDong)");
     }
+    
+    public List<Object[]> bieuDoDichVu(java.sql.Date tuNgay, java.sql.Date denNgay) {
+        return getRawValues("select top 3 tenDichVu,sum(soLuong),MONTH(gioSuDung), YEAR(gioSuDung) from chiTietDichVuSuDung a join dichVu b "
+                            + "on a.idDichVu = b.idDichVu where gioSuDung between '"+tuNgay+"' and '"+denNgay+"' "
+                            + "group by tenDichVu,MONTH(gioSuDung), YEAR(gioSuDung) order by sum(soLuong) desc");
+    }
 }

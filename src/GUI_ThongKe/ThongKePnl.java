@@ -28,6 +28,9 @@ public class ThongKePnl extends javax.swing.JPanel {
         chart.addLegend("Tiền giờ", new Color(245, 189, 135));
         chart.addLegend("Dịch vụ", new Color(135, 189, 245));
         chart.addLegend("Phụ thu", new Color(189, 135, 245));
+        
+        jdcTuNgay.setDateFormatString("dd-MM-yyyy");
+        jdcDenNgay.setDateFormatString("dd-MM-yyyy");
     }
 
     @SuppressWarnings("unchecked")
@@ -38,8 +41,8 @@ public class ThongKePnl extends javax.swing.JPanel {
         roundPanel2 = new GUI.RoundPanel();
         jLabel4 = new javax.swing.JLabel();
         btnThongKe = new GUI.Button();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jdcTuNgay = new com.toedter.calendar.JDateChooser();
+        jdcDenNgay = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cbxLoaiHinh = new javax.swing.JComboBox<>();
@@ -78,9 +81,9 @@ public class ThongKePnl extends javax.swing.JPanel {
             }
         });
 
-        jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
+        jdcTuNgay.setBackground(new java.awt.Color(255, 255, 255));
 
-        jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
+        jdcDenNgay.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setText("Từ ngày");
 
@@ -100,11 +103,11 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addGap(75, 75, 75)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jdcTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jdcDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -124,8 +127,8 @@ public class ThongKePnl extends javax.swing.JPanel {
                             .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jdcTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jdcDenNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbxLoaiHinh))
@@ -133,8 +136,8 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jDateChooser1.setBackground(Color.WHITE);
-        jDateChooser2.setBackground(Color.WHITE);
+        jdcTuNgay.setBackground(Color.WHITE);
+        jdcDenNgay.setBackground(Color.WHITE);
         cbxLoaiHinh.setBackground(Color.WHITE);
 
         roundPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -319,10 +322,20 @@ public class ThongKePnl extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        java.util.Date DateOfBirth1 = jdcTuNgay.getDate();
+        java.sql.Date tuNgay= new java.sql.Date(DateOfBirth1.getTime());
+        java.util.Date StartingDate1 = jdcDenNgay.getDate();
+        java.sql.Date denNgay = new java.sql.Date(StartingDate1.getTime());
         if (cbxLoaiHinh.getSelectedIndex() == 0) {
             System.out.println("ok");
         }else if (cbxLoaiHinh.getSelectedIndex() == 1) {
+            List<Object[]> dichVus = thongKeController.bieuDoDichVu(tuNgay,denNgay);
             chart.clear();
+            for (int i = 0; i <= dichVus.size()-1; i++) {
+                Integer SoLuong = Integer.parseInt(dichVus.get(i)[1].toString()); 
+                chart.addData(new ModelChart(dichVus.get(i)[2].toString()+"/"+dichVus.get(i)[3].toString(),new double[]{SoLuong}));
+            }
+            chart.start();
         }
     }//GEN-LAST:event_btnThongKeActionPerformed
 
@@ -379,8 +392,6 @@ public class ThongKePnl extends javax.swing.JPanel {
     private GUI.Button btnThongKe;
     private javax.swing.JComboBox<String> cbxLoaiHinh;
     private GUI_ThongKe.Chart chart;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -391,6 +402,8 @@ public class ThongKePnl extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private com.toedter.calendar.JDateChooser jdcDenNgay;
+    private com.toedter.calendar.JDateChooser jdcTuNgay;
     private javax.swing.JLabel lblLoiNhuan;
     private javax.swing.JLabel lblTienDichVu;
     private javax.swing.JLabel lblTienGio;
