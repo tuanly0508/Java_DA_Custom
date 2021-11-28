@@ -7,6 +7,7 @@ package View_DichVu;
 
 import Controller.DichVuController;
 import Help.ChuyenDoi;
+import Help.XuatExcel;
 import Model.DanhMuc;
 import Model.DichVu;
 import Model.DonViTinh;
@@ -408,88 +409,9 @@ public class QlDichVuPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimNhanVienKeyReleased
 
     private void btnXuatDanhSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatDanhSachActionPerformed
-
-        try{
-            JFileChooser jFileChooser = new JFileChooser();
-            jFileChooser.showSaveDialog(this);
-            File saveFile = jFileChooser.getSelectedFile();
-           
-            if(saveFile != null){
-                saveFile = new File(saveFile.toString()+".xlsx");
-                Workbook wb = new XSSFWorkbook();
-                Sheet sheet = wb.createSheet("customer");
-
-                Row rowCol = sheet.createRow(0);
-                for(int i=0;i<tblDichVu.getColumnCount();i++){
-                    Cell cell = rowCol.createCell(i);
-                    cell.setCellValue(tblDichVu.getColumnName(i));
-                }
-               
-                for(int j=0;j<tblDichVu.getRowCount();j++){
-                    Row row = sheet.createRow(j+1);
-                    for(int k=0;k<tblDichVu.getColumnCount();k++){
-                        Cell cell = row.createCell(k);
-                        if(tblDichVu.getValueAt(j, k)!=null){
-                            cell.setCellValue(tblDichVu.getValueAt(j, k).toString());
-                        }
-                    }
-                }
-                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-                wb.write(out);
-                wb.close();
-                out.close();
-                int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn mở file vừa xuất ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-                if (clickLuu == JOptionPane.YES_OPTION) {
-                    openFile(saveFile.toString());
-                }
-
-           }else{
-               JOptionPane.showMessageDialog(null,"Error al generar archivo");
-           }
-       }catch(FileNotFoundException e){
-           System.out.println(e);
-       }catch(IOException io){
-           System.out.println(io);
-       }
+        XuatExcel.xuat(tblDichVu);
     }//GEN-LAST:event_btnXuatDanhSachActionPerformed
 
-    public void exportExcel(JTable table) {
-        JFileChooser chooser = new JFileChooser();
-        int i = chooser.showSaveDialog(chooser);
-        if (i == JFileChooser.APPROVE_OPTION) {
-         File file = chooser.getSelectedFile();
-         try {
-          FileWriter out = new FileWriter(file + ".xls");
-          BufferedWriter bwrite = new BufferedWriter(out);
-          DefaultTableModel model = (DefaultTableModel) table.getModel();
-          // ten Cot
-          for (int j = 0; j < table.getColumnCount(); j++) {
-           bwrite.write(model.getColumnName(j) + "\t");
-          }
-          bwrite.write("\n");
-          // Lay du lieu dong
-          for (int j = 0; j < table.getRowCount(); j++) {
-           for (int k = 0; k < table.getColumnCount(); k++) {
-            bwrite.write(model.getValueAt(j, k) + "\t");
-           }
-           bwrite.write("\n");
-          }
-          bwrite.close();
-          JOptionPane.showMessageDialog(null, "Lưu file thành công!");
-         } catch (Exception e2) {
-          JOptionPane.showMessageDialog(null, "Lỗi khi lưu file!");
-         }
-        }
-       }
-    
-    public void openFile(String file){
-        try{
-            File path = new File(file);
-            Desktop.getDesktop().open(path);
-        }catch(IOException ioe){
-            System.out.println(ioe);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public swing.Button btnSua;
