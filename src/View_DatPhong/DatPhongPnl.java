@@ -1446,29 +1446,14 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void btnThemDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDichVuActionPerformed
         int click = tblSuDungDichVu.getSelectedRow();
         List<Object[]> data = datPhongController.getIdHoaDonDichVu(phongHienTai);
-        Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;
+        Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;        
         
-//        try {
-//            java.util.Date temp = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.SSSSSS").parse("2012-07-10 14:58:00.000000");
-//        } catch (ParseException ex) {
-//            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-        try {
-            System.out.println(tblSuDungDichVu.getValueAt(click, 3).toString());
-            Date thisDate = dateFormat.parse(tblSuDungDichVu.getValueAt(click, 3).toString());
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
+        if(data.get(0)[1].equals(phongHienTai)) {            
+            datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), 
+                    Timestamp.valueOf(tblSuDungDichVu.getValueAt(click, 3).toString()) ); 
+            List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
+            loadTableSuDungDV(data2);                        
         }
-        
-//        if(data.get(0)[1].equals(phongHienTai)) {            
-//            datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), 
-//                    Timestamp.valueOf(tblSuDungDichVu.getValueAt(click, 3).toString()) ); 
-//            List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
-//            loadTableSuDungDV(data2);                        
-//        }
     }//GEN-LAST:event_btnThemDichVuActionPerformed
 
     public void themDichVu(JTable table) {
