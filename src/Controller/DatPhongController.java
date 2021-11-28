@@ -114,7 +114,7 @@ public class DatPhongController {
         return phongs;
     }
     
-    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu) {
-        datPhongDAO.updateSoLuongSuDungDichVu(soLuong,idDichVu);
+    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu, java.sql.Timestamp gioMo) {
+        datPhongDAO.updateSoLuongSuDungDichVu(soLuong,idDichVu, gioMo);
     }
 }

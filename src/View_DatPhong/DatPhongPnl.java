@@ -28,9 +28,14 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -620,19 +625,19 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         tblSuDungDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Dịch vụ", "ĐVT", "Ngày sử dụng", "SL", "Thành tiền"
+                "id", "Dịch vụ", "ĐVT", "Ngày sử dụng", "SL", "Thành tiền", "idDichVu"
             }
         ));
         tblSuDungDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -642,9 +647,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblSuDungDichVu);
         if (tblSuDungDichVu.getColumnModel().getColumnCount() > 0) {
-            tblSuDungDichVu.getColumnModel().getColumn(0).setMinWidth(40);
-            tblSuDungDichVu.getColumnModel().getColumn(0).setPreferredWidth(40);
-            tblSuDungDichVu.getColumnModel().getColumn(0).setMaxWidth(40);
+            tblSuDungDichVu.getColumnModel().getColumn(0).setMinWidth(0);
+            tblSuDungDichVu.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblSuDungDichVu.getColumnModel().getColumn(0).setMaxWidth(0);
             tblSuDungDichVu.getColumnModel().getColumn(2).setMinWidth(45);
             tblSuDungDichVu.getColumnModel().getColumn(2).setPreferredWidth(45);
             tblSuDungDichVu.getColumnModel().getColumn(2).setMaxWidth(45);
@@ -654,6 +659,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tblSuDungDichVu.getColumnModel().getColumn(5).setMinWidth(100);
             tblSuDungDichVu.getColumnModel().getColumn(5).setPreferredWidth(100);
             tblSuDungDichVu.getColumnModel().getColumn(5).setMaxWidth(100);
+            tblSuDungDichVu.getColumnModel().getColumn(6).setMinWidth(0);
+            tblSuDungDichVu.getColumnModel().getColumn(6).setPreferredWidth(0);
+            tblSuDungDichVu.getColumnModel().getColumn(6).setMaxWidth(0);
         }
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -1340,7 +1348,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     int idHoaDon = hoaDonController.layIdHoaDon(idPhieuThuePhong);
                     System.out.println("idPhieuThue la:" +idPhieuThuePhong);
                     System.out.println("idHoaDon là: "+ idHoaDon);
-                    XuatHoaDon(idHoaDon,"src/GUI_DatPhong/HoaDonDayDu.jrxml");
+                    XuatHoaDon(idHoaDon,"src/View_DatPhong/HoaDonDayDu.jrxml");
 //                            if(tienDichVu!=0){
 //                                XuatHoaDon((int)ttHoaDon.get(0)[0],"src/panel/HoaDon.jrxml");
 //                            }else{
@@ -1439,12 +1447,28 @@ public class DatPhongPnl extends javax.swing.JPanel {
         int click = tblSuDungDichVu.getSelectedRow();
         List<Object[]> data = datPhongController.getIdHoaDonDichVu(phongHienTai);
         Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;
-        System.out.println(tblSuDungDichVu.getValueAt(click, 0));
-//        if(data.get(0)[1].equals(phongHienTai)) {
-//            datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 0));
+        
+//        try {
+//            java.util.Date temp = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.SSSSSS").parse("2012-07-10 14:58:00.000000");
+//        } catch (ParseException ex) {
+//            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        try {
+            System.out.println(tblSuDungDichVu.getValueAt(click, 3).toString());
+            Date thisDate = dateFormat.parse(tblSuDungDichVu.getValueAt(click, 3).toString());
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+//        if(data.get(0)[1].equals(phongHienTai)) {            
+//            datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), 
+//                    Timestamp.valueOf(tblSuDungDichVu.getValueAt(click, 3).toString()) ); 
 //            List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
-//            loadTableSuDungDV(data2);    
-//        }               
+//            loadTableSuDungDV(data2);                        
+//        }
     }//GEN-LAST:event_btnThemDichVuActionPerformed
 
     public void themDichVu(JTable table) {

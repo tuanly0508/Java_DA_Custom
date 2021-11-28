@@ -28,7 +28,7 @@ public class DichVuDAO extends AbsDAO<DichVu>{
     
     public List<Object[]> layChiTietDichVu(int idPhong) {
         return getRawValues("select hd.idHoaDonDichVu,dv.tenDichVu,dvt.tenDonVi,FORMAT(ctdv.gioSuDung ,'dd/MM/yyyy HH:mm:ss') ngaySuDung,"
-                + "ctdv.soLuong,format(ctdv.gia,'#,#')thanhTien from HoaDonDichVu hd join chiTietDichVuSuDung ctdv on "
+                + "ctdv.soLuong,format(ctdv.gia,'#,#')thanhTien, ctdv.idDichVu from HoaDonDichVu hd join chiTietDichVuSuDung ctdv on "
                 + "hd.idHoaDonDichVu=ctdv.idHoaDonDichVu join DichVu dv on ctdv.idDichVu=dv.idDichVu join donViTinh dvt on "
                 + "dvt.idDonViTinh=dv.idDonViTinh where idphong= '"+idPhong+"' and trangThai=1 order by ngaySuDung");
     }
