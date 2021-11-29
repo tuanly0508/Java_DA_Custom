@@ -30,6 +30,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -101,6 +102,17 @@ public class DatPhongPnl extends javax.swing.JPanel {
         txtThoiGianMo.setVisible(false);
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
+        
+//        String s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime());
+//        System.out.println("s "+s);
+//        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+//        Timestamp timeNow = new Timestamp(new Date().getTime());
+//        System.out.println(new Date().getTime());
+//        System.out.println(timeNow);
+        
+//        Date date = new Date(time);
+//        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+//        return format.format(date);
     }   
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
@@ -1451,37 +1463,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
         int click = tblSuDungDichVu.getSelectedRow();
         List<Object[]> data = datPhongController.getIdHoaDonDichVu(phongHienTai);
         Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;        
-        
-//        try {
-//            java.util.Date temp = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.SSSSSS").parse("2012-07-10 14:58:00.000000");
-//        } catch (ParseException ex) {
-//            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-//        try {
-//            System.out.println(tblSuDungDichVu.getValueAt(click, 3).toString());
-//            Date thisDate = dateFormat.parse(tblSuDungDichVu.getValueAt(click, 3).toString());
-//            
-//        } catch (ParseException ex) {
-//            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            
-        try {
-            
-            java.util.Date d = sdf.parse(tblSuDungDichVu.getValueAt(click, 3).toString());
-            LocalDateTime ldt = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
-            Timestamp time = Timestamp.valueOf(ldt);
-
-            if(data.get(0)[1].equals(phongHienTai)) {
-                datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6),time); 
-                List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
-                loadTableSuDungDV(data2);  
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if(data.get(0)[1].equals(phongHienTai)) {
+            datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), tblSuDungDichVu.getValueAt(click, 3)+"00"); 
+            List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
+            loadTableSuDungDV(data2);  
+        }           
     }//GEN-LAST:event_btnThemDichVuActionPerformed
 
     public void themDichVu(JTable table) {

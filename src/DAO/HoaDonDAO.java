@@ -5,6 +5,7 @@ import Model.HoaDon;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
@@ -29,8 +30,8 @@ public class HoaDonDAO extends AbsDAO<HoaDon>{
     
     public void themChiTietDichVu(int idHoaDonDichVu,int idDichVu,int soLan){
         String query2="insert into chiTietDichVuSuDung values (?,?,?,?,(select gia from DichVu where idDichVu=?)*?)";
-        Timestamp timeNow = new Timestamp(new Date().getTime());
-        DBConnection.executeUpdate(query2,idDichVu,idHoaDonDichVu,soLan,timeNow,idDichVu,soLan);
+        String s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime());
+        DBConnection.executeUpdate(query2,idDichVu,idHoaDonDichVu,soLan,s,idDichVu,soLan);
     }
     
     public void chuyenHoaDonDichVu(int idPhongMuonDoi, int idPhongCanDoi) {

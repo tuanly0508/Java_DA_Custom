@@ -25,14 +25,12 @@ public class DichVuDAO extends AbsDAO<DichVu>{
         return getRawValues("select idDichVu,tenDichVu, tenDonVi, gia from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where idDanhMuc = '"+idDanhMuc+"' ");
     }
     
-    
     public List<Object[]> layChiTietDichVu(int idPhong) {
-        return getRawValues("select hd.idHoaDonDichVu,dv.tenDichVu,dvt.tenDonVi,FORMAT(ctdv.gioSuDung ,'HH:mm:ss') ngaySuDung,"
-                + "ctdv.soLuong,format(ctdv.gia,'#,#')thanhTien, ctdv.idDichVu from HoaDonDichVu hd join chiTietDichVuSuDung ctdv on "
+        return getRawValues("select hd.idHoaDonDichVu,dv.tenDichVu,dvt.tenDonVi,ctdv.gioSuDung ngaySuDung,"
+                + "ctdv.soLuong,format(ctdv.gia*ctdv.soLuong,'#,#')thanhTien, ctdv.idDichVu from HoaDonDichVu hd join chiTietDichVuSuDung ctdv on "
                 + "hd.idHoaDonDichVu=ctdv.idHoaDonDichVu join DichVu dv on ctdv.idDichVu=dv.idDichVu join donViTinh dvt on "
                 + "dvt.idDonViTinh=dv.idDonViTinh where idphong= '"+idPhong+"' and trangThai=1 order by ngaySuDung");
-    }
-    
+    }   
     
     public void xoaTamThoiDichVu(int idDichVu){
         String query = "update DichVu set tinhTrang=0 where idDichVu =?";

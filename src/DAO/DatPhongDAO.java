@@ -70,7 +70,7 @@ public class DatPhongDAO extends AbsDAO<Phong>{
                             + "where b.idPhong = "+idPhong+" and b.trangThai = 1");
     }
     
-    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu, java.sql.Timestamp gioMo) {
+    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu, String gioMo) {
         String query = "update chiTietDichVuSuDung set soLuong = ? where idDichVu = ? and gioSuDung = ?";
         DBConnection.executeUpdate(query,soLuong, idDichVu, gioMo);
     }
