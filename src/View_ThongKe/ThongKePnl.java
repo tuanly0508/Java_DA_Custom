@@ -5,23 +5,10 @@ import swing.ScrollBar;
 import Help.ChuyenDoi;
 import Help.XuatExcel;
 import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Frame;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ThongKePnl extends javax.swing.JPanel {
     private ThongKeController thongKeController;
