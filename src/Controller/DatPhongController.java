@@ -94,7 +94,7 @@ public class DatPhongController {
         khachHangDAO.insertKhachHang(SDT, tenKhach, tienNo, tienSuDung, traSau, ghiChu, tinhTrang);
     }  
         
-    public List<Object[]> getTTPhieuDatPhong() {   
+    public List<Object[]> getTTPhieuDatPhong(){
         List<Object[]> getTinhTrangPDP = datPhongDAO.getTinhTrangPDP();
         return getTinhTrangPDP;
     }
@@ -136,5 +136,10 @@ public class DatPhongController {
     public List<Object[]> timDichVu(String tenDichVu){
         List<Object[]> dichVus =dichVuDAO.timDichVu(tenDichVu);
         return dichVus;
+    }
+    
+    //Huỷ chi tiết dịch vụ sử dụng
+    public void huyDichVu(int idDichVu,String gioMo){
+        dichVuDAO.huyDichVu(idDichVu,gioMo);
     }
 }

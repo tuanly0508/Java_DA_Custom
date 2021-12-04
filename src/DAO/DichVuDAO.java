@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DichVuDAO extends AbsDAO<DichVu>{
     public List<Object[]> getAllDichVu() {
-        return getRawValues("select idDichVu,tenDichVu, tenDonVi, gia,soluongcon from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where a.tinhTrang=1");
+        return getRawValues("select idDichVu,tenDichVu, tenDonVi, format(gia,'#,#') gia,soluongcon from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where a.tinhTrang=1");
     }
     
     public List<Object[]> layDanhSachDichVu() {
@@ -26,7 +26,7 @@ public class DichVuDAO extends AbsDAO<DichVu>{
     }
     
     public List<Object[]> getDichVuId(int idDanhMuc) {
-        return getRawValues("select idDichVu,tenDichVu, tenDonVi, gia,soluongcon from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where idDanhMuc = '"+idDanhMuc+"' ");
+        return getRawValues("select idDichVu,tenDichVu, tenDonVi, format(gia,'#,#') gia,soluongcon from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where idDanhMuc = '"+idDanhMuc+"' ");
     }
     
     public List<Object[]> layChiTietDichVu(int idPhong) {
@@ -59,4 +59,9 @@ public class DichVuDAO extends AbsDAO<DichVu>{
         DBConnection.executeUpdate(query, soLuong,idDichVu);
     }
     
+    //Huỷ chi tiết dịch vụ
+    public void huyDichVu(int idDichVu,String gio){
+        String query= "delete from ChiTietDichVuSuDung where idDichVu = ? and gioSuDung=?";
+        DBConnection.executeUpdate(query, idDichVu,gio);
+    }
 }
