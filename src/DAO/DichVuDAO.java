@@ -59,4 +59,9 @@ public class DichVuDAO extends AbsDAO<DichVu>{
         DBConnection.executeUpdate(query, soLuong,idDichVu);
     }
     
+    //Huỷ chi tiết dịch vụ
+    public void huyDichVu(int idDichVu,String gio){
+        String query= "delete from ChiTietDichVuSuDung where idDichVu = ? and gioSuDung=?";
+        DBConnection.executeUpdate(query, idDichVu,gio);
+    }
 }

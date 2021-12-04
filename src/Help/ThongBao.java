@@ -18,4 +18,8 @@ public class ThongBao {
         JOptionPane.showMessageDialog(new JFrame(), noiDung, tieuDe, JOptionPane.INFORMATION_MESSAGE);
     }
     
+    public static int LuaChon(String noiDung, String tieuDe){
+        return JOptionPane.showConfirmDialog(new JFrame(), noiDung, tieuDe,JOptionPane.YES_NO_OPTION);
+    }
+    
 }

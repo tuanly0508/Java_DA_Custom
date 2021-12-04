@@ -108,7 +108,17 @@ public class DatPhongPnl extends javax.swing.JPanel {
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
         loadPanelPhong(data, data2, data3);
-    }    
+    }
+    
+    public void loadAllTableDichVu(){
+        //load lại bảng danh sách dịch vụ 
+        List<Object[]> dichVus = datPhongController.getAllDichVu();
+        loadTable(tblAllDichVu,dichVus);
+
+        //load lại bảng chi tiết dịch vụ sử dụng
+        List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
+        loadTableSuDungDV(data2);
+    }
     
     public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo, List<Object[]> tt) {  
         PhongRender p = new PhongRender(idPhong);
@@ -1295,10 +1305,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tienDichVu += ChuyenDoi.SoDouble(tblSuDungDichVu.getValueAt(i, 5).toString());
         }
         
-        List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();      
+        List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();
         
-        tienNgayLe = Double.parseDouble(gia.get(0)[1].toString());       
-        List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);       
+        tienNgayLe = Double.parseDouble(gia.get(0)[1].toString());
+        List<Object[]> data = datPhongController.getGiaPhong(loaiPhongHienTai, phongHienTai);
         
         for (int i = 0; i < data.size(); i++) {
             Double giaThue = Double.valueOf(data.get(i)[5].toString());
@@ -1542,12 +1552,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon+(soLuongDauTien-soLuong));
                 }
                 //load lại bảng danh sách dịch vụ 
-                List<Object[]> dichVus = datPhongController.getAllDichVu();
-                loadTable(tblAllDichVu,dichVus);
-                
-                //load lại bảng chi tiết dịch vụ sử dụng
-                List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
-                loadTableSuDungDV(data2);
+                loadAllTableDichVu();
             }   
         }
     
@@ -1563,7 +1568,23 @@ public class DatPhongPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimDichVuKeyReleased
 
     private void btnHuyDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDichVuActionPerformed
-        
+        int click = tblSuDungDichVu.getSelectedRow();
+        if(click==-1){
+            ThongBao.ThongBao("Vui lòng chọn dịch vụ cần huỷ !", "Cảnh báo");
+        }else{
+            int choice = ThongBao.LuaChon("Xác nhận huỷ dịch vụ?", "Xác nhận");
+            if(choice==0){
+                int idDichVu =(int) tblSuDungDichVu.getValueAt(click, 6);
+                //huỷ dịch vụ
+                datPhongController.huyDichVu(idDichVu, tblSuDungDichVu.getValueAt(click, 3)+"00");
+                //cập nhật lại số lượng
+                int soLuongCon = datPhongController.laySoLuongDichVu(idDichVu);
+                datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon+soLuongDauTien);
+                
+                //load lại bảng danh sách dịch vụ 
+                loadAllTableDichVu();
+            }
+        }
     }//GEN-LAST:event_btnHuyDichVuActionPerformed
 
     private void txtTienPhuThuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienPhuThuKeyReleased
