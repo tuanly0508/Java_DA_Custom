@@ -97,18 +97,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         txtThoiGianMo.setVisible(false);
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
-        rdbDuocNo.setEnabled(false);
-        
-//        String s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime());
-//        System.out.println("s "+s);
-//        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
-//        Timestamp timeNow = new Timestamp(new Date().getTime());
-//        System.out.println(new Date().getTime());
-//        System.out.println(timeNow);
-        
-//        Date date = new Date(time);
-//        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
-//        return format.format(date);
+        rdbDuocNo.setEnabled(false);        
     }   
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
@@ -183,18 +172,18 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) { 
-                         DefaultTableModel p = (DefaultTableModel) datPhongDialog.tblDatPhong.getModel();
-                         int click = datPhongDialog.tblDatPhong.getSelectedRow();
-                         datPhongDialog.txtTenKhach.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 2));
-                         datPhongDialog.txtSDT.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 3));
+                        DefaultTableModel p = (DefaultTableModel) datPhongDialog.tblDatPhong.getModel();
+                        int click = datPhongDialog.tblDatPhong.getSelectedRow();
+                        datPhongDialog.txtTenKhach.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 2));
+                        datPhongDialog.txtSDT.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 3));
 
-                         PhieuDatPhong pdp = phieuDatPhongController.getIdGioDatTruoc((Integer) datPhongDialog.tblDatPhong.getValueAt(click, 0));                           
-                         for (int i = 0; i < datPhongDialog.cbxDatTruoc.getItemCount(); i++) {
-                             GioDatTruoc g = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getItemAt(i);
-                             if(g.getIdGioDatTruoc().equals(pdp.getThoiGianDat())){
-                                 datPhongDialog.cbxDatTruoc.setSelectedIndex(i);
-                             }
-                         }
+                        PhieuDatPhong pdp = phieuDatPhongController.getIdGioDatTruoc((Integer) datPhongDialog.tblDatPhong.getValueAt(click, 0));                           
+                        for (int i = 0; i < datPhongDialog.cbxDatTruoc.getItemCount(); i++) {
+                            GioDatTruoc g = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getItemAt(i);
+                            if(g.getIdGioDatTruoc().equals(pdp.getThoiGianDat())){
+                                datPhongDialog.cbxDatTruoc.setSelectedIndex(i);
+                            }
+                        }
                     } 
                 });
 
@@ -246,7 +235,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             if (isSDT == false) {
                                 datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
                             }
-                            phieuDatPhong = new PhieuDatPhong(0,SDT,p.idPhong,idDatTruoc,null,1,tenKhach);
+                            phieuDatPhong = new PhieuDatPhong(0,SDT,p.idPhong,idDatTruoc,null,true,tenKhach);
                             phieuDatPhongController.insert(phieuDatPhong);        
                             reLoadPhong();
                             List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(p.idPhong);
@@ -817,7 +806,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         );
         panelPhongLayout.setVerticalGroup(
             panelPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 447, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelPLayout = new javax.swing.GroupLayout(panelP);
@@ -833,8 +822,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
             panelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -1081,8 +1070,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             datPhongController.loadListPhong();          
         }
     }//GEN-LAST:event_rdbAllPhongActionPerformed
-
-    
+   
     //Hiển thị phòng thường
     private void rdbPhongThuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongThuongActionPerformed
         if (rdbPhongThuong.isSelected()) {
@@ -1240,7 +1228,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         setPhongTrong();
     }//GEN-LAST:event_btnHuyBaoTriActionPerformed
 
-    
+    //Bảo trì
     private void btnBaoTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaoTriActionPerformed
         datPhongController.updateTinhTrangPhong("Đang bảo trì", phongHienTai);
         phongRender.setBackground(new Color(153,153,153));
