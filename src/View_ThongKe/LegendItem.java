@@ -5,7 +5,7 @@ public class LegendItem extends javax.swing.JPanel {
     public LegendItem(ModelLegend data) {
         initComponents();
         setOpaque(false);
-        lblColor.setBackground(data.getColor());
+        lbColor.setBackground(data.getColor());
         lbName.setText(data.getName());
     }
 
@@ -14,14 +14,12 @@ public class LegendItem extends javax.swing.JPanel {
     private void initComponents() {
 
         lbName = new javax.swing.JLabel();
-        lblColor = new View_ThongKe.LabelColor();
+        lbColor = new View_ThongKe.LabelColor();
 
-        setPreferredSize(new java.awt.Dimension(69, 36));
-
-        lbName.setForeground(new java.awt.Color(100, 100, 100));
+        lbName.setForeground(new java.awt.Color(180, 180, 180));
         lbName.setText("Name");
 
-        lblColor.setText("labelColor1");
+        lbColor.setText("labelColor1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -29,10 +27,10 @@ public class LegendItem extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblColor, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbName)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -40,14 +38,14 @@ public class LegendItem extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbName)
-                    .addComponent(lblColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View_ThongKe.LabelColor lbColor;
     private javax.swing.JLabel lbName;
-    private View_ThongKe.LabelColor lblColor;
     // End of variables declaration//GEN-END:variables
 }
