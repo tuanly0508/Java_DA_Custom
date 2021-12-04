@@ -106,7 +106,6 @@ public class BlankPlotChart extends JComponent {
             g2.drawLine((int) (insets.left + textWidth + spaceText), y, (int) getWidth() - insets.right, y);
             locationY += space;
         }
-
     }
 
     private void createValues(Graphics2D g2) {
