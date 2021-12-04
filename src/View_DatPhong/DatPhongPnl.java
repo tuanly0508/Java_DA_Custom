@@ -11,6 +11,7 @@ import View_Dialog.DatPhongDlg;
 import View_Dialog.DoiPhongDlg;
 import View_Dialog.GiaNgayLeDlg;
 import Help.ChuyenDoi;
+import Help.ThongBao;
 import Model.GiaNgayLe;
 import Model.GioDatTruoc;
 import Model.HoaDon;
@@ -73,6 +74,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     Double tienGio = 0.0;
     Double tienNo = 0.0;
     boolean duocNo = false ;
+    int soLuongDauTien =0;
        
     public DatPhongPnl() {
         initComponents();
@@ -1041,11 +1043,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    //Thay đổi số lượng dịch vụ
+
     private void jtpDichVuAllStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jtpDichVuAllStateChanged
         int i = jtpDichVuAll.getSelectedIndex();       
         if (i == 0) {
-            if (datPhongController == null) {                
+            if (datPhongController == null) {
                 datPhongController = new DatPhongController(this);
                 panelPhong.removeAll();
                 panelPhong.revalidate();
@@ -1469,18 +1471,42 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void tblSuDungDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuDungDichVuMouseClicked
         int click = tblSuDungDichVu.getSelectedRow();
         spnSoLuong.setValue(tblSuDungDichVu.getValueAt(click, 4));
+        soLuongDauTien=(int)tblSuDungDichVu.getValueAt(click, 4);
     }//GEN-LAST:event_tblSuDungDichVuMouseClicked
 
     private void btnThemDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDichVuActionPerformed
         int click = tblSuDungDichVu.getSelectedRow();
         List<Object[]> data = datPhongController.getIdHoaDonDichVu(phongHienTai);
-        Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;        
-
-        if(data.get(0)[1].equals(phongHienTai)) {
-            datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), tblSuDungDichVu.getValueAt(click, 3)+"00"); 
-            List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
-            loadTableSuDungDV(data2);  
-        }           
+        Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;
+        
+        //kiểm tra số lượng
+        int idDichVu =(int) tblSuDungDichVu.getValueAt(click, 6);
+        int soLuongCon = datPhongController.laySoLuongDichVu(idDichVu);
+        
+        if(soLuong>soLuongCon){
+            ThongBao.ThongBao("Số lượng không hợp lệ", "Thông Báo");
+        }else{
+            if(data.get(0)[1].equals(phongHienTai)) {
+                datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), tblSuDungDichVu.getValueAt(click, 3)+"00"); 
+                //nếu số lượng mới > sl cũ thì trừ thêm chênh lệch
+                if(soLuong>soLuongDauTien){
+                    datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon-(soLuong-soLuongDauTien));
+                    System.out.println("id :"+idDichVu);
+                    System.out.println(soLuongCon-(soLuong-soLuongDauTien));
+                //nếu số lượng mới < sl cũ thì + thêm vào sl dịch vụ
+                }else if(soLuong<soLuongDauTien){
+                    datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon+(soLuongDauTien-soLuong));
+                }
+                //load lại bảng danh sách dịch vụ 
+                List<Object[]> dichVus = datPhongController.getAllDichVu();
+                loadTable(tblAllDichVu,dichVus);
+                
+                //load lại bảng chi tiết dịch vụ sử dụng
+                List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
+                loadTableSuDungDV(data2);
+            }   
+        }
+    
     }//GEN-LAST:event_btnThemDichVuActionPerformed
 
     private void rdbDuocNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbDuocNoActionPerformed
@@ -1499,7 +1525,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     }
                     int idHoaDon = hoaDonController.getIdHoaDonDichVu(phongHienTai);
                     hoaDonController.themChiTietDichVu(idHoaDon,(int) table.getValueAt(click1,0), 1);
-
+                    
+                    //Cập nhật lại số lượng
+                    int soLuongCon = datPhongController.laySoLuongDichVu((int) table.getValueAt(click1,0));
+                    datPhongController.capNhatSoLuongDichVu((int) table.getValueAt(click1,0), soLuongCon-1);
+                    
+                    //load lại danh sách dịch vụ
+                    List<Object[]> data = datPhongController.getAllDichVu();
+                    loadTable(tblAllDichVu,data);
+                    
                     List<Object[]> data2 = datPhongController.layChiTietDichVu(phongHienTai);
                     loadTableSuDungDV(data2);
                 }

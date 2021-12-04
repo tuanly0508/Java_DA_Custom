@@ -2,6 +2,8 @@ package DAO;
 
 import Help.DBConnection;
 import Model.DichVu;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class DichVuDAO extends AbsDAO<DichVu>{
@@ -14,6 +16,8 @@ public class DichVuDAO extends AbsDAO<DichVu>{
                             "join donViTinh b on a.idDonViTinh = b.idDonViTinh\n" +
                             "join danhMuc dm on dm.idDanhMuc=a.idDanhMuc where a.tinhTrang=1");
     }
+    
+    
     
     public List<Object[]> timDichVu(String tenDichVu) {
         return getRawValues("select idDichVu,tenDichVu,tenDanhMuc, tenDonVi,soluongcon, format(gia,'#,#') gia from dichVu a \n" +
@@ -36,4 +40,23 @@ public class DichVuDAO extends AbsDAO<DichVu>{
         String query = "update DichVu set tinhTrang=0 where idDichVu =?";
         DBConnection.executeUpdate(query, idDichVu);
     }
+    
+    public int laySoLuongDichVuCon(int idDichVu){
+        String query = "select soLuongCon from DichVu where idDichVu="+idDichVu+"";
+        ResultSet rs = DBConnection.executeQuery(query);
+        int slCon =0;
+        try {
+            while (rs.next()) {
+                slCon=rs.getInt("soLuongCon");
+            }
+        } catch (SQLException ex) {
+        }
+        return slCon;
+    }
+    
+    public void capNhatSoLuongDichVu(int idDichVu, int soLuong){
+        String query ="update dichVu set soluongCon =? where idDichVu =?";
+        DBConnection.executeUpdate(query, soLuong,idDichVu);
+    }
+    
 }
