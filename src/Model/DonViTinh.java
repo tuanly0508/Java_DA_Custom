@@ -12,6 +12,7 @@ package Model;
 public class DonViTinh extends AbsTable {
     private Integer idDonViTinh ;
     private String tenDonVi ;
+    private Integer giaTri;
     private Boolean tinhTrang ;
 
     public DonViTinh() {

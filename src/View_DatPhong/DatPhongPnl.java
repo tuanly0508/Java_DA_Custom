@@ -38,7 +38,10 @@ import static javax.swing.JComponent.UNDEFINED_CONDITION;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -104,6 +107,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         tblSuDungDichVu.setEnabled(false);
         jtpDichVuAll.setEnabled(false);
         tblAllDichVu.setEnabled(false);
+        cssTableDichVu();
     }   
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
@@ -705,15 +709,18 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tblSuDungDichVu.getColumnModel().getColumn(0).setMinWidth(0);
             tblSuDungDichVu.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblSuDungDichVu.getColumnModel().getColumn(0).setMaxWidth(0);
-            tblSuDungDichVu.getColumnModel().getColumn(2).setMinWidth(45);
-            tblSuDungDichVu.getColumnModel().getColumn(2).setPreferredWidth(45);
-            tblSuDungDichVu.getColumnModel().getColumn(2).setMaxWidth(45);
+            tblSuDungDichVu.getColumnModel().getColumn(1).setMinWidth(100);
+            tblSuDungDichVu.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblSuDungDichVu.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblSuDungDichVu.getColumnModel().getColumn(2).setMinWidth(40);
+            tblSuDungDichVu.getColumnModel().getColumn(2).setPreferredWidth(40);
+            tblSuDungDichVu.getColumnModel().getColumn(2).setMaxWidth(40);
             tblSuDungDichVu.getColumnModel().getColumn(4).setMinWidth(25);
             tblSuDungDichVu.getColumnModel().getColumn(4).setPreferredWidth(25);
             tblSuDungDichVu.getColumnModel().getColumn(4).setMaxWidth(25);
-            tblSuDungDichVu.getColumnModel().getColumn(5).setMinWidth(100);
-            tblSuDungDichVu.getColumnModel().getColumn(5).setPreferredWidth(100);
-            tblSuDungDichVu.getColumnModel().getColumn(5).setMaxWidth(100);
+            tblSuDungDichVu.getColumnModel().getColumn(5).setMinWidth(80);
+            tblSuDungDichVu.getColumnModel().getColumn(5).setPreferredWidth(80);
+            tblSuDungDichVu.getColumnModel().getColumn(5).setMaxWidth(80);
             tblSuDungDichVu.getColumnModel().getColumn(6).setMinWidth(0);
             tblSuDungDichVu.getColumnModel().getColumn(6).setPreferredWidth(0);
             tblSuDungDichVu.getColumnModel().getColumn(6).setMaxWidth(0);
@@ -897,7 +904,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
             },
             new String [] {
-                "id", "Dịch vụ", "ĐVT", "Giá", "SL còn"
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL Còn"
             }
         ));
         jScrollPane2.setViewportView(tblAllDichVu);
@@ -905,9 +912,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tblAllDichVu.getColumnModel().getColumn(0).setMinWidth(0);
             tblAllDichVu.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblAllDichVu.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblAllDichVu.getColumnModel().getColumn(1).setMinWidth(150);
+            tblAllDichVu.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblAllDichVu.getColumnModel().getColumn(1).setMaxWidth(150);
             tblAllDichVu.getColumnModel().getColumn(2).setMinWidth(45);
             tblAllDichVu.getColumnModel().getColumn(2).setPreferredWidth(45);
             tblAllDichVu.getColumnModel().getColumn(2).setMaxWidth(45);
+            tblAllDichVu.getColumnModel().getColumn(4).setMinWidth(60);
+            tblAllDichVu.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tblAllDichVu.getColumnModel().getColumn(4).setMaxWidth(60);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -936,7 +949,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
             },
             new String [] {
-                "id", "Dịch vụ", "ĐVT", "Giá", "SL còn"
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL Còn"
             }
         ));
         jScrollPane5.setViewportView(tblDoUong);
@@ -944,9 +957,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tblDoUong.getColumnModel().getColumn(0).setMinWidth(0);
             tblDoUong.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblDoUong.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDoUong.getColumnModel().getColumn(1).setMinWidth(150);
+            tblDoUong.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblDoUong.getColumnModel().getColumn(1).setMaxWidth(150);
             tblDoUong.getColumnModel().getColumn(2).setMinWidth(45);
             tblDoUong.getColumnModel().getColumn(2).setPreferredWidth(45);
             tblDoUong.getColumnModel().getColumn(2).setMaxWidth(45);
+            tblDoUong.getColumnModel().getColumn(4).setMinWidth(60);
+            tblDoUong.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tblDoUong.getColumnModel().getColumn(4).setMaxWidth(60);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -983,9 +1002,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tblBimbim.getColumnModel().getColumn(0).setMinWidth(0);
             tblBimbim.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblBimbim.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblBimbim.getColumnModel().getColumn(1).setMinWidth(150);
+            tblBimbim.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblBimbim.getColumnModel().getColumn(1).setMaxWidth(150);
             tblBimbim.getColumnModel().getColumn(2).setMinWidth(45);
             tblBimbim.getColumnModel().getColumn(2).setPreferredWidth(45);
             tblBimbim.getColumnModel().getColumn(2).setMaxWidth(45);
+            tblBimbim.getColumnModel().getColumn(4).setMinWidth(60);
+            tblBimbim.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tblBimbim.getColumnModel().getColumn(4).setMaxWidth(60);
         }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -1823,6 +1848,23 @@ public class DatPhongPnl extends javax.swing.JPanel {
         this.giaNgayLeController = giaNgayLeController;
     }
 
+    public void cssTableDichVu(){
+        DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();  
+        dtcr.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        //Bảng dịch vụ
+        TableColumn col = tblAllDichVu.getColumnModel().getColumn(4);
+        col.setCellRenderer(dtcr);
+        TableColumn col1 = tblDoUong.getColumnModel().getColumn(4);
+        col1.setCellRenderer(dtcr);
+        TableColumn col2 = tblBimbim.getColumnModel().getColumn(4);
+        col2.setCellRenderer(dtcr);
+        
+//        //header
+//        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
+//        renderer.setHorizontalAlignment(JLabel.CENTER);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private swing.RoundPanel body;
     private swing.Button btnBaoTri;
