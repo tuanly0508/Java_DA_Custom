@@ -114,11 +114,21 @@ public class DatPhongController {
         return phongs;
     }
     
+    //Cập nhật sl dịch vụ trong bảng chi tiết dịch vụ sử dụng
     public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu, String gioMo) {
         datPhongDAO.updateSoLuongSuDungDichVu(soLuong,idDichVu, gioMo);
     }
     
     public Boolean layTinhTrangNo(String sdt){
         return khachHangDAO.layTinhTrangNo(sdt);
+    }
+    
+    public int laySoLuongDichVu(int idDichVu){
+        return dichVuDAO.laySoLuongDichVuCon(idDichVu);
+    }
+    
+    //Cập nhật tổng số lượng dịch vụ
+    public void capNhatSoLuongDichVu(int idDichVu,int soLuong){
+        dichVuDAO.capNhatSoLuongDichVu(idDichVu, soLuong);
     }
 }
