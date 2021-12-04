@@ -48,6 +48,7 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
         btnSua1 = new swing.Button();
         btnXoa1 = new swing.Button();
         txtTenDanhMuc1 = new swing.TextField();
+        txtGiaTri = new swing.TextField();
         roundPanel3 = new swing.RoundPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -71,13 +72,13 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
 
         tblDonViTinh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID Đơn vị tính", "Tên Đơn vị"
+                "ID Đơn vị tính", "Tên Đơn vị", "Giá trị"
             }
         ));
         tblDonViTinh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,6 +114,8 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
 
         txtTenDanhMuc1.setLabelText("Tên Danh Mục");
 
+        txtGiaTri.setLabelText("Giá trị");
+
         javax.swing.GroupLayout roundPanel2Layout = new javax.swing.GroupLayout(roundPanel2);
         roundPanel2.setLayout(roundPanel2Layout);
         roundPanel2Layout.setHorizontalGroup(
@@ -122,11 +125,13 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
                     .addGroup(roundPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel2Layout.createSequentialGroup()
-                        .addContainerGap(108, Short.MAX_VALUE)
-                        .addComponent(txtTenDanhMuc1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtGiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTenDanhMuc1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(100, 100, 100)))
                 .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnThem1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnXoa1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
@@ -141,19 +146,20 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
         roundPanel2Layout.setVerticalGroup(
             roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel2Layout.createSequentialGroup()
-                .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTenDanhMuc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTenDanhMuc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtGiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnXoa1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23))
             .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel2Layout.createSequentialGroup()
@@ -323,17 +329,17 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm cần xoá !");
         }else{
             int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION) {
+            if (click == JOptionPane.YES_OPTION){
                 dichVuController.xoaDichVu((Integer)tblDanhMuc.getValueAt(dongXoa, 0));
                 JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
             }
-            
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         String tenDonVi = txtTenDanhMuc1.getText();
-        DonViTinh dvt = new DonViTinh(0,tenDonVi,true);
+        int giaTri = Integer.getInteger(txtGiaTri.getText());
+        DonViTinh dvt = new DonViTinh(0,tenDonVi,giaTri,true);
         dichVuController.themDonViTinh(dvt);
     }//GEN-LAST:event_btnThem1ActionPerformed
 
@@ -345,8 +351,10 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
             int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn sửa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
             if (clickLuu == JOptionPane.YES_OPTION) {
                 String tenDonVi = txtTenDanhMuc1.getText();
-                DonViTinh dvt = new DonViTinh((Integer)tblDanhMuc.getValueAt(chonDong, 0),tenDonVi,true);
-                dichVuController.suaDonViTinh(dvt);
+                Integer giaTri = Integer.getInteger(txtGiaTri.getText());
+                System.out.println(giaTri);
+//                DonViTinh dvt = new DonViTinh((Integer)tblDanhMuc.getValueAt(chonDong, 0),tenDonVi,giaTri,true);
+//                dichVuController.suaDonViTinh(dvt);
             }
         }
     }//GEN-LAST:event_btnSua1ActionPerformed
@@ -357,11 +365,10 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm cần xoá !");
         }else{
             int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION) {
+            if (click == JOptionPane.YES_OPTION){
                 dichVuController.xoaDonViTinh((Integer)tblDonViTinh.getValueAt(dongXoa, 0));
                 JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
             }
-            
         }
     }//GEN-LAST:event_btnXoa1ActionPerformed
 
@@ -375,6 +382,7 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
         DefaultTableModel ml = (DefaultTableModel) tblDonViTinh.getModel();
         int click = tblDonViTinh.getSelectedRow();
         txtTenDanhMuc1.setText(tblDonViTinh.getValueAt(click, 1).toString());
+        txtGiaTri.setText(tblDonViTinh.getValueAt(click, 2).toString());
     }//GEN-LAST:event_tblDonViTinhMouseClicked
 
     
@@ -414,6 +422,7 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
     private swing.RoundPanel roundPanel3;
     private swing.Table tblDanhMuc;
     private swing.Table tblDonViTinh;
+    public swing.TextField txtGiaTri;
     public swing.TextField txtTenDanhMuc;
     public swing.TextField txtTenDanhMuc1;
     // End of variables declaration//GEN-END:variables
