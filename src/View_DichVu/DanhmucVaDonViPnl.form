@@ -89,7 +89,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtTenDanhMuc2" min="-2" pref="213" max="-2" attributes="0"/>
+                                  <Component id="txtGiaTri" min="-2" pref="213" max="-2" attributes="0"/>
                                   <Component id="txtTenDanhMuc1" min="-2" pref="213" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
@@ -121,7 +121,7 @@
                           <Group type="102" attributes="0">
                               <Component id="txtTenDanhMuc1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtTenDanhMuc2" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtGiaTri" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="btnXoa1" min="-2" pref="30" max="-2" attributes="0"/>
@@ -248,7 +248,7 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="swing.TextField" name="txtTenDanhMuc2">
+            <Component class="swing.TextField" name="txtGiaTri">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Gi&#xe1; tr&#x1ecb;"/>
               </Properties>

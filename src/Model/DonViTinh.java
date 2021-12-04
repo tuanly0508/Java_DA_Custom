@@ -18,11 +18,21 @@ public class DonViTinh extends AbsTable {
     public DonViTinh() {
     }
 
-    public DonViTinh(Integer idDonViTinh, String tenDonVi, Boolean tinhTrang) {
+    public DonViTinh(Integer idDonViTinh, String tenDonVi, Integer giaTri, Boolean tinhTrang) {
         this.idDonViTinh = idDonViTinh;
         this.tenDonVi = tenDonVi;
+        this.giaTri = giaTri;
         this.tinhTrang = tinhTrang;
     }
+
+    public Integer getGiaTri() {
+        return giaTri;
+    }
+
+    public void setGiaTri(Integer giaTri) {
+        this.giaTri = giaTri;
+    }
+
 
     public Boolean getTinhTrang() {
         return tinhTrang;

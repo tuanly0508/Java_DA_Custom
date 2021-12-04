@@ -109,11 +109,6 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 "Mã phiếu nhập", "Nhà cung cấp", "Nhân viên", "Ngày lập", "Tổng tiền", "Tiền nợ", "Ghi chú", "Trạng thái"
             }
         ));
-        tblDanhSachPhieuNhap.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDanhSachPhieuNhapMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tblDanhSachPhieuNhap);
         if (tblDanhSachPhieuNhap.getColumnModel().getColumnCount() > 0) {
             tblDanhSachPhieuNhap.getColumnModel().getColumn(0).setMinWidth(40);
