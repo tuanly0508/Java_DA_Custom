@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="177"/>
+	<parameter name="idHoaDon" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[6]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select idhoaDon,nv.hoTenNhanVien,kh.tenKhachHang,kh.SDTKhachHang,p.tenPhong,FORMAT(ptp.thoiGianMo ,'HH:mm:ss dd/MM/yyyy') ngayDat,FORMAT(ptp.thoiGianDong ,'HH:mm:ss dd/MM/yyyy') ngayDi,tenLoaiPhong,
+format(hd.tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,format(hd.tienNo,'#,#') tienNo
+from HoaDon hd 
+join phieuThuePhong ptp on hd.idPhieuThuePhong=ptp.idPhieuThuePhong
+join NhanVien nv on nv.idNhanVien=ptp.idNhanVien
+join KhachHang kh on kh.SDTKhachHang=ptp.SDTKhachHang
+join Phong p on p.idPhong=ptp.idPhong
+join LoaiPhong lp on p.idLoaiPhong=lp.idLoaiPhong
+where idHoaDon =$P{idHoaDon}]]>
+	</queryString>
+	<field name="idhoaDon" class="java.lang.Integer"/>
+	<field name="hoTenNhanVien" class="java.lang.String"/>
+	<field name="tenKhachHang" class="java.lang.String"/>
+	<field name="SDTKhachHang" class="java.lang.String"/>
+	<field name="tenPhong" class="java.lang.String"/>
+	<field name="ngayDat" class="java.lang.String"/>
+	<field name="ngayDi" class="java.lang.String"/>
+	<field name="tenLoaiPhong" class="java.lang.String"/>
+	<field name="tienPhong" class="java.lang.String"/>
+	<field name="tienDichVu" class="java.lang.String"/>
+	<field name="phuThu" class="java.lang.String"/>
+	<field name="tongTien" class="java.lang.String"/>
+	<field name="tienNo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="535" y="4" width="20" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{idhoaDon}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="24" width="555" height="43"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HOÁ ĐƠN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="4" width="52" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ID Hoá Đơn:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="15" width="100" height="20"/>
+				<text><![CDATA[I, Thông tin hoá đơn]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="532" splitType="Stretch">
+			<staticText>
+				<reportElement x="62" y="53" width="100" height="20"/>
+				<text><![CDATA[Số Điện Thoại:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="162" y="53" width="110" height="20"/>
+				<textFieldExpression><![CDATA[$F{SDTKhachHang}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="305" y="20" width="100" height="20"/>
+				<text><![CDATA[Loại phòng:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="406" y="20" width="110" height="20"/>
+				<textFieldExpression><![CDATA[$F{tenLoaiPhong}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="405" y="89" width="110" height="20"/>
+				<textFieldExpression><![CDATA[$F{ngayDi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="20" width="110" height="20"/>
+				<textFieldExpression><![CDATA[$F{tenKhachHang}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="306" y="55" width="100" height="20"/>
+				<text><![CDATA[Giờ Thuê:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="20" width="100" height="20"/>
+				<text><![CDATA[Tên khách hàng: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="163" y="89" width="110" height="20"/>
+				<textFieldExpression><![CDATA[$F{tenPhong}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="55" width="110" height="20"/>
+				<textFieldExpression><![CDATA[$F{ngayDat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="305" y="89" width="100" height="20"/>
+				<text><![CDATA[Giờ Trả:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="89" width="100" height="20"/>
+				<text><![CDATA[Phòng thuê:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="280" width="100" height="20"/>
+				<text><![CDATA[Tổng tiền trả:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="210" width="19" height="20"/>
+				<text><![CDATA[vnđ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="280" width="74" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tongTien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="310" width="74" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tienNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="490" y="280" width="19" height="20"/>
+				<text><![CDATA[vnđ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="250" width="74" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{phuThu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="230" width="74" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[0]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="489" y="310" width="19" height="20"/>
+				<text><![CDATA[vnđ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="210" width="100" height="20"/>
+				<text><![CDATA[Tiền Phòng: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="250" width="19" height="20"/>
+				<text><![CDATA[vnđ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="230" width="100" height="20"/>
+				<text><![CDATA[Dịch vụ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="310" width="31" height="20"/>
+				<text><![CDATA[Nợ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="250" width="100" height="20"/>
+				<text><![CDATA[Phụ thu:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="230" width="19" height="20"/>
+				<text><![CDATA[vnđ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="210" width="74" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tienPhong}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="422" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{hoTenNhanVien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="422" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tenKhachHang}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="362" y="382" width="121" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Xác nhận Khách hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="382" width="100" height="20"/>
+				<text><![CDATA[Xác nhận nhân viên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="135" width="137" height="20"/>
+				<text><![CDATA[II, Thông tin Thanh toán]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="85" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
