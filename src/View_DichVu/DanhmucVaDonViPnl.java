@@ -348,14 +348,10 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
         if (chonDong == -1) {
             JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
         } else {
-            int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn sửa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (clickLuu == JOptionPane.YES_OPTION) {
-                String tenDonVi = txtTenDanhMuc1.getText();
-                Integer giaTri = Integer.getInteger(txtGiaTri.getText());
-                System.out.println(giaTri);
-//                DonViTinh dvt = new DonViTinh((Integer)tblDanhMuc.getValueAt(chonDong, 0),tenDonVi,giaTri,true);
-//                dichVuController.suaDonViTinh(dvt);
-            }
+            String tenDonVi = txtTenDanhMuc1.getText();
+            Integer giaTri = Integer.parseInt(txtGiaTri.getText());
+            DonViTinh dvt = new DonViTinh(Integer.parseInt(tblDonViTinh.getValueAt(chonDong, 0).toString()),tenDonVi,giaTri,true);
+            dichVuController.suaDonViTinh(dvt);
         }
     }//GEN-LAST:event_btnSua1ActionPerformed
 
