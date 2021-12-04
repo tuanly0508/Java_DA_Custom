@@ -2,13 +2,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="144"/>
 	<parameter name="idHoaDon" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[6]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select idhoaDon,nv.hoTenNhanVien,kh.tenKhachHang,kh.SDTKhachHang,p.tenPhong,FORMAT(ptp.thoiGianMo ,'HH:mm:ss dd/MM/yyyy') ngayDat,FORMAT(ptp.thoiGianDong ,'HH:mm:ss dd/MM/yyyy') ngayDi,tenLoaiPhong,
-format(hd.tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,
+format(hd.tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,format(hd.tienNo,'#,#') tienNo,
 tenDichVu,FORMAT(gioSuDung ,'HH:mm:ss dd/MM/yyyy') gioSuDung,soLuong,format(ctdv.gia,'#,#') thanhTien 
 from HoaDon hd 
 join phieuThuePhong ptp on hd.idPhieuThuePhong=ptp.idPhieuThuePhong
@@ -33,6 +33,7 @@ where idHoaDon =$P{idHoaDon}]]>
 	<field name="tienDichVu" class="java.lang.String"/>
 	<field name="phuThu" class="java.lang.String"/>
 	<field name="tongTien" class="java.lang.String"/>
+	<field name="tienNo" class="java.lang.String"/>
 	<field name="tenDichVu" class="java.lang.String"/>
 	<field name="gioSuDung" class="java.lang.String"/>
 	<field name="soLuong" class="java.lang.Integer"/>
@@ -177,81 +178,94 @@ where idHoaDon =$P{idHoaDon}]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="214" splitType="Stretch">
+		<band height="244" splitType="Stretch">
 			<staticText>
-				<reportElement x="506" y="38" width="19" height="20"/>
+				<reportElement x="489" y="38" width="19" height="20"/>
 				<text><![CDATA[vnđ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="506" y="58" width="19" height="20"/>
+				<reportElement x="489" y="58" width="19" height="20"/>
 				<text><![CDATA[vnđ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="432" y="78" width="74" height="20"/>
+				<reportElement x="409" y="78" width="74" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{phuThu}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="506" y="108" width="19" height="20"/>
+				<reportElement x="489" y="108" width="19" height="20"/>
 				<text><![CDATA[vnđ]]></text>
 			</staticText>
 			<line>
-				<reportElement x="331" y="24" width="200" height="1"/>
+				<reportElement x="309" y="27" width="200" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="506" y="78" width="19" height="20"/>
+				<reportElement x="489" y="78" width="19" height="20"/>
 				<text><![CDATA[vnđ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="332" y="38" width="100" height="20"/>
+				<reportElement x="309" y="38" width="100" height="20"/>
 				<text><![CDATA[Tiền Phòng: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="432" y="38" width="74" height="20"/>
+				<reportElement x="409" y="38" width="74" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{tienPhong}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="432" y="58" width="74" height="20"/>
+				<reportElement x="409" y="58" width="74" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{tienDichVu}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="432" y="108" width="74" height="20"/>
+				<reportElement x="409" y="108" width="74" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{tongTien}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="332" y="58" width="100" height="20"/>
+				<reportElement x="309" y="58" width="100" height="20"/>
 				<text><![CDATA[Dịch vụ:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="332" y="78" width="100" height="20"/>
+				<reportElement x="309" y="78" width="100" height="20"/>
 				<text><![CDATA[Phụ thu:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="332" y="108" width="100" height="20"/>
+				<reportElement x="309" y="108" width="100" height="20"/>
 				<text><![CDATA[Tổng tiền trả:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="396" y="148" width="100" height="20"/>
+				<reportElement x="395" y="184" width="100" height="20"/>
 				<text><![CDATA[Xác nhận nhân viên]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="396" y="188" width="100" height="20"/>
+				<reportElement x="395" y="224" width="100" height="20"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{hoTenNhanVien}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="79" y="148" width="121" height="20"/>
+				<reportElement x="78" y="184" width="121" height="20"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Xác nhận Khách hàng]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="90" y="188" width="100" height="20"/>
+				<reportElement x="89" y="224" width="100" height="20"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{tenKhachHang}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="488" y="138" width="19" height="20"/>
+				<text><![CDATA[vnđ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="408" y="138" width="74" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tienNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="377" y="138" width="31" height="20"/>
+				<text><![CDATA[Nợ:]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
