@@ -427,6 +427,10 @@
                           <Component id="jLabel10" max="32767" attributes="0"/>
                           <Component id="jSeparator4" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel3" min="-2" pref="79" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="rdbDuocNo" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnTamTinh" min="-2" pref="82" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnThanhToan" min="-2" pref="82" max="-2" attributes="0"/>
@@ -468,6 +472,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnThanhToan" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
                           <Component id="btnTamTinh" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="rdbDuocNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -548,6 +554,22 @@
                   <Font name="Segoe UI" size="14" style="3"/>
                 </Property>
                 <Property name="labelText" type="java.lang.String" value="Th&#xe0;nh ti&#x1ec1;n"/>
+              </Properties>
+            </Component>
+            <Component class="swing.BtnRadioCus" name="rdbDuocNo">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="66" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Kh&#xf4;ng"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdbDuocNoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x1b0;&#x1ee3;c n&#x1ee3; ?: "/>
               </Properties>
             </Component>
           </SubComponents>
