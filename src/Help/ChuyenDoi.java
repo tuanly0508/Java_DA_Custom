@@ -48,6 +48,20 @@ public class ChuyenDoi {
         }
     }
     
+    //Làm tròn số Double
+    public static double lamTronSoDouble(double number, int multiple) {
+
+        double result = multiple;
+        if (number % multiple == 0) {
+            return (int) number;
+        }
+        if (number % multiple != 0) {
+            int division = (int) ((number / multiple) + 1);
+            result = division * multiple;
+        }
+        return result;
+    }
+    
     //chuyển đổi chữ đầu thành hoa
     public static String doiTen(String ten){
 	//cắt string thành mảng qua các dấu Space

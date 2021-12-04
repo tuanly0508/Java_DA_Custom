@@ -94,7 +94,7 @@ public class DatPhongController {
         khachHangDAO.insertKhachHang(SDT, tenKhach, tienNo, tienSuDung, traSau, ghiChu, tinhTrang);
     }  
         
-    public List<Object[]> getTTPhieuDatPhong() {   
+    public List<Object[]> getTTPhieuDatPhong(){
         List<Object[]> getTinhTrangPDP = datPhongDAO.getTinhTrangPDP();
         return getTinhTrangPDP;
     }
@@ -114,7 +114,32 @@ public class DatPhongController {
         return phongs;
     }
     
-    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu) {
-        datPhongDAO.updateSoLuongSuDungDichVu(soLuong,idDichVu);
+    //Cập nhật sl dịch vụ trong bảng chi tiết dịch vụ sử dụng
+    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu, String gioMo) {
+        datPhongDAO.updateSoLuongSuDungDichVu(soLuong,idDichVu, gioMo);
+    }
+    
+    public Boolean layTinhTrangNo(String sdt){
+        return khachHangDAO.layTinhTrangNo(sdt);
+    }
+    
+    public int laySoLuongDichVu(int idDichVu){
+        return dichVuDAO.laySoLuongDichVuCon(idDichVu);
+    }
+    
+    //Cập nhật tổng số lượng dịch vụ
+    public void capNhatSoLuongDichVu(int idDichVu,int soLuong){
+        dichVuDAO.capNhatSoLuongDichVu(idDichVu, soLuong);
+    }
+    
+    //Tìm dịch vụ
+    public List<Object[]> timDichVu(String tenDichVu){
+        List<Object[]> dichVus =dichVuDAO.timDichVu(tenDichVu);
+        return dichVus;
+    }
+    
+    //Huỷ chi tiết dịch vụ sử dụng
+    public void huyDichVu(int idDichVu,String gioMo){
+        dichVuDAO.huyDichVu(idDichVu,gioMo);
     }
 }

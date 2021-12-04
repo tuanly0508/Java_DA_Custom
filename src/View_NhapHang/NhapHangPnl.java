@@ -2,15 +2,27 @@ package View_NhapHang;
 
 import Controller.NhaCungCapController;
 import Controller.PhieuNhapHangController;
+import Help.XuatExcel;
 import Model.NhaCungCap;
 import swing.ScrollBar;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Frame;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class NhapHangPnl extends javax.swing.JPanel {
     private PhieuNhapHangController phieuNhapHangController;
@@ -409,6 +421,11 @@ public class NhapHangPnl extends javax.swing.JPanel {
 
         button11.setBorder(null);
         button11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel (1).png"))); // NOI18N
+        button11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout roundPanel4Layout = new javax.swing.GroupLayout(roundPanel4);
         roundPanel4.setLayout(roundPanel4Layout);
@@ -510,7 +527,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 nhaCungCapController.xoaNhaCungCap((Integer)tblNhaCungCap.getValueAt(dongXoa, 0));
             }
             JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
-        }        // TODO add your handling code here:
+        } 
 
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -551,10 +568,11 @@ public class NhapHangPnl extends javax.swing.JPanel {
         txtNhaCungCap2.setText((String) tblNhaCungCap.getValueAt(click, 1));
     }//GEN-LAST:event_tblNhaCungCapMouseClicked
 
-    private void tblDanhSachPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachPhieuNhapMouseClicked
-        
-    }//GEN-LAST:event_tblDanhSachPhieuNhapMouseClicked
+    private void button11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button11ActionPerformed
+        XuatExcel.xuat(tblNhaCungCap);
+    }//GEN-LAST:event_button11ActionPerformed
 
+    
     public void CssTable(JScrollPane table) {
         JPanel p = new JPanel();
         table.setVerticalScrollBar(new ScrollBar());

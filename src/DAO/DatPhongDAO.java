@@ -61,8 +61,9 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     }
     
     public List<Object[]> getTinhTrangPDP(){
-        return getRawValues("select DISTINCT b.idPhong,tinhTrang,tenPhong from phieuDatPhong a right join phong b on a.idPhong = b.idPhong "
-                            + "where tinhTrang = 1");
+        return getRawValues("select DISTINCT b.idPhong,tinhTrang,tenPhong,MIN(tenHinhThuc) tenHinhThuc from phieuDatPhong a right join phong b "
+                            + "on a.idPhong = b.idPhong join GioDatTruoc c on c.idGioDatTruoc = a.thoiGianDat where tinhTrang = 1 group "
+                            + "by b.idPhong,tinhTrang,tenPhong");
     }
     
     public List<Object[]> getIdHoaDonDichVu(int idPhong){
@@ -70,8 +71,8 @@ public class DatPhongDAO extends AbsDAO<Phong>{
                             + "where b.idPhong = "+idPhong+" and b.trangThai = 1");
     }
     
-    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu) {
-        String query = "update chiTietDichVuSuDung set soLuong = ? where idDichVu = ?";
-        DBConnection.executeUpdate(query,soLuong, idDichVu);
+    public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu, String gioMo) {
+        String query = "update chiTietDichVuSuDung set soLuong = ? where idDichVu = ? and gioSuDung = ?";
+        DBConnection.executeUpdate(query,soLuong, idDichVu, gioMo);
     }
 }

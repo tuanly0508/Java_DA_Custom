@@ -6,13 +6,13 @@ public class PhieuDatPhong extends AbsTable{
     private Integer idPhong;
     private int thoiGianDat;
     private String ghiChu;
-    private Integer tinhTrang;
+    private Boolean tinhTrang;
     private String tenKhach;
 
     public PhieuDatPhong() {
     }
 
-    public PhieuDatPhong(Integer idPhieuDatPhong, String SDTKhachHang, Integer idPhong, int thoiGianDat, String ghiChu, Integer tinhTrang, String tenKhach) {
+    public PhieuDatPhong(Integer idPhieuDatPhong, String SDTKhachHang, Integer idPhong, int thoiGianDat, String ghiChu, Boolean tinhTrang, String tenKhach) {
         this.idPhieuDatPhong = idPhieuDatPhong;
         this.SDTKhachHang = SDTKhachHang;
         this.idPhong = idPhong;
@@ -62,11 +62,11 @@ public class PhieuDatPhong extends AbsTable{
         this.ghiChu = ghiChu;
     }
 
-    public Integer getTinhTrang() {
+    public Boolean getTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(Integer tinhTrang) {
+    public void setTinhTrang(Boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 
