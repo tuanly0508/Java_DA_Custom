@@ -323,8 +323,10 @@ public class ThongKePnl extends javax.swing.JPanel {
             for (int i = 0; i <= data2.size()-1; i++) {
                 Double tienGio = Double.parseDouble(data2.get(i)[2].toString());
                 Double dichVu = Double.parseDouble(data2.get(i)[3].toString());
-                Double phuThu1 = Double.parseDouble(data2.get(i)[4].toString());  
-                chart.addData(new ModelChart(data2.get(i)[0].toString()+"/"+data2.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu1}));
+                Double phuThu = Double.parseDouble(data2.get(i)[4].toString()); 
+                Double tongTien = Double.parseDouble(data2.get(i)[5].toString());
+                setValueSum(tienGio, dichVu, phuThu, tongTien);
+                chart.addData(new ModelChart(data2.get(i)[0].toString()+"/"+data2.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu}));
             }
             chart.start();
         }else if (cbxLoaiHinh.getSelectedIndex() == 1) {
@@ -350,13 +352,28 @@ public class ThongKePnl extends javax.swing.JPanel {
     private void button11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button11ActionPerformed
         XuatExcel.xuat(tblThongKe);
     }//GEN-LAST:event_button11ActionPerformed
-
-    
+   
     public void setValueSum(Double phong , Double dichVu ,Double phuThu, Double tong){
         lblTienGio.setText(ChuyenDoi.SoString(phong)+" đ");
         lblTienDichVu.setText(ChuyenDoi.SoString(dichVu)+" đ");
         lblTienPhuThu.setText(ChuyenDoi.SoString(phuThu)+" đ");
         lblTongTien.setText(ChuyenDoi.SoString(tong)+" đ");
+    }   
+    
+    public void viewTableThongKe(List<Object[]> data) {
+        DefaultTableModel model = (DefaultTableModel) tblThongKe.getModel();   
+        if(data == null) {
+            for (int i = tblThongKe.getRowCount()-1; i >= 0; i--) {
+                model.removeRow(i);
+            }
+        }else {
+            for (int i = tblThongKe.getRowCount()-1; i >= 0; i--) {
+                model.removeRow(i);
+            }      
+            for (Object[] objects : data) {
+                model.addRow(objects);
+            }            
+        }       
     }
     
     public void setGiaDefault(List<Object[]> data) {
@@ -382,22 +399,6 @@ public class ThongKePnl extends javax.swing.JPanel {
             chart.addData(new ModelChart(data.get(i)[0].toString()+"/"+data.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu1}));
         }
         chart.start();
-    }
-    
-    public void viewTableThongKe(List<Object[]> data) {
-        DefaultTableModel model = (DefaultTableModel) tblThongKe.getModel();   
-        if(data == null) {
-            for (int i = tblThongKe.getRowCount()-1; i >= 0; i--) {
-                model.removeRow(i);
-            }
-        }else {
-            for (int i = tblThongKe.getRowCount()-1; i >= 0; i--) {
-                model.removeRow(i);
-            }      
-            for (Object[] objects : data) {
-                model.addRow(objects);
-            }            
-        }       
     }
     
     public void setController (ThongKeController thongKeController) {
