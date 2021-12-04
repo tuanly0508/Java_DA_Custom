@@ -149,6 +149,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     btnThemDichVu.setEnabled(false);
                     jtpDichVuAll.setEnabled(false);
                     tblAllDichVu.setEnabled(false);
+                    btnMoPhong.setEnabled(true);
                 }else if (ttPhong.equals("Đang hoạt động")) {
                     phongCanDoi = idPhong;
                     setNullTamTinh();
