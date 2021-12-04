@@ -182,7 +182,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {  
                 if (datPhongDialog == null) {                   
                     datPhongDialog = new DatPhongDlg(null,true);
-                    setCombobox(datPhongDialog.cbxDatTruoc);                    
+                    setCombobox(datPhongDialog.cbxDatTruoc);   
                 }         
                        
                 datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
