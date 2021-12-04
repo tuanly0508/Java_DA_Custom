@@ -98,6 +98,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
         rdbDuocNo.setEnabled(false);        
+        btnBaoTri.setEnabled(false);
+        btnMoPhong.setEnabled(false);
+        btnThemDichVu.setEnabled(false);
+        tblSuDungDichVu.setEnabled(false);
     }   
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
@@ -140,13 +144,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     setNull();
                     setNullTamTinh();
                     setPhongTrong();
+                    btnThemDichVu.setEnabled(false);
                 }else if (ttPhong.equals("Đang hoạt động")) {
                     phongCanDoi = idPhong;
                     setNullTamTinh();
                     setPhongHoatDong();
                     setThongTinPhong(phongHienTai);
                     btnTamTinh.setEnabled(true);
-                    btnThanhToan.setEnabled(true);                   
+                    btnThanhToan.setEnabled(true);
+                    tblSuDungDichVu.setEnabled(true);
                 }else if (ttPhong.equals("Phòng đặt trước")) {
                     loadTableSuDungDV(null);
                     setNullTamTinh();
@@ -362,7 +368,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblBimbim = new swing.Table();
-        txtTimNhanVien = new swing.TextInputTT();
+        txtTimDichVu = new swing.TextInputTT();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -688,7 +694,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("DỊCH VỤ SỬ DỤNG");
 
         spnSoLuong.setOpaque(false);
@@ -705,25 +711,26 @@ public class DatPhongPnl extends javax.swing.JPanel {
         roundPanel5.setLayout(roundPanel5Layout);
         roundPanel5Layout.setHorizontalGroup(
             roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(roundPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(roundPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         roundPanel5Layout.setVerticalGroup(
             roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(roundPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1))
         );
@@ -962,6 +969,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         jtpDichVuAll.addTab("Bim bim", jPanel5);
 
+        txtTimDichVu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimDichVuKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -972,7 +985,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     .addComponent(jtpDichVuAll, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator3)
-                    .addComponent(txtTimNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtTimDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -983,7 +996,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTimNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtpDichVuAll)
                 .addContainerGap())
@@ -1472,6 +1485,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         int click = tblSuDungDichVu.getSelectedRow();
         spnSoLuong.setValue(tblSuDungDichVu.getValueAt(click, 4));
         soLuongDauTien=(int)tblSuDungDichVu.getValueAt(click, 4);
+        btnThemDichVu.setEnabled(true);
     }//GEN-LAST:event_tblSuDungDichVuMouseClicked
 
     private void btnThemDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDichVuActionPerformed
@@ -1512,6 +1526,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void rdbDuocNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbDuocNoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdbDuocNoActionPerformed
+
+    private void txtTimDichVuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimDichVuKeyReleased
+        List<Object[]> dichVus = datPhongController.timDichVu(txtTimDichVu.getText());
+        loadTable(tblAllDichVu,dichVus);
+    }//GEN-LAST:event_txtTimDichVuKeyReleased
 
     public void themDichVu(JTable table) {
         table.addMouseListener(new MouseAdapter() {
@@ -1804,7 +1823,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private swing.TextField txtTienDichVu;
     private swing.TextField txtTienGio;
     private swing.TextField txtTienPhuThu;
-    private swing.TextInputTT txtTimNhanVien;
+    private swing.TextInputTT txtTimDichVu;
     private swing.TextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

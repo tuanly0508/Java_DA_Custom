@@ -131,4 +131,10 @@ public class DatPhongController {
     public void capNhatSoLuongDichVu(int idDichVu,int soLuong){
         dichVuDAO.capNhatSoLuongDichVu(idDichVu, soLuong);
     }
+    
+    //Tìm dịch vụ
+    public List<Object[]> timDichVu(String tenDichVu){
+        List<Object[]> dichVus =dichVuDAO.timDichVu(tenDichVu);
+        return dichVus;
+    }
 }
