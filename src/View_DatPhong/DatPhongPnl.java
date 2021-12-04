@@ -860,7 +860,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
             },
             new String [] {
-                "id", "Dịch vụ", "ĐVT", "Giá"
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL còn"
             }
         ));
         jScrollPane2.setViewportView(tblAllDichVu);
@@ -899,7 +899,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
             },
             new String [] {
-                "id", "Dịch vụ", "ĐVT", "Giá"
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL còn"
             }
         ));
         jScrollPane5.setViewportView(tblDoUong);
@@ -918,9 +918,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 355, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -940,7 +938,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
             },
             new String [] {
-                "id", "Dịch vụ", "ĐVT", "Giá"
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL Còn"
             }
         ));
         jScrollPane6.setViewportView(tblBimbim);
@@ -959,9 +957,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 355, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1480,7 +1476,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
     private void tblSuDungDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuDungDichVuMouseClicked
         int click = tblSuDungDichVu.getSelectedRow();
-        spnSoLuong.setValue(tblSuDungDichVu.getValueAt(click, 4));       
+        spnSoLuong.setValue(tblSuDungDichVu.getValueAt(click, 4));
     }//GEN-LAST:event_tblSuDungDichVuMouseClicked
 
     private void btnThemDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDichVuActionPerformed
