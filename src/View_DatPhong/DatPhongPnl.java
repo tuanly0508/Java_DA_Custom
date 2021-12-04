@@ -70,6 +70,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     Double tienPhuThu = 0.0;
     Double tongTien = 0.0;
     Double tienGio = 0.0;
+    boolean duocNo = false ;
        
     public DatPhongPnl() {
         initComponents();
@@ -91,7 +92,19 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnDoiPhong.setVisible(false);        
         txtThoiGianMo.setVisible(false);
         btnTamTinh.setEnabled(false);
-        btnThanhToan.setEnabled(false);        
+        btnThanhToan.setEnabled(false);
+        rdbDuocNo.setEnabled(false);
+        
+//        String s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime());
+//        System.out.println("s "+s);
+//        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+//        Timestamp timeNow = new Timestamp(new Date().getTime());
+//        System.out.println(new Date().getTime());
+//        System.out.println(timeNow);
+        
+//        Date date = new Date(time);
+//        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+//        return format.format(date);
     }   
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
@@ -121,6 +134,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             p.setBackground(new Color(153,153,153));
         }       
         
+        // sự kiện khi click vào panel phòng
         p.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -153,6 +167,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             }                    
         });           
         
+        // sự kiện khi click vào đặt trước
         p.btnDatTruoc.addActionListener(new AbstractAction(){
             @Override
             public void actionPerformed(ActionEvent e) {  
@@ -322,6 +337,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         txtTienDichVu = new swing.TextField();
         txtTienPhuThu = new swing.TextField();
         txtTongTien = new swing.TextField();
+        rdbDuocNo = new swing.BtnRadioCus();
+        jLabel3 = new javax.swing.JLabel();
         roundPanel5 = new swing.RoundPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSuDungDichVu = new swing.Table();
@@ -572,6 +589,16 @@ public class DatPhongPnl extends javax.swing.JPanel {
         txtTongTien.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         txtTongTien.setLabelText("Thành tiền");
 
+        rdbDuocNo.setBackground(new java.awt.Color(0, 102, 204));
+        rdbDuocNo.setText("Không");
+        rdbDuocNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbDuocNoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Được nợ ?: ");
+
         javax.swing.GroupLayout roundPanel4Layout = new javax.swing.GroupLayout(roundPanel4);
         roundPanel4.setLayout(roundPanel4Layout);
         roundPanel4Layout.setHorizontalGroup(
@@ -582,6 +609,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator4)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdbDuocNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnTamTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -613,7 +644,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTamTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTamTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdbDuocNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(20, 20, 20))
         );
 
@@ -1017,6 +1050,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //Thay đổi số lượng dịch vụ
     private void jtpDichVuAllStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jtpDichVuAllStateChanged
         int i = jtpDichVuAll.getSelectedIndex();       
         if (i == 0) {
@@ -1040,6 +1074,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jtpDichVuAllStateChanged
 
+    //Hiển thị tất cả phòng
     private void rdbAllPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbAllPhongActionPerformed
         if (rdbAllPhong.isSelected()) {
             panelPhong.removeAll();
@@ -1047,6 +1082,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_rdbAllPhongActionPerformed
 
+    
+    //Hiển thị phòng thường
     private void rdbPhongThuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongThuongActionPerformed
         if (rdbPhongThuong.isSelected()) {
             panelPhong.removeAll();
@@ -1057,6 +1094,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_rdbPhongThuongActionPerformed
 
+    //Hiển thị phòng vip
     private void rdbPhongVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongVipActionPerformed
         if (rdbPhongVip.isSelected()) {
             panelPhong.removeAll();
@@ -1067,6 +1105,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_rdbPhongVipActionPerformed
 
+    //Hiển thị phòng trống
     private void rdbPhongTrongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongTrongActionPerformed
         if (rdbPhongTrong.isSelected()) {
             panelPhong.removeAll();
@@ -1078,6 +1117,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_rdbPhongTrongActionPerformed
 
+    //HIển thị phòng đang hoạt động
     private void rdbPhongDangHoatDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongDangHoatDongActionPerformed
         if (rdbPhongDangHoatDong.isSelected()) {
             System.out.println("Hoạt động");
@@ -1090,6 +1130,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_rdbPhongDangHoatDongActionPerformed
 
+    //Set trạng thái bảo trì
     private void rdbBaoTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbBaoTriActionPerformed
         if (rdbBaoTri.isSelected()) {
             System.out.println("Bảo trì");
@@ -1102,6 +1143,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_rdbBaoTriActionPerformed
 
+    //Mở phòng
     private void btnMoPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoPhongActionPerformed
         Timestamp thoiGianMo = null;
         Date date = new Date();         
@@ -1110,15 +1152,19 @@ public class DatPhongPnl extends javax.swing.JPanel {
         String SDT = txtSDT.getText();
                 
         if (isSDT == false) {
+            //Thêm khách nếu là khách lần đầu
             datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
         }
         if (rdbGiaNgayLe.isSelected()) {
+            //Chỉnh giá ngày lễ
             phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,1);
             phieuThuePhongController.insert(phieuThuePhong);
         }else {
+            //Thêm phiếu thuê phòng
             phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
             phieuThuePhongController.insert(phieuThuePhong);
         }        
+        //Cập nhật tình trạng phòng
         phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
         datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
         phongRender.setBackground(new Color(255,0,0));
@@ -1127,6 +1173,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         setThongTinPhong(phongHienTai);           
     }//GEN-LAST:event_btnMoPhongActionPerformed
 
+    //Đổi phòng
     private void btnDoiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiPhongActionPerformed
         if (doiPhongDialog == null) {
             doiPhongDialog = new DoiPhongDlg(null,true);                                 
@@ -1164,6 +1211,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         doiPhongDialog.setVisible(true);
     }//GEN-LAST:event_btnDoiPhongActionPerformed
 
+    //Search sdt trong DB
     private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
         String SDT = txtSDT.getText();
         List<Object[]> data = datPhongController.getThongTinKH(SDT);
@@ -1172,10 +1220,19 @@ public class DatPhongPnl extends javax.swing.JPanel {
         } else {
             isSDT=true;
             txtTenKhach.setText(data.get(0)[1].toString());
+            duocNo=(boolean) data.get(0)[4];
+            if(duocNo){
+                rdbDuocNo.setSelected(true);
+                rdbDuocNo.setText("Có");
+            }else{
+                rdbDuocNo.setSelected(false);
+                rdbDuocNo.setText("Không");
+            }
             txtTenKhach.setEditable(true);
         }
     }//GEN-LAST:event_txtSDTKeyReleased
 
+    //Huỷ bảo trì
     private void btnHuyBaoTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBaoTriActionPerformed
         datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
         phongRender.setBackground(new Color(0,204,204));
@@ -1183,6 +1240,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         setPhongTrong();
     }//GEN-LAST:event_btnHuyBaoTriActionPerformed
 
+    
     private void btnBaoTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaoTriActionPerformed
         datPhongController.updateTinhTrangPhong("Đang bảo trì", phongHienTai);
         phongRender.setBackground(new Color(153,153,153));
@@ -1190,6 +1248,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         setPhongBaoTri();
     }//GEN-LAST:event_btnBaoTriActionPerformed
 
+    //Tạm tính
     private void btnTamTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTamTinhActionPerformed
         tienDichVu = 0.0;
         String PhuThuThem = txtTienPhuThu.getText();       
@@ -1299,7 +1358,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGiaNgayLeActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        TinhTienFrm tinhTienFrm= new TinhTienFrm(null,true);
+        TinhTienFrm tinhTienFrm= new TinhTienFrm(null,true,tongTien);
+        //Nếu khách không được nợ thì ko nhập được
+        if(duocNo==false){
+            tinhTienFrm.txtTienNo.setEnabled(false);
+        }
+        
         tinhTienFrm.txtTongTien.setText(ChuyenDoi.SoString(tongTien));
         tinhTienFrm.txtKhachDua.addKeyListener(new KeyAdapter() {
             @Override
@@ -1314,6 +1378,18 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 }           
             }
         });       
+        
+        tinhTienFrm.txtTienNo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                double tienNo = ChuyenDoi.SoDouble(tinhTienFrm.txtTienNo.getText());
+                tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tienNo));
+                if(tienNo>tinhTienFrm.tongTien){
+                    tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tongTien));  
+                }      
+            }
+        });  
+        
         
         tinhTienFrm.btnThanhToanIn.addMouseListener(new MouseAdapter() {
                 @Override
@@ -1451,6 +1527,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }           
     }//GEN-LAST:event_btnThemDichVuActionPerformed
 
+    private void rdbDuocNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbDuocNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdbDuocNoActionPerformed
+
     public void themDichVu(JTable table) {
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -1489,6 +1569,17 @@ public class DatPhongPnl extends javax.swing.JPanel {
         loadTableSuDungDV(data2);
         List<Object[]> data = datPhongController.getThongTinPhong(idPhong);
         txtTenKhach.setText(data.get(0)[5].toString());
+        //set Tình trạng nợ
+        if(datPhongController.layTinhTrangNo(data.get(0)[1].toString())){
+            rdbDuocNo.setSelected(true);
+            rdbDuocNo.setText("Có");
+            duocNo=true;
+        }else{
+            rdbDuocNo.setSelected(false);
+            rdbDuocNo.setText("Không");
+            duocNo=false;
+        }
+        
         txtSDT.setText(data.get(0)[1].toString());
         txtThoiGianMo.setText(data.get(0)[3].toString());
     }
@@ -1677,6 +1768,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1700,6 +1792,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private swing.RoundPanel panelPhong;
     private swing.BtnRadioCus rdbAllPhong;
     private swing.BtnRadioCus rdbBaoTri;
+    private swing.BtnRadioCus rdbDuocNo;
     private swing.BtnRadioCus rdbGiaNgayLe;
     private swing.BtnRadioCus rdbPhongDangHoatDong;
     private swing.BtnRadioCus rdbPhongThuong;

@@ -117,4 +117,8 @@ public class DatPhongController {
     public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu, String gioMo) {
         datPhongDAO.updateSoLuongSuDungDichVu(soLuong,idDichVu, gioMo);
     }
+    
+    public Boolean layTinhTrangNo(String sdt){
+        return khachHangDAO.layTinhTrangNo(sdt);
+    }
 }
