@@ -5,21 +5,25 @@ import java.sql.Timestamp;
 public class PhieuNhapHang extends AbsTable{
     private Integer idPhieuNhap;
     private Integer idNhaCungCap;
+    private Integer idNhanVien;
     private java.sql.Timestamp thoiGianNhap;
     private Double tongTien;
+    private Double tienNo;
     private String ghiChu;
-    private String maPhieuNhap;
+    private Boolean trangThai;
 
     public PhieuNhapHang() {
     }
 
-    public PhieuNhapHang(Integer idPhieuNhap, Integer idNhaCungCap, Timestamp thoiGianNhap, Double tongTien, String ghiChu, String maPhieuNhap) {
+    public PhieuNhapHang(Integer idPhieuNhap, Integer idNhaCungCap, Integer idNhanVien, Timestamp thoiGianNhap, Double tongTien, Double tienNo, String ghiChu, Boolean trangThai) {
         this.idPhieuNhap = idPhieuNhap;
         this.idNhaCungCap = idNhaCungCap;
+        this.idNhanVien = idNhanVien;
         this.thoiGianNhap = thoiGianNhap;
         this.tongTien = tongTien;
+        this.tienNo = tienNo;
         this.ghiChu = ghiChu;
-        this.maPhieuNhap = maPhieuNhap;
+        this.trangThai = trangThai;
     }
 
     public Integer getIdPhieuNhap() {
@@ -38,6 +42,14 @@ public class PhieuNhapHang extends AbsTable{
         this.idNhaCungCap = idNhaCungCap;
     }
 
+    public Integer getIdNhanVien() {
+        return idNhanVien;
+    }
+
+    public void setIdNhanVien(Integer idNhanVien) {
+        this.idNhanVien = idNhanVien;
+    }
+
     public Timestamp getThoiGianNhap() {
         return thoiGianNhap;
     }
@@ -54,6 +66,14 @@ public class PhieuNhapHang extends AbsTable{
         this.tongTien = tongTien;
     }
 
+    public Double getTienNo() {
+        return tienNo;
+    }
+
+    public void setTienNo(Double tienNo) {
+        this.tienNo = tienNo;
+    }
+
     public String getGhiChu() {
         return ghiChu;
     }
@@ -62,13 +82,17 @@ public class PhieuNhapHang extends AbsTable{
         this.ghiChu = ghiChu;
     }
 
-    public String getMaPhieuNhap() {
-        return maPhieuNhap;
+    public Boolean getTrangThai() {
+        return trangThai;
     }
 
-    public void setMaPhieuNhap(String maPhieuNhap) {
-        this.maPhieuNhap = maPhieuNhap;
+    public void setTrangThai(Boolean trangThai) {
+        this.trangThai = trangThai;
     }
+
+   
+
+
     
     @Override
     public int getId() {

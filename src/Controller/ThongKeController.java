@@ -11,14 +11,14 @@ public class ThongKeController {
     public ThongKeController(ThongKePnl view) {
         this.view = view;
         tableDefault();
-        bieuDoDefault();
+//        bieuDoDefault();
         view.setController(this);
     }
     
     public void tableDefault() {
         List<Object[]> defaults = thongKeDAO.tableDefaul();
         view.viewTableThongKe(defaults);
-        view.setGiaDefault(defaults);
+//        view.setGiaDefault(defaults);
     }
     
     public void bieuDoDefault(){
