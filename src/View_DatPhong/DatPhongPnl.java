@@ -1292,7 +1292,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
         
         for(int i=0;i<=tblSuDungDichVu.getRowCount()-1;i++){
-            tienDichVu += ChuyenDoi.SoDouble(tblSuDungDichVu.getValueAt(i, 5).toString()) * Double.parseDouble(tblSuDungDichVu.getValueAt(i, 4).toString());
+            tienDichVu += ChuyenDoi.SoDouble(tblSuDungDichVu.getValueAt(i, 5).toString());
         }
         
         List<Object[]> gia = giaNgayLeController.getGiaNgayLeTrue();      
@@ -1521,7 +1521,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void btnThemDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDichVuActionPerformed
         int click = tblSuDungDichVu.getSelectedRow();
         List<Object[]> data = datPhongController.getIdHoaDonDichVu(phongHienTai);
-        Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString()) ;
+        Integer soLuong = Integer.parseInt(spnSoLuong.getValue().toString());
         
         //kiểm tra số lượng
         int idDichVu =(int) tblSuDungDichVu.getValueAt(click, 6);
@@ -1563,7 +1563,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimDichVuKeyReleased
 
     private void btnHuyDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDichVuActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnHuyDichVuActionPerformed
 
     private void txtTienPhuThuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienPhuThuKeyReleased
