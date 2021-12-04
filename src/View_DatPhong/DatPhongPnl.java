@@ -102,6 +102,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnMoPhong.setEnabled(false);
         btnThemDichVu.setEnabled(false);
         tblSuDungDichVu.setEnabled(false);
+        jtpDichVuAll.setEnabled(false);
+        tblAllDichVu.setEnabled(false);
     }   
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
@@ -145,6 +147,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     setNullTamTinh();
                     setPhongTrong();
                     btnThemDichVu.setEnabled(false);
+                    jtpDichVuAll.setEnabled(false);
+                    tblAllDichVu.setEnabled(false);
                 }else if (ttPhong.equals("Đang hoạt động")) {
                     phongCanDoi = idPhong;
                     setNullTamTinh();
@@ -153,6 +157,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     btnTamTinh.setEnabled(true);
                     btnThanhToan.setEnabled(true);
                     tblSuDungDichVu.setEnabled(true);
+                    jtpDichVuAll.setEnabled(true);
+                    tblAllDichVu.setEnabled(true);
                 }else if (ttPhong.equals("Phòng đặt trước")) {
                     loadTableSuDungDV(null);
                     setNullTamTinh();
@@ -162,6 +168,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     setNullTamTinh();
                     loadTableSuDungDV(null);     
                     setPhongBaoTri();
+                    btnThemDichVu.setEnabled(false);
+                    jtpDichVuAll.setEnabled(false);
+                    tblAllDichVu.setEnabled(false);
                 }  
             }                    
         });           
@@ -718,7 +727,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     .addGroup(roundPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
