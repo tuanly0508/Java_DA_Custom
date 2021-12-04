@@ -25,22 +25,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import static java.lang.System.in;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import static javax.swing.JComponent.UNDEFINED_CONDITION;
@@ -134,6 +124,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         for (int i = 0; i < tt.size(); i++) {           
             if (tt.get(i)[0].equals(idPhong)) {
                 p.btnDatTruoc.setBackground(new Color(255,195,137));  
+                p.txtGioDatTruoc.setText(tt.get(i)[3].toString());
             }     
         }
                     
