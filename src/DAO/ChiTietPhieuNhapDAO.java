@@ -23,4 +23,5 @@ public class ChiTietPhieuNhapDAO extends AbsDAO<ChiTietPhieuNhap>{
         String query = "insert into ChiTietPhieuNhap values(?,?,?,?,?)";
         DBConnection.executeUpdate(query, ctpn.getMaPhieuNhap(),ctpn.getIdDichVu(),ctpn.getIdDonViTinh(),ctpn.getSoLuong(),ctpn.getGiaNhap());
     }
+    
 }

@@ -9,14 +9,14 @@ import java.util.List;
 
 public class PhieuNhapHangDAO extends AbsDAO<PhieuNhapDichVu>{
     public List<Object[]> getDataPhieuNhapHang(){
-        return getRawValues("select pn.maPhieuNhap, ncc.tenNhaCungCap, nv.hoTenNhanVien, pn.thoiGianNhap,pn.tongTien,pn.tienNo,pn.ghiChu,pn.trangThai from phieuNhapDichVu as pn \n" +
+        return getRawValues("select pn.maPhieuNhap, ncc.tenNhaCungCap, nv.hoTenNhanVien, pn.thoiGianNhap,format(pn.tongTien,'#,#')tongTien,pn.tienNo,pn.ghiChu,pn.trangThai from phieuNhapDichVu as pn \n" +
                             "join nhanVien as nv on pn.idNhanVien = nv.idNhanVien \n" +
                             "join nhaCungCap as ncc on pn.idNhaCungCap = ncc.idNhaCungCap \n" +
                             "where pn.trangThai = 1");
     } 
     
     public List<Object[]> getDataChiTietPN(String maPhieuNhap){
-        return getRawValues("select maPhieuNhap,tenDichVu,soLuong,giaNhap,tenDonVi from ChiTietPhieuNhap ctpn \n" +
+        return getRawValues("select maPhieuNhap,tenDichVu,soLuong,format(giaNhap,'#,#')giaNhap,tenDonVi from ChiTietPhieuNhap ctpn \n" +
                             "join donViTinh dvt on dvt.idDonViTinh=ctpn.idDonViTinh\n" +
                             "join dichVu dv on dv.idDichVu=ctpn.idDichVu where maPhieuNhap=?",maPhieuNhap);
     }

@@ -2,6 +2,7 @@ package View_NhapHang;
 
 import Controller.NhaCungCapController;
 import Controller.PhieuNhapHangController;
+import Help.ChuyenDoi;
 import Help.XuatExcel;
 import Model.ChiTietPhieuNhap;
 import Model.DanhMuc;
@@ -334,6 +335,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
             }
         });
 
+        txtTongGiaTri.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTongGiaTri.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtTongGiaTri.setLabelText("Tổng Giá trị Phiếu nhập");
         txtTongGiaTri.setOpaque(false);
@@ -675,6 +677,13 @@ public class NhapHangPnl extends javax.swing.JPanel {
         ngayNhap = java.sql.Timestamp.valueOf( tblDanhSachPhieuNhap.getValueAt(click, 3).toString() );
         
         phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);
+        
+        //tính tổng tiền phiếu nhập
+        Double tongGiaNhap =0.0;
+        for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
+            tongGiaNhap += ChuyenDoi.SoDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString());
+        }
+        txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
     }//GEN-LAST:event_tblDanhSachPhieuNhapMouseClicked
 
     private void txtTimDichVuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimDichVuKeyReleased
@@ -691,18 +700,22 @@ public class NhapHangPnl extends javax.swing.JPanel {
         DonViTinh donViTinh =(DonViTinh) cbxDonVi.getSelectedItem();
         Integer idDonViTinh = donViTinh.getIdDonViTinh();
         Integer giaTri =donViTinh.getGiaTri();
-        
         Integer soLuong = Integer.parseInt(txtSoLuongDV.getText());
-        
         int soLuongDV = phieuNhapHangController.laySoLuongDV(idDichVu);
-        
         Double giaNhap = Double.parseDouble(txtGiaNhapDV.getText());
-        
         
         //Thêm chi tiết phiếu nhập mới
         ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(maPhieuNhap,idDichVu,idDonViTinh,soLuong,giaNhap);
+        
         //Cập nhật lại số lượng
         phieuNhapHangController.capNhatSoLuongDV(idDichVu, soLuongDV+(soLuong*giaTri));
+        
+        //tính tổng tiền phiếu nhập
+        Double tongGiaNhap =0.0;
+        for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
+            tongGiaNhap += Double.parseDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString());
+        }
+        txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
         
         phieuNhapHangController.themChiTietPN(ctpn);
         phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);

@@ -35,7 +35,6 @@ public class PhieuNhapHangController {
     }
     
     public void loadChiTietPhieuNhap(String maPhieuNhap){
-        System.out.println(maPhieuNhap);
         List<Object[]> chiTiets = phieuNhapHangDAO.getDataChiTietPN(maPhieuNhap);
         view.viewTableChiTietPhieuNhap(chiTiets);
     }
