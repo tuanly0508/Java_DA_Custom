@@ -2,8 +2,8 @@ package Model;
 
 import java.sql.Timestamp;
 
-public class PhieuNhapHang extends AbsTable{
-    private Integer idPhieuNhap;
+public class PhieuNhapDichVu extends AbsTable{
+    private String maPhieuNhap;
     private Integer idNhaCungCap;
     private Integer idNhanVien;
     private java.sql.Timestamp thoiGianNhap;
@@ -12,11 +12,11 @@ public class PhieuNhapHang extends AbsTable{
     private String ghiChu;
     private Boolean trangThai;
 
-    public PhieuNhapHang() {
+    public PhieuNhapDichVu() {
     }
 
-    public PhieuNhapHang(Integer idPhieuNhap, Integer idNhaCungCap, Integer idNhanVien, Timestamp thoiGianNhap, Double tongTien, Double tienNo, String ghiChu, Boolean trangThai) {
-        this.idPhieuNhap = idPhieuNhap;
+    public PhieuNhapDichVu(String maPhieuNhap, Integer idNhaCungCap, Integer idNhanVien, Timestamp thoiGianNhap, Double tongTien, Double tienNo, String ghiChu, Boolean trangThai) {
+        this.maPhieuNhap = maPhieuNhap;
         this.idNhaCungCap = idNhaCungCap;
         this.idNhanVien = idNhanVien;
         this.thoiGianNhap = thoiGianNhap;
@@ -26,13 +26,15 @@ public class PhieuNhapHang extends AbsTable{
         this.trangThai = trangThai;
     }
 
-    public Integer getIdPhieuNhap() {
-        return idPhieuNhap;
+    public String getMaPhieuNhap() {
+        return maPhieuNhap;
     }
 
-    public void setIdPhieuNhap(Integer idPhieuNhap) {
-        this.idPhieuNhap = idPhieuNhap;
+    public void setMaPhieuNhap(String maPhieuNhap) {
+        this.maPhieuNhap = maPhieuNhap;
     }
+
+
 
     public Integer getIdNhaCungCap() {
         return idNhaCungCap;
@@ -90,13 +92,11 @@ public class PhieuNhapHang extends AbsTable{
         this.trangThai = trangThai;
     }
 
-   
-
-
-    
     @Override
     public int getId() {
-        return idPhieuNhap;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
     
 }
