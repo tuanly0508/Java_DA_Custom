@@ -24,4 +24,7 @@ public class ChiTietPhieuNhapDAO extends AbsDAO<ChiTietPhieuNhap>{
         DBConnection.executeUpdate(query, ctpn.getMaPhieuNhap(),ctpn.getIdDichVu(),ctpn.getIdDonViTinh(),ctpn.getSoLuong(),ctpn.getGiaNhap());
     }
     
+    public void xoaCTPN(String maPN,int idDichVu){
+        DBConnection.executeUpdate("delete from ChiTietPhieuNhap where maPhieuNhap =? and idDichVu=?", maPN,idDichVu);
+    }
 }

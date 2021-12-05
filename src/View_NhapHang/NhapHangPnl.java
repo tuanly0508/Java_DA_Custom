@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -40,6 +41,9 @@ public class NhapHangPnl extends javax.swing.JPanel {
     private int idNhanVien ;
     private String maPhieuNhap ;
     private int idDichVu;
+    private int idDichVuXoa;
+    private int idDonVi;
+    private int giaTri;
     
     public NhapHangPnl() {
         initComponents();
@@ -121,7 +125,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã phiếu nhập", "Nhà cung cấp", "Nhân viên", "Ngày lập", "Tổng tiền", "Tiền nợ", "Ghi chú", "Trạng thái"
+                "Mã phiếu", "Nhà cung cấp", "Nhân viên", "Ngày lập", "Tổng tiền", "Tiền nợ", "Ghi chú", "Trạng thái"
             }
         ));
         tblDanhSachPhieuNhap.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,9 +135,18 @@ public class NhapHangPnl extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDanhSachPhieuNhap);
         if (tblDanhSachPhieuNhap.getColumnModel().getColumnCount() > 0) {
-            tblDanhSachPhieuNhap.getColumnModel().getColumn(0).setMinWidth(40);
-            tblDanhSachPhieuNhap.getColumnModel().getColumn(0).setPreferredWidth(40);
-            tblDanhSachPhieuNhap.getColumnModel().getColumn(0).setMaxWidth(40);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(0).setMinWidth(70);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(0).setPreferredWidth(70);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(0).setMaxWidth(70);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(4).setMinWidth(80);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(4).setMaxWidth(80);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(5).setMinWidth(60);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(5).setPreferredWidth(60);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(5).setMaxWidth(60);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(6).setMinWidth(0);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(6).setPreferredWidth(0);
+            tblDanhSachPhieuNhap.getColumnModel().getColumn(6).setMaxWidth(0);
             tblDanhSachPhieuNhap.getColumnModel().getColumn(7).setMinWidth(0);
             tblDanhSachPhieuNhap.getColumnModel().getColumn(7).setPreferredWidth(0);
             tblDanhSachPhieuNhap.getColumnModel().getColumn(7).setMaxWidth(0);
@@ -260,6 +273,16 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 "Mã PN", "Tên dịch vụ", "Số lượng", "Giá nhập", "Đơn vị tính"
             }
         ));
+        tblChiTietPhieuNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChiTietPhieuNhapMouseClicked(evt);
+            }
+        });
+        tblChiTietPhieuNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblChiTietPhieuNhapKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblChiTietPhieuNhap);
         if (tblChiTietPhieuNhap.getColumnModel().getColumnCount() > 0) {
             tblChiTietPhieuNhap.getColumnModel().getColumn(0).setMinWidth(100);
@@ -713,7 +736,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
         //tính tổng tiền phiếu nhập
         Double tongGiaNhap =0.0;
         for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
-            tongGiaNhap += Double.parseDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString());
+            tongGiaNhap += ChuyenDoi.SoDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString());
         }
         txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
         
@@ -723,8 +746,34 @@ public class NhapHangPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemChiTietPNActionPerformed
 
     private void btnXoaChiTietPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaChiTietPNActionPerformed
-        // TODO add your handling code here:
+        //Xoá chi tiết phiếu nhập
+        phieuNhapHangController.xoaChiTietPN(maPhieuNhap,idDichVuXoa);
+        System.out.println("mã: "+maPhieuNhap+"  "+idDichVuXoa);
+        //cập nhật lại sl dịch vụ
+        int soLuongDV = phieuNhapHangController.laySoLuongDV(idDichVuXoa);
+        phieuNhapHangController.capNhatSoLuongDV(idDichVuXoa,soLuongDV-giaTri);
+        phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);
+        //tính tổng tiền phiếu nhập
+        Double tongGiaNhap =0.0;
+        for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
+            tongGiaNhap += ChuyenDoi.SoDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString());
+        }
+        txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
     }//GEN-LAST:event_btnXoaChiTietPNActionPerformed
+
+    private void tblChiTietPhieuNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblChiTietPhieuNhapKeyPressed
+        
+    }//GEN-LAST:event_tblChiTietPhieuNhapKeyPressed
+
+    private void tblChiTietPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietPhieuNhapMouseClicked
+        int click = tblChiTietPhieuNhap.getSelectedRow();
+        System.out.println(tblChiTietPhieuNhap.getValueAt(click,1).toString());
+        idDichVuXoa =phieuNhapHangController.layIdDichVu(tblChiTietPhieuNhap.getValueAt(click,1).toString());
+        String tenDonVi = tblChiTietPhieuNhap.getValueAt(click,4).toString();
+        ArrayList<Integer> donVi = phieuNhapHangController.layIdDonVi(tenDonVi);
+        idDonVi=donVi.get(0);
+        giaTri=donVi.get(1);
+    }//GEN-LAST:event_tblChiTietPhieuNhapMouseClicked
 
     
     public void CssTable(JScrollPane table) {
