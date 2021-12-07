@@ -26,3 +26,4 @@ dist/README.TXT
 nbproject/private/private.xml
 nbproject/project.properties
 test.pdf
+/dist/

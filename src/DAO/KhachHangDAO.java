@@ -51,4 +51,11 @@ public class KhachHangDAO extends AbsDAO{
         }
         return duocNo;
     }
+    
+    public boolean checkSDTKhachHangExist(String phone){
+        List<Object[]> data=getRawValues("select COUNT(*) from khachHang where SDTKhachHang = ?", phone);
+        Integer count =(Integer) data.get(0)[0];
+        return count >0;
+    }
+    
 }

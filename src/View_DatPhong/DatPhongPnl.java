@@ -912,12 +912,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tblAllDichVu.getColumnModel().getColumn(0).setMinWidth(0);
             tblAllDichVu.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblAllDichVu.getColumnModel().getColumn(0).setMaxWidth(0);
-            tblAllDichVu.getColumnModel().getColumn(1).setMinWidth(150);
-            tblAllDichVu.getColumnModel().getColumn(1).setPreferredWidth(150);
-            tblAllDichVu.getColumnModel().getColumn(1).setMaxWidth(150);
-            tblAllDichVu.getColumnModel().getColumn(2).setMinWidth(45);
-            tblAllDichVu.getColumnModel().getColumn(2).setPreferredWidth(45);
-            tblAllDichVu.getColumnModel().getColumn(2).setMaxWidth(45);
+            tblAllDichVu.getColumnModel().getColumn(1).setMinWidth(100);
+            tblAllDichVu.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblAllDichVu.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblAllDichVu.getColumnModel().getColumn(2).setMinWidth(95);
+            tblAllDichVu.getColumnModel().getColumn(2).setPreferredWidth(95);
+            tblAllDichVu.getColumnModel().getColumn(2).setMaxWidth(95);
             tblAllDichVu.getColumnModel().getColumn(4).setMinWidth(60);
             tblAllDichVu.getColumnModel().getColumn(4).setPreferredWidth(60);
             tblAllDichVu.getColumnModel().getColumn(4).setMaxWidth(60);

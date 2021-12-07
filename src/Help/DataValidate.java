@@ -5,6 +5,7 @@
  */
 package Help;
 
+import DAO.KhachHangDAO;
 import DAO.NhanVienDAO;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ import java.util.Date;
  */
 public class DataValidate {
     static NhanVienDAO nhanVienDAO = new NhanVienDAO();
+    static KhachHangDAO khachHangDAO = new KhachHangDAO();
     static SimpleDateFormat sql = new SimpleDateFormat("yyyy-MM-dd");
     
       public static void checkEmpty(String field,StringBuilder sb,String errMess){
@@ -32,12 +34,12 @@ public class DataValidate {
         }
     }
     
-//    public static void checkEmailExist(String email,StringBuilder sb){
-//        System.out.println("CheckMail");
-//        if(nhanVienDAO.checkEmailExist(email)){
-//            sb.append("Email đã tồn tại! \n");
-//        }
-//    }
+    public static void checkEmailExist(String email,StringBuilder sb){
+        System.out.println("CheckMail");
+        if(nhanVienDAO.checkEmailExist(email)){
+            sb.append("Email đã tồn tại! \n");
+        }
+    }
     
     public static void checkSdtForm(String sdt,StringBuilder sb){
         try {
@@ -53,11 +55,23 @@ public class DataValidate {
         }
     }
     
-//    public static void checkPhoneExist(String sdt, StringBuilder sb){
-//        if(nhanVienDAO.checkPhoneExist(sdt)){
-//            sb.append("Số đt đã tồn tại! \n");
-//        }
-//    }
+    public static void checkPhoneExist(String sdt, StringBuilder sb){
+        if(nhanVienDAO.checkPhoneExist(sdt)){
+            sb.append("Số điện thoại đã tồn tại! \n");
+        }
+    }
+    
+    public static void checkCMNDExist(String cmnd, StringBuilder sb){
+        if(nhanVienDAO.checkCMNDExist(cmnd)){
+            sb.append("Số CMND đã tồn tại! \n");
+        }
+    }
+    
+    public static void checkSDTKhachHangExist(String cmnd, StringBuilder sb){
+        if(khachHangDAO.checkSDTKhachHangExist(cmnd)){
+            sb.append("Số Số điện thoại đã tồn tại! \n");
+        }
+    }
     
     public static void checkNgayThang(Date nSinh,Date nVao,StringBuilder sb){
         String today = sql.format(new Date());
@@ -116,8 +130,13 @@ public class DataValidate {
     }
     
     public static void checkSoHoChieu(String shc,StringBuilder sb){
-        if (shc.length() != 7) {
-            sb.append("Số CMND phải đúng 7 ký tự\n");
+        try {
+            Double checksdt = Double.parseDouble(shc);
+            if (shc.length() != 12) {
+                sb.append("Số Hộ chiếu phải đúng 12 chữ số\n");
+            }
+        } catch (Exception e) {
+            sb.append("Số Hộ chiếu Phải là chữ số \n");
         }
     }
     

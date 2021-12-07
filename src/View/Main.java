@@ -27,7 +27,7 @@ public class Main extends javax.swing.JFrame {
     private NhanVienPnl nhanVienPnl;
     private NhapHangPnl nhapHangPnl;
     private KhachHangPnl khachHangPnl;
-    private ThongKePnl thongKePnl;
+//    private ThongKePnl thongKePnl;
     
     public Main() {
         initComponents();    
@@ -40,7 +40,7 @@ public class Main extends javax.swing.JFrame {
         datPhongPnl = new DatPhongPnl();
         nhanVienPnl = new NhanVienPnl();
         nhapHangPnl = new NhapHangPnl();
-        thongKePnl = new ThongKePnl();
+//        thongKePnl = new ThongKePnl();
         dichVuPnl =  new DichVuPnl();
         
         PhieuThuePhongController phieuThuePhongController = new PhieuThuePhongController(datPhongPnl);
@@ -50,7 +50,7 @@ public class Main extends javax.swing.JFrame {
         GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
         DatPhongController datPhongController = new DatPhongController(datPhongPnl);
         NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
-        ThongKeController thongKeController = new ThongKeController(thongKePnl);
+//        ThongKeController thongKeController = new ThongKeController(thongKePnl);
         HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
         DichVuController dichVuController = new DichVuController(dichVuPnl);
         NhaCungCapController nhaCungCapController = new NhaCungCapController(nhapHangPnl);
@@ -61,7 +61,7 @@ public class Main extends javax.swing.JFrame {
                 if (index == 0) {
                     showForm(datPhongPnl);
                 }else if (index == 1) {
-                    showForm(thongKePnl);
+//                    showForm(thongKePnl);
                 }else if (index == 2) {
                     showForm(nhanVienPnl);
                 }else if (index == 3) {

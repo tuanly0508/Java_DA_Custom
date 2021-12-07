@@ -2,6 +2,7 @@ package View_KhachHang;
 
 import Controller.KhachHangController;
 import Help.ChuyenDoi;
+import Help.DataValidate;
 import Help.XuatExcel;
 import java.util.List;
 import Model.KhachHang;
@@ -270,10 +271,37 @@ public class KhachHangPnl extends javax.swing.JPanel {
         } else {
             int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
             if(update == JOptionPane.YES_OPTION){
+                StringBuilder sb = new StringBuilder();
+                
                 String SDTKhachHang = txtSDT.getText();
+                DataValidate.checkEmpty(SDTKhachHang, sb, "Số điện thoại không được để trống! ");
+                DataValidate.checkSdtForm(SDTKhachHang, sb);                
+                
                 String tenKhachHang = txtTenKhach.getText();
-                Double tienNo = Double.parseDouble(txtTienNo.getText());
-                Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
+                DataValidate.checkEmpty(tenKhachHang, sb, "Tên không được để trống");
+                
+//                Double tienNo = Double.parseDouble(txtTienNo.getText());
+//                Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
+                double tienNo = 0;
+                try {
+                    tienNo = Double.parseDouble(txtTienNo.getText()) ;
+                    if(tienNo < 0){
+                        sb.append("Tiền nợ phải lớn hớn 0 \n");
+                    }
+                } catch (Exception e) {
+                    sb.append("Tiền nợ phải là số \n");
+                }       
+
+                double tienSuDung = 0;
+                try {
+                    tienSuDung = Double.parseDouble(txtTienSuDung.getText()) ;
+                    if(tienSuDung < 0){
+                        sb.append("Tiền sử dụng phải lớn hớn 0 \n");
+                    }
+                } catch (Exception e) {
+                    sb.append("Tiền sử dụng phải là số \n");
+                }                 
+
                 Boolean no = true;
                 if(rdbNo.isSelected()){
                     no = true;
@@ -284,27 +312,68 @@ public class KhachHangPnl extends javax.swing.JPanel {
                 if(ghiChu.equals("")){
                     ghiChu="không";
                 }
-                KhachHang kh= new KhachHang(SDTKhachHang,tenKhachHang,tienNo,tienSuDung,no,ghiChu,true);
-                khachHangController.update(kh);
-                JOptionPane.showMessageDialog(new Frame(),"Update success !!!");
+                
+                if(sb.length() > 0){
+                    JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    KhachHang kh= new KhachHang(SDTKhachHang,tenKhachHang,tienNo,tienSuDung,no,ghiChu,true);
+                    khachHangController.update(kh);
+                    JOptionPane.showMessageDialog(new Frame(),"Update success !!!");
+                }
             }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        StringBuilder sb = new StringBuilder();
+        
         String sdtKhachHang = txtSDT.getText();
+        DataValidate.checkEmpty(sdtKhachHang, sb, "Số điện thoại không được để trống! ");
+        DataValidate.checkSdtForm(sdtKhachHang, sb);
+        DataValidate.checkSDTKhachHangExist(sdtKhachHang, sb);
+        
         String tenKhachHang = txtTenKhach.getText();
-        Double tienNo = Double.parseDouble(txtTienNo.getText());
-        Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
+        DataValidate.checkEmpty(tenKhachHang, sb, "Tên không được để trống");
+        
+//        Double tienNo = Double.parseDouble(txtTienNo.getText());
+        double tienNo = 0;
+        try {
+            tienNo = Double.parseDouble(txtTienNo.getText()) ;
+            if(tienNo < 0){
+                sb.append("Tiền nợ phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Tiền nợ phải là số \n");
+        }       
+        
+//        Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
+        double tienSuDung = 0;
+        try {
+            tienSuDung = Double.parseDouble(txtTienSuDung.getText()) ;
+            if(tienSuDung < 0){
+                sb.append("Tiền sử dụng phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Tiền sử dụng phải là số \n");
+        } 
+
         boolean no = true;
         if(rdbNo.isSelected()){
             no = true;
         }else if(rdbKhongNo.isSelected()){
             no = false;
         }
+        
         String ghiChu = txtGhiChu.getText();
-        KhachHang kh = new KhachHang(sdtKhachHang,tenKhachHang,tienNo, tienSuDung, no, ghiChu, true);
-        khachHangController.insert(kh);        
+        if(ghiChu.equals("")){
+            ghiChu="không";
+        }
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }else{        
+            KhachHang kh = new KhachHang(sdtKhachHang,tenKhachHang,tienNo, tienSuDung, no, ghiChu, true);
+            khachHangController.insert(kh);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
