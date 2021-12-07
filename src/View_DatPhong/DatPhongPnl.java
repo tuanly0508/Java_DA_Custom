@@ -11,6 +11,7 @@ import View_Dialog.DatPhongDlg;
 import View_Dialog.DoiPhongDlg;
 import View_Dialog.GiaNgayLeDlg;
 import Help.ChuyenDoi;
+import Help.DataValidate;
 import Help.ThongBao;
 import Model.GiaNgayLe;
 import Model.GioDatTruoc;
@@ -35,6 +36,7 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import static javax.swing.JComponent.UNDEFINED_CONDITION;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -1214,32 +1216,39 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
     //Mở phòng
     private void btnMoPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoPhongActionPerformed
+        StringBuilder sb = new StringBuilder();
         Timestamp thoiGianMo = null;
         Date date = new Date();         
         thoiGianMo=new Timestamp(date.getTime());
         String tenKhach = txtTenKhach.getText();
+        DataValidate.checkEmpty(tenKhach, sb, "Tên không được để trống! ");
         String SDT = txtSDT.getText();
-                
-        if (isSDT == false) {
-            //Thêm khách nếu là khách lần đầu
-            datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
-        }
-        if (rdbGiaNgayLe.isSelected()) {
-            //Chỉnh giá ngày lễ
-            phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,1);
-            phieuThuePhongController.insert(phieuThuePhong);
-        }else {
-            //Thêm phiếu thuê phòng
-            phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
-            phieuThuePhongController.insert(phieuThuePhong);
-        }        
-        //Cập nhật tình trạng phòng
-        phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
-        datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
-        phongRender.setBackground(new Color(255,0,0));
-        setPhongHoatDong();
-        reLoadPhong();
-        setThongTinPhong(phongHienTai);           
+        DataValidate.checkEmpty(SDT, sb, "Số điện thoại không được để trống! ");
+        DataValidate.checkSdtForm(SDT, sb);
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            if (isSDT == false) {
+                //Thêm khách nếu là khách lần đầu
+                datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
+            }
+            if (rdbGiaNgayLe.isSelected()) {
+                //Chỉnh giá ngày lễ
+                phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,1);
+                phieuThuePhongController.insert(phieuThuePhong);
+            }else {
+                //Thêm phiếu thuê phòng
+                phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
+                phieuThuePhongController.insert(phieuThuePhong);
+            }        
+            //Cập nhật tình trạng phòng
+            phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
+            datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
+            phongRender.setBackground(new Color(255,0,0));
+            setPhongHoatDong();
+            reLoadPhong();
+            setThongTinPhong(phongHienTai);                     
+        }                  
     }//GEN-LAST:event_btnMoPhongActionPerformed
 
     //Đổi phòng

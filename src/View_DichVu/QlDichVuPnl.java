@@ -7,6 +7,7 @@ package View_DichVu;
 
 import Controller.DichVuController;
 import Help.ChuyenDoi;
+import Help.DataValidate;
 import Help.XuatExcel;
 import Model.DanhMuc;
 import Model.DichVu;
@@ -328,18 +329,41 @@ public class QlDichVuPnl extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        StringBuilder sb = new StringBuilder();
         String tenDichVu = txtTenDichVu.getText();
-        String soLuongCon = txtSoLuongCon.getText();
-        String giaBan = txtGiaBan.getText();
+        DataValidate.checkEmpty(tenDichVu, sb, "Tên dịch vụ không được để trống.");
+        
+        Integer soLuongCon = 0;
+        try {
+            soLuongCon = Integer.parseInt(txtSoLuongCon.getText()) ;
+            if(soLuongCon < 0){
+                sb.append("Số lượng còn phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Số lượng còn phải là số \n");
+        } 
+        
+        double giaBan = 0;
+        try {
+            giaBan = Double.parseDouble(txtGiaBan.getText()) ;
+            if(giaBan < 0){
+                sb.append("Tiền nợ phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Tiền nợ phải là số \n");
+        }   
         
         DanhMuc danhMuc =(DanhMuc) cbxDanhMuc.getSelectedItem();
         Integer idDanhMuc = danhMuc.getIdDanhMuc();
         
         DonViTinh donViTinh =(DonViTinh) cbxDonViTinh.getSelectedItem();
         Integer idDonViTinh = donViTinh.getIdDonViTinh();
-        
-        DichVu dv = new DichVu(0,idDanhMuc,idDonViTinh,tenDichVu,Integer.parseInt(soLuongCon),Double.parseDouble(giaBan),true);
-        dichVuController.themDichVu(dv);
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }else{  
+            DichVu dv = new DichVu(0,idDanhMuc,idDonViTinh,tenDichVu,soLuongCon,giaBan,true);
+            dichVuController.themDichVu(dv);        
+        }        
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -387,9 +411,29 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         } else {
             int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn sửa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
             if (clickLuu == JOptionPane.YES_OPTION) {
+                StringBuilder sb = new StringBuilder();
+                
                 String tenDichVu = txtTenDichVu.getText();
-                String soLuongCon = txtSoLuongCon.getText();
-                String giaBan = txtGiaBan.getText();
+                DataValidate.checkEmpty(tenDichVu, sb, "Tên dịch vụ không được để trống.");
+                Integer soLuongCon = 0;
+                try {
+                    soLuongCon = Integer.parseInt(txtSoLuongCon.getText()) ;
+                    if(soLuongCon < 0){
+                        sb.append("Số lượng còn phải lớn hớn 0 \n");
+                    }
+                } catch (Exception e) {
+                    sb.append("Số lượng còn phải là số \n");
+                } 
+                
+                double giaBan = 0;
+                try {
+                    giaBan = Double.parseDouble(txtGiaBan.getText()) ;
+                    if(giaBan < 0){
+                        sb.append("Tiền nợ phải lớn hớn 0 \n");
+                    }
+                } catch (Exception e) {
+                    sb.append("Tiền nợ phải là số \n");
+                } 
 
                 DanhMuc danhMuc =(DanhMuc) cbxDanhMuc.getSelectedItem();
                 Integer idDanhMuc = danhMuc.getIdDanhMuc();
@@ -397,8 +441,12 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                 DonViTinh donViTinh =(DonViTinh) cbxDonViTinh.getSelectedItem();
                 Integer idDonViTinh = donViTinh.getIdDonViTinh();
                 int idDichVu = (Integer)tblDichVu.getValueAt(chonDong, 0);
-                DichVu dv = new DichVu(idDichVu,idDanhMuc,idDonViTinh,tenDichVu,Integer.parseInt(soLuongCon),ChuyenDoi.SoDouble(giaBan),true);
-                dichVuController.suaDichVu(dv);
+                if(sb.length() > 0){
+                    JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    DichVu dv = new DichVu(idDichVu,idDanhMuc,idDonViTinh,tenDichVu,soLuongCon,giaBan,true);
+                    dichVuController.suaDichVu(dv);                    
+                }    
             }
         }
         

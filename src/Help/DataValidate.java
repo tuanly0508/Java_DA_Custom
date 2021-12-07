@@ -6,6 +6,7 @@
 package Help;
 
 import DAO.KhachHangDAO;
+import DAO.NhaCungCapDAO;
 import DAO.NhanVienDAO;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ import java.util.Date;
 public class DataValidate {
     static NhanVienDAO nhanVienDAO = new NhanVienDAO();
     static KhachHangDAO khachHangDAO = new KhachHangDAO();
+    static NhaCungCapDAO nhaCungCapDAO = new NhaCungCapDAO();
     static SimpleDateFormat sql = new SimpleDateFormat("yyyy-MM-dd");
     
       public static void checkEmpty(String field,StringBuilder sb,String errMess){
@@ -67,8 +69,14 @@ public class DataValidate {
         }
     }
     
-    public static void checkSDTKhachHangExist(String cmnd, StringBuilder sb){
-        if(khachHangDAO.checkSDTKhachHangExist(cmnd)){
+    public static void checkSDTKhachHangExist(String sdt, StringBuilder sb){
+        if(khachHangDAO.checkSDTKhachHangExist(sdt)){
+            sb.append("Số Số điện thoại đã tồn tại! \n");
+        }
+    }
+    
+    public static void checkSDTNCCExist(String sdt, StringBuilder sb){
+        if(nhaCungCapDAO.checkSDTNCCExist(sdt)){
             sb.append("Số Số điện thoại đã tồn tại! \n");
         }
     }
