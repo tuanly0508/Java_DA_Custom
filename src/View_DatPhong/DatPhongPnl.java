@@ -90,13 +90,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
         CssTable(jScrollPane2);
         CssTable(jScrollPane5);
         CssTable(jScrollPane6);
-        GridLayout layout = new GridLayout(4,1);
+        GridLayout layout = new GridLayout(4,2);
         layout.setHgap(5);
         layout.setVgap(5);
         panelPhong.setLayout(layout);
-        panelPhong.revalidate();
-        panelPhong.repaint();
-        btnDoiPhong.setVisible(false);        
+        btnDoiPhong.setVisible(false);
         txtThoiGianMo.setVisible(false);
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
@@ -125,6 +123,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     }
     
     public void loadPhongBtn(Integer idPhong, String tenPhong, String ttPhong, Integer idLoaiPhong,String thoiGianMo, List<Object[]> tt) {  
+        setLayoutRenderPhong();
         PhongRender p = new PhongRender(idPhong);
         p.lblTenPhong.setText(tenPhong);
         p.txtGioMo.setText(thoiGianMo);
@@ -193,7 +192,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         // sự kiện khi click vào đặt trước
         p.btnDatTruoc.addActionListener(new AbstractAction(){
             @Override
-            public void actionPerformed(ActionEvent e) {  
+            public void actionPerformed(ActionEvent e) {
                 if (datPhongDialog == null) {                   
                     datPhongDialog = new DatPhongDlg(null,true);
                     setCombobox(datPhongDialog.cbxDatTruoc);   
@@ -201,7 +200,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                        
                 datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mouseClicked(MouseEvent e) { 
+                    public void mouseClicked(MouseEvent e) {
                         DefaultTableModel p = (DefaultTableModel) datPhongDialog.tblDatPhong.getModel();
                         int click = datPhongDialog.tblDatPhong.getSelectedRow();
                         datPhongDialog.txtTenKhach.setText((String) datPhongDialog.tblDatPhong.getValueAt(click, 2));
@@ -258,6 +257,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         String tenKhach = datPhongDialog.txtTenKhach.getText();
                         String SDT = datPhongDialog.txtSDT.getText();
                         GioDatTruoc myCbb = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
+                        String gio = myCbb.getTenHinhThuc();
+                        datPhongController.HienThiThoiGian(gio);
                         Integer idDatTruoc = myCbb.getId();                              
                         
                         if (p.idPhong != 0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
@@ -852,17 +853,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         panelP.setBackground(new java.awt.Color(255, 255, 255));
 
         panelPhong.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panelPhongLayout = new javax.swing.GroupLayout(panelPhong);
-        panelPhong.setLayout(panelPhongLayout);
-        panelPhongLayout.setHorizontalGroup(
-            panelPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-        );
-        panelPhongLayout.setVerticalGroup(
-            panelPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
-        );
+        panelPhong.setLayout(new java.awt.GridLayout(2, 4, 5, 5));
 
         javax.swing.GroupLayout panelPLayout = new javax.swing.GroupLayout(panelP);
         panelP.setLayout(panelPLayout);
@@ -877,8 +868,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
             panelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -1157,6 +1148,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void rdbPhongThuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongThuongActionPerformed
         if (rdbPhongThuong.isSelected()) {
             panelPhong.removeAll();
+            setLayoutRenderPhong();
             List<Object[]> data = datPhongController.fullInfoLoaiPhong(1);
             List<Object[]> data2 = datPhongController.infoOpen();
             List<Object[]> data3 = datPhongController.getTTPhieuDatPhong();
@@ -1168,6 +1160,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void rdbPhongVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongVipActionPerformed
         if (rdbPhongVip.isSelected()) {
             panelPhong.removeAll();
+            setLayoutRenderPhong();
             List<Object[]> data = datPhongController.fullInfoLoaiPhong(2);
             List<Object[]> data2 = datPhongController.infoOpen();
             List<Object[]> data3 = datPhongController.getTTPhieuDatPhong();
@@ -1179,6 +1172,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void rdbPhongTrongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPhongTrongActionPerformed
         if (rdbPhongTrong.isSelected()) {
             panelPhong.removeAll();
+            setLayoutRenderPhong();
             String tinhTrangPhong = "Phòng còn trống";
             List<Object[]> data = datPhongController.getLoaiPhongTT(tinhTrangPhong);
             List<Object[]> data2 = datPhongController.infoOpen();
@@ -1192,6 +1186,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         if (rdbPhongDangHoatDong.isSelected()) {
             System.out.println("Hoạt động");
             panelPhong.removeAll();
+            setLayoutRenderPhong();
             String tinhTrangPhong = "Đang hoạt động";
             List<Object[]> data = datPhongController.getLoaiPhongTT(tinhTrangPhong);
             List<Object[]> data2 = datPhongController.infoOpen();
@@ -1205,6 +1200,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         if (rdbBaoTri.isSelected()) {
             System.out.println("Bảo trì");
             panelPhong.removeAll();
+            setLayoutRenderPhong();
             String tinhTrangPhong = "Đang bảo trì";
             List<Object[]> data = datPhongController.getLoaiPhongTT(tinhTrangPhong);
             List<Object[]> data2 = datPhongController.infoOpen();
@@ -1861,10 +1857,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
         col1.setCellRenderer(dtcr);
         TableColumn col2 = tblBimbim.getColumnModel().getColumn(4);
         col2.setCellRenderer(dtcr);
-        
-//        //header
-//        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
-//        renderer.setHorizontalAlignment(JLabel.CENTER);
+    }
+    
+    public void setLayoutRenderPhong(){
+//        GridLayout layout = new GridLayout(4,2);
+//        layout.setHgap(5);
+//        layout.setVgap(5);
+//        panelPhong.setLayout(layout);
+        panelPhong.revalidate();
+        panelPhong.repaint();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

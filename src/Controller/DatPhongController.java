@@ -6,6 +6,10 @@ import DAO.GioDatTruocDAO;
 import DAO.KhachHangDAO;
 import View_DatPhong.DatPhongPnl;
 import Model.GioDatTruoc;
+import View_Dialog.TimesUp;
+import static java.lang.Thread.sleep;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class DatPhongController {
@@ -141,5 +145,44 @@ public class DatPhongController {
     //Huỷ chi tiết dịch vụ sử dụng
     public void huyDichVu(int idDichVu,String gioMo){
         dichVuDAO.huyDichVu(idDichVu,gioMo);
+    }
+    
+    public void HienThiThoiGian(String gio) {
+        System.out.println("gio dat là: "+ gio);
+        
+        
+        Thread clock = new Thread() {
+            public void run() {
+                try {
+                    while (true) {
+                        int gioDat =Integer.valueOf(gio.substring(0, 2))-1;
+        
+                        String timess = "" ;
+//                        System.out.println("1gio dat la:"+gio.substring(3));
+                        if(gio.substring(3).equals("00")){
+                            timess=gioDat+"h45";
+                        }
+                        if(gio.substring(3).equals("30")){
+                            timess=gioDat+"h15";
+                        }
+//                        System.out.println("gioThong Bao:"+timess);
+                        Calendar cal = new GregorianCalendar();
+                        int minute = cal.get(Calendar.MINUTE);
+                        int hour = cal.get(Calendar.HOUR_OF_DAY);
+                        String time =hour+"h"+minute;
+//                        System.out.println(hour+"h"+minute);
+                        if(timess.equals(time)){
+//                            System.out.println(gio.equals(time));
+                            TimesUp times = new TimesUp(null, true);
+                            times.setVisible(true);
+                        }
+                        sleep(1000*60);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Lỗi: " + e);
+                }
+            }
+        };
+        clock.start();
     }
 }

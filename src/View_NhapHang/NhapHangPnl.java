@@ -42,7 +42,6 @@ public class NhapHangPnl extends javax.swing.JPanel {
     private String maPhieuNhap ;
     private int idDichVu;
     private int idDichVuXoa;
-    private int idDonVi;
     private int giaTri;
     
     public NhapHangPnl() {
@@ -697,7 +696,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
         txtTongTienPN.setText(tblDanhSachPhieuNhap.getValueAt(click, 4).toString());
         txtTienNoPN.setText(tblDanhSachPhieuNhap.getValueAt(click, 5).toString());
         txtGhiChu.setText(tblDanhSachPhieuNhap.getValueAt(click, 6).toString());
-        ngayNhap = java.sql.Timestamp.valueOf( tblDanhSachPhieuNhap.getValueAt(click, 3).toString() );
+        ngayNhap = java.sql.Timestamp.valueOf( tblDanhSachPhieuNhap.getValueAt(click, 3).toString());
         
         phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);
         
@@ -771,7 +770,6 @@ public class NhapHangPnl extends javax.swing.JPanel {
         idDichVuXoa =phieuNhapHangController.layIdDichVu(tblChiTietPhieuNhap.getValueAt(click,1).toString());
         String tenDonVi = tblChiTietPhieuNhap.getValueAt(click,4).toString();
         ArrayList<Integer> donVi = phieuNhapHangController.layIdDonVi(tenDonVi);
-        idDonVi=donVi.get(0);
         giaTri=donVi.get(1);
     }//GEN-LAST:event_tblChiTietPhieuNhapMouseClicked
 
