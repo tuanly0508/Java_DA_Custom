@@ -730,6 +730,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("DỊCH VỤ SỬ DỤNG");
 
+        spnSoLuong.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         spnSoLuong.setOpaque(false);
 
         btnThemDichVu.setBackground(new java.awt.Color(120, 225, 220));
@@ -777,7 +778,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     .addComponent(btnThemDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHuyDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         spnSoLuong.setBackground(Color.WHITE);
