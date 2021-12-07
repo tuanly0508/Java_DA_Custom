@@ -31,6 +31,8 @@ public class ThongKePnl extends javax.swing.JPanel {
         
         chart1.setVisible(false);
         lblDichVu.setVisible(false);
+        lineChart1.setVisible(false);
+        chart_Custom1.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -47,7 +49,10 @@ public class ThongKePnl extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         cbxLoaiHinh = new swing.ComboBoxSuggestion();
+        jButton1 = new javax.swing.JButton();
         roundPanel3 = new swing.RoundPanel();
+        lineChart1 = new View_ThongKe.LineChart();
+        chart_Custom1 = new View_ThongKe.Chart_Custom();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblThongKe = new swing.Table();
         button11 = new swing.Button();
@@ -97,6 +102,13 @@ public class ThongKePnl extends javax.swing.JPanel {
         cbxLoaiHinh.setEditable(false);
         cbxLoaiHinh.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Doanh thu", "Dịch vụ" }));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout roundPanel2Layout = new javax.swing.GroupLayout(roundPanel2);
         roundPanel2.setLayout(roundPanel2Layout);
         roundPanel2Layout.setHorizontalGroup(
@@ -116,7 +128,9 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxLoaiHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -130,7 +144,8 @@ public class ThongKePnl extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbxLoaiHinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1))
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(roundPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -143,6 +158,21 @@ public class ThongKePnl extends javax.swing.JPanel {
         jdcDenNgay.setBackground(Color.WHITE);
 
         roundPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        roundPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        roundPanel3.add(lineChart1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 560, 320));
+
+        javax.swing.GroupLayout chart_Custom1Layout = new javax.swing.GroupLayout(chart_Custom1);
+        chart_Custom1.setLayout(chart_Custom1Layout);
+        chart_Custom1Layout.setHorizontalGroup(
+            chart_Custom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 560, Short.MAX_VALUE)
+        );
+        chart_Custom1Layout.setVerticalGroup(
+            chart_Custom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+        );
+
+        roundPanel3.add(chart_Custom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 560, 290));
 
         tblThongKe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -164,6 +194,8 @@ public class ThongKePnl extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tblThongKe);
 
+        roundPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 560, 570));
+
         button11.setBorder(null);
         button11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel (1).png"))); // NOI18N
         button11.addActionListener(new java.awt.event.ActionListener() {
@@ -171,27 +203,7 @@ public class ThongKePnl extends javax.swing.JPanel {
                 button11ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout roundPanel3Layout = new javax.swing.GroupLayout(roundPanel3);
-        roundPanel3.setLayout(roundPanel3Layout);
-        roundPanel3Layout.setHorizontalGroup(
-            roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button11, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        roundPanel3Layout.setVerticalGroup(
-            roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addGap(18, 18, 18)
-                .addComponent(button11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        roundPanel3.add(button11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 599, 64, 30));
 
         roundPanel4.setBackground(new java.awt.Color(255, 255, 255));
         roundPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -255,7 +267,7 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(lblTienPhuThu, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,9 +297,9 @@ public class ThongKePnl extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(roundPanel1Layout.createSequentialGroup()
-                        .addComponent(roundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(roundPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(roundPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(roundPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(roundPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(roundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(65, Short.MAX_VALUE))
@@ -323,7 +335,11 @@ public class ThongKePnl extends javax.swing.JPanel {
             viewTableThongKe(data);
             List<Object[]> data2 = thongKeController.bieuDoDoanhThu(tuNgay,denNgay);
             Double tienPhong1 = 0.0,tienDichVu1=0.0 ,phuThu1=0.0 ,Tong1=0.0;
-            chart.clear();                
+            chart.clear();   
+            lineChart1.addLegend("Tiền giờ", new Color(12, 84, 175), new Color(0, 108, 247));
+            lineChart1.addLegend("Dịch vụ", new Color(54, 4, 143), new Color(104, 49, 200));
+            lineChart1.addLegend("Phụ thu", new Color(5, 125, 0), new Color(95, 209, 69));
+            lineChart1.clear();
             for (int i = 0; i <= data2.size()-1; i++) {                
                 tienPhong1+=ChuyenDoi.SoDouble(data2.get(i)[2].toString());
                 tienDichVu1+=ChuyenDoi.SoDouble(data2.get(i)[3].toString());
@@ -336,8 +352,10 @@ public class ThongKePnl extends javax.swing.JPanel {
                 
                 setValueSum(tienPhong1, tienDichVu1, phuThu1, Tong1);
                 chart.addData(new ModelChart(data2.get(i)[0].toString()+"/"+data2.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu}));
+                lineChart1.addData(new ModelChart(data2.get(i)[0].toString()+"/"+data2.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu}));
             }
             chart.start();
+            lineChart1.start();
         }else if (cbxLoaiHinh.getSelectedIndex() == 1) {
             chart1.addLegend("Tiền giờ", new Color(12, 84, 175), new Color(0, 108, 247));
             lblDoanhThu.setVisible(false);
@@ -357,6 +375,12 @@ public class ThongKePnl extends javax.swing.JPanel {
     private void button11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button11ActionPerformed
         XuatExcel.xuat(tblThongKe);
     }//GEN-LAST:event_button11ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        lineChart1.setVisible(true);
+        jScrollPane2.setVisible(false);
+        chart_Custom1.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
    
     public void setValueSum(Double phong , Double dichVu ,Double phuThu, Double tong){
         lblTienGio.setText(ChuyenDoi.SoString(phong)+" đ");
@@ -416,6 +440,8 @@ public class ThongKePnl extends javax.swing.JPanel {
     private swing.ComboBoxSuggestion cbxLoaiHinh;
     private View_ThongKe.Chart chart;
     private View_ThongKe.Chart chart1;
+    private View_ThongKe.Chart_Custom chart_Custom1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -433,6 +459,7 @@ public class ThongKePnl extends javax.swing.JPanel {
     private javax.swing.JLabel lblTienGio;
     private javax.swing.JLabel lblTienPhuThu;
     private javax.swing.JLabel lblTongTien;
+    private View_ThongKe.LineChart lineChart1;
     private swing.RoundPanel roundPanel1;
     private swing.RoundPanel roundPanel2;
     private swing.RoundPanel roundPanel3;

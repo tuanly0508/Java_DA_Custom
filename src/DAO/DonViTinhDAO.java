@@ -7,6 +7,9 @@ package DAO;
 
 import Help.DBConnection;
 import Model.DonViTinh;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,5 +24,21 @@ public class DonViTinhDAO extends AbsDAO<DonViTinh>{
     public void xoaTamThoiDonViTinh(int idDonVi){
         String query = "update donViTinh set tinhTrang=0 where idDonviTinh =?";
         DBConnection.executeUpdate(query, idDonVi);
+    }
+    
+    public ArrayList<Integer> layIDDonvi(String tenDonVi){
+        String query = "select idDonViTinh,giaTri from donViTinh where tenDonVi like ?";
+        ResultSet rs = DBConnection.executeQuery(query,tenDonVi);
+        ArrayList<Integer> donVi = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                donVi.add(rs.getInt("idDonViTinh"));
+                System.out.println(rs.getInt("idDonViTinh"));
+                donVi.add(rs.getInt("giaTri"));
+                System.out.println(rs.getInt("giaTri"));
+            }
+        } catch (SQLException ex) {
+        }
+        return donVi;
     }
 }

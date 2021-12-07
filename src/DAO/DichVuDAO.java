@@ -64,4 +64,19 @@ public class DichVuDAO extends AbsDAO<DichVu>{
         String query= "delete from ChiTietDichVuSuDung where idDichVu = ? and gioSuDung=?";
         DBConnection.executeUpdate(query, idDichVu,gio);
     }
+    
+    //lấy id dịch vụ
+    public int layIdDichVu(String ten){
+        String query = "select idDichvu from DichVu where tenDichVu like ?";
+        ResultSet rs = DBConnection.executeQuery(query,ten);
+        int slCon =0;
+        try {
+            while (rs.next()) {
+                slCon=rs.getInt("idDichvu");
+            }
+        } catch (SQLException ex) {
+        }
+        return slCon;
+    }
+    
 }

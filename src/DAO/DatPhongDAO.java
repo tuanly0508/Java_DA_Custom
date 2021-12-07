@@ -2,6 +2,8 @@ package DAO;
 
 import Help.DBConnection;
 import Model.Phong;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class DatPhongDAO extends AbsDAO<Phong>{
@@ -74,5 +76,18 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     public void updateSoLuongSuDungDichVu(int soLuong ,int idDichVu, String gioMo) {
         String query = "update chiTietDichVuSuDung set soLuong = ? where idDichVu = ? and gioSuDung = ?";
         DBConnection.executeUpdate(query,soLuong, idDichVu, gioMo);
+    }
+    
+    public String layTenPhong(int idPhong){
+        String query = "select tenPhong from Phong where idPhong="+idPhong+"";
+        ResultSet rs = DBConnection.executeQuery(query);
+        String tenPhong="";
+        try {
+            while (rs.next()) {
+                tenPhong=rs.getString("tenPhong");
+            }
+        } catch (SQLException ex) {
+        }
+        return tenPhong;
     }
 }

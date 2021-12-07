@@ -10,6 +10,7 @@ import Model.DanhMuc;
 import Model.DonViTinh;
 import Model.PhieuNhapDichVu;
 import View_NhapHang.NhapHangPnl;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhieuNhapHangController {
@@ -35,7 +36,6 @@ public class PhieuNhapHangController {
     }
     
     public void loadChiTietPhieuNhap(String maPhieuNhap){
-        System.out.println(maPhieuNhap);
         List<Object[]> chiTiets = phieuNhapHangDAO.getDataChiTietPN(maPhieuNhap);
         view.viewTableChiTietPhieuNhap(chiTiets);
     }
@@ -85,4 +85,20 @@ public class PhieuNhapHangController {
     public void capNhatSoLuongDV(int idDichVu, int soLuong){
         dichVuDAO.capNhatSoLuongDichVu(idDichVu, soLuong);
     }
+    
+    //Xoá Chi tiết phiếu nhập
+    public void xoaChiTietPN(String maPN,int idDichVu){
+        chiTietPhieuNhapDAO.xoaCTPN(maPN,idDichVu);
+    }
+    
+    //lấy id Đơn vị tính
+    public ArrayList<Integer> layIdDonVi(String ten){
+        return donViTinhDAO.layIDDonvi(ten);
+    }
+    
+    //lấy id dịch vụ
+    public int layIdDichVu(String ten){
+        return dichVuDAO.layIdDichVu(ten);
+    }
 }
+
