@@ -78,6 +78,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     Double tienNo = 0.0;
     boolean duocNo = false ;
     int soLuongDauTien =0;
+    int loadPopup = 0;
        
     public DatPhongPnl() {
         initComponents();
@@ -196,8 +197,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 if (datPhongDialog == null) {                   
                     datPhongDialog = new DatPhongDlg(null,true);
                     setCombobox(datPhongDialog.cbxDatTruoc);   
-                }         
-                       
+                }
+                
                 datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -258,7 +259,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         String SDT = datPhongDialog.txtSDT.getText();
                         GioDatTruoc myCbb = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
                         String gio = myCbb.getTenHinhThuc();
-                        datPhongController.HienThiThoiGian(gio);
+                        
+                        datPhongController.HienThiThoiGian(gio,tenKhach,SDT,p.idPhong);
+                        
                         Integer idDatTruoc = myCbb.getId();                              
                         
                         if (p.idPhong != 0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
@@ -273,7 +276,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             loadTable(datPhongDialog.tblDatPhong, data);
                             setNullDatPhongDiaglog();
                             p.idPhong = 0;
-                        }                                                      
+                        }
                     }
                 });
                 

@@ -4,6 +4,7 @@ import DAO.DatPhongDAO;
 import DAO.DichVuDAO;
 import DAO.GioDatTruocDAO;
 import DAO.KhachHangDAO;
+import DAO.PhieuDatPhongDAO;
 import View_DatPhong.DatPhongPnl;
 import Model.GioDatTruoc;
 import View_Dialog.TimesUp;
@@ -18,10 +19,12 @@ public class DatPhongController {
     KhachHangDAO khachHangDAO = new KhachHangDAO();
     DichVuDAO dichVuDAO = new DichVuDAO();
     GioDatTruocDAO gioDatTruocDAO = new GioDatTruocDAO();
+    PhieuDatPhongDAO phieuDatPhongDAO = new PhieuDatPhongDAO();
 
     public DatPhongController(DatPhongPnl view) {
         this.view = view;
         loadListPhong();
+        LoadShowPopUp();
         view.setController(this);
     }
      
@@ -147,9 +150,14 @@ public class DatPhongController {
         dichVuDAO.huyDichVu(idDichVu,gioMo);
     }
     
-    public void HienThiThoiGian(String gio) {
-        System.out.println("gio dat là: "+ gio);
+    
+    public void HienThiThoiGian(String gio,String tenKhach,String sdt ,int idPhong) {
         
+        String tenPhong = datPhongDAO.layTenPhong(idPhong);
+        System.out.println("Thông báo đặt trước phòng: "+ tenPhong);
+        System.out.println("Giờ đặt : "+ gio);
+        System.out.println("Số điện thoại : "+ sdt);
+        System.out.println("Tên Khách : "+ tenKhach);
         
         Thread clock = new Thread() {
             public void run() {
@@ -160,10 +168,10 @@ public class DatPhongController {
                         String timess = "" ;
 //                        System.out.println("1gio dat la:"+gio.substring(3));
                         if(gio.substring(3).equals("00")){
-                            timess=gioDat+"h45";
+                            timess=gioDat+"h30";
                         }
                         if(gio.substring(3).equals("30")){
-                            timess=gioDat+"h15";
+                            timess=Integer.valueOf(gio.substring(0, 2))+"h0";
                         }
 //                        System.out.println("gioThong Bao:"+timess);
                         Calendar cal = new GregorianCalendar();
@@ -171,9 +179,15 @@ public class DatPhongController {
                         int hour = cal.get(Calendar.HOUR_OF_DAY);
                         String time =hour+"h"+minute;
 //                        System.out.println(hour+"h"+minute);
+
                         if(timess.equals(time)){
-//                            System.out.println(gio.equals(time));
+                            System.out.println(gio.equals(time));
                             TimesUp times = new TimesUp(null, true);
+                            times.lblTenPhong.setText("Thông báo đặt trước phòng: "+ tenPhong);
+                            times.txtGioDat.setText("Giờ đặt : "+ gio);
+                            times.txtSdt.setText("Số điện thoại : "+ sdt);
+                            times.txtTenKhach.setText("Tên Khách : "+ tenKhach);
+                            
                             times.setVisible(true);
                         }
                         sleep(1000*60);
@@ -184,5 +198,54 @@ public class DatPhongController {
             }
         };
         clock.start();
+    }
+    
+    public void LoadShowPopUp() {
+        List<Object[]> allPhieuDatPhong = phieuDatPhongDAO.getAllPhieuDatPhong();
+        for (int i=0;i<allPhieuDatPhong.size();i++){
+            String gio =allPhieuDatPhong.get(i)[5].toString();
+            String tenPhong =allPhieuDatPhong.get(i)[2].toString();
+            String sdt = allPhieuDatPhong.get(i)[4].toString();
+            String tenKhach = allPhieuDatPhong.get(i)[3].toString();
+            
+        Thread clock = new Thread() {
+            public void run() {
+                try {
+                    while (true) {
+                        int gioDat =Integer.valueOf(gio.substring(0, 2))-1;
+        
+                        String timess = "" ;
+//                        System.out.println("1gio dat la:"+gio.substring(3));
+                        if(gio.substring(3).equals("00")){
+                            timess=gioDat+"h30";
+                        }
+                        if(gio.substring(3).equals("30")){
+                            timess=Integer.valueOf(gio.substring(0, 2))+"h0";
+                        }
+//                        System.out.println("gioThong Bao:"+timess);
+                        Calendar cal = new GregorianCalendar();
+                        int minute = cal.get(Calendar.MINUTE);
+                        int hour = cal.get(Calendar.HOUR_OF_DAY);
+                        String time =hour+"h"+minute;
+//                        System.out.println("giờ đặt: " + timess);
+//                        System.out.println("Giờ hiện tại: "+hour+"h"+minute);
+                        if(timess.equals(time)){
+//                            System.out.println(gio.equals(time));
+                            TimesUp times = new TimesUp(null, true);
+                            times.lblTenPhong.setText("Thông báo đặt trước : "+ tenPhong);
+                            times.txtGioDat.setText("Giờ đặt : "+ gio);
+                            times.txtSdt.setText("Số điện thoại : "+ sdt);
+                            times.txtTenKhach.setText("Tên Khách : "+ tenKhach);
+                            times.setVisible(true);
+                        }
+                        sleep(1000*60);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Lỗi: " + e);
+                }
+            }
+        };
+        clock.start();
+    }
     }
 }

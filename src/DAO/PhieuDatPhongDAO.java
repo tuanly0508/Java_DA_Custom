@@ -19,4 +19,11 @@ public class PhieuDatPhongDAO extends AbsDAO<PhieuDatPhong>{
         return getRawValues("select idPhieuDatPhong,idPhong,tenKhach,SDTKhachHang,b.tenHinhThuc from phieuDatPhong a join GioDatTruoc b "
                             + "on a.thoiGianDat = b.idGioDatTruoc where idPhong = "+idPhong+" and tinhTrang = 1 ");
     }
+    
+    public List<Object[]> getAllPhieuDatPhong() {
+        return getRawValues("select idPhieuDatPhong,a.idPhong,tenPhong,tenKhach,SDTKhachHang,b.tenHinhThuc from phieuDatPhong a \n" +
+                            "join GioDatTruoc b on a.thoiGianDat = b.idGioDatTruoc \n" +
+                            "join phong p on p.idPhong=a.idPhong\n" +
+                            "where tinhTrang = 1");
+    }
 }
