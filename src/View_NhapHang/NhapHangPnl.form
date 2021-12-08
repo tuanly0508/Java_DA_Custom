@@ -435,12 +435,12 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jScrollPane5" pref="0" max="32767" attributes="0"/>
-                              <Component id="txtTimDichVu" pref="190" max="32767" attributes="0"/>
+                              <Component id="txtTimDichVu" pref="82" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="txtTongGiaTri" max="32767" attributes="0"/>
+                                  <Component id="txtTongGiaTri" pref="160" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                   <Component id="btnXoaChiTietPN" min="-2" pref="70" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -448,11 +448,12 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="txtTenDichVu" min="-2" pref="160" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
-                                      </Group>
                                       <Component id="txtSoLuongDV" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="txtTenDichVu" min="-2" pref="18" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="cbxDichVu" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -471,8 +472,9 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="txtTenDichVu" max="32767" attributes="0"/>
+                                      <Component id="txtTenDichVu" min="-2" max="-2" attributes="0"/>
                                       <Component id="cbxDonVi" max="32767" attributes="0"/>
+                                      <Component id="cbxDichVu" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -600,6 +602,11 @@
                     <Property name="labelText" type="java.lang.String" value="T&#x1ed5;ng Gi&#xe1; tr&#x1ecb; Phi&#x1ebf;u nh&#x1ead;p"/>
                     <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
+                </Component>
+                <Component class="swing.ComboBoxSuggestion" name="cbxDichVu">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DichVu&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

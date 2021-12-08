@@ -6,33 +6,20 @@ import Help.ChuyenDoi;
 import Help.DataValidate;
 import Help.XuatExcel;
 import Model.ChiTietPhieuNhap;
-import Model.DanhMuc;
+import Model.DichVu;
 import Model.DonViTinh;
-import Model.NhaCungCap;
 import Model.PhieuNhapDichVu;
 import swing.ScrollBar;
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Frame;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class NhapHangPnl extends javax.swing.JPanel {
     private PhieuNhapHangController phieuNhapHangController;
@@ -91,6 +78,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
         txtTimDichVu = new swing.TextInputTT();
         cbxDonVi = new javax.swing.JComboBox<>();
         txtTongGiaTri = new swing.TextField();
+        cbxDichVu = new swing.ComboBoxSuggestion<>();
         button12 = new swing.Button();
         roundPanel4 = new swing.RoundPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -370,21 +358,22 @@ public class NhapHangPnl extends javax.swing.JPanel {
             .addGroup(roundPanel6Layout.createSequentialGroup()
                 .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txtTimDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
+                    .addComponent(txtTimDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+                .addGap(137, 137, 137)
                 .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundPanel6Layout.createSequentialGroup()
-                        .addComponent(txtTongGiaTri, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTongGiaTri, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                         .addGap(39, 39, 39)
                         .addComponent(btnXoaChiTietPN, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnThemChiTietPN, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundPanel6Layout.createSequentialGroup()
                         .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSoLuongDV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(roundPanel6Layout.createSequentialGroup()
-                                .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 11, Short.MAX_VALUE))
-                            .addComponent(txtSoLuongDV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbxDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtGiaNhapDV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -397,8 +386,9 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel6Layout.createSequentialGroup()
                         .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtTenDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxDonVi))
+                            .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxDonVi)
+                            .addComponent(cbxDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtSoLuongDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -950,6 +940,13 @@ public class NhapHangPnl extends javax.swing.JPanel {
         }
     }
     
+    public void FillDataComboBoxDichVu(List<DichVu> dichVus) {
+        cbxDichVu.removeAllItems();
+        for (DichVu dichVu : dichVus) {
+            cbxDichVu.addItem(dichVu);
+        }
+    }
+    
     public void FillDataComboBoxDonViTinh(List<DonViTinh> donviTinhs) {
         cbxDonVi.removeAllItems();
         for (DonViTinh donViTinh : donviTinhs) {
@@ -976,6 +973,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
     private swing.Button button10;
     private swing.Button button11;
     private swing.Button button12;
+    private swing.ComboBoxSuggestion<DichVu> cbxDichVu;
     private javax.swing.JComboBox<DonViTinh> cbxDonVi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

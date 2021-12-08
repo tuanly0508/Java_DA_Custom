@@ -7,6 +7,7 @@ import DAO.DonViTinhDAO;
 import DAO.PhieuNhapHangDAO;
 import Model.ChiTietPhieuNhap;
 import Model.DanhMuc;
+import Model.DichVu;
 import Model.DonViTinh;
 import Model.PhieuNhapDichVu;
 import View_NhapHang.NhapHangPnl;
@@ -27,7 +28,7 @@ public class PhieuNhapHangController {
         loadList();
         loadDichVu();
         loadDonViTinh();
-        
+        loadTenDichVu();
     } 
     
     public void loadList(){
@@ -53,6 +54,11 @@ public class PhieuNhapHangController {
     public void loadDonViTinh() {
         List<DonViTinh> donViTinhs = donViTinhDAO.getAll();
         view.FillDataComboBoxDonViTinh(donViTinhs);
+    }
+    
+    public void loadTenDichVu() {
+        List<DichVu> dichVus = dichVuDAO.getAll();
+        view.FillDataComboBoxDichVu(dichVus);
     }
     
     public void insert(PhieuNhapDichVu pn){

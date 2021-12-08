@@ -82,21 +82,25 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jdcTuNgay" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="64" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jdcDenNgay" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cbxThoiGian" min="-2" pref="111" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" pref="64" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbxLoaiHinh" min="-2" pref="111" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="switchButton1" min="-2" pref="61" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" pref="44" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="btnThongKe" min="-2" pref="65" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -107,24 +111,38 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jdcDenNgay" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="cbxLoaiHinh" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="btnThongKe" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="btnThongKe" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jdcTuNgay" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel6" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jdcTuNgay" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jdcDenNgay" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel6" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="cbxThoiGian" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="cbxLoaiHinh" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="switchButton1" min="-2" pref="25" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -146,6 +164,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jdcTuNgay.setBackground(Color.WHITE);"/>
@@ -156,6 +175,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jdcDenNgay.setBackground(Color.WHITE);"/>
@@ -197,6 +217,29 @@
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bi&#x1ec3;u &#x111;&#x1ed3;"/>
+              </Properties>
+            </Component>
+            <Component class="swing.ComboBoxSuggestion" name="cbxThoiGian">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="5">
+                    <StringItem index="0" value="Ch&#x1ecd;n"/>
+                    <StringItem index="1" value="H&#xf4;m nay"/>
+                    <StringItem index="2" value="Tu&#x1ea7;n n&#xe0;y"/>
+                    <StringItem index="3" value="Th&#xe1;ng n&#xe0;y"/>
+                    <StringItem index="4" value="N&#x103;m n&#xe0;y"/>
+                  </StringArray>
+                </Property>
+                <Property name="selectedIndex" type="int" value="1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbxThoiGianItemStateChanged"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Th&#x1edd;i gian"/>
               </Properties>
             </Component>
           </SubComponents>

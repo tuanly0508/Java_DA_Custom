@@ -84,4 +84,9 @@ public class DichVu extends AbsTable{
     public int getId() {
         return idDichVu;
     }
+    
+    @Override
+    public String toString() {
+        return tenDichVu;
+    }
 }

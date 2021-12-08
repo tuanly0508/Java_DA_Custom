@@ -20,7 +20,8 @@ public class ThongKeController {
     
     public ThongKeController(tablePnl view) {
         this.viewPnl = view;
-        tableDefault();
+        tableDefaulHomNay();
+        tableDefaulThang();
         view.setController(this);
     }
     
@@ -29,13 +30,33 @@ public class ThongKeController {
         view.setController(this);
     }
     
-    public void tableDefault() {
-        List<Object[]> khoangs = thongKeDAO.tableDefaul(); 
+    public void tableDefaulHomNay() {
+        List<Object[]> khoangs = thongKeDAO.tableDefaulHomNay(); 
         viewPnl.viewTableThongKe(khoangs);
+    }   
+    
+    public List<Object[]> tableDefaulToday() {
+        List<Object[]> khoangs = thongKeDAO.tableDefaulHomNay(); 
+        return khoangs;
+    } 
+    
+    public List<Object[]> tableDefaulTuan() {
+        List<Object[]> khoangs = thongKeDAO.tableDefaulTuan(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> tableDefaulThang() {
+        List<Object[]> khoangs = thongKeDAO.tableDefaulThang(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> tableDefaulNam() {
+        List<Object[]> khoangs = thongKeDAO.tableDefaulNam(); 
+        return khoangs;
     }
     
     public void giaDefault() {
-        List<Object[]> defaults = thongKeDAO.tableDefaul();
+        List<Object[]> defaults = thongKeDAO.tableDefaulHomNay();
         view.setGiaDefault(defaults);
     }
     
