@@ -1,4 +1,4 @@
-package View_ThongKe;
+package Model;
 
 import java.awt.Color;
 

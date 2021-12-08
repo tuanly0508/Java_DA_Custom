@@ -1,5 +1,7 @@
 package View_ThongKe;
 
+import Model.ModelChart;
+import Model.ModelLegend;
 import View_ThongKe.BlankPlotChart;
 import View_ThongKe.BlankPlotChatRender;
 import View_ThongKe.SeriesSize;

@@ -1,25 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View_DichVu;
 
 import Controller.DichVuController;
-import Help.ChuyenDoi;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.List;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Administrator
- */
 public class DichVuPnl extends javax.swing.JPanel {
 
     DichVuController dichVuController ;

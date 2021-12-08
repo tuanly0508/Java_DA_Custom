@@ -1,5 +1,7 @@
 package View_ThongKe;
 
+import Model.ModelLegend;
+
 public class LegendItem extends javax.swing.JPanel {
 
     public LegendItem(ModelLegend data) {

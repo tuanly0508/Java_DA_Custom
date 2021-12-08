@@ -1,4 +1,4 @@
-package View_ThongKe;
+package Model;
 
 public class ModelChart {
 

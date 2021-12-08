@@ -5,7 +5,7 @@ import java.util.List;
 public class ThongKeDAO extends AbsDAO{
     
     public List<Object[]> tableDefaul() {
-        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'0,#') tienPhong,format(tienDichVu,'0,#') tienDichVu,format(phuThu,'0,#') phuThu,format(tongTien,'0,#') tongTien from phong a "
+        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien from phong a "
                             + "join phieuThuePhong b on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong "
                             + "where thoiGianMo between CONVERT(datetime, replace(GETDATE(),DATEPART(dd,GETDATE()),01), 121) and GETDATE()");
     }
@@ -18,7 +18,7 @@ public class ThongKeDAO extends AbsDAO{
     }
     
     public List<Object[]> tableDoanhThu(java.sql.Date tuNgay, java.sql.Date denNgay) {
-        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,tienPhong,tienDichVu,phuThu,tongTien from phong a "
+        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien from phong a "
                             + "join phieuThuePhong b on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong "
                             + "where thoiGianMo between '"+tuNgay+"' and '"+denNgay+"' ");
     }
