@@ -62,14 +62,18 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private DatPhongDlg datPhongDialog;
     private PhongRender phongRender;
     private boolean isSDT = false;
-    int loaiPhongHienTai = UNDEFINED_CONDITION;
-    String tenPhongHienTai = TOOL_TIP_TEXT_KEY;
+    private Table table;
+    int loaiPhongHienTai = UNDEFINED_CONDITION;   
     int phongHienTai = UNDEFINED_CONDITION;
     int phongCanDoi = UNDEFINED_CONDITION;
     int idGiaNgayLe = UNDEFINED_CONDITION;
     int click1 = UNDEFINED_CONDITION;
+    boolean duocNo = false ;
+    int soLuongDauTien =0;
+    int loadPopup = 0;
     PhieuThuePhong phieuThuePhong = new PhieuThuePhong();
     PhieuDatPhong phieuDatPhong = new PhieuDatPhong();
+    String tenPhongHienTai = TOOL_TIP_TEXT_KEY;
     GiaNgayLe giaNgayLe = new GiaNgayLe();
     KhachHang khachHang = new KhachHang();    
     Double tienDichVu = 0.0;
@@ -77,15 +81,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
     Double tienPhuThu = 0.0;
     Double tongTien = 0.0;
     Double tienGio = 0.0;
-    Double tienNo = 0.0;
-    boolean duocNo = false ;
-    int soLuongDauTien =0;
-    int loadPopup = 0;
+    Double tienNo = 0.0;      
        
     public DatPhongPnl() {
         initComponents();
         init();
         setDisable();   
+        tabAllPanel();
     }
 
     public void init() {
@@ -221,7 +223,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
                 datPhongDialog.btnHuy.addActionListener(new AbstractAction(){
                     @Override
-                    public void actionPerformed(ActionEvent e) {  
+                    public void actionPerformed(ActionEvent e) {
                         for (int i = 0; i < tt.size(); i++) {           
                             if (tt.get(i)[0].equals(p.idPhong)) {
                                 GioDatTruoc g =(GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
@@ -234,6 +236,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                                 loadTable(datPhongDialog.tblDatPhong, data);
                                 setNullDatPhongDiaglog();
                                 p.idPhong =0;
+                                datPhongDialog.dispose();
                             }
                         }                                                           
                     }                        
@@ -278,6 +281,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             loadTable(datPhongDialog.tblDatPhong, data);
                             setNullDatPhongDiaglog();
                             p.idPhong = 0;
+                            datPhongDialog.dispose();
                         }
                     }
                 });
@@ -312,6 +316,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             setThongTinPhong(p.idPhong);
                             setNullDatPhongDiaglog();
                             p.idPhong = 0;
+                            datPhongDialog.dispose();
                         }
                     }
                 });
@@ -329,6 +334,19 @@ public class DatPhongPnl extends javax.swing.JPanel {
         panelPhong.revalidate();
         panelPhong.repaint();
     }   
+    
+    public void tabAllPanel() {
+//        JPanel bimbim;
+//        bimbim  = new JPanel();
+//        table = new swing.Table();
+//        table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+//        table.setSize(355, 313);
+//        JScrollPane jsp = new JScrollPane();
+//        jsp.setSize(450, 400);
+//        jsp.setViewportView(table);
+//        bimbim.add(jsp);
+//        jtpDichVuAll.addTab("xxx", bimbim);       
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -933,7 +951,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 324, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)))
         );
