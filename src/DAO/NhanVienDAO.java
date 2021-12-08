@@ -17,4 +17,24 @@ public class NhanVienDAO extends AbsDAO<NhanVien>{
         String query = "update nhanVien set trangThai = 'Off' where idNhanVien = ?";
         DBConnection.executeUpdate(query, idNhanVien);
     }
+    
+    public boolean checkEmailExist(String email){
+        List<Object[]> data=getRawValues("select count(*) from NhanVien where email = ?", email);
+        Integer count =(Integer) data.get(0)[0];
+        return count >0;
+    }
+    
+    public boolean checkPhoneExist(String phone){
+        List<Object[]> data=getRawValues("Select count(*) from NhanVien where soDienThoai=?", phone);
+        Integer count =(Integer) data.get(0)[0];
+        return count >0;
+    }
+    
+    public boolean checkCMNDExist(String CMND){
+        List<Object[]> data=getRawValues("Select count(*) from NhanVien where CMND=?", CMND);
+        Integer count =(Integer) data.get(0)[0];
+        return count >0;
+    }
+    
+    
 }

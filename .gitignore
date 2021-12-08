@@ -26,8 +26,4 @@ dist/README.TXT
 nbproject/private/private.xml
 nbproject/project.properties
 test.pdf
-build/built-jar.properties
-dist/README.TXT
-nbproject/private/private.xml
-nbproject/project.properties
-test.pdf
+/dist/

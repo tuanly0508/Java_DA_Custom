@@ -6,6 +6,7 @@
 package View_DichVu;
 
 import Controller.DichVuController;
+import Help.DataValidate;
 import Model.DanhMuc;
 import Model.DonViTinh;
 import java.awt.Frame;
@@ -303,9 +304,16 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        StringBuilder sb = new StringBuilder();
+        
         String tenDichVu = txtTenDanhMuc.getText();
-        DanhMuc dm = new DanhMuc(0,tenDichVu,true);
-        dichVuController.themDanhMuc(dm);
+        DataValidate.checkEmpty(tenDichVu, sb, "Tên danh mục không được để trống! ");
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            DanhMuc dm = new DanhMuc(0,tenDichVu,true);
+            dichVuController.themDanhMuc(dm);           
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -315,9 +323,15 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
         } else {
             int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn sửa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
             if (clickLuu == JOptionPane.YES_OPTION) {
+                StringBuilder sb = new StringBuilder();
                 String tenDichVu = txtTenDanhMuc.getText();
-                DanhMuc dm = new DanhMuc((Integer)tblDanhMuc.getValueAt(chonDong, 0),tenDichVu,true);
-                dichVuController.suaDanhMuc(dm);
+                DataValidate.checkEmpty(tenDichVu, sb, "Tên danh mục không được để trống! ");
+                if(sb.length() > 0){
+                    JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    DanhMuc dm = new DanhMuc((Integer)tblDanhMuc.getValueAt(chonDong, 0),tenDichVu,true);
+                    dichVuController.suaDanhMuc(dm);                    
+                }   
             }
         }
 
@@ -337,10 +351,24 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
+        StringBuilder sb = new StringBuilder();
         String tenDonVi = txtTenDanhMuc1.getText();
-        int giaTri = Integer.getInteger(txtGiaTri.getText());
-        DonViTinh dvt = new DonViTinh(0,tenDonVi,giaTri,true);
-        dichVuController.themDonViTinh(dvt);
+        DataValidate.checkEmpty(tenDonVi, sb, "Tên danh mục không được để trống! ");
+        Integer giaTri = 0;
+        try {
+            giaTri = Integer.parseInt(txtGiaTri.getText()) ;
+            if(giaTri < 0){
+                sb.append("Giá trị phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Giá trị phải là số \n");
+        }
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }else{    
+            DonViTinh dvt = new DonViTinh(0,tenDonVi,giaTri,true);
+            dichVuController.themDonViTinh(dvt);            
+        }          
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
@@ -348,10 +376,28 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
         if (chonDong == -1) {
             JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
         } else {
-            String tenDonVi = txtTenDanhMuc1.getText();
-            Integer giaTri = Integer.parseInt(txtGiaTri.getText());
-            DonViTinh dvt = new DonViTinh(Integer.parseInt(tblDonViTinh.getValueAt(chonDong, 0).toString()),tenDonVi,giaTri,true);
-            dichVuController.suaDonViTinh(dvt);
+            int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
+            if(update == JOptionPane.YES_OPTION){
+                StringBuilder sb = new StringBuilder();
+                
+                String tenDonVi = txtTenDanhMuc1.getText();
+                DataValidate.checkEmpty(tenDonVi, sb, "Tên danh mục không được để trống! ");
+                Integer giaTri = 0;
+                try {
+                    giaTri = Integer.parseInt(txtGiaTri.getText()) ;
+                    if(giaTri < 0){
+                        sb.append("Giá trị phải lớn hớn 0 \n");
+                    }
+                } catch (Exception e) {
+                    sb.append("Giá trị phải là số \n");
+                }
+                if(sb.length() > 0){
+                    JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    DonViTinh dvt = new DonViTinh(Integer.parseInt(tblDonViTinh.getValueAt(chonDong, 0).toString()),tenDonVi,giaTri,true);
+                    dichVuController.suaDonViTinh(dvt);                    
+                }                            
+            }
         }
     }//GEN-LAST:event_btnSua1ActionPerformed
 

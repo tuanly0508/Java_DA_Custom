@@ -3,6 +3,7 @@ package View_NhapHang;
 import Controller.NhaCungCapController;
 import Controller.PhieuNhapHangController;
 import Help.ChuyenDoi;
+import Help.DataValidate;
 import Help.XuatExcel;
 import Model.ChiTietPhieuNhap;
 import Model.DanhMuc;
@@ -633,23 +634,65 @@ public class NhapHangPnl extends javax.swing.JPanel {
         } else {
             int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
             if(update == JOptionPane.YES_OPTION){
+                StringBuilder sb = new StringBuilder();
+                
                 String tenNhaCungCap = txtNhaCungCap.getText();
+                DataValidate.checkEmpty(tenNhaCungCap, sb, "Tên không được để trống");
                 String SDTNhaCungCap = txtSDT.getText();
+                DataValidate.checkEmpty(SDTNhaCungCap, sb, "Số điện thoại không được để trống! ");
+                DataValidate.checkSdtForm(SDTNhaCungCap, sb);                
                 String diaChi = txtDiaChi.getText();
-                Double tienNo = Double.parseDouble(txtTienNo.getText());
+                DataValidate.checkEmpty(diaChi, sb, "Địa chỉ không được để trống! ");
+//                Double tienNo = Double.parseDouble(txtTienNo.getText());
+                double tienNo = 0;
+                try {
+                    tienNo = Double.parseDouble(txtTienNo.getText()) ;
+                    if(tienNo < 0){
+                        sb.append("Tiền nợ phải lớn hớn 0 \n");
+                    }
+                } catch (Exception e) {
+                    sb.append("Tiền nợ phải là số \n");
+                }              
                 Integer idNhaCungCap = (Integer) tblNhaCungCap.getValueAt(chonDong, 0);
+                if(sb.length() > 0){
+                    JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+                }else{                
                 nhaCungCapController.update(idNhaCungCap, tenNhaCungCap, SDTNhaCungCap, diaChi, tienNo);
-                JOptionPane.showMessageDialog(new Frame(),"Update success !!!");
+                JOptionPane.showMessageDialog(new Frame(),"Update success !!!");           
+                }
             }
         }
     }//GEN-LAST:event_bntSuaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        StringBuilder sb = new StringBuilder();
+        
         String tenNhaCungCap = txtNhaCungCap.getText();
+        DataValidate.checkEmpty(tenNhaCungCap, sb, "Tên không được để trống");
+        
         String SDTNhaCungCap = txtSDT.getText();
+        DataValidate.checkEmpty(SDTNhaCungCap, sb, "Số điện thoại không được để trống! ");
+        DataValidate.checkSdtForm(SDTNhaCungCap, sb);
+        DataValidate.checkSDTNCCExist(SDTNhaCungCap, sb);        
+        
         String diaChi = txtDiaChi.getText();
-        Double tienNo = Double.parseDouble(txtTienNo.getText());
-        nhaCungCapController.insert(tenNhaCungCap, SDTNhaCungCap, diaChi, tienNo);
+        DataValidate.checkEmpty(diaChi, sb, "Địa chỉ không được để trống! ");
+        
+//        Double tienNo = Double.parseDouble(txtTienNo.getText());
+        double tienNo = 0;
+        try {
+            tienNo = Double.parseDouble(txtTienNo.getText()) ;
+            if(tienNo < 0){
+                sb.append("Tiền nợ phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Tiền nợ phải là số \n");
+        } 
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }else{         
+            nhaCungCapController.insert(tenNhaCungCap, SDTNhaCungCap, diaChi, tienNo);
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblNhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhaCungCapMouseClicked
@@ -667,22 +710,82 @@ public class NhapHangPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_button11ActionPerformed
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
+        StringBuilder sb = new StringBuilder();
         String maPhieuNhap = txtMaPN.getText();
-        Double tongTien = Double.parseDouble(txtTongTienPN.getText());
-        Double tienNo = Double.parseDouble(txtTienNoPN.getText());
+        DataValidate.checkEmpty(maPhieuNhap, sb, "Mã phiếu nhập không được để trống");
+//        Double tongTien = Double.parseDouble(txtTongTienPN.getText());
+//        Double tienNo = Double.parseDouble(txtTienNoPN.getText());
+        String tenNhaCungCap = txtNhaCungCapPN.getText();
+        DataValidate.checkEmpty(tenNhaCungCap, sb, "Tên không được để trống");
+                
+        double tongTien = 0;
+        try {
+            tongTien = Double.parseDouble(txtTongTienPN.getText()) ;
+            if(tongTien < 0){
+                sb.append("Tiền nợ phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Tiền nợ phải là số \n");
+        }
+        
+        double tienNo = 0;
+        try {
+            tienNo = Double.parseDouble(txtTienNoPN.getText()) ;
+            if(tienNo < 0){
+                sb.append("Tiền nợ phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Tiền nợ phải là số \n");
+        }
+        
         String ghiChu = txtGhiChu.getText();
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         java.sql.Timestamp timeNow = new java.sql.Timestamp(new Date().getTime());
-
-        PhieuNhapDichVu pn = new PhieuNhapDichVu(maPhieuNhap,idNhaCungCap,1,timeNow,tongTien,tienNo,ghiChu,true);
-        phieuNhapHangController.insert(pn);
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            PhieuNhapDichVu pn = new PhieuNhapDichVu(maPhieuNhap,idNhaCungCap,1,timeNow,tongTien,tienNo,ghiChu,true);
+            phieuNhapHangController.insert(pn);
+        }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
-
-        PhieuNhapDichVu pn = new PhieuNhapDichVu(maPhieuNhap,idNhaCungCap,idNhanVien,ngayNhap,Double.parseDouble(txtTongTienPN.getText()),Double.parseDouble(txtTienNoPN.getText()),txtGhiChu.getText(),true);
-        phieuNhapHangController.update(pn);
+        int chonDong = tblDanhSachPhieuNhap.getSelectedRow();
+        if (chonDong == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
+            if(update == JOptionPane.YES_OPTION){
+                StringBuilder sb = new StringBuilder();
+                String nhaCungCap = txtNhaCungCapPN.getText();
+                DataValidate.checkEmpty(nhaCungCap, sb, "Nhà cung cấp không được để trống");
+                double tongTien = 0;
+                try {
+                    tongTien = Double.parseDouble(txtTongTienPN.getText()) ;
+                    if(tongTien < 0){
+                        sb.append("Tiền nợ phải lớn hớn 0 \n");
+                    }
+                } catch (Exception e) {
+                    sb.append("Tiền nợ phải là số \n");
+                }   
+                double tienNo = 0;
+                try {
+                    tienNo = Double.parseDouble(txtTienNoPN.getText()) ;
+                    if(tienNo < 0){
+                        sb.append("Tiền nợ phải lớn hớn 0 \n");
+                    }
+                } catch (Exception e) {
+                    sb.append("Tiền nợ phải là số \n");
+                }
+                if(sb.length() > 0){
+                    JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+                }else{          
+                    PhieuNhapDichVu pn = new PhieuNhapDichVu(maPhieuNhap,idNhaCungCap,idNhanVien,ngayNhap,tongTien,tienNo,txtGhiChu.getText(),true);
+                    phieuNhapHangController.update(pn);
+                }            
+            }
+        }      
     }//GEN-LAST:event_btnSua1ActionPerformed
 
     private void tblDanhSachPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachPhieuNhapMouseClicked
@@ -719,29 +822,54 @@ public class NhapHangPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_tblDichVuMouseClicked
 
     private void btnThemChiTietPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemChiTietPNActionPerformed
+        StringBuilder sb = new StringBuilder();
+        String dichVu = txtTenDichVu.getText();
+        DataValidate.checkEmpty(dichVu, sb, "Dịch vụ không được để trống");
+ 
         DonViTinh donViTinh =(DonViTinh) cbxDonVi.getSelectedItem();
         Integer idDonViTinh = donViTinh.getIdDonViTinh();
         Integer giaTri =donViTinh.getGiaTri();
-        Integer soLuong = Integer.parseInt(txtSoLuongDV.getText());
+//        Integer soLuong = Integer.parseInt(txtSoLuongDV.getText());
+        Integer soLuong = 0;
+        try {
+            soLuong = Integer.parseInt(txtSoLuongDV.getText()) ;
+            if(soLuong < 0){
+                sb.append("Số lượng phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Số lượng phải là số \n");
+        }        
+        
         int soLuongDV = phieuNhapHangController.laySoLuongDV(idDichVu);
-        Double giaNhap = Double.parseDouble(txtGiaNhapDV.getText());
-        
-        //Thêm chi tiết phiếu nhập mới
-        ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(maPhieuNhap,idDichVu,idDonViTinh,soLuong,giaNhap);
-        
-        //Cập nhật lại số lượng
-        phieuNhapHangController.capNhatSoLuongDV(idDichVu, soLuongDV+(soLuong*giaTri));
-        
-        //tính tổng tiền phiếu nhập
-        Double tongGiaNhap =0.0;
-        for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
-            tongGiaNhap += ChuyenDoi.SoDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString());
-        }
-        txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
-        
-        phieuNhapHangController.themChiTietPN(ctpn);
-        phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);
-        
+        double giaNhap = 0;
+        try {
+            giaNhap = Double.parseDouble(txtGiaNhapDV.getText()) ;
+            if(giaNhap < 0){
+                sb.append("Giá nhập phải lớn hớn 0 \n");
+            }
+        } catch (Exception e) {
+            sb.append("Giá nhập phải là số \n");
+        }        
+
+        if(sb.length() > 0){
+            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        }else{ 
+            //Thêm chi tiết phiếu nhập mới
+            ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(maPhieuNhap,idDichVu,idDonViTinh,soLuong,giaNhap);
+
+            //Cập nhật lại số lượng
+            phieuNhapHangController.capNhatSoLuongDV(idDichVu, soLuongDV+(soLuong*giaTri));
+
+            //tính tổng tiền phiếu nhập
+            Double tongGiaNhap =0.0;
+            for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
+                tongGiaNhap += ChuyenDoi.SoDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString());
+            }
+            txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
+
+            phieuNhapHangController.themChiTietPN(ctpn);
+            phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);            
+        }   
     }//GEN-LAST:event_btnThemChiTietPNActionPerformed
 
     private void btnXoaChiTietPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaChiTietPNActionPerformed
