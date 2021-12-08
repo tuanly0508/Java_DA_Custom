@@ -41,25 +41,6 @@ public class ThongKePnl extends javax.swing.JPanel {
         card4.lbTitle.setText("Tổng tiền");
         card4.lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cash.png")));         
     }
-    
-        //            List<Object[]> data2 = thongKeController.bieuDoDoanhThu(tuNgay,denNgay);
-    //            Double tienPhong1 = 0.0,tienDichVu1=0.0 ,phuThu1=0.0 ,Tong1=0.0;
-    //            for (int i = 0; i <= data2.size()-1; i++) {                
-    //                tienPhong1+=ChuyenDoi.SoDouble(data2.get(i)[2].toString());
-    //                tienDichVu1+=ChuyenDoi.SoDouble(data2.get(i)[3].toString());
-    //                phuThu1+=ChuyenDoi.SoDouble(data2.get(i)[4].toString());
-    //                Tong1+=ChuyenDoi.SoDouble(data2.get(i)[5].toString());
-    //
-    //                Double tienGio = Double.parseDouble(data2.get(i)[2].toString());
-    //                Double dichVu = Double.parseDouble(data2.get(i)[3].toString());
-    //                Double phuThu = Double.parseDouble(data2.get(i)[4].toString()); 
-    //                
-    //                setValueSum(tienPhong1, tienDichVu1, phuThu1, Tong1);
-    //                chart.addData(new ModelChart(data2.get(i)[0].toString()+"/"+data2.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu}));
-    //                lineChart1.addData(new ModelChart(data2.get(i)[0].toString()+"/"+data2.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu}));
-    //            }
-    //            chart.start();
-    //            lineChart1.start();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -279,19 +260,29 @@ public class ThongKePnl extends javax.swing.JPanel {
                 java.sql.Date tuNgay= new java.sql.Date(DateOfBirth1.getTime());
                 java.sql.Date denNgay = new java.sql.Date(StartingDate1.getTime());                
                 List<Object[]> data = thongKeController.tableDoanhThu(tuNgay, denNgay);
-                fillDataTable(data);                              
+                List<Object[]> data2 = thongKeController.bieuDoDoanhThu(tuNgay, denNgay);
+                fillDataTable(data);    
+                fillDataChart(data2);
             }else if(cbxThoiGian.getSelectedIndex() == 1) {
                 List<Object[]> data = thongKeController.tableDefaulToday();
+                List<Object[]> data2 = thongKeController.bieuDoHomNay();
                 fillDataTable(data);
+                fillDataChart(data2);
             }else if (cbxThoiGian.getSelectedIndex() == 2) {
                 List<Object[]> data = thongKeController.tableDefaulTuan();
+                List<Object[]> data2 = thongKeController.bieuDoTuan();
                 fillDataTable(data);
+                fillDataChart(data2);
             }else if (cbxThoiGian.getSelectedIndex() == 3) {
                 List<Object[]> data = thongKeController.tableDefaulThang();
+                List<Object[]> data2 = thongKeController.bieuDoThang();
                 fillDataTable(data);
+                fillDataChart(data2);
             }else {
                 List<Object[]> data = thongKeController.tableDefaulNam();
+                List<Object[]> data2 = thongKeController.bieuDoNam();
                 fillDataTable(data);
+                fillDataChart(data2);
             }
         }        
     }//GEN-LAST:event_btnThongKeActionPerformed
@@ -308,6 +299,11 @@ public class ThongKePnl extends javax.swing.JPanel {
    
     public void fillDataTable(List<Object[]> data) {
         tablePnl.viewTableThongKe(data);
+        setGiaDefault(data);
+    }
+    
+    public void fillDataChart(List<Object[]> data) {
+        bieuDoPnl.bieuDoDefault(data);  
         setGiaDefault(data);
     }
     

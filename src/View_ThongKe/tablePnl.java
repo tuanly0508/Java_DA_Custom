@@ -39,20 +39,20 @@ public class tablePnl extends javax.swing.JPanel {
 
         tblThongKe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tên phòng", "Thời gian mở", "Tiền phòng", "Tiền dịch vụ", "Phụ thu", "Tông tiền"
+                "Tên phòng", "Thời gian mở", "Tiền phòng", "Tiền dịch vụ", "Phụ thu", "Tông tiền", "Khách Hàng"
             }
         ));
         jScrollPane2.setViewportView(tblThongKe);

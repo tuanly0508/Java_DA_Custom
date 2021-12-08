@@ -27,6 +27,8 @@ public class ThongKeController {
     
     public ThongKeController(bieuDoPnl view) {
         this.viewDoPnl = view;
+        bieuDoDefault();
+        bieuDoDefaultNam();
         view.setController(this);
     }
     
@@ -62,7 +64,32 @@ public class ThongKeController {
     
     public void bieuDoDefault(){
         List<Object[]> khoangs = thongKeDAO.bieuDoDefault(); 
-        //view.bieuDoDefault(khoangs);
+        viewDoPnl.bieuDoDefault(khoangs);
+    }
+    
+    public void bieuDoDefaultNam(){
+        List<Object[]> khoangs = thongKeDAO.bieuDoNam(); 
+        viewDoPnl.bieuDo2Default(khoangs);
+    }
+    
+    public List<Object[]> bieuDoHomNay() {
+        List<Object[]> khoangs = thongKeDAO.bieuDoDefault(); 
+        return khoangs;
+    } 
+    
+    public List<Object[]> bieuDoTuan() {
+        List<Object[]> khoangs = thongKeDAO.bieuDoTuan(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> bieuDoThang() {
+        List<Object[]> khoangs = thongKeDAO.bieuDoThang(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> bieuDoNam() {
+        List<Object[]> khoangs = thongKeDAO.bieuDoNam(); 
+        return khoangs;
     }
     
     public List<Object[]> tableDoanhThu(java.sql.Date tuNgay, java.sql.Date denNgay) {
