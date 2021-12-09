@@ -14,9 +14,10 @@ public class bieuDoPnl extends javax.swing.JPanel {
         chart.addLegend("Tiền giờ", new Color(12, 84, 175), new Color(0, 108, 247));
         chart.addLegend("Dịch vụ", new Color(54, 4, 143), new Color(104, 49, 200));
         chart.addLegend("Phụ thu", new Color(5, 125, 0), new Color(95, 209, 69));
-        curveChart.addLegend("Tiền giờ", new Color(12, 84, 175), new Color(0, 108, 247));
-        curveChart.addLegend("Dịch vụ", new Color(54, 4, 143), new Color(104, 49, 200));
+        curveChart.addLegend("Tiền giờ", new Color(212,116,255), new Color(212,116,255));
+        curveChart.addLegend("Dịch vụ", new Color(63,232,255), new Color(64, 216, 206));
         curveChart.addLegend("Phụ thu", new Color(5, 125, 0), new Color(95, 209, 69));
+        curveChart.addLegend("Tổng tiền", new Color(247,215,86), new Color(247,215,86));
         scroll.setVerticalScrollBar(new ScrollBar());
         scroll.getViewport().setOpaque(false);
         scroll.setViewportBorder(null);
@@ -104,7 +105,8 @@ public class bieuDoPnl extends javax.swing.JPanel {
             Double tienGio = Double.parseDouble(data.get(i)[2].toString());
             Double dichVu = Double.parseDouble(data.get(i)[3].toString());
             Double phuThu = Double.parseDouble(data.get(i)[4].toString());  
-            curveChart.addData(new ModelChart(data.get(i)[0].toString()+"/"+data.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu}));
+            Double tongTien = Double.parseDouble(data.get(i)[5].toString());
+            curveChart.addData(new ModelChart(data.get(i)[0].toString()+"/"+data.get(i)[1].toString(),new double[]{tienGio,dichVu,phuThu,tongTien}));
         }
         curveChart.start();
     }

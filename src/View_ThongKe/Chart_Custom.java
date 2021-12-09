@@ -47,11 +47,11 @@ public class Chart_Custom extends javax.swing.JPanel {
         map = new HashMap<>();
         list = new ArrayList<>();
         //  Test data
-        map.put("java", new Chart_Item("Java", 1000, new Color(44, 198, 138), new ImageIcon(getClass().getResource("/icon/visibility.png"))));
-        map.put("cpp", new Chart_Item("C++", 1500, new Color(44, 96, 198), new ImageIcon(getClass().getResource("/icon/visibility.png"))));
-        map.put("flutter", new Chart_Item("Flutter", 1300, new Color(107, 44, 198), new ImageIcon(getClass().getResource("/icon/visibility.png"))));
-        map.put("c_sharp", new Chart_Item("C Sharp", 200, new Color(205, 61, 198), new ImageIcon(getClass().getResource("/icon/visibility.png"))));
-        map.put("python", new Chart_Item("Python", 350, new Color(205, 198, 61), new ImageIcon(getClass().getResource("/icon/visibility.png"))));
+        map.put("java", new Chart_Item("Java", 1000, new Color(44, 198, 138)));
+        map.put("cpp", new Chart_Item("C++", 1500, new Color(44, 96, 198)));
+        map.put("flutter", new Chart_Item("Flutter", 1300, new Color(107, 44, 198)));
+        map.put("c_sharp", new Chart_Item("C Sharp", 200, new Color(205, 61, 198)));
+        map.put("python", new Chart_Item("Python", 350, new Color(205, 198, 61)));
         sort();
     }
 
@@ -98,7 +98,6 @@ public class Chart_Custom extends javax.swing.JPanel {
         //  size for space icon
         DecimalFormat df = new DecimalFormat("#,##0.##");
         g2.setColor(new Color(88, 88, 88));
-        g2.drawImage(((ImageIcon) item.getIcon()).getImage(), x, y, size, size, null);
         g2.drawString(df.format(item.getValues()), x + size + 5, y + (size / 2 + 7));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

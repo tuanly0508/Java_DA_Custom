@@ -1,7 +1,6 @@
 package View_ThongKe;
 
 import java.awt.Color;
-import javax.swing.Icon;
 
 public class Chart_Item {
 
@@ -29,19 +28,10 @@ public class Chart_Item {
         this.color = color;
     }
 
-    public Icon getIcon() {
-        return icon;
-    }
-
-    public void setIcon(Icon icon) {
-        this.icon = icon;
-    }
-
-    public Chart_Item(String name, double values, Color color, Icon icon) {
+    public Chart_Item(String name, double values, Color color) {
         this.name = name;
         this.values = values;
         this.color = color;
-        this.icon = icon;
     }
 
     public Chart_Item() {
@@ -50,5 +40,4 @@ public class Chart_Item {
     private String name;
     private double values;
     private Color color;
-    private Icon icon;
 }

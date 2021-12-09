@@ -10,7 +10,9 @@ import swing.EventSwitchSelected;
 public class ThongKePnl extends javax.swing.JPanel {
     private ThongKeController thongKeController;
     private tablePnl tablePnl;
+    private tableDichVuPnl tableDichVuPnl;
     private bieuDoPnl bieuDoPnl;
+    private bieuDoDichVuPnl bieuDoDichVuPnl;
     public static JPanel show ;
 
     public ThongKePnl() {
@@ -24,9 +26,13 @@ public class ThongKePnl extends javax.swing.JPanel {
             @Override
             public void onSelected(boolean selected) {
                 if (selected) {
-                    addBieuDo();
+                    if(cbxLoaiHinh.getSelectedIndex()==0) {
+                        addBieuDo();
+                    }else addBieuDoDichVu();
                 } else {
-                    addTable();
+                    if (cbxLoaiHinh.getSelectedIndex()==0) {
+                        addTable();
+                    }else addTableDichVu();                   
                 }
             }
         });       
@@ -95,6 +101,11 @@ public class ThongKePnl extends javax.swing.JPanel {
 
         cbxLoaiHinh.setEditable(false);
         cbxLoaiHinh.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Doanh thu", "Dịch vụ" }));
+        cbxLoaiHinh.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxLoaiHinhItemStateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Bảng");
 
@@ -145,31 +156,30 @@ public class ThongKePnl extends javax.swing.JPanel {
         roundPanel2Layout.setVerticalGroup(
             roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel2Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
                 .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundPanel2Layout.createSequentialGroup()
-                        .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdcTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(5, 5, 5))
-                    .addGroup(roundPanel2Layout.createSequentialGroup()
-                        .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jdcDenNgay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(5, 5, 5)
+                        .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(cbxLoaiHinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(5, 5, 5))))
-            .addGroup(roundPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(switchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jdcTuNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jdcDenNgay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbxThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbxLoaiHinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(roundPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(switchButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5))
         );
 
         jdcTuNgay.setBackground(Color.WHITE);
@@ -177,9 +187,9 @@ public class ThongKePnl extends javax.swing.JPanel {
 
         roundPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        card1.setForeground(new java.awt.Color(228, 166, 255));
+        card1.setForeground(new java.awt.Color(212, 116, 255));
 
-        card2.setForeground(new java.awt.Color(161, 238, 247));
+        card2.setForeground(new java.awt.Color(63, 232, 255));
 
         card3.setForeground(new java.awt.Color(130, 227, 176));
 
@@ -255,53 +265,154 @@ public class ThongKePnl extends javax.swing.JPanel {
         java.util.Date DateOfBirth1 = jdcTuNgay.getDate();        
         java.util.Date StartingDate1 = jdcDenNgay.getDate();
         
-        if (cbxLoaiHinh.getSelectedIndex() == 0) {            
+        if (cbxLoaiHinh.getSelectedIndex() == 0) {
             if (cbxThoiGian.getSelectedIndex() == 0) {   
                 java.sql.Date tuNgay= new java.sql.Date(DateOfBirth1.getTime());
-                java.sql.Date denNgay = new java.sql.Date(StartingDate1.getTime());                
-                List<Object[]> data = thongKeController.tableDoanhThu(tuNgay, denNgay);
-                List<Object[]> data2 = thongKeController.bieuDoDoanhThu(tuNgay, denNgay);
-                fillDataTable(data);    
-                fillDataChart(data2);
-                bieuDoPnl.lblTimeThongKe.setText("THEO THỜI GIAN");
-            }else if(cbxThoiGian.getSelectedIndex() == 1) {
-                List<Object[]> data = thongKeController.tableDefaulToday();
-                List<Object[]> data2 = thongKeController.bieuDoHomNay();
-                fillDataTable(data);
-                fillDataChart(data2);
-                bieuDoPnl.lblTimeThongKe.setText("HÔM NAY");
-            }else if (cbxThoiGian.getSelectedIndex() == 2) {
-                List<Object[]> data = thongKeController.tableDefaulTuan();
-                List<Object[]> data2 = thongKeController.bieuDoTuan();
-                fillDataTable(data);
-                fillDataChart(data2);
-                bieuDoPnl.lblTimeThongKe.setText("TUẦN NÀY");
-            }else if (cbxThoiGian.getSelectedIndex() == 3) {
-                List<Object[]> data = thongKeController.tableDefaulThang();
-                List<Object[]> data2 = thongKeController.bieuDoThang();
-                fillDataTable(data);
-                fillDataChart(data2);
-                bieuDoPnl.lblTimeThongKe.setText("THÁNG NÀY");
-            }else {
-                List<Object[]> data = thongKeController.tableDefaulNam();
-                List<Object[]> data2 = thongKeController.bieuDoNam();
-                fillDataTable(data);
-                fillDataChart(data2);
-                bieuDoPnl.lblTimeThongKe.setText("NĂM NÀY");
+                java.sql.Date denNgay = new java.sql.Date(StartingDate1.getTime());    
+                if(switchButton1.isSelected()) {
+                    List<Object[]> data2 = thongKeController.bieuDoDoanhThu(tuNgay, denNgay);
+                    fillDataChart(data2);
+                    bieuDoPnl.lblTimeThongKe.setText("THEO THỜI GIAN");
+                }else {
+                    List<Object[]> data = thongKeController.tableDoanhThu(tuNgay, denNgay);               
+                    fillDataTable(data);
+                }
             }
-        }        
+        }else {
+            if (cbxThoiGian.getSelectedIndex() == 0) {   
+                java.sql.Date tuNgay= new java.sql.Date(DateOfBirth1.getTime());
+                java.sql.Date denNgay = new java.sql.Date(StartingDate1.getTime());    
+                if(switchButton1.isSelected()) {
+                    List<Object[]> data2 = thongKeController.bieuDoDichVuHotSearch(tuNgay, denNgay);
+                    fillDataChart2(data2);
+                    bieuDoDichVuPnl.lblTimeDv.setText("THEO THỜI GIAN");
+                }else {
+                    List<Object[]> data = thongKeController.tableDichVuHotSearch(tuNgay, denNgay);               
+                    fillDataTable2(data);
+                }
+            }
+        }      
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void cbxThoiGianItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxThoiGianItemStateChanged
-        if (cbxThoiGian.getSelectedIndex() == 0) {
+        if (cbxThoiGian.getSelectedIndex() == 0 ) {
             jdcTuNgay.setEnabled(true);
             jdcDenNgay.setEnabled(true);
-        }else {
+        }else if (cbxThoiGian.getSelectedIndex() == 1 && cbxLoaiHinh.getSelectedIndex()==0) {
             jdcTuNgay.setEnabled(false);
             jdcDenNgay.setEnabled(false);
+            if(switchButton1.isSelected()) {
+                List<Object[]> data2 = thongKeController.bieuDoHomNay();
+                fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("HÔM NAY");
+            }else {
+                List<Object[]> data = thongKeController.tableDefaulToday();                
+                fillDataTable(data);
+            }
+        }else if (cbxThoiGian.getSelectedIndex() == 2 && cbxLoaiHinh.getSelectedIndex()==0) {
+            jdcTuNgay.setEnabled(false);
+            jdcDenNgay.setEnabled(false);
+            if(switchButton1.isSelected()) {
+                List<Object[]> data2 = thongKeController.bieuDoTuan();
+                fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("TUẦN NÀY");
+            }else {
+                List<Object[]> data = thongKeController.tableDefaulTuan();                
+                fillDataTable(data);
+            }
+        }else if (cbxThoiGian.getSelectedIndex() == 3 && cbxLoaiHinh.getSelectedIndex()==0) {
+            jdcTuNgay.setEnabled(false);
+            jdcDenNgay.setEnabled(false);
+            if(switchButton1.isSelected()) {
+                List<Object[]> data2 = thongKeController.bieuDoThang();
+                fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("THÁNG NÀY");
+            }else {
+                List<Object[]> data = thongKeController.tableDefaulThang();
+                fillDataTable(data);
+            }
+        }else if (cbxThoiGian.getSelectedIndex() == 4 && cbxLoaiHinh.getSelectedIndex()==0) {
+            jdcTuNgay.setEnabled(false);
+            jdcDenNgay.setEnabled(false);
+            if(switchButton1.isSelected()) {
+                List<Object[]> data2 = thongKeController.bieuDoNam();
+                fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("NĂM NÀY");
+            }else {
+                List<Object[]> data = thongKeController.tableDefaulNam();
+                fillDataTable(data);
+            }
+        }else if (cbxThoiGian.getSelectedIndex() == 1 && cbxLoaiHinh.getSelectedIndex()==1) {
+            jdcTuNgay.setEnabled(false);
+            jdcDenNgay.setEnabled(false);
+            if(switchButton1.isSelected()) {
+                List<Object[]> data2 = thongKeController.bieuDoDichVuHomNay();
+                fillDataChart2(data2);
+                bieuDoDichVuPnl.lblTimeDv.setText("HÔM NAY");
+            }else {
+                List<Object[]> data = thongKeController.tableDichVuHotHomNay();                
+                fillDataTable2(data);
+            } 
+        }else if (cbxThoiGian.getSelectedIndex() == 2 && cbxLoaiHinh.getSelectedIndex()==1) {
+            jdcTuNgay.setEnabled(false);
+            jdcDenNgay.setEnabled(false);
+            if(switchButton1.isSelected()) {
+                List<Object[]> data2 = thongKeController.bieuDoDichVuTuanNay();
+                fillDataChart2(data2);
+                bieuDoDichVuPnl.lblTimeDv.setText("TUẦN NÀY");
+            }else {
+                List<Object[]> data = thongKeController.tableDichVuHotTuanNay();                
+                fillDataTable2(data);
+            }
+        }else if (cbxThoiGian.getSelectedIndex() == 3 && cbxLoaiHinh.getSelectedIndex()==1) {
+            jdcTuNgay.setEnabled(false);
+            jdcDenNgay.setEnabled(false);
+            if(switchButton1.isSelected()) {
+                List<Object[]> data2 = thongKeController.bieuDoDichVuThangNay();
+                fillDataChart2(data2);
+                bieuDoDichVuPnl.lblTimeDv.setText("THÁNG NÀY");
+            }else {
+                List<Object[]> data = thongKeController.tableDichVuHotThangNay();                
+                fillDataTable2(data);
+            }
+        }else if (cbxThoiGian.getSelectedIndex() == 4 && cbxLoaiHinh.getSelectedIndex()==1) {
+            jdcTuNgay.setEnabled(false);
+            jdcDenNgay.setEnabled(false);
+            if(switchButton1.isSelected()) {
+                List<Object[]> data2 = thongKeController.bieuDoDichVuNamNay();
+                fillDataChart2(data2);
+                bieuDoDichVuPnl.lblTimeDv.setText("NĂM NÀY");
+            }else {
+                List<Object[]> data = thongKeController.tableDichVuHotNamNay();                
+                fillDataTable2(data);
+            }
         }
     }//GEN-LAST:event_cbxThoiGianItemStateChanged
+
+    private void cbxLoaiHinhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxLoaiHinhItemStateChanged
+        if(cbxLoaiHinh.getSelectedIndex() == 0) {
+            if (switchButton1.isSelected()) {
+                cbxThoiGian.setSelectedIndex(1);
+                addBieuDo();
+            }else {
+                cbxThoiGian.setSelectedIndex(1);
+                addTable();
+            }
+        }else {
+            if (switchButton1.isSelected()) {
+                cbxThoiGian.setSelectedIndex(1);
+                addBieuDoDichVu();
+            }else {
+                cbxThoiGian.setSelectedIndex(1);
+                addTableDichVu();
+            }
+        }
+    }//GEN-LAST:event_cbxLoaiHinhItemStateChanged
    
+    public void fillDataTable2(List<Object[]> data) {
+        tableDichVuPnl.viewTableHot(data);
+    }
+    
     public void fillDataTable(List<Object[]> data) {
         tablePnl.viewTableThongKe(data);
         setGiaDefault(data);
@@ -312,16 +423,32 @@ public class ThongKePnl extends javax.swing.JPanel {
         setGiaDefault(data);
     }
     
+    public void fillDataChart2(List<Object[]> data) {
+        bieuDoDichVuPnl.bieuDoDefault(data);  
+    }
+    
     public void addTable(){
         tablePnl = new tablePnl();
         ThongKeController thongKeController = new ThongKeController(tablePnl);
         ShowPanel(contentPnl, tablePnl);
     }
     
+    public void addTableDichVu(){
+        tableDichVuPnl = new tableDichVuPnl();
+        ThongKeController thongKeController = new ThongKeController(tableDichVuPnl);
+        ShowPanel(contentPnl, tableDichVuPnl);
+    }
+    
     public void addBieuDo() {
         bieuDoPnl = new bieuDoPnl();
         ThongKeController thongKeController = new ThongKeController(bieuDoPnl);
         ShowPanel(contentPnl, bieuDoPnl);
+    }
+    
+    public void addBieuDoDichVu() {
+        bieuDoDichVuPnl = new bieuDoDichVuPnl();
+        ThongKeController thongKeController = new ThongKeController(bieuDoDichVuPnl);
+        ShowPanel(contentPnl, bieuDoDichVuPnl);
     }
     
     public static void ShowPanel(JPanel PanelChua, JPanel panel) {

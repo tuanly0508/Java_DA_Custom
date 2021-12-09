@@ -2,14 +2,18 @@ package Controller;
 
 import DAO.ThongKeDAO;
 import View_ThongKe.ThongKePnl;
+import View_ThongKe.bieuDoDichVuPnl;
 import View_ThongKe.bieuDoPnl;
+import View_ThongKe.tableDichVuPnl;
 import View_ThongKe.tablePnl;
 import java.util.List;
 
 public class ThongKeController {
     ThongKePnl view;
     tablePnl viewPnl;
+    tableDichVuPnl tableDichVuPnl;
     bieuDoPnl viewDoPnl;
+    bieuDoDichVuPnl bieuDoDichVuPnl;
     ThongKeDAO thongKeDAO = new ThongKeDAO();
 
     public ThongKeController(ThongKePnl view) {
@@ -29,6 +33,19 @@ public class ThongKeController {
         this.viewDoPnl = view;
         bieuDoDefault();
         bieuDoDefaultNam();
+        view.setController(this);
+    }
+    
+    public ThongKeController(tableDichVuPnl view) {
+        this.tableDichVuPnl = view;
+        tableDichVuCon();
+        tableDichVuHotDf();
+        view.setController(this);
+    }
+    
+    public ThongKeController(bieuDoDichVuPnl view) {
+        this.bieuDoDichVuPnl = view;
+        bieuDoDichVuDefault();
         view.setController(this);
     }
     
@@ -104,6 +121,71 @@ public class ThongKeController {
     
     public List<Object[]> bieuDoDichVu(java.sql.Date tuNgay, java.sql.Date denNgay) {
         List<Object[]> khoangs = thongKeDAO.bieuDoDichVu(tuNgay, denNgay); 
+        return khoangs;
+    }
+    
+    public void tableDichVuCon() {
+        List<Object[]> khoangs = thongKeDAO.tableDichVuCon(); 
+        tableDichVuPnl.viewTableThongKe(khoangs);
+    }
+    
+    public List<Object[]> tableDichVuHotSearch(java.sql.Date tuNgay, java.sql.Date denNgay) {
+        List<Object[]> khoangs = thongKeDAO.tableDichVuHotSearch(tuNgay, denNgay); 
+        return khoangs;
+    }
+    
+    public List<Object[]> bieuDoDichVuHotSearch(java.sql.Date tuNgay, java.sql.Date denNgay) {
+        List<Object[]> khoangs = thongKeDAO.bieuDoDichVuHotSearch(tuNgay, denNgay); 
+        return khoangs;
+    }
+    
+    public void tableDichVuHotDf() {
+        List<Object[]> khoangs = thongKeDAO.tableDichVuHot(); 
+        tableDichVuPnl.viewTableHot(khoangs);
+    }
+    
+    public List<Object[]> tableDichVuHotHomNay() {
+        List<Object[]> khoangs = thongKeDAO.tableDichVuHot(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> tableDichVuHotTuanNay() {
+        List<Object[]> khoangs = thongKeDAO.tableDichVuHotTuanNay(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> tableDichVuHotThangNay() {
+        List<Object[]> khoangs = thongKeDAO.tableDichVuHotThangNay(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> tableDichVuHotNamNay() {
+        List<Object[]> khoangs = thongKeDAO.tableDichVuHotNamNay(); 
+        return khoangs;
+    }
+    
+    public void bieuDoDichVuDefault(){
+        List<Object[]> khoangs = thongKeDAO.bieuDoDichVuHot(); 
+        bieuDoDichVuPnl.bieuDoDefault(khoangs);
+    }
+    
+    public List<Object[]> bieuDoDichVuHomNay() {
+        List<Object[]> khoangs = thongKeDAO.bieuDoDichVuHot(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> bieuDoDichVuTuanNay() {
+        List<Object[]> khoangs = thongKeDAO.bieuDoDichVuHotTuanNay(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> bieuDoDichVuThangNay() {
+        List<Object[]> khoangs = thongKeDAO.bieuDoDichVuHotThangNay(); 
+        return khoangs;
+    }
+    
+    public List<Object[]> bieuDoDichVuNamNay() {
+        List<Object[]> khoangs = thongKeDAO.bieuDoDichVuHotNamNay(); 
         return khoangs;
     }
 }
