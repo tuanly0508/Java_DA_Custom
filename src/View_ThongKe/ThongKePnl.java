@@ -263,26 +263,31 @@ public class ThongKePnl extends javax.swing.JPanel {
                 List<Object[]> data2 = thongKeController.bieuDoDoanhThu(tuNgay, denNgay);
                 fillDataTable(data);    
                 fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("THEO THỜI GIAN");
             }else if(cbxThoiGian.getSelectedIndex() == 1) {
                 List<Object[]> data = thongKeController.tableDefaulToday();
                 List<Object[]> data2 = thongKeController.bieuDoHomNay();
                 fillDataTable(data);
                 fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("HÔM NAY");
             }else if (cbxThoiGian.getSelectedIndex() == 2) {
                 List<Object[]> data = thongKeController.tableDefaulTuan();
                 List<Object[]> data2 = thongKeController.bieuDoTuan();
                 fillDataTable(data);
                 fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("TUẦN NÀY");
             }else if (cbxThoiGian.getSelectedIndex() == 3) {
                 List<Object[]> data = thongKeController.tableDefaulThang();
                 List<Object[]> data2 = thongKeController.bieuDoThang();
                 fillDataTable(data);
                 fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("THÁNG NÀY");
             }else {
                 List<Object[]> data = thongKeController.tableDefaulNam();
                 List<Object[]> data2 = thongKeController.bieuDoNam();
                 fillDataTable(data);
                 fillDataChart(data2);
+                bieuDoPnl.lblTimeThongKe.setText("NĂM NÀY");
             }
         }        
     }//GEN-LAST:event_btnThongKeActionPerformed
