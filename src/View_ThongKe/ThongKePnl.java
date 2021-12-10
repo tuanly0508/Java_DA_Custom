@@ -410,7 +410,8 @@ public class ThongKePnl extends javax.swing.JPanel {
     }//GEN-LAST:event_cbxLoaiHinhItemStateChanged
    
     public void fillDataTable2(List<Object[]> data) {
-        tableDichVuPnl.viewTableHot(data);
+        if(tableDichVuPnl == null) {            
+        }else tableDichVuPnl.viewTableHot(data);
     }
     
     public void fillDataTable(List<Object[]> data) {

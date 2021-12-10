@@ -70,8 +70,6 @@ public class Main extends javax.swing.JFrame {
                     showForm(nhapHangPnl);
                 }else if (index == 5) {
                     showForm(khachHangPnl);
-                }else if (index == 6) {
-                    System.out.println("hi");
                 }else {
                     Login lg = new Login();
                     lg.setVisible(true);

@@ -151,14 +151,8 @@ public class DatPhongController {
     }
     
     
-    public void HienThiThoiGian(String gio,String tenKhach,String sdt ,int idPhong) {
-        
-        String tenPhong = datPhongDAO.layTenPhong(idPhong);
-//        System.out.println("Thông báo đặt trước phòng: "+ tenPhong);
-//        System.out.println("Giờ đặt : "+ gio);
-//        System.out.println("Số điện thoại : "+ sdt);
-//        System.out.println("Tên Khách : "+ tenKhach);
-        
+    public void HienThiThoiGian(String gio,String tenKhach,String sdt ,int idPhong) {        
+        String tenPhong = datPhongDAO.layTenPhong(idPhong);      
         Thread clock = new Thread() {
             public void run() {
                 try {

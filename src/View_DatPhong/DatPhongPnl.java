@@ -86,8 +86,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     public DatPhongPnl() {
         initComponents();
         init();
-        setDisable();   
-        tabAllPanel();
+        setDisable();
     }
 
     public void init() {
@@ -95,6 +94,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         CssTable(jScrollPane2);
         CssTable(jScrollPane5);
         CssTable(jScrollPane6);
+        CssTable(jScrollPane7);
+        CssTable(jScrollPane8);
+        CssTable(jScrollPane9);
+        CssTable(jScrollPane10);
         GridLayout layout = new GridLayout(4,2);
         layout.setHgap(5);
         layout.setVgap(5);
@@ -199,9 +202,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         p.btnDatTruoc.addActionListener(new AbstractAction(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                phongHienTai = idPhong;
                 if (datPhongDialog == null) {                   
                     datPhongDialog = new DatPhongDlg(null,true);
-                    setCombobox(datPhongDialog.cbxDatTruoc);   
+                    setCombobox(datPhongDialog.cbxDatTruoc);                      
                 }
                 
                 datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
@@ -226,17 +230,17 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         for (int i = 0; i < tt.size(); i++) {           
-                            if (tt.get(i)[0].equals(p.idPhong)) {
+                            if (tt.get(i)[0].equals(phongHienTai)) {
                                 GioDatTruoc g =(GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
                                 Integer idGioDatTruoc = g.getIdGioDatTruoc();
 
-                                phieuDatPhongController.updateNullPhieuDatPhong(0, p.idPhong,idGioDatTruoc);
+                                phieuDatPhongController.updateNullPhieuDatPhong(0, phongHienTai,idGioDatTruoc);
                                 p.btnDatTruoc.setBackground(new Color(255,255,255));
                                 reLoadPhong();
                                 List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(idPhong);           
                                 loadTable(datPhongDialog.tblDatPhong, data);
                                 setNullDatPhongDiaglog();
-                                p.idPhong =0;
+                                phongHienTai =0;
                                 datPhongDialog.dispose();
                             }
                         }                                                           
@@ -264,25 +268,24 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         String tenKhach = datPhongDialog.txtTenKhach.getText();
                         String SDT = datPhongDialog.txtSDT.getText();
                         GioDatTruoc myCbb = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
-                        String gio = myCbb.getTenHinhThuc();
+                        String gio = myCbb.getTenHinhThuc();                        
                         
-                        datPhongController.HienThiThoiGian(gio,tenKhach,SDT,p.idPhong);
-                        
-                        Integer idDatTruoc = myCbb.getId();                              
-                        
-                        if (p.idPhong != 0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
-                            System.out.println(p.idPhong);
+                        Integer idDatTruoc = myCbb.getId();
+                        if (idDatTruoc==1) {
+                            datPhongDialog.lblErrCbx.setText("Chọn thời gian đặt");
+                        }else if (idDatTruoc!=1 || phongHienTai != 0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
                             if (isSDT == false) {
                                 datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
                             }
-                            phieuDatPhong = new PhieuDatPhong(0,SDT,p.idPhong,idDatTruoc,null,true,tenKhach);
-                            phieuDatPhongController.insert(phieuDatPhong);        
-                            reLoadPhong();
-                            List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(p.idPhong);
+                            phieuDatPhong = new PhieuDatPhong(0,SDT,phongHienTai,idDatTruoc,null,true,tenKhach);
+                            phieuDatPhongController.insert(phieuDatPhong);                                    
+                            List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(phongHienTai);
                             loadTable(datPhongDialog.tblDatPhong, data);
-                            setNullDatPhongDiaglog();
-                            p.idPhong = 0;
+                            datPhongController.HienThiThoiGian(gio,tenKhach,SDT,phongHienTai);
+                            reLoadPhong();
+                            setNullDatPhongDiaglog();                            
                             datPhongDialog.dispose();
+                            phongHienTai = 0;
                         }
                     }
                 });
@@ -296,27 +299,27 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         String tenKhach = datPhongDialog.txtTenKhach.getText();
                         String SDT = datPhongDialog.txtSDT.getText();
                         List<Object[]> khachHang = datPhongController.getThongTinKH(SDT);
-                        if (p.idPhong !=0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
+                        if (phongHienTai !=0 || !datPhongDialog.txtSDT.getText().equals("") || !datPhongDialog.txtTenKhach.getText().equals("")) {
                             if (!SDT.equals(khachHang.get(0)[0])){
                                 datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
                             }
                             if (datPhongDialog.rdbGiaNgayLe.isSelected()) {
-                                phieuThuePhong = new PhieuThuePhong(0,SDT,1,p.idPhong,thoiGianMo,null,tenKhach,1,1);                              
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,1);                              
                                 phieuThuePhongController.insert(phieuThuePhong);
                             }else {
-                                phieuThuePhong = new PhieuThuePhong(0,SDT,1,p.idPhong,thoiGianMo,null,tenKhach,1,0);
+                                phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
                                 phieuThuePhongController.insert(phieuThuePhong);
                             }        
-                            phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, p.idPhong);
-                            datPhongController.updateTinhTrangPhong("Đang hoạt động",p.idPhong);
-                            List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(p.idPhong);
+                            phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
+                            datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
+                            List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(phongHienTai);
                             loadTable(datPhongDialog.tblDatPhong, data);
                             p.btnDatTruoc.setBackground(new Color(255,0,0));
                             setPhongHoatDong();
                             reLoadPhong();
-                            setThongTinPhong(p.idPhong);
+                            setThongTinPhong(phongHienTai);
                             setNullDatPhongDiaglog();
-                            p.idPhong = 0;
+                            phongHienTai = 0;
                             datPhongDialog.dispose();
                         }
                     }
@@ -326,6 +329,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 loadTable(datPhongDialog.tblDatPhong, data);
                 datPhongDialog.txtTenKhach.setText("");
                 datPhongDialog.txtSDT.setText("");
+                datPhongDialog.lblErrCbx.setText("");
                 datPhongDialog.cbxDatTruoc.setSelectedIndex(0);
                 datPhongDialog.lblTenPhongDlg.setText(tenPhong.toUpperCase());
                 datPhongDialog.setVisible(true);
@@ -334,20 +338,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         panelPhong.add(p); 
         panelPhong.revalidate();
         panelPhong.repaint();
-    }   
-    
-    public void tabAllPanel() {
-//        JPanel bimbim;
-//        bimbim  = new JPanel();
-//        table = new swing.Table();
-//        table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//        table.setSize(355, 313);
-//        JScrollPane jsp = new JScrollPane();
-//        jsp.setSize(450, 400);
-//        jsp.setViewportView(table);
-//        bimbim.add(jsp);
-//        jtpDichVuAll.addTab("xxx", bimbim);       
-    }
+    }       
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -418,6 +409,18 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblBimbim = new swing.Table();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tblThuocLa = new swing.Table();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tblDoKho = new swing.Table();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tblDoAn = new swing.Table();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tblTraiCay = new swing.Table();
         txtTimDichVu = new swing.TextInputTT();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -904,6 +907,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         jtpDichVuAll.setBackground(new java.awt.Color(255, 255, 255));
         jtpDichVuAll.setForeground(new java.awt.Color(51, 51, 51));
+        jtpDichVuAll.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jtpDichVuAll.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jtpDichVuAll.setOpaque(true);
         jtpDichVuAll.setBackground(Color.WHITE);
@@ -974,12 +978,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tblDoUong.getColumnModel().getColumn(0).setMinWidth(0);
             tblDoUong.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblDoUong.getColumnModel().getColumn(0).setMaxWidth(0);
-            tblDoUong.getColumnModel().getColumn(1).setMinWidth(150);
-            tblDoUong.getColumnModel().getColumn(1).setPreferredWidth(150);
-            tblDoUong.getColumnModel().getColumn(1).setMaxWidth(150);
-            tblDoUong.getColumnModel().getColumn(2).setMinWidth(45);
-            tblDoUong.getColumnModel().getColumn(2).setPreferredWidth(45);
-            tblDoUong.getColumnModel().getColumn(2).setMaxWidth(45);
+            tblDoUong.getColumnModel().getColumn(1).setMinWidth(100);
+            tblDoUong.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblDoUong.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblDoUong.getColumnModel().getColumn(2).setMinWidth(95);
+            tblDoUong.getColumnModel().getColumn(2).setPreferredWidth(95);
+            tblDoUong.getColumnModel().getColumn(2).setMaxWidth(95);
             tblDoUong.getColumnModel().getColumn(4).setMinWidth(60);
             tblDoUong.getColumnModel().getColumn(4).setPreferredWidth(60);
             tblDoUong.getColumnModel().getColumn(4).setMaxWidth(60);
@@ -1019,12 +1023,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
             tblBimbim.getColumnModel().getColumn(0).setMinWidth(0);
             tblBimbim.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblBimbim.getColumnModel().getColumn(0).setMaxWidth(0);
-            tblBimbim.getColumnModel().getColumn(1).setMinWidth(150);
-            tblBimbim.getColumnModel().getColumn(1).setPreferredWidth(150);
-            tblBimbim.getColumnModel().getColumn(1).setMaxWidth(150);
-            tblBimbim.getColumnModel().getColumn(2).setMinWidth(45);
-            tblBimbim.getColumnModel().getColumn(2).setPreferredWidth(45);
-            tblBimbim.getColumnModel().getColumn(2).setMaxWidth(45);
+            tblBimbim.getColumnModel().getColumn(1).setMinWidth(100);
+            tblBimbim.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblBimbim.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblBimbim.getColumnModel().getColumn(2).setMinWidth(95);
+            tblBimbim.getColumnModel().getColumn(2).setPreferredWidth(95);
+            tblBimbim.getColumnModel().getColumn(2).setMaxWidth(95);
             tblBimbim.getColumnModel().getColumn(4).setMinWidth(60);
             tblBimbim.getColumnModel().getColumn(4).setPreferredWidth(60);
             tblBimbim.getColumnModel().getColumn(4).setMaxWidth(60);
@@ -1048,6 +1052,178 @@ public class DatPhongPnl extends javax.swing.JPanel {
         );
 
         jtpDichVuAll.addTab("Bim bim", jPanel5);
+
+        tblThuocLa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL Còn"
+            }
+        ));
+        jScrollPane7.setViewportView(tblThuocLa);
+        if (tblThuocLa.getColumnModel().getColumnCount() > 0) {
+            tblThuocLa.getColumnModel().getColumn(0).setMinWidth(0);
+            tblThuocLa.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblThuocLa.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblThuocLa.getColumnModel().getColumn(1).setMinWidth(100);
+            tblThuocLa.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblThuocLa.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblThuocLa.getColumnModel().getColumn(2).setMinWidth(95);
+            tblThuocLa.getColumnModel().getColumn(2).setPreferredWidth(95);
+            tblThuocLa.getColumnModel().getColumn(2).setMaxWidth(95);
+            tblThuocLa.getColumnModel().getColumn(4).setMinWidth(60);
+            tblThuocLa.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tblThuocLa.getColumnModel().getColumn(4).setMaxWidth(60);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 355, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 324, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)))
+        );
+
+        jtpDichVuAll.addTab("Thuốc lá", jPanel1);
+
+        tblDoKho.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL Còn"
+            }
+        ));
+        jScrollPane8.setViewportView(tblDoKho);
+        if (tblDoKho.getColumnModel().getColumnCount() > 0) {
+            tblDoKho.getColumnModel().getColumn(0).setMinWidth(0);
+            tblDoKho.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblDoKho.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDoKho.getColumnModel().getColumn(1).setMinWidth(100);
+            tblDoKho.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblDoKho.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblDoKho.getColumnModel().getColumn(2).setMinWidth(95);
+            tblDoKho.getColumnModel().getColumn(2).setPreferredWidth(95);
+            tblDoKho.getColumnModel().getColumn(2).setMaxWidth(95);
+            tblDoKho.getColumnModel().getColumn(4).setMinWidth(60);
+            tblDoKho.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tblDoKho.getColumnModel().getColumn(4).setMaxWidth(60);
+        }
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 355, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 324, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)))
+        );
+
+        jtpDichVuAll.addTab("Đồ khô", jPanel2);
+
+        tblDoAn.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL Còn"
+            }
+        ));
+        jScrollPane9.setViewportView(tblDoAn);
+        if (tblDoAn.getColumnModel().getColumnCount() > 0) {
+            tblDoAn.getColumnModel().getColumn(0).setMinWidth(0);
+            tblDoAn.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblDoAn.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDoAn.getColumnModel().getColumn(1).setMinWidth(100);
+            tblDoAn.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblDoAn.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblDoAn.getColumnModel().getColumn(2).setMinWidth(95);
+            tblDoAn.getColumnModel().getColumn(2).setPreferredWidth(95);
+            tblDoAn.getColumnModel().getColumn(2).setMaxWidth(95);
+            tblDoAn.getColumnModel().getColumn(4).setMinWidth(60);
+            tblDoAn.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tblDoAn.getColumnModel().getColumn(4).setMaxWidth(60);
+        }
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 355, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 324, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)))
+        );
+
+        jtpDichVuAll.addTab("Đồ ăn", jPanel6);
+
+        tblTraiCay.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Dịch vụ", "ĐVT", "Giá", "SL Còn"
+            }
+        ));
+        jScrollPane10.setViewportView(tblTraiCay);
+        if (tblTraiCay.getColumnModel().getColumnCount() > 0) {
+            tblTraiCay.getColumnModel().getColumn(0).setMinWidth(0);
+            tblTraiCay.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblTraiCay.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblTraiCay.getColumnModel().getColumn(1).setMinWidth(100);
+            tblTraiCay.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblTraiCay.getColumnModel().getColumn(1).setMaxWidth(100);
+            tblTraiCay.getColumnModel().getColumn(2).setMinWidth(95);
+            tblTraiCay.getColumnModel().getColumn(2).setPreferredWidth(95);
+            tblTraiCay.getColumnModel().getColumn(2).setMaxWidth(95);
+            tblTraiCay.getColumnModel().getColumn(4).setMinWidth(60);
+            tblTraiCay.getColumnModel().getColumn(4).setPreferredWidth(60);
+            tblTraiCay.getColumnModel().getColumn(4).setMaxWidth(60);
+        }
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 355, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 324, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)))
+        );
+
+        jtpDichVuAll.addTab("Trái cây", jPanel8);
 
         txtTimDichVu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -1157,6 +1333,22 @@ public class DatPhongPnl extends javax.swing.JPanel {
             List<Object[]> data = datPhongController.getDichVuId(2);
             loadTable(tblBimbim,data);
             themDichVu(tblBimbim);
+        }else if (i == 3) {
+            List<Object[]> data = datPhongController.getDichVuId(3);
+            loadTable(tblThuocLa,data);
+            themDichVu(tblThuocLa);
+        }else if (i == 4) {
+            List<Object[]> data = datPhongController.getDichVuId(4);
+            loadTable(tblDoKho,data);
+            themDichVu(tblDoKho);
+        }else if (i == 5) {
+            List<Object[]> data = datPhongController.getDichVuId(5);
+            loadTable(tblDoAn,data);
+            themDichVu(tblDoAn);
+        }else if (i == 6) {
+            List<Object[]> data = datPhongController.getDichVuId(6);
+            loadTable(tblTraiCay,data);
+            themDichVu(tblTraiCay);
         }
     }//GEN-LAST:event_jtpDichVuAllStateChanged
 
@@ -1924,14 +2116,22 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private swing.RoundPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -1956,8 +2156,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private javax.swing.JSpinner spnSoLuong;
     private swing.Table tblAllDichVu;
     private swing.Table tblBimbim;
+    private swing.Table tblDoAn;
+    private swing.Table tblDoKho;
     private swing.Table tblDoUong;
     private swing.Table tblSuDungDichVu;
+    private swing.Table tblThuocLa;
+    private swing.Table tblTraiCay;
     private swing.TextField txtSDT;
     private swing.TextField txtTenKhach;
     private swing.TextField txtThoiGianMo;

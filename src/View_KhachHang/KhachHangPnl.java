@@ -1,26 +1,13 @@
 package View_KhachHang;
 
 import Controller.KhachHangController;
-import Help.ChuyenDoi;
 import Help.DataValidate;
 import Help.XuatExcel;
 import java.util.List;
 import Model.KhachHang;
-import java.awt.Desktop;
 import java.awt.Frame;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class KhachHangPnl extends javax.swing.JPanel {
     private KhachHangController khachHangController;
