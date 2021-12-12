@@ -28,7 +28,6 @@ public class PhieuNhapHangController {
         loadList();
         loadDichVu();
         loadDonViTinh();
-        loadTenDichVu();
     } 
     
     public void loadList(){
@@ -56,10 +55,6 @@ public class PhieuNhapHangController {
         view.FillDataComboBoxDonViTinh(donViTinhs);
     }
     
-    public void loadTenDichVu() {
-        List<DichVu> dichVus = dichVuDAO.getAll();
-        view.FillDataComboBoxDichVu(dichVus);
-    }
     
     public void insert(PhieuNhapDichVu pn){
         phieuNhapHangDAO.themPhieuNhap(pn);
@@ -105,6 +100,12 @@ public class PhieuNhapHangController {
     //lấy id dịch vụ
     public int layIdDichVu(String ten){
         return dichVuDAO.layIdDichVu(ten);
+    }
+    
+    //Cập nhật tiền nợ lên nhà cung cấp
+    public void updateTienNoNCC(int idNhaCungCap,Double tienNo){
+        phieuNhapHangDAO.updateTienNoNCC(idNhaCungCap,tienNo);
+        
     }
 }
 

@@ -27,6 +27,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
@@ -49,6 +50,8 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class DatPhongPnl extends javax.swing.JPanel {
@@ -294,7 +297,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Timestamp thoiGianMo = null;
-                        Date date = new Date();         
+                        Date date = new Date();
                         thoiGianMo=new Timestamp(date.getTime());
                         String tenKhach = datPhongDialog.txtTenKhach.getText();
                         String SDT = datPhongDialog.txtSDT.getText();
@@ -1710,9 +1713,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     int idHoaDon = hoaDonController.layIdHoaDon(idPhieuThuePhong);
                     
                     if(tienDichVu!=0){
-                        XuatHoaDon(idHoaDon,"src/View_DatPhong/HoaDonDayDu.jrxml");
+                        XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonDayDu.jrxml");
                     }else{
-                        XuatHoaDon(idHoaDon,"src/View_DatPhong/HoaDonKhongDichVu.jrxml");
+                        XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonKhongDichVu.jrxml");
                     }
                     tongTien=0.0;
                     tienGio = 0.0;
@@ -1970,12 +1973,21 @@ public class DatPhongPnl extends javax.swing.JPanel {
     public void XuatHoaDon(int idHoaDon,String duongDanFile){
         try {
             Hashtable map = new Hashtable();
-            JasperReport report = JasperCompileManager.compileReport(duongDanFile);            
+            InputStream file = getClass().getResourceAsStream(duongDanFile);
+            JasperDesign jasperdesign = JRXmlLoader.load(file);
+            JasperReport report = JasperCompileManager.compileReport(jasperdesign);
+            
             map.put("idHoaDon", idHoaDon);
+            
             Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost;database=DuAn1;", "sa", "123456");
+            
             JasperPrint p = JasperFillManager.fillReport(report,  map, connection );
+            
             JasperViewer.viewReport(p, false);
             JasperExportManager.exportReportToPdfFile(p, "test.pdf");
+            
+            
+            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

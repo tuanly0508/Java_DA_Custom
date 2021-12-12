@@ -211,6 +211,11 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         txtSoLuongCon.setLabelText("Số lượng còn");
 
         txtGiaBan.setLabelText("Giá bán");
+        txtGiaBan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGiaBanKeyReleased(evt);
+            }
+        });
 
         btnThem.setBackground(new java.awt.Color(120, 225, 220));
         btnThem.setText("Thêm");
@@ -344,14 +349,10 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         } 
         
         double giaBan = 0;
-        try {
-            giaBan = Double.parseDouble(txtGiaBan.getText()) ;
-            if(giaBan < 0){
-                sb.append("Tiền nợ phải lớn hớn 0 \n");
-            }
-        } catch (Exception e) {
-            sb.append("Tiền nợ phải là số \n");
-        }   
+        giaBan=ChuyenDoi.SoDouble(txtGiaBan.getText());
+        if(giaBan<=0){
+            sb.append("Giá bán phải lớn hơn 0 \n");
+        }
         
         DanhMuc danhMuc =(DanhMuc) cbxDanhMuc.getSelectedItem();
         Integer idDanhMuc = danhMuc.getIdDanhMuc();
@@ -426,15 +427,12 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                 } 
                 
                 double giaBan = 0;
-                try {
-                    giaBan = Double.parseDouble(txtGiaBan.getText()) ;
-                    if(giaBan < 0){
-                        sb.append("Tiền nợ phải lớn hớn 0 \n");
-                    }
-                } catch (Exception e) {
-                    sb.append("Tiền nợ phải là số \n");
-                } 
-
+                giaBan=ChuyenDoi.SoDouble(txtGiaBan.getText());
+                if(giaBan<=0){
+                    sb.append("Giá bán phải lớn hơn 0 \n");
+                }
+                
+                
                 DanhMuc danhMuc =(DanhMuc) cbxDanhMuc.getSelectedItem();
                 Integer idDanhMuc = danhMuc.getIdDanhMuc();
 
@@ -459,6 +457,11 @@ public class QlDichVuPnl extends javax.swing.JPanel {
     private void btnXuatDanhSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatDanhSachActionPerformed
         XuatExcel.xuat(tblDichVu);
     }//GEN-LAST:event_btnXuatDanhSachActionPerformed
+
+    private void txtGiaBanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaBanKeyReleased
+        double khachDua = ChuyenDoi.SoDouble(txtGiaBan.getText());
+        txtGiaBan.setText(ChuyenDoi.SoString(khachDua));
+    }//GEN-LAST:event_txtGiaBanKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

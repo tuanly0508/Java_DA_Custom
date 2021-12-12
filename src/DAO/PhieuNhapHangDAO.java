@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PhieuNhapHangDAO extends AbsDAO<PhieuNhapDichVu>{
     public List<Object[]> getDataPhieuNhapHang(){
-        return getRawValues("select pn.maPhieuNhap, ncc.tenNhaCungCap, nv.hoTenNhanVien, pn.thoiGianNhap,format(pn.tongTien,'#,#')tongTien,pn.tienNo,pn.ghiChu,pn.trangThai from phieuNhapDichVu as pn \n" +
+        return getRawValues("select pn.maPhieuNhap, ncc.tenNhaCungCap, nv.hoTenNhanVien, CONVERT(varchar,pn.thoiGianNhap, 105) thoiGianNhap,format(pn.tongTien,'#,#')tongTien,pn.tienNo,pn.ghiChu,pn.trangThai from phieuNhapDichVu as pn \n" +
                             "join nhanVien as nv on pn.idNhanVien = nv.idNhanVien \n" +
                             "join nhaCungCap as ncc on pn.idNhaCungCap = ncc.idNhaCungCap \n" +
                             "where pn.trangThai = 1");
@@ -46,6 +46,9 @@ public class PhieuNhapHangDAO extends AbsDAO<PhieuNhapDichVu>{
         DBConnection.executeUpdate("update PhieuNhapDichVu set trangThai =0 where maPhieuNhap = ?", maPhieuNhap);
     }
     
-    
+    public void updateTienNoNCC(int idNhaCungCap, Double no){
+        DBConnection.executeUpdate("update NhaCungCap set tienNo = tienNo+? where idNhaCungCap =?", no,idNhaCungCap);
+        
+    }
     
 }
