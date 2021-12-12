@@ -105,7 +105,10 @@ public class PhieuNhapHangController {
     //Cập nhật tiền nợ lên nhà cung cấp
     public void updateTienNoNCC(int idNhaCungCap,Double tienNo){
         phieuNhapHangDAO.updateTienNoNCC(idNhaCungCap,tienNo);
-        
+    }
+    
+    public Double getTienNoNCC(int idNhaCungCap){
+        return phieuNhapHangDAO.getTienNoNCC(idNhaCungCap);
     }
 }
 

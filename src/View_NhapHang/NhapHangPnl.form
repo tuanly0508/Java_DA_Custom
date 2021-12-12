@@ -246,6 +246,9 @@
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTongTienPNKeyReleased"/>
+              </Events>
             </Component>
             <Component class="swing.TextField" name="txtNhaCungCapPN">
               <Properties>
@@ -256,6 +259,9 @@
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n n&#x1ee3;"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTienNoPNKeyReleased"/>
+              </Events>
             </Component>
             <Component class="swing.TextField" name="txtGhiChu">
               <Properties>
@@ -813,6 +819,9 @@
                 </Property>
                 <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n n&#x1ee3;"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTienNoKeyReleased"/>
+              </Events>
             </Component>
             <Component class="swing.Button" name="button11">
               <Properties>

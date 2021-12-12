@@ -8,8 +8,8 @@
 	</parameter>
 	<queryString>
 		<![CDATA[select idhoaDon,nv.hoTenNhanVien,kh.tenKhachHang,kh.SDTKhachHang,p.tenPhong,FORMAT(ptp.thoiGianMo ,'HH:mm:ss dd/MM/yyyy') ngayDat,FORMAT(ptp.thoiGianDong ,'HH:mm:ss dd/MM/yyyy') ngayDi,tenLoaiPhong,
-format(hd.tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,format(hd.tienNo,'#,#') tienNo,
-tenDichVu,FORMAT(gioSuDung ,'HH:mm:ss dd/MM/yyyy') gioSuDung,soLuong,format(ctdv.gia,'#,#') thanhTien 
+format(hd.tienPhong,'#,0') tienPhong,format(tienDichVu,'#,0') tienDichVu,format(phuThu,'#,0') phuThu,format(tongTien,'#,0') tongTien,format(hd.tienNo,'#,#') tienNo,
+tenDichVu,FORMAT(gioSuDung ,'HH:mm:ss dd/MM/yyyy') gioSuDung,soLuong,format(ctdv.gia,'#,0') thanhTien 
 from HoaDon hd 
 join phieuThuePhong ptp on hd.idPhieuThuePhong=ptp.idPhieuThuePhong
 join HoaDonDichVu hddv on hddv.idHoaDonDichVu=hd.idHoaDonDichVu

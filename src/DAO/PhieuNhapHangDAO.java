@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PhieuNhapHangDAO extends AbsDAO<PhieuNhapDichVu>{
     public List<Object[]> getDataPhieuNhapHang(){
-        return getRawValues("select pn.maPhieuNhap, ncc.tenNhaCungCap, nv.hoTenNhanVien, CONVERT(varchar,pn.thoiGianNhap, 105) thoiGianNhap,format(pn.tongTien,'#,#')tongTien,pn.tienNo,pn.ghiChu,pn.trangThai from phieuNhapDichVu as pn \n" +
+        return getRawValues("select pn.maPhieuNhap, ncc.tenNhaCungCap, nv.hoTenNhanVien, CONVERT(varchar,pn.thoiGianNhap, 105) thoiGianNhap,format(pn.tongTien,'#,#')tongTien,format(pn.tienNo,'#,0') tienNo,pn.ghiChu,pn.trangThai from phieuNhapDichVu as pn \n" +
                             "join nhanVien as nv on pn.idNhanVien = nv.idNhanVien \n" +
                             "join nhaCungCap as ncc on pn.idNhaCungCap = ncc.idNhaCungCap \n" +
                             "where pn.trangThai = 1");
@@ -47,8 +47,19 @@ public class PhieuNhapHangDAO extends AbsDAO<PhieuNhapDichVu>{
     }
     
     public void updateTienNoNCC(int idNhaCungCap, Double no){
-        DBConnection.executeUpdate("update NhaCungCap set tienNo = tienNo+? where idNhaCungCap =?", no,idNhaCungCap);
-        
+        DBConnection.executeUpdate("update NhaCungCap set tienNo = ? where idNhaCungCap =?", no,idNhaCungCap);
     }
     
+    public Double getTienNoNCC(int idNhaCungCap){
+        String query = "select tienNo from nhaCungCap where idNhaCungCap="+idNhaCungCap+"";
+        ResultSet rs = DBConnection.executeQuery(query);
+        Double slCon =0.0;
+        try {
+            while (rs.next()) {
+                slCon=rs.getDouble("tienNo");
+            }
+        } catch (SQLException ex) {
+        }
+        return slCon;
+    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class NhaCungCapDAO extends AbsDAO<NhaCungCap>{
     public List<Object[]> getDataStaff(){
-        return getRawValues("select * from nhaCungCap where tinhTrang = 1");
+        return getRawValues("select idNhaCungCap,tenNhaCungCap,SDTNhaCungCap,diachi,format(tienNo,'#,0') tienNo from nhaCungCap where tinhTrang = 1");
     }
     
     public void deleteNhaCungCapTam(int idNhaCungCap){

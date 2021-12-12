@@ -25,12 +25,13 @@ public class NhapHangPnl extends javax.swing.JPanel {
     private PhieuNhapHangController phieuNhapHangController;
     private NhaCungCapController nhaCungCapController;
     private int idNhaCungCap = UNDEFINED_CONDITION; 
-    private java.sql.Timestamp ngayNhap ;
+    private String ngayNhap ="";
     private int idNhanVien ;
     private String maPhieuNhap ;
     private int idDichVu;
     private int idDichVuXoa;
     private int giaTri;
+    private Double tienNoPN ;
     
     public NhapHangPnl() {
         initComponents();
@@ -140,10 +141,20 @@ public class NhapHangPnl extends javax.swing.JPanel {
         }
 
         txtTongTienPN.setLabelText("Tổng tiền");
+        txtTongTienPN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTongTienPNKeyReleased(evt);
+            }
+        });
 
         txtNhaCungCapPN.setLabelText("Nhà cung cấp");
 
         txtTienNoPN.setLabelText("Tiền nợ");
+        txtTienNoPN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienNoPNKeyReleased(evt);
+            }
+        });
 
         txtGhiChu.setLabelText("Ghi chú");
 
@@ -500,6 +511,11 @@ public class NhapHangPnl extends javax.swing.JPanel {
 
         txtTienNo.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         txtTienNo.setLabelText("Tiền nợ");
+        txtTienNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienNoKeyReleased(evt);
+            }
+        });
 
         button11.setBorder(null);
         button11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel (1).png"))); // NOI18N
@@ -629,22 +645,20 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 DataValidate.checkSdtForm(SDTNhaCungCap, sb);                
                 String diaChi = txtDiaChi.getText();
                 DataValidate.checkEmpty(diaChi, sb, "Địa chỉ không được để trống! ");
-//                Double tienNo = Double.parseDouble(txtTienNo.getText());
+
                 double tienNo = 0;
-                try {
-                    tienNo = Double.parseDouble(txtTienNo.getText()) ;
-                    if(tienNo < 0){
-                        sb.append("Tiền nợ phải lớn hớn 0 \n");
-                    }
-                } catch (Exception e) {
-                    sb.append("Tiền nợ phải là số \n");
-                }              
+                tienNo=ChuyenDoi.SoDouble(txtTienNo.getText());
+        
                 Integer idNhaCungCap = (Integer) tblNhaCungCap.getValueAt(chonDong, 0);
                 if(sb.length() > 0){
                     JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 }else{                
-                nhaCungCapController.update(idNhaCungCap, tenNhaCungCap, SDTNhaCungCap, diaChi, tienNo);
-                JOptionPane.showMessageDialog(new Frame(),"Update success !!!");           
+                    nhaCungCapController.update(idNhaCungCap, tenNhaCungCap, SDTNhaCungCap, diaChi, tienNo);
+                    txtSDT.setText("");
+                    txtNhaCungCap.setText("");
+                    txtDiaChi.setText("");
+                    txtTienNo.setText("");
+                    JOptionPane.showMessageDialog(new Frame(),"Update success !!!");           
                 }
             }
         }
@@ -666,18 +680,16 @@ public class NhapHangPnl extends javax.swing.JPanel {
         
 //        Double tienNo = Double.parseDouble(txtTienNo.getText());
         double tienNo = 0;
-        try {
-            tienNo = Double.parseDouble(txtTienNo.getText()) ;
-            if(tienNo < 0){
-                sb.append("Tiền nợ phải lớn hớn 0 \n");
-            }
-        } catch (Exception e) {
-            sb.append("Tiền nợ phải là số \n");
-        } 
+        tienNo=ChuyenDoi.SoDouble(txtTienNo.getText());
+        
         if(sb.length() > 0){
             JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
         }else{         
             nhaCungCapController.insert(tenNhaCungCap, SDTNhaCungCap, diaChi, tienNo);
+            txtSDT.setText("");
+            txtNhaCungCap.setText("");
+            txtDiaChi.setText("");
+            txtTienNo.setText("");
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -708,26 +720,16 @@ public class NhapHangPnl extends javax.swing.JPanel {
             sb.append("Vui lòng chọn nhà cung cấp ở bảng Nhà cung cấp \n");
         }
         
-        
         double tongTien = 0;
-        try {
-            tongTien = Double.parseDouble(txtTongTienPN.getText()) ;
-            if(tongTien < 0){
-                sb.append("Tổng tiền phải lớn hơn 0 \n");
-            }
-        } catch (Exception e) {
-            sb.append("Tổng tiền phải là số \n");
+        tongTien=ChuyenDoi.SoDouble(txtTongTienPN.getText());
+        if(tongTien <= 0){
+            sb.append("Tổng tiền phải lớn hơn 0 \n");
         }
+
         
         double tienNo = 0;
-        try {
-            tienNo = Double.parseDouble(txtTienNoPN.getText()) ;
-            if(tienNo < 0){
-                sb.append("Tiền nợ phải lớn hớn 0 \n");
-            }
-        } catch (Exception e) {
-            sb.append("Tiền nợ phải là số \n");
-        }
+        tienNo=ChuyenDoi.SoDouble(txtTienNoPN.getText());
+        
         
         String ghiChu = txtGhiChu.getText();
         if(ghiChu.length()==0){
@@ -765,6 +767,11 @@ public class NhapHangPnl extends javax.swing.JPanel {
             }
             phieuNhapHangController.insert(pn);
             idNhaCungCap=UNDEFINED_CONDITION;
+            txtNhaCungCapPN.setText("");
+            txtNgayNhapPN.setText("");
+            txtTongTienPN.setText("");
+            txtTienNoPN.setText("");
+            txtGhiChu.setText("");
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
@@ -778,29 +785,52 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 StringBuilder sb = new StringBuilder();
                 String nhaCungCap = txtNhaCungCapPN.getText();
                 DataValidate.checkEmpty(nhaCungCap, sb, "Nhà cung cấp không được để trống");
+                
                 double tongTien = 0;
-                try {
-                    tongTien = Double.parseDouble(txtTongTienPN.getText()) ;
-                    if(tongTien < 0){
-                        sb.append("Tiền nợ phải lớn hớn 0 \n");
-                    }
-                } catch (Exception e) {
-                    sb.append("Tiền nợ phải là số \n");
-                }   
-                double tienNo = 0;
-                try {
-                    tienNo = Double.parseDouble(txtTienNoPN.getText()) ;
-                    if(tienNo < 0){
-                        sb.append("Tiền nợ phải lớn hớn 0 \n");
-                    }
-                } catch (Exception e) {
-                    sb.append("Tiền nợ phải là số \n");
+                tongTien=ChuyenDoi.SoDouble(txtTongTienPN.getText());
+                if(tongTien <= 0){
+                    sb.append("Tổng tiền phải lớn hơn 0 \n");
                 }
+
+                double tienNo = 0;
+                tienNo=ChuyenDoi.SoDouble(txtTienNoPN.getText());
+                
+                
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                java.sql.Timestamp timeNow = null;
+                String ngayNhap = txtNgayNhapPN.getText();
+                Date date = new Date();
+                if(ngayNhap.equals("")){
+                    timeNow = new java.sql.Timestamp(new Date().getTime());
+                }else{
+                    try {
+                        date = sdf.parse(txtNgayNhapPN.getText());
+                        timeNow = new java.sql.Timestamp(date.getTime());
+                    } catch (Exception e) {
+                        sb.append("Sai thông tin ngày tháng ! \n");
+                    }
+                }
+                
                 if(sb.length() > 0){
                     JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 }else{          
-                    PhieuNhapDichVu pn = new PhieuNhapDichVu(maPhieuNhap,idNhaCungCap,idNhanVien,ngayNhap,tongTien,tienNo,txtGhiChu.getText(),true);
+                    PhieuNhapDichVu pn = new PhieuNhapDichVu(maPhieuNhap,idNhaCungCap,idNhanVien,timeNow,tongTien,tienNo,txtGhiChu.getText(),true);
+                    //Cập nhật tiền nợ
+                    Double tongTienNo = phieuNhapHangController.getTienNoNCC(idNhaCungCap);
+                    if(tienNo<tienNoPN){
+                        phieuNhapHangController.updateTienNoNCC(idNhaCungCap, tongTienNo-(tienNoPN-tienNo));
+                        nhaCungCapController.loadList();
+                    }else if (tienNo>tienNoPN){
+                        phieuNhapHangController.updateTienNoNCC(idNhaCungCap, tienNo+(tienNo-tienNoPN));
+                        nhaCungCapController.loadList();
+                    }
                     phieuNhapHangController.update(pn);
+                    idNhaCungCap=UNDEFINED_CONDITION;
+                    txtNhaCungCapPN.setText("");
+                    txtNgayNhapPN.setText("");
+                    txtTongTienPN.setText("");
+                    txtTienNoPN.setText("");
+                    txtGhiChu.setText("");
                 }            
             }
         }      
@@ -818,6 +848,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
         txtTienNoPN.setText(tblDanhSachPhieuNhap.getValueAt(click, 5).toString());
         txtGhiChu.setText(tblDanhSachPhieuNhap.getValueAt(click, 6).toString());
         txtNgayNhapPN.setText(tblDanhSachPhieuNhap.getValueAt(click, 3).toString());
+        tienNoPN=ChuyenDoi.SoDouble(tblDanhSachPhieuNhap.getValueAt(click, 5).toString());
         
         phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);
         
@@ -886,6 +917,9 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 tongGiaNhap += ChuyenDoi.SoDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString())*(int)tblChiTietPhieuNhap.getValueAt(i, 2);
             }
             txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
+            txtTenDichVu.setText("");
+            txtGiaNhapDV.setText("");
+            txtSoLuongDV.setText("");
         }   
     }//GEN-LAST:event_btnThemChiTietPNActionPerformed
 
@@ -919,6 +953,21 @@ public class NhapHangPnl extends javax.swing.JPanel {
         ArrayList<Integer> donVi = phieuNhapHangController.layIdDonVi(tenDonVi);
         giaTri=donVi.get(1);
     }//GEN-LAST:event_tblChiTietPhieuNhapMouseClicked
+
+    private void txtTienNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienNoKeyReleased
+        double khachDua = ChuyenDoi.SoDouble(txtTienNo.getText());
+        txtTienNo.setText(ChuyenDoi.SoString(khachDua));
+    }//GEN-LAST:event_txtTienNoKeyReleased
+
+    private void txtTienNoPNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienNoPNKeyReleased
+        double khachDua = ChuyenDoi.SoDouble(txtTienNoPN.getText());
+        txtTienNoPN.setText(ChuyenDoi.SoString(khachDua));
+    }//GEN-LAST:event_txtTienNoPNKeyReleased
+
+    private void txtTongTienPNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTongTienPNKeyReleased
+        double khachDua = ChuyenDoi.SoDouble(txtTongTienPN.getText());
+        txtTongTienPN.setText(ChuyenDoi.SoString(khachDua));
+    }//GEN-LAST:event_txtTongTienPNKeyReleased
 
     
     public void CssTable(JScrollPane table) {
