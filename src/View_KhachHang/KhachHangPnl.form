@@ -339,11 +339,17 @@
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n n&#x1ee3;"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTienNoKeyReleased"/>
+              </Events>
             </Component>
             <Component class="swing.TextField" name="txtTienSuDung">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n s&#x1eed; d&#x1ee5;ng"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTienSuDungKeyReleased"/>
+              </Events>
             </Component>
             <Component class="swing.TextField" name="txtGhiChu">
               <Properties>

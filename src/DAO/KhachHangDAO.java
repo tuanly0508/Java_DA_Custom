@@ -14,12 +14,12 @@ public class KhachHangDAO extends AbsDAO{
     }
     
     public List<Object[]> getThongTinKH(String SDT) {
-        return getRawValues("select SDTKhachHang, tenKhachHang,tienNo,tienSuDung, traSau, ghiChu from khachHang "
+        return getRawValues("select SDTKhachHang, tenKhachHang,format(tienNo,'#,0')tienNo,format(tiensuDung,'#,0')tiensuDung, traSau, ghiChu from khachHang "
                             + "where SDTKhachHang like '"+SDT+"' ");
     }
     
     public List<Object[]> getDataStaff(){
-        return getRawValues("select * from khachHang where tinhTrang = 'true'");
+        return getRawValues("select SDTKhachHang, tenKhachHang,format(tienNo,'#,0')tienNo,format(tiensuDung,'#,0')tiensuDung, IIF(traSau='true', N'Được Phép', N'Không' ) traSau,IIF(ghiChu is NULL, N' ', ghiChu) ghiChu from khachHang where tinhTrang = 'true'");
     }
     
     public List<Object[]> deleteTam(){
@@ -58,4 +58,7 @@ public class KhachHangDAO extends AbsDAO{
         return count >0;
     }
     
+    public void capNhatTienNo(String sdt, Double tienNo ,Double tongTien){
+        DBConnection.executeUpdate("update khachHang set tienNo = tienNo+?,tienSuDung=tienSuDung+? where sdtKhachHang =?", tienNo,tongTien,sdt);
+    }; 
 }

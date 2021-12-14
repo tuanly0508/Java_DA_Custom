@@ -78,7 +78,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
     PhieuDatPhong phieuDatPhong = new PhieuDatPhong();
     String tenPhongHienTai = TOOL_TIP_TEXT_KEY;
     GiaNgayLe giaNgayLe = new GiaNgayLe();
-    KhachHang khachHang = new KhachHang();    
+    KhachHang khachHang = new KhachHang();   
+    String sdtKhach ;
     Double tienDichVu = 0.0;
     Double tienNgayLe = 0.0; 
     Double tienPhuThu = 0.0;
@@ -165,7 +166,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 phongHienTai = idPhong;
                 loaiPhongHienTai = idLoaiPhong;
                 tenPhongHienTai = tenPhong;
-                lblTenPhong.setText(tenPhong);                                            
+                lblTenPhong.setText(tenPhong);                     
                 if (ttPhong.equals("Phòng còn trống")) {
                     setNull();
                     setNullTamTinh();
@@ -1454,7 +1455,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 //Thêm phiếu thuê phòng
                 phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
                 phieuThuePhongController.insert(phieuThuePhong);
-            }        
+            }
+            sdtKhach=SDT;
             //Cập nhật tình trạng phòng
             phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
             datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
@@ -1698,6 +1700,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
                         hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
                     }
+                    //Cập nhật tiền nợ của khách
+                    datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
                     hoaDonController.insert(hd);
                     
                     //đóng phiếu thuê phòng
@@ -1744,7 +1748,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
                     }
                     hoaDonController.insert(hd);
-                    
+                    //Cập nhật tiền nợ của khách
+                    datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
                     //đóng phiếu thuê phòng
                     phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
                     //Cập nhật lại tình trạng phòng
@@ -1903,6 +1908,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }
         
         txtSDT.setText(data.get(0)[1].toString());
+        //set SDT khách hàng 
+        sdtKhach=data.get(0)[1].toString();
         txtThoiGianMo.setText(data.get(0)[3].toString());
     }
     

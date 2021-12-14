@@ -1,6 +1,7 @@
 package View_KhachHang;
 
 import Controller.KhachHangController;
+import Help.ChuyenDoi;
 import Help.DataValidate;
 import Help.XuatExcel;
 import java.util.List;
@@ -146,8 +147,18 @@ public class KhachHangPnl extends javax.swing.JPanel {
         txtTenKhach.setLabelText("Tên khách hàng");
 
         txtTienNo.setLabelText("Tiền nợ");
+        txtTienNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienNoKeyReleased(evt);
+            }
+        });
 
         txtTienSuDung.setLabelText("Tiền sử dụng");
+        txtTienSuDung.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienSuDungKeyReleased(evt);
+            }
+        });
 
         txtGhiChu.setLabelText("Ghi chú");
 
@@ -267,27 +278,11 @@ public class KhachHangPnl extends javax.swing.JPanel {
                 String tenKhachHang = txtTenKhach.getText();
                 DataValidate.checkEmpty(tenKhachHang, sb, "Tên không được để trống");
                 
-//                Double tienNo = Double.parseDouble(txtTienNo.getText());
-//                Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
                 double tienNo = 0;
-                try {
-                    tienNo = Double.parseDouble(txtTienNo.getText()) ;
-                    if(tienNo < 0){
-                        sb.append("Tiền nợ phải lớn hớn 0 \n");
-                    }
-                } catch (Exception e) {
-                    sb.append("Tiền nợ phải là số \n");
-                }       
+                tienNo = ChuyenDoi.SoDouble(txtTienNo.getText()) ;
 
                 double tienSuDung = 0;
-                try {
-                    tienSuDung = Double.parseDouble(txtTienSuDung.getText()) ;
-                    if(tienSuDung < 0){
-                        sb.append("Tiền sử dụng phải lớn hớn 0 \n");
-                    }
-                } catch (Exception e) {
-                    sb.append("Tiền sử dụng phải là số \n");
-                }                 
+                tienSuDung = ChuyenDoi.SoDouble(txtTienSuDung.getText()) ;        
 
                 Boolean no = true;
                 if(rdbNo.isSelected()){
@@ -322,27 +317,12 @@ public class KhachHangPnl extends javax.swing.JPanel {
         String tenKhachHang = txtTenKhach.getText();
         DataValidate.checkEmpty(tenKhachHang, sb, "Tên không được để trống");
         
-//        Double tienNo = Double.parseDouble(txtTienNo.getText());
         double tienNo = 0;
-        try {
-            tienNo = Double.parseDouble(txtTienNo.getText()) ;
-            if(tienNo < 0){
-                sb.append("Tiền nợ phải lớn hớn 0 \n");
-            }
-        } catch (Exception e) {
-            sb.append("Tiền nợ phải là số \n");
-        }       
+        tienNo = ChuyenDoi.SoDouble(txtTienNo.getText()) ;
+
         
-//        Double tienSuDung = Double.parseDouble(txtTienSuDung.getText());
         double tienSuDung = 0;
-        try {
-            tienSuDung = Double.parseDouble(txtTienSuDung.getText()) ;
-            if(tienSuDung < 0){
-                sb.append("Tiền sử dụng phải lớn hớn 0 \n");
-            }
-        } catch (Exception e) {
-            sb.append("Tiền sử dụng phải là số \n");
-        } 
+        tienSuDung = ChuyenDoi.SoDouble(txtTienSuDung.getText()) ;
 
         boolean no = true;
         if(rdbNo.isSelected()){
@@ -372,7 +352,7 @@ public class KhachHangPnl extends javax.swing.JPanel {
         txtTienNo.setText(tblKhachHang.getValueAt(click, 2).toString());
         txtTienSuDung.setText(tblKhachHang.getValueAt(click, 3).toString());
         
-        if(tblKhachHang.getValueAt(click, 4).toString().equals(false)){                        
+        if(tblKhachHang.getValueAt(click, 4).toString().equals("Không")){                        
             rdbKhongNo.setSelected(true);
         }else{
             rdbNo.setSelected(true);
@@ -396,6 +376,16 @@ public class KhachHangPnl extends javax.swing.JPanel {
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
         XuatExcel.xuat(tblKhachHang);
     }//GEN-LAST:event_btnXoa1ActionPerformed
+
+    private void txtTienNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienNoKeyReleased
+        double khachDua = ChuyenDoi.SoDouble(txtTienNo.getText());
+        txtTienNo.setText(ChuyenDoi.SoString(khachDua));
+    }//GEN-LAST:event_txtTienNoKeyReleased
+
+    private void txtTienSuDungKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienSuDungKeyReleased
+        double khachDua = ChuyenDoi.SoDouble(txtTienSuDung.getText());
+        txtTienSuDung.setText(ChuyenDoi.SoString(khachDua));
+    }//GEN-LAST:event_txtTienSuDungKeyReleased
 
     
     public void viewTableStaff(List<Object[]> data) {

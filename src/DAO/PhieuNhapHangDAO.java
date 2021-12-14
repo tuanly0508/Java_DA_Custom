@@ -16,7 +16,7 @@ public class PhieuNhapHangDAO extends AbsDAO<PhieuNhapDichVu>{
     } 
     
     public List<Object[]> getDataChiTietPN(String maPhieuNhap){
-        return getRawValues("select maPhieuNhap,tenDichVu,soLuong,format(giaNhap,'#,#')giaNhap,tenDonVi from ChiTietPhieuNhap ctpn \n" +
+        return getRawValues("select maPhieuNhap,tenDichVu,soLuong,format(giaNhap,'#,0')giaNhap,tenDonVi from ChiTietPhieuNhap ctpn \n" +
                             "join donViTinh dvt on dvt.idDonViTinh=ctpn.idDonViTinh\n" +
                             "join dichVu dv on dv.idDichVu=ctpn.idDichVu where maPhieuNhap=?",maPhieuNhap);
     }

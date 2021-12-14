@@ -150,6 +150,11 @@ public class DatPhongController {
         dichVuDAO.huyDichVu(idDichVu,gioMo);
     }
     
+    //Cập nhật tiền nợ khách hàng
+    public void capNhatTienNo(String sdtKhach ,Double tienNo,Double TongTien){
+        khachHangDAO.capNhatTienNo(sdtKhach, tienNo,TongTien);
+    }
+    
     
     public void HienThiThoiGian(String gio,String tenKhach,String sdt ,int idPhong) {        
         String tenPhong = datPhongDAO.layTenPhong(idPhong);      
