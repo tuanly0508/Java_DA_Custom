@@ -20,7 +20,7 @@ public class ThongKeDAO extends AbsDAO{
                             + "tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,tenKhachHang from phong a join phieuThuePhong b "
                             + "on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong where thoiGianMo between "
                             + "CONVERT(date, replace(GETDATE(),DATEPART(dd,GETDATE()),DAY(GETDATE()) - (DATEPART(DW,GETDATE()) - "
-                            + "(DATEPART(DW,convert(varchar, GETDATE(), 103))-DATEPART(DW,convert(varchar, GETDATE(), 103)) + 2 ))), 103) "
+                            + "(DATEPART(DW,convert(date, GETDATE(), 103))-DATEPART(DW,convert(date, GETDATE(), 103)) + 2 ))), 103) "
                             + "and GETDATE() order by MONTH(thoiGianMo),DAY(thoiGianMo)");
     }
     
@@ -42,7 +42,7 @@ public class ThongKeDAO extends AbsDAO{
         return getRawValues("select MONTH(thoiGianMo), YEAR(thoiGianMo) , sum(tienPhong), sum(tienDichVu), sum(phuThu), sum(tongTien) from phong a join "
                             + "phieuThuePhong b on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong where thoiGianMo "
                             + "between CONVERT(date, replace(GETDATE(),DATEPART(dd,GETDATE()),DAY(GETDATE()) - (DATEPART(DW,GETDATE()) - "
-                            + "(DATEPART(DW,convert(varchar, GETDATE(), 103))-DATEPART(DW,convert(varchar, GETDATE(), 103)) + 2 ))), 103) "
+                            + "(DATEPART(DW,convert(date, GETDATE(), 103))-DATEPART(DW,convert(date, GETDATE(), 103)) + 2 ))), 103) "
                             + "and GETDATE() group by MONTH(thoiGianMo), YEAR(thoiGianMo)");
     }
     
@@ -103,7 +103,7 @@ public class ThongKeDAO extends AbsDAO{
         return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, b.gia*sum(soLuong) from chiTietDichVuSuDung a join dichVu b on "
                             + "a.idDichVu = b.idDichVu join donViTinh c on c.idDonViTinh = b.idDonViTinh where gioSuDung between "
                             + "CONVERT(date, replace(GETDATE(),DATEPART(dd,GETDATE()),DAY(GETDATE()) - (DATEPART(DW,GETDATE()) - "
-                            + "(DATEPART(DW,convert(varchar, GETDATE(), 103))-DATEPART(DW,convert(varchar, GETDATE(), 103)) + 2 ))), 103) and "
+                            + "(DATEPART(DW,convert(date, GETDATE(), 103))-DATEPART(DW,convert(date, GETDATE(), 103)) + 2 ))), 103) and "
                             + "GETDATE() group by tenDichVu,b.gia,tenDonVi order by sum(soLuong) desc");
     }
     
@@ -130,7 +130,7 @@ public class ThongKeDAO extends AbsDAO{
         return getRawValues("select top 10 tenDichVu,sum(soLuong),tenDonVi, b.gia*sum(soLuong) from chiTietDichVuSuDung a join dichVu b on "
                             + "a.idDichVu = b.idDichVu join donViTinh c on c.idDonViTinh = b.idDonViTinh where gioSuDung between "
                             + "CONVERT(date, replace(GETDATE(),DATEPART(dd,GETDATE()),DAY(GETDATE()) - (DATEPART(DW,GETDATE()) - "
-                            + "(DATEPART(DW,convert(varchar, GETDATE(), 103))-DATEPART(DW,convert(varchar, GETDATE(), 103)) + 2 ))), 103) and "
+                            + "(DATEPART(DW,convert(date, GETDATE(), 103))-DATEPART(DW,convert(date, GETDATE(), 103)) + 2 ))), 103) and "
                             + "GETDATE() group by tenDichVu,b.gia,tenDonVi order by sum(soLuong) desc");
     }
     
