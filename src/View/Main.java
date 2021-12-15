@@ -78,7 +78,11 @@ public class Main extends javax.swing.JFrame {
             }
         };
         menu.initMenu(event);
-        showForm(datPhongPnl);
+        if(Login.per.equals("ADMIN")){
+            showForm(thongKePnl);
+        }else{
+            showForm(datPhongPnl);
+        }
     }
     
     private void showForm(Component com) {
