@@ -12,6 +12,7 @@ import Controller.PhieuDatPhongController;
 import Controller.PhieuNhapHangController;
 import Controller.PhieuThuePhongController;
 import Controller.ThongKeController;
+import Help.ThongBao;
 import View_DichVu.DichVuPnl;
 import View_DatPhong.DatPhongPnl;
 import View_KhachHang.KhachHangPnl;
@@ -79,8 +80,10 @@ public class Main extends javax.swing.JFrame {
         };
         menu.initMenu(event);
         if(Login.per.equals("ADMIN")){
+            ThongBao.ThongBao("Bạn đã đăng nhập thành công với quyền Admin", "Thông báo");
             showForm(thongKePnl);
         }else{
+            ThongBao.ThongBao("Bạn đã đăng nhập thành công với quyền User", "Thông báo");
             showForm(datPhongPnl);
         }
     }
