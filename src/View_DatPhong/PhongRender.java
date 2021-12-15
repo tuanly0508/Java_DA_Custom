@@ -19,6 +19,9 @@ public class PhongRender extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtGioDatTruoc = new javax.swing.JLabel();
 
+        setMaximumSize(new java.awt.Dimension(167, 137));
+        setMinimumSize(new java.awt.Dimension(167, 137));
+
         lblTenPhong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTenPhong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenPhong.setText("TÊN PHÒNG");
