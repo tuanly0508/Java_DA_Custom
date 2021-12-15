@@ -467,14 +467,18 @@ public class ThongKePnl extends javax.swing.JPanel {
     }       
     
     public void setGiaDefault(List<Object[]> data) {
-        Double tienPhong = 0.0,tienDichVu=0.0 ,phuThu=0.0 ,Tong=0.0;        
-        for(int i=0 ;i<=data.size()-1;i++){
-            tienPhong+=ChuyenDoi.SoDouble(data.get(i)[2].toString());
-            tienDichVu+=ChuyenDoi.SoDouble(data.get(i)[3].toString());
-            phuThu+=ChuyenDoi.SoDouble(data.get(i)[4].toString());
-            Tong+=ChuyenDoi.SoDouble(data.get(i)[5].toString());
-        }
-        setValueSum(tienPhong, tienDichVu, phuThu, Tong);
+        if (data == null) {
+            
+        }else {
+            Double tienPhong = 0.0,tienDichVu=0.0 ,phuThu=0.0 ,Tong=0.0;        
+            for(int i=0 ;i<=data.size()-1;i++){
+                tienPhong+=ChuyenDoi.SoDouble(data.get(i)[2].toString());
+                tienDichVu+=ChuyenDoi.SoDouble(data.get(i)[3].toString());
+                phuThu+=ChuyenDoi.SoDouble(data.get(i)[4].toString());
+                Tong+=ChuyenDoi.SoDouble(data.get(i)[5].toString());
+            }
+            setValueSum(tienPhong, tienDichVu, phuThu, Tong); 
+        }      
     }    
     
     public void setController (ThongKeController thongKeController) {

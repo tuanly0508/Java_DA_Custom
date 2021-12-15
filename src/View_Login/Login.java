@@ -73,7 +73,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Đăng nhập");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 27, 360, -1));
 
-        txtEmail.setLabelText("Email");
+        txtEmail.setLabelText("Số điện thoại");
         txtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtEmailMouseClicked(evt);
@@ -173,14 +173,14 @@ public class Login extends javax.swing.JFrame {
         lblErrPass.setText("");
         
         if (email.equals("") && password.equals("")) {
-            lblErrEmail.setText("Email không được để trống");
+            lblErrEmail.setText("Số điện thoại không được để trống");
             lblErrPass.setText("Mật khẩu không được để trống");
             btnLogin.setVisible(true);
         }else if (password.equals("")) {           
             lblErrPass.setText("Mật khẩu không được để trống");
             btnLogin.setVisible(true);
         }else if (email.equals("")) {
-            lblErrEmail.setText("Email không được để trống");
+            lblErrEmail.setText("Số điện thoại không được để trống");
             btnLogin.setVisible(true);
         }else {
             new Thread() {
@@ -190,7 +190,7 @@ public class Login extends javax.swing.JFrame {
                         lblLoading.setVisible(true);
                         this.sleep(1500); 
                         
-                        PreparedStatement pst = DBConnection.prepareStatement("select * from NhanVien where email='" + email + "'");
+                        PreparedStatement pst = DBConnection.prepareStatement("select * from NhanVien where soDienThoai='" + email + "'");
                         ResultSet rs = pst.executeQuery();
                             if (rs.next()) {
                                 String pass = rs.getString("matKhau");
@@ -204,7 +204,7 @@ public class Login extends javax.swing.JFrame {
                                     btnLogin.setVisible(true);
                                 }
                             } else {
-                                lblErrEmail.setText("Email không tồn tại");
+                                lblErrEmail.setText("Số điện thoại không tồn tại");
                                 lblLoading.setVisible(false);
                                 btnLogin.setVisible(true);
                             }

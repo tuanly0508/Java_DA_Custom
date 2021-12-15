@@ -31,9 +31,13 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import static javax.swing.JComponent.UNDEFINED_CONDITION;
@@ -1795,18 +1799,25 @@ public class DatPhongPnl extends javax.swing.JPanel {
             ThongBao.ThongBao("Số lượng không hợp lệ", "Thông Báo");
         }else{
             if(data.get(0)[1].equals(phongHienTai)) {
-                datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), tblSuDungDichVu.getValueAt(click, 3)+"00"); 
-                //nếu số lượng mới > sl cũ thì trừ thêm chênh lệch
-                if(soLuong>soLuongDauTien){
-                    datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon-(soLuong-soLuongDauTien));
-                    System.out.println("id :"+idDichVu);
-                    System.out.println(soLuongCon-(soLuong-soLuongDauTien));
-                //nếu số lượng mới < sl cũ thì + thêm vào sl dịch vụ
-                }else if(soLuong<soLuongDauTien){
-                    datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon+(soLuongDauTien-soLuong));
-                }
-                //load lại bảng danh sách dịch vụ 
-                loadAllTableDichVu();
+                SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+                SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                String reformattedStr;
+                try {
+                    reformattedStr = myFormat.format(fromUser.parse(tblSuDungDichVu.getValueAt(click, 3).toString()));
+                    datPhongController.updateSoLuongSuDungDichVu(soLuong, (int) tblSuDungDichVu.getValueAt(click, 6), reformattedStr+".000"); 
+                    //nếu số lượng mới > sl cũ thì trừ thêm chênh lệch
+                    if(soLuong>soLuongDauTien){
+                        datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon-(soLuong-soLuongDauTien));
+                    //nếu số lượng mới < sl cũ thì + thêm vào sl dịch vụ
+                    }else if(soLuong<soLuongDauTien){
+                        datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon+(soLuongDauTien-soLuong));
+                    }
+                    //load lại bảng danh sách dịch vụ 
+                    loadAllTableDichVu();
+                } catch (ParseException ex) {
+                    Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
+                }                               
             }   
         }
     
