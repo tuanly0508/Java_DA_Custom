@@ -80,10 +80,10 @@ public class Main extends javax.swing.JFrame {
         };
         menu.initMenu(event);
         if(Login.per.equals("ADMIN")){
-            ThongBao.ThongBao("Bạn đã đăng nhập thành công với quyền Admin", "Thông báo");
+            ThongBao.ThongBaoDon("Bạn đã đăng nhập thành công với quyền Admin", "Đăng nhập");
             showForm(thongKePnl);
         }else{
-            ThongBao.ThongBao("Bạn đã đăng nhập thành công với quyền User", "Thông báo");
+            ThongBao.ThongBaoDon("Bạn đã đăng nhập thành công với quyền User", "Đăng nhập");
             showForm(datPhongPnl);
         }
     }

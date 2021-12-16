@@ -52,7 +52,9 @@ public class Menu extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if(!Login.per.equals("ADMIN")&&index==1){
-                    ThongBao.ThongBao("Chức năng chỉ dành cho ADMIN", "Quyền hạn");
+                    ThongBao.ThongBaoDon("Chức năng chỉ dành cho ADMIN", "Quyền hạn");
+                }else if(!Login.per.equals("ADMIN")&&index==2){
+                    ThongBao.ThongBaoDon("Chức năng chỉ dành cho ADMIN", "Quyền hạn");
                 }else{
                     event.selected(index);
                     setSelected(menu); 
