@@ -176,7 +176,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     tblAllDichVu.setEnabled(false);
                     btnMoPhong.setEnabled(true);
                     btnBaoTri.setEnabled(true);
-                    datPhongDialog.btnMoPhong.setEnabled(true);
                 }else if (ttPhong.equals("Đang hoạt động")) {
                     phongCanDoi = idPhong;
                     setNullTamTinh();
@@ -187,7 +186,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     tblSuDungDichVu.setEnabled(true);
                     jtpDichVuAll.setEnabled(true);
                     tblAllDichVu.setEnabled(true);
-                    datPhongDialog.btnMoPhong.setEnabled(false);
                 }else if (ttPhong.equals("Phòng đặt trước")) {
                     loadTableSuDungDV(null);
                     setNullTamTinh();
@@ -1940,7 +1938,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
             }
         }
     }
-    
+
     public void setThongTinPhong(int idPhong) {
         List<Object[]> data2 = datPhongController.layChiTietDichVu(idPhong);
         loadTableSuDungDV(data2);

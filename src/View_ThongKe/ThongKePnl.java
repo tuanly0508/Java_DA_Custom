@@ -415,17 +415,24 @@ public class ThongKePnl extends javax.swing.JPanel {
     }
     
     public void fillDataTable(List<Object[]> data) {
-        tablePnl.viewTableThongKe(data);
-        setGiaDefault(data);
+        if(tablePnl == null){
+        }else {
+            tablePnl.viewTableThongKe(data);
+            setGiaDefault(data);
+        }
     }
     
     public void fillDataChart(List<Object[]> data) {
-        bieuDoPnl.bieuDoDefault(data);  
-        setGiaDefault(data);
+        if(bieuDoPnl == null){
+        }else {
+            bieuDoPnl.bieuDoDefault(data);  
+            setGiaDefault(data);
+        }
     }
     
     public void fillDataChart2(List<Object[]> data) {
-        bieuDoDichVuPnl.bieuDoDefault(data);  
+        if(bieuDoDichVuPnl == null){
+        }else bieuDoDichVuPnl.bieuDoDefault(data);  
     }
     
     public void addTable(){
