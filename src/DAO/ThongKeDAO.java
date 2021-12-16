@@ -4,20 +4,20 @@ import java.util.List;
 
 public class ThongKeDAO extends AbsDAO{
     public List<Object[]> tableDefaulNam() {
-        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') "
-                            + "tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,tenKhachHang from phong a join phieuThuePhong b "
+        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,0') tienPhong,format(tienDichVu,'#,0') "
+                            + "tienDichVu,format(phuThu,'#,0') phuThu,format(tongTien,'#,0') tongTien,tenKhachHang from phong a join phieuThuePhong b "
                             + "on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong where year(thoiGianMo) = YEAR(GETDATE()) order by MONTH(thoiGianMo),DAY(thoiGianMo)");
     }
     
     public List<Object[]> tableDefaulThang() {
-        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,tenKhachHang from phong a "
+        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,0') tienPhong,format(tienDichVu,'#,0') tienDichVu,format(phuThu,'#,0') phuThu,format(tongTien,'#,0') tongTien,tenKhachHang from phong a "
                             + "join phieuThuePhong b on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong "
                             + "where thoiGianMo between CONVERT(datetime, replace(GETDATE(),DATEPART(dd,GETDATE()),01), 121) and GETDATE() order by MONTH(thoiGianMo),DAY(thoiGianMo)");
     }
     
     public List<Object[]> tableDefaulTuan() {
-        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') "
-                            + "tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,tenKhachHang from phong a join phieuThuePhong b "
+        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,0') tienPhong,format(tienDichVu,'#,0') "
+                            + "tienDichVu,format(phuThu,'#,0') phuThu,format(tongTien,'#,0') tongTien,tenKhachHang from phong a join phieuThuePhong b "
                             + "on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong where thoiGianMo between "
                             + "CONVERT(date, replace(GETDATE(),DATEPART(dd,GETDATE()),DAY(GETDATE()) - (DATEPART(DW,GETDATE()) - "
                             + "(DATEPART(DW,convert(date, GETDATE(), 103))-DATEPART(DW,convert(date, GETDATE(), 103)) + 2 ))), 103) "
@@ -25,8 +25,8 @@ public class ThongKeDAO extends AbsDAO{
     }
     
     public List<Object[]> tableDefaulHomNay() {
-        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,#') tienPhong,"
-                            + "format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,"
+        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,0') tienPhong,"
+                            + "format(tienDichVu,'#,0') tienDichVu,format(phuThu,'#,0') phuThu,format(tongTien,'#,0') tongTien,"
                             + "tenKhachHang from phong a "
                             + "join phieuThuePhong b on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong "
                             + "where convert(varchar, thoiGianMo, 103)=convert(varchar, GETDATE(), 103)");
@@ -59,7 +59,7 @@ public class ThongKeDAO extends AbsDAO{
     }
     
     public List<Object[]> tableDoanhThu(java.sql.Date tuNgay, java.sql.Date denNgay) {
-        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,#') tienPhong,format(tienDichVu,'#,#') tienDichVu,format(phuThu,'#,#') phuThu,format(tongTien,'#,#') tongTien,tenKhachHang from phong a "
+        return getRawValues("select tenPhong,convert(varchar, thoiGianMo, 103) thoiGianMo,format(tienPhong,'#,0') tienPhong,format(tienDichVu,'#,0') tienDichVu,format(phuThu,'#,0') phuThu,format(tongTien,'#,0') tongTien,tenKhachHang from phong a "
                             + "join phieuThuePhong b on a.idPhong = b.idPhong join hoaDon c on c.idPhieuThuePhong = b.idPhieuThuePhong "
                             + "where thoiGianMo between '"+tuNgay+"' and '"+denNgay+"' order by MONTH(thoiGianMo),DAY(thoiGianMo)");
     }
@@ -77,12 +77,12 @@ public class ThongKeDAO extends AbsDAO{
     }
     
     public List<Object[]> tableDichVuCon() {
-        return getRawValues("select tenDichVu,tenDanhMuc,tenDonVi,gia,soLuongCon from dichVu a join danhMuc b on a.idDanhMuc = b.idDanhMuc "
+        return getRawValues("select tenDichVu,tenDanhMuc,tenDonVi,format(gia,'#,0') gia,soLuongCon from dichVu a join danhMuc b on a.idDanhMuc = b.idDanhMuc "
                             + "join donViTinh c on c.idDonViTinh = a.idDonViTinh order by soLuongCon");
     }
     
     public List<Object[]> tableDichVuHotSearch(java.sql.Date tuNgay, java.sql.Date denNgay) {
-        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, b.gia*sum(soLuong) from chiTietDichVuSuDung a join dichVu b "
+        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, format(b.gia*sum(soLuong),'#,0') from chiTietDichVuSuDung a join dichVu b "
                             + "on a.idDichVu = b.idDichVu join donViTinh c on c.idDonViTinh = b.idDonViTinh where "
                             + "gioSuDung between '"+tuNgay+"' and '"+denNgay+"' group by tenDichVu,b.gia, tenDonVi order by sum(soLuong) desc");
     }
@@ -94,13 +94,13 @@ public class ThongKeDAO extends AbsDAO{
     }
     
     public List<Object[]> tableDichVuHot() {
-        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, b.gia*sum(soLuong) from chiTietDichVuSuDung a join dichVu b "
+        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, format(b.gia*sum(soLuong),'#,0') from chiTietDichVuSuDung a join dichVu b "
                             + "on a.idDichVu = b.idDichVu join donViTinh c on c.idDonViTinh = b.idDonViTinh where "
                             + "convert(varchar, gioSuDung, 103)=convert(varchar, GETDATE(), 103) group by tenDichVu,b.gia, tenDonVi order by sum(soLuong) desc");
     }
     
     public List<Object[]> tableDichVuHotTuanNay() {
-        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, b.gia*sum(soLuong) from chiTietDichVuSuDung a join dichVu b on "
+        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, format(b.gia*sum(soLuong),'#,0') from chiTietDichVuSuDung a join dichVu b on "
                             + "a.idDichVu = b.idDichVu join donViTinh c on c.idDonViTinh = b.idDonViTinh where gioSuDung between "
                             + "CONVERT(date, replace(GETDATE(),DATEPART(dd,GETDATE()),DAY(GETDATE()) - (DATEPART(DW,GETDATE()) - "
                             + "(DATEPART(DW,convert(date, GETDATE(), 103))-DATEPART(DW,convert(date, GETDATE(), 103)) + 2 ))), 103) and "
@@ -108,14 +108,14 @@ public class ThongKeDAO extends AbsDAO{
     }
     
     public List<Object[]> tableDichVuHotThangNay() {
-        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, b.gia*sum(soLuong) from chiTietDichVuSuDung a join dichVu b on "
+        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, format(b.gia*sum(soLuong),'#,0') from chiTietDichVuSuDung a join dichVu b on "
                             + "a.idDichVu = b.idDichVu join donViTinh c on c.idDonViTinh = b.idDonViTinh where gioSuDung between "
                             + "CONVERT(datetime, replace(GETDATE(),DATEPART(dd,GETDATE()),01), 121) and GETDATE() group by "
                             + "tenDichVu,b.gia,tenDonVi order by sum(soLuong) desc");
     }
     
     public List<Object[]> tableDichVuHotNamNay() {
-        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi, b.gia*sum(soLuong) from chiTietDichVuSuDung a join dichVu b on "
+        return getRawValues("select tenDichVu,sum(soLuong),tenDonVi,format(b.gia*sum(soLuong),'#,0') from chiTietDichVuSuDung a join dichVu b on "
                             + "a.idDichVu = b.idDichVu join donViTinh c on c.idDonViTinh = b.idDonViTinh where year(gioSuDung) = YEAR(GETDATE()) "
                             + "group by tenDichVu,b.gia,tenDonVi order by sum(soLuong) desc");
     }
