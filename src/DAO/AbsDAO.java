@@ -17,21 +17,19 @@ public abstract class AbsDAO<T extends AbsTable> {
     
     public void insert(T obj) {
         /*
-        insert into table {DanhMuc, BanAn} values (?,?,?)
+        insert into table {tenTable} values (?,?,?)
         */
         String query = "insert into " + obj.getTableName();
         query += " values (";
         for (String column : obj.getColumnNames()) {
             query += "?,";
         }
-        //"insert into DanhMuc values (?,"
+        //"insert into tenTable values (?,"
         query = query.substring(0, query.length() - 1);
-        //"insert into DanhMuc values (?"
+        //"insert into tenTable values (?"
         query += ")";
-        //"insert into DanhMuc values (?)
-        // chay debug lenh loi thu
-        // e chưa biết chạy debug thầy ơi
-        System.out.println("Chạy lệnh sql: " + query);
+        //"insert into tenTable values (?)
+//        System.out.println("Chạy lệnh sql: " + query);
         DBConnection.executeUpdate(query, obj.getValues());
     }
     

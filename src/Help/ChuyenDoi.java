@@ -33,13 +33,12 @@ public class ChuyenDoi {
         }
     }
 
-    //chuyển từ Double <-> String 10.000.000
-    //chuyển Double -> String
+    //chuyển định dạng từ số Double thành String dạng có ,(vd 1,000,000)
     public static String SoString(double so){
         return NumberFormat.getNumberInstance().format(so);
     }
     
-    //chuyển String -> Double
+    //chuyển định dạng String (1,000,111) thành số Double
     public static double SoDouble(String so){
         try {
             return NumberFormat.getNumberInstance().parse(so).doubleValue();
@@ -49,15 +48,15 @@ public class ChuyenDoi {
     }
     
     //Làm tròn số Double
-    public static double lamTronSoDouble(double number, int multiple) {
+    public static double lamTronSoDouble(double number, int khoangLamTron) {
 
-        double result = multiple;
-        if (number % multiple == 0) {
+        double result = khoangLamTron;
+        if (number % khoangLamTron == 0) {
             return (int) number;
         }
-        if (number % multiple != 0) {
-            int division = (int) ((number / multiple) + 1);
-            result = division * multiple;
+        if (number % khoangLamTron != 0) {
+            int division = (int) ((number / khoangLamTron) + 1);
+            result = division * khoangLamTron;
         }
         return result;
     }

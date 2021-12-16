@@ -12,26 +12,11 @@ import Help.XuatExcel;
 import Model.DanhMuc;
 import Model.DichVu;
 import Model.DonViTinh;
-import java.awt.Desktop;
 import java.awt.Frame;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import static javax.swing.JComponent.UNDEFINED_CONDITION;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 /**
  *
@@ -361,9 +346,11 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         Integer idDonViTinh = donViTinh.getIdDonViTinh();
         if(sb.length() > 0){
             JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
-        }else{  
+        }else{
+            
             DichVu dv = new DichVu(0,idDanhMuc,idDonViTinh,tenDichVu,soLuongCon,giaBan,true);
-            dichVuController.themDichVu(dv);        
+            dichVuController.themDichVu(dv);
+            
         }        
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -374,14 +361,15 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         }else{
             int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
             if (click == JOptionPane.YES_OPTION) {
-                dichVuController.xoaDichVu((Integer)tblDichVu.getValueAt(dongXoa, 0));
+                int idDichVu = (Integer)tblDichVu.getValueAt(dongXoa, 0);
+                dichVuController.xoaDichVu(idDichVu);
             }
             JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tblDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDichVuMouseClicked
-        DefaultTableModel ml = (DefaultTableModel) tblDichVu.getModel();
+
         int click = tblDichVu.getSelectedRow();
         DichVu dv = dichVuController.getByIdDichVu((Integer) tblDichVu.getValueAt(click, 0));
         
@@ -442,8 +430,10 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                 if(sb.length() > 0){
                     JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 }else{
+                    
                     DichVu dv = new DichVu(idDichVu,idDanhMuc,idDonViTinh,tenDichVu,soLuongCon,giaBan,true);
-                    dichVuController.suaDichVu(dv);                    
+                    dichVuController.suaDichVu(dv);    
+                    
                 }    
             }
         }
