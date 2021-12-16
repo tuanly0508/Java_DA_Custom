@@ -10,8 +10,6 @@ public class ThongBaoDlg extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btnDatGia);
-        lblNoiDung.setEditable(false);
-        lblNoiDung.setBorder(null);
     }
     
     public void setNoiDung(String tieuDe , String noiDung){
@@ -34,8 +32,7 @@ public class ThongBaoDlg extends javax.swing.JDialog {
         lblErr = new javax.swing.JLabel();
         btnDatGia = new swing.Button();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lblNoiDung = new javax.swing.JTextArea();
+        lblNoiDung = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,10 +51,7 @@ public class ThongBaoDlg extends javax.swing.JDialog {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/notifications.png"))); // NOI18N
 
-        lblNoiDung.setColumns(20);
-        lblNoiDung.setRows(5);
-        lblNoiDung.setBorder(null);
-        jScrollPane1.setViewportView(lblNoiDung);
+        lblNoiDung.setText("jLabel1");
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
@@ -69,7 +63,8 @@ public class ThongBaoDlg extends javax.swing.JDialog {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13))
                     .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(roundPanel1Layout.createSequentialGroup()
                             .addGap(290, 290, 290)
@@ -86,10 +81,10 @@ public class ThongBaoDlg extends javax.swing.JDialog {
                     .addGroup(roundPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(roundPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lblNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
                 .addComponent(btnDatGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(145, 145, 145)
                 .addComponent(lblErr, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -115,11 +110,10 @@ public class ThongBaoDlg extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private swing.Button btnDatGia;
+    public swing.Button btnDatGia;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblErr;
-    private javax.swing.JTextArea lblNoiDung;
+    public javax.swing.JLabel lblErr;
+    private javax.swing.JLabel lblNoiDung;
     private swing.RoundPanel roundPanel1;
     // End of variables declaration//GEN-END:variables
 }

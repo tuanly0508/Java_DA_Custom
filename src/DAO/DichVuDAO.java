@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DichVuDAO extends AbsDAO<DichVu>{
+    
     public List<Object[]> getAllDichVu() {
-        return getRawValues("select idDichVu,tenDichVu, tenDonVi, format(gia,'#,0') gia,soluongcon from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh where a.tinhTrang=1");
+        return getRawValues("select idDichVu,tenDichVu, tenDonVi, format(gia,'#,0') gia,soluongcon "
+                          + "from dichVu a join donViTinh b on a.idDonViTinh = b.idDonViTinh "
+                          + "where a.tinhTrang=1");
     }
     
     public List<Object[]> layDanhSachDichVu() {
