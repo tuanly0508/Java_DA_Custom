@@ -409,7 +409,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
             ThongBao.ThongBaoDon("Chọn dòng cần sửa", "Thông báo");
         } else {
             int clickLuu = ThongBao.LuaChonFix("Xác nhận sửa ?", "");
-            if (clickLuu == JOptionPane.YES_OPTION) {
+            if (clickLuu == 1) {
                 StringBuilder sb = new StringBuilder();
                 
                 String tenDichVu = txtTenDichVu.getText();
@@ -440,9 +440,9 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                 if(sb.length() > 0){
                     JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 }else{
-                    
                     DichVu dv = new DichVu(idDichVu,idDanhMuc,idDonViTinh,tenDichVu,soLuongCon,giaBan,true);
-                    dichVuController.suaDichVu(dv);    
+                    dichVuController.suaDichVu(dv);
+                    dichVuController.loadListDichVu();
                     ThongBao.ThongBaoDon("Cập nhật dịch vụ thành công", "Thông báo");
                 }    
             }
