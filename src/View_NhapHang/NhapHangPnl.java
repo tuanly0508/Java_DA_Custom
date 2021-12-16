@@ -82,8 +82,8 @@ public class NhapHangPnl extends javax.swing.JPanel {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblDichVu = new swing.Table();
         txtTimDichVu = new swing.TextInputTT();
-        cbxDonVi = new javax.swing.JComboBox<>();
         txtTongGiaTri = new swing.TextField();
+        cbxDonVi = new swing.ComboBoxSuggestion<>();
         button12 = new swing.Button();
         roundPanel4 = new swing.RoundPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -372,6 +372,10 @@ public class NhapHangPnl extends javax.swing.JPanel {
         txtTongGiaTri.setLabelText("Tổng Giá trị Phiếu nhập");
         txtTongGiaTri.setOpaque(false);
 
+        cbxDonVi.setEditable(false);
+        cbxDonVi.setMinimumSize(new java.awt.Dimension(30, 22));
+        cbxDonVi.setPreferredSize(new java.awt.Dimension(30, 22));
+
         javax.swing.GroupLayout roundPanel6Layout = new javax.swing.GroupLayout(roundPanel6);
         roundPanel6.setLayout(roundPanel6Layout);
         roundPanel6Layout.setHorizontalGroup(
@@ -394,8 +398,10 @@ public class NhapHangPnl extends javax.swing.JPanel {
                             .addComponent(txtTenDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtGiaNhapDV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxDonVi, 0, 160, Short.MAX_VALUE)))))
+                            .addComponent(txtGiaNhapDV, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(roundPanel6Layout.createSequentialGroup()
+                                .addComponent(cbxDonVi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))))
         );
         roundPanel6Layout.setVerticalGroup(
             roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,9 +409,9 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel6Layout.createSequentialGroup()
-                        .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxDonVi))
+                            .addComponent(cbxDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtSoLuongDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,8 +427,6 @@ public class NhapHangPnl extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
-
-        cbxDonVi.setBackground(Color.WHITE);
 
         button12.setBorder(null);
         button12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel (1).png"))); // NOI18N
@@ -1084,7 +1088,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
     private swing.Button button10;
     private swing.Button button11;
     private swing.Button button12;
-    private javax.swing.JComboBox<DonViTinh> cbxDonVi;
+    public swing.ComboBoxSuggestion<DonViTinh> cbxDonVi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
