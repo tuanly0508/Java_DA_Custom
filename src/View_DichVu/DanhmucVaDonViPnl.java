@@ -7,6 +7,7 @@ package View_DichVu;
 
 import Controller.DichVuController;
 import Help.DataValidate;
+import Help.ThongBao;
 import Model.DanhMuc;
 import Model.DonViTinh;
 import java.awt.Frame;
@@ -312,14 +313,15 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             DanhMuc dm = new DanhMuc(0,tenDichVu,true);
-            dichVuController.themDanhMuc(dm);           
+            dichVuController.themDanhMuc(dm);  
+            ThongBao.ThongBaoDon("Thêm mới danh mục thành công", "Thông báo");
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int chonDong = tblDanhMuc.getSelectedRow();
         if (chonDong == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần sửa", "Thông báo");
         } else {
             int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn sửa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
             if (clickLuu == JOptionPane.YES_OPTION) {
@@ -330,7 +332,8 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 }else{
                     DanhMuc dm = new DanhMuc((Integer)tblDanhMuc.getValueAt(chonDong, 0),tenDichVu,true);
-                    dichVuController.suaDanhMuc(dm);                    
+                    dichVuController.suaDanhMuc(dm);     
+                    ThongBao.ThongBaoDon("Cập nhật danh mục thành công", "Thông báo");
                 }   
             }
         }
@@ -340,12 +343,12 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int dongXoa = tblDanhMuc.getSelectedRow();
         if (dongXoa == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm cần xoá !");
+            ThongBao.ThongBaoDon("Vui lòng chọn danh mục cần xoá", "Thông báo");
         }else{
-            int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION){
+            int click = ThongBao.LuaChonFix("Xác nhận xoá ?", "");
+            if (click == 1){
                 dichVuController.xoaDichVu((Integer)tblDanhMuc.getValueAt(dongXoa, 0));
-                JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
+                ThongBao.ThongBaoDon("Xoá thành công", "Thông báo");
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -367,14 +370,15 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
         }else{    
             DonViTinh dvt = new DonViTinh(0,tenDonVi,giaTri,true);
-            dichVuController.themDonViTinh(dvt);            
+            dichVuController.themDonViTinh(dvt); 
+            ThongBao.ThongBaoDon("Thêm mới thành công", "Thông báo");
         }          
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
         int chonDong = tblDonViTinh.getSelectedRow();
         if (chonDong == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần cập nhật", "Thông báo");
         } else {
             int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
             if(update == JOptionPane.YES_OPTION){
@@ -395,7 +399,8 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 }else{
                     DonViTinh dvt = new DonViTinh(Integer.parseInt(tblDonViTinh.getValueAt(chonDong, 0).toString()),tenDonVi,giaTri,true);
-                    dichVuController.suaDonViTinh(dvt);                    
+                    dichVuController.suaDonViTinh(dvt);        
+                    ThongBao.ThongBaoDon("Cập nhật Đơn vị thành công", "Thông báo");
                 }                            
             }
         }
@@ -404,24 +409,24 @@ public class DanhmucVaDonViPnl extends javax.swing.JPanel {
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
         int dongXoa = tblDonViTinh.getSelectedRow();
         if (dongXoa == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm cần xoá !");
+            ThongBao.ThongBaoDon("Vui lòng chọn Đơn vị cần xoá", "Thông báo");
         }else{
-            int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION){
+            int click = ThongBao.LuaChonFix("Xác nhận xoá ?", "");
+            if (click == 1){
                 dichVuController.xoaDonViTinh((Integer)tblDonViTinh.getValueAt(dongXoa, 0));
-                JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
+                ThongBao.ThongBaoDon("Xoá dịch vụ thành công", "Thông báo");
             }
         }
     }//GEN-LAST:event_btnXoa1ActionPerformed
 
     private void tblDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhMucMouseClicked
-        DefaultTableModel ml = (DefaultTableModel) tblDanhMuc.getModel();
+
         int click = tblDanhMuc.getSelectedRow();
         txtTenDanhMuc.setText(tblDanhMuc.getValueAt(click, 1).toString());
     }//GEN-LAST:event_tblDanhMucMouseClicked
 
     private void tblDonViTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDonViTinhMouseClicked
-        DefaultTableModel ml = (DefaultTableModel) tblDonViTinh.getModel();
+
         int click = tblDonViTinh.getSelectedRow();
         txtTenDanhMuc1.setText(tblDonViTinh.getValueAt(click, 1).toString());
         txtGiaTri.setText(tblDonViTinh.getValueAt(click, 2).toString());

@@ -3,6 +3,7 @@ package View_KhachHang;
 import Controller.KhachHangController;
 import Help.ChuyenDoi;
 import Help.DataValidate;
+import Help.ThongBao;
 import Help.XuatExcel;
 import java.util.List;
 import Model.KhachHang;
@@ -265,7 +266,7 @@ public class KhachHangPnl extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int chonDong = tblKhachHang.getSelectedRow();
         if (chonDong == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Vui lòng chọn dòng cần sửa", "Thông báo");
         } else {
             int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
             if(update == JOptionPane.YES_OPTION){
@@ -300,7 +301,7 @@ public class KhachHangPnl extends javax.swing.JPanel {
                 }else{
                     KhachHang kh= new KhachHang(SDTKhachHang,tenKhachHang,tienNo,tienSuDung,no,ghiChu,true);
                     khachHangController.update(kh);
-                    JOptionPane.showMessageDialog(new Frame(),"Update success !!!");
+                    ThongBao.ThongBaoDon("Cập nhật thông tin khách thành công !", "Thông báo");
                 }
             }
         }
@@ -340,12 +341,12 @@ public class KhachHangPnl extends javax.swing.JPanel {
         }else{        
             KhachHang kh = new KhachHang(sdtKhachHang,tenKhachHang,tienNo, tienSuDung, no, ghiChu, true);
             khachHangController.insert(kh);
+            ThongBao.ThongBaoDon("Thêm mới Khách hàng thành công", "Thông báo");
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
-        DefaultTableModel ml = (DefaultTableModel) tblKhachHang.getModel();
-        
+
         int click = tblKhachHang.getSelectedRow();
         txtSDT.setText((String) tblKhachHang.getValueAt(click, 0));
         txtTenKhach.setText((String) tblKhachHang.getValueAt(click, 1));
@@ -363,11 +364,12 @@ public class KhachHangPnl extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int dongXoa = tblKhachHang.getSelectedRow();
         if (dongXoa == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa !","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần xoá", "Thông báo");
         } else {
-            int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION) {
+            int click = ThongBao.LuaChonFix("Xác nhận xoá ?", "");
+            if (click == 1) {
                 khachHangController.delete((String) tblKhachHang.getValueAt(dongXoa, 0));
+                ThongBao.ThongBaoDon("Xoá thành công !", "Thông báo");
                 khachHangController.loadList();
             }
         }  

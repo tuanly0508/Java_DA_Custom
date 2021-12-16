@@ -1741,6 +1741,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     }else{
                         XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonKhongDichVu.jrxml");
                     }
+                    ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
                     tongTien=0.0;
                     tienGio = 0.0;
                     tienDichVu = 0.0;
@@ -1778,7 +1779,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
                     //reloadTable dịch vụ
                     clearTable(tblSuDungDichVu);
-                    
+                    ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
                     tongTien=0.0;
                     tienGio = 0.0;
                     tienDichVu = 0.0;
@@ -1812,7 +1813,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         int soLuongCon = datPhongController.laySoLuongDichVu(idDichVu);
         
         if(soLuong>soLuongCon){
-            ThongBao.ThongBao("Số lượng không hợp lệ", "Thông Báo");
+            ThongBao.ThongBaoDon("Số lượng không hợp lệ", "Thông Báo");
         }else{
             if(data.get(0)[1].equals(phongHienTai)) {
                 SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
@@ -1851,10 +1852,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void btnHuyDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDichVuActionPerformed
         int click = tblSuDungDichVu.getSelectedRow();
         if(click==-1){
-            ThongBao.ThongBao("Vui lòng chọn dịch vụ cần huỷ !", "Cảnh báo");
+            ThongBao.ThongBaoDon("Vui lòng chọn dịch vụ cần huỷ !", "Cảnh báo");
         }else{
-            int choice = ThongBao.LuaChon("Xác nhận huỷ dịch vụ?", "Xác nhận");
-            if(choice==0){
+            int choice = ThongBao.LuaChonFix("Xác nhận huỷ dịch vụ?", "");
+            if(choice==1){
                 
                 SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
                 SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

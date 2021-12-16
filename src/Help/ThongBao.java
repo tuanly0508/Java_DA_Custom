@@ -5,6 +5,7 @@
  */
 package Help;
 
+import View_Dialog.ConfirmDlg;
 import View_Dialog.ThongBaoDlg;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,6 +25,17 @@ public class ThongBao {
         tb.setNoiDung(tieuDe, noiDung);
         tb.setVisible(true);
     }
+    
+    public static int LuaChonFix(String noiDung, String tieuDe){
+        if(tieuDe.equals("")){
+            tieuDe="Xác nhận";
+        }
+        ConfirmDlg dlg = new ConfirmDlg(null, true);
+        dlg.setNoiDung(tieuDe, noiDung);
+        dlg.setVisible(true);
+        return dlg.choice;
+    }
+    
     
     public static int LuaChon(String noiDung, String tieuDe){
         return JOptionPane.showConfirmDialog(new JFrame(), noiDung, tieuDe,JOptionPane.YES_NO_OPTION);

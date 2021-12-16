@@ -2,6 +2,7 @@ package View_NhanVien;
 
 import Controller.NhanVienController;
 import Help.DataValidate;
+import Help.ThongBao;
 import java.util.List;
 import java.util.Date;
 import Model.NhanVien;
@@ -399,6 +400,7 @@ public class NhanVienPnl extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             nhanVienController.insert(hoTenNhanVien,CMND,soDienThoai,diaChi,gioiTinh,email,trangThai,ngaySinh,ngayVao);
+            ThongBao.ThongBaoDon("Thêm mới Nhân viên thành công", "Thông báo");
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -439,23 +441,23 @@ public class NhanVienPnl extends javax.swing.JPanel {
     private void bntXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntXoaActionPerformed
         int dongXoa = tblNhanVien.getSelectedRow();
         if (dongXoa == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa !","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần xoá", "Thông báo");
         } else {        
-            int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION) {
+            int click = ThongBao.LuaChonFix("Xác nhận xoá ?", "");
+            if (click == 1) {
                 nhanVienController.xoaNhanVien((Integer)tblNhanVien.getValueAt(dongXoa, 0));
             }
-            JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
+            ThongBao.ThongBaoDon("Xoá thành công", "Thông báo");
         }
     }//GEN-LAST:event_bntXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int chonDong = tblNhanVien.getSelectedRow();
         if (chonDong == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần sửa", "Thông báo");
         } else {
-            int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
-            if(update == JOptionPane.YES_OPTION){
+            int update = ThongBao.LuaChonFix("Xác nhận sửa ?", "");
+            if(update == 1){
                 StringBuilder sb = new StringBuilder();
                 
                 String hoTenNhanVien = txtHoTen.getText();
@@ -513,7 +515,7 @@ public class NhanVienPnl extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 }else{
                 nhanVienController.update(idNhanVien,hoTenNhanVien,CMND,soDienThoai,diaChi,gioiTinh,email,trangThai,ngaySinh,ngayVao);
-                JOptionPane.showMessageDialog(new Frame(),"Update success !!!");
+                ThongBao.ThongBaoDon("Cập nhật thông tin nhân viên thành công !", "Thông báo");
                 }
             }                
         }        
