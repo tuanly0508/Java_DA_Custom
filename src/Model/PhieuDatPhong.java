@@ -1,5 +1,7 @@
 package Model;
 
+import java.sql.Date;
+
 public class PhieuDatPhong extends AbsTable{
     private Integer idPhieuDatPhong;
     private String SDTKhachHang;
@@ -8,11 +10,12 @@ public class PhieuDatPhong extends AbsTable{
     private String ghiChu;
     private Boolean tinhTrang;
     private String tenKhach;
+    private java.sql.Date ngayDat;
 
     public PhieuDatPhong() {
     }
 
-    public PhieuDatPhong(Integer idPhieuDatPhong, String SDTKhachHang, Integer idPhong, int thoiGianDat, String ghiChu, Boolean tinhTrang, String tenKhach) {
+    public PhieuDatPhong(Integer idPhieuDatPhong, String SDTKhachHang, Integer idPhong, int thoiGianDat, String ghiChu, Boolean tinhTrang, String tenKhach, Date ngayDat) {
         this.idPhieuDatPhong = idPhieuDatPhong;
         this.SDTKhachHang = SDTKhachHang;
         this.idPhong = idPhong;
@@ -20,8 +23,9 @@ public class PhieuDatPhong extends AbsTable{
         this.ghiChu = ghiChu;
         this.tinhTrang = tinhTrang;
         this.tenKhach = tenKhach;
+        this.ngayDat = ngayDat;
     }
-
+    
     public Integer getIdPhieuDatPhong() {
         return idPhieuDatPhong;
     }
@@ -76,6 +80,14 @@ public class PhieuDatPhong extends AbsTable{
 
     public void setTenKhach(String tenKhach) {
         this.tenKhach = tenKhach;
+    }
+
+    public Date getNgayDat() {
+        return ngayDat;
+    }
+
+    public void setNgayDat(Date ngayDat) {
+        this.ngayDat = ngayDat;
     }
     
     @Override

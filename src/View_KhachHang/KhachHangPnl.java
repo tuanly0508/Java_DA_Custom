@@ -7,15 +7,25 @@ import Help.ThongBao;
 import Help.XuatExcel;
 import java.util.List;
 import Model.KhachHang;
+import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import swing.ScrollBar;
 
 public class KhachHangPnl extends javax.swing.JPanel {
     private KhachHangController khachHangController;
     
     public KhachHangPnl() {
         initComponents();
+        
+        JPanel p = new JPanel();
+        jScrollPane1.setVerticalScrollBar(new ScrollBar());
+        jScrollPane1.getVerticalScrollBar().setBackground(Color.WHITE);
+        jScrollPane1.getViewport().setBackground(Color.WHITE);       
+        jScrollPane1.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
     }
 
     @SuppressWarnings("unchecked")
