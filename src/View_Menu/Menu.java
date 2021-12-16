@@ -1,5 +1,7 @@
 package View_Menu;
 
+import Help.ThongBao;
+import View_Login.Login;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,8 +51,13 @@ public class Menu extends javax.swing.JPanel {
         menu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                event.selected(index);
-                setSelected(menu);
+                if(!Login.per.equals("ADMIN")&&index==1){
+                    ThongBao.ThongBao("Chức năng chỉ dành cho ADMIN", "Quyền hạn");
+                }else{
+                    event.selected(index);
+                    setSelected(menu); 
+                }
+                
             }
         });
     }

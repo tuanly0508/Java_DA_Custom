@@ -16,6 +16,10 @@ import java.awt.Cursor;
  */
 public class Login extends javax.swing.JFrame {
 
+    public static String per ="User";
+    public static int idNV =1;
+    public static String tenNV="Admin";
+    
     public Login() {
         initComponents();
         init();
@@ -24,7 +28,7 @@ public class Login extends javax.swing.JFrame {
         btnAnPass.setVisible(false);
         btnHienPass.setVisible(true);
     }
-
+    
     public void init() {
         btnRePass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
@@ -37,10 +41,10 @@ public class Login extends javax.swing.JFrame {
         btnHienPass = new swing.Button();
         btnAnPass = new swing.Button();
         jLabel1 = new javax.swing.JLabel();
-        txtEmail = new swing.TextField();
+        txtSdt = new swing.TextField();
         txtPass = new View_Login.PasswordField();
         btnLogin = new swing.Button();
-        lblErrEmail = new javax.swing.JLabel();
+        lblErrSdt = new javax.swing.JLabel();
         lblErrPass = new javax.swing.JLabel();
         lblLoading = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -73,13 +77,13 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Đăng nhập");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 27, 360, -1));
 
-        txtEmail.setLabelText("Số điện thoại");
-        txtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtSdt.setLabelText("Số điện thoại");
+        txtSdt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtEmailMouseClicked(evt);
+                txtSdtMouseClicked(evt);
             }
         });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 102, 298, 45));
+        jPanel1.add(txtSdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 102, 298, 45));
 
         txtPass.setLabelText("Mật khẩu");
         txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,10 +104,10 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 298, 45));
 
-        lblErrEmail.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
-        lblErrEmail.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrEmail.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jPanel1.add(lblErrEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 153, 298, 21));
+        lblErrSdt.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
+        lblErrSdt.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrSdt.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel1.add(lblErrSdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 153, 298, 21));
 
         lblErrPass.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
         lblErrPass.setForeground(new java.awt.Color(255, 0, 0));
@@ -166,21 +170,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        String email = txtEmail.getText();
+        String sdt = txtSdt.getText();
         String password = String.valueOf(txtPass.getPassword()) ;
         btnLogin.setVisible(false);
-        lblErrEmail.setText("");
+        lblErrSdt.setText("");
         lblErrPass.setText("");
         
-        if (email.equals("") && password.equals("")) {
-            lblErrEmail.setText("Số điện thoại không được để trống");
+        if (sdt.equals("") && password.equals("")) {
+            lblErrSdt.setText("Số điện thoại không được để trống");
             lblErrPass.setText("Mật khẩu không được để trống");
             btnLogin.setVisible(true);
         }else if (password.equals("")) {           
             lblErrPass.setText("Mật khẩu không được để trống");
             btnLogin.setVisible(true);
-        }else if (email.equals("")) {
-            lblErrEmail.setText("Số điện thoại không được để trống");
+        }else if (sdt.equals("")) {
+            lblErrSdt.setText("Số điện thoại không được để trống");
             btnLogin.setVisible(true);
         }else {
             new Thread() {
@@ -190,11 +194,14 @@ public class Login extends javax.swing.JFrame {
                         lblLoading.setVisible(true);
                         this.sleep(1500); 
                         
-                        PreparedStatement pst = DBConnection.prepareStatement("select * from NhanVien where soDienThoai='" + email + "'");
+                        PreparedStatement pst = DBConnection.prepareStatement("select * from NhanVien where soDienThoai='" + sdt + "'");
                         ResultSet rs = pst.executeQuery();
                             if (rs.next()) {
                                 String pass = rs.getString("matKhau");
-                                if (password.equals(pass)) {                                       
+                                if (password.equals(pass)) {
+                                    per = rs.getString("quyenHan");
+                                    idNV= rs.getInt("idNhanVien");
+                                    tenNV = rs.getString("hoTenNhanVien");
                                     Main ss = new Main();
                                     ss.show();
                                     dispose();
@@ -204,7 +211,7 @@ public class Login extends javax.swing.JFrame {
                                     btnLogin.setVisible(true);
                                 }
                             } else {
-                                lblErrEmail.setText("Số điện thoại không tồn tại");
+                                lblErrSdt.setText("Số điện thoại không tồn tại");
                                 lblLoading.setVisible(false);
                                 btnLogin.setVisible(true);
                             }
@@ -218,9 +225,9 @@ public class Login extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void txtEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailMouseClicked
-        lblErrEmail.setText("");
-    }//GEN-LAST:event_txtEmailMouseClicked
+    private void txtSdtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSdtMouseClicked
+        lblErrSdt.setText("");
+    }//GEN-LAST:event_txtSdtMouseClicked
 
     private void txtPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassMouseClicked
         lblErrPass.setText("");
@@ -299,10 +306,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblErrEmail;
     private javax.swing.JLabel lblErrPass;
+    private javax.swing.JLabel lblErrSdt;
     private javax.swing.JLabel lblLoading;
-    private swing.TextField txtEmail;
     private View_Login.PasswordField txtPass;
+    private swing.TextField txtSdt;
     // End of variables declaration//GEN-END:variables
 }

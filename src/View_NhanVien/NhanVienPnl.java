@@ -337,7 +337,7 @@ public class NhanVienPnl extends javax.swing.JPanel {
         //validate hoTen
         StringBuilder sb = new StringBuilder();
         String hoTenNhanVien = txtHoTen.getText();
-        DataValidate.checkEmpty(hoTenNhanVien, sb, "Tên không được để trống");
+        DataValidate.checkEmpty(hoTenNhanVien, sb, "Tên không được để trống \n");
         
         String CMND = txtCMND.getText();       
         if(CMND.length() <= 9){
@@ -348,15 +348,15 @@ public class NhanVienPnl extends javax.swing.JPanel {
         DataValidate.checkCMNDExist(CMND, sb);
         
         String soDienThoai = txtSDT.getText();
-        DataValidate.checkEmpty(soDienThoai, sb, "Số điện thoại không được để trống! ");
+        DataValidate.checkEmpty(soDienThoai, sb, "Số điện thoại không được để trống! \n");
         DataValidate.checkSdtForm(soDienThoai, sb);
         DataValidate.checkPhoneExist(soDienThoai, sb);
         
         String diaChi = txtDiaChi.getText();
-        DataValidate.checkEmpty(diaChi, sb, "Địa chỉ không được để trống! ");
+        DataValidate.checkEmpty(diaChi, sb, "Địa chỉ không được để trống! \n");
         
         String email = txtEmail.getText();
-        DataValidate.checkEmpty(email, sb, "Email không được để trống! ");
+        DataValidate.checkEmpty(email, sb, "Email không được để trống! \n");
         DataValidate.checkEmailForm(email, sb);
         DataValidate.checkEmailExist(email, sb);
         
