@@ -1463,8 +1463,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         String SDT = txtSDT.getText();
         if(txtSDT.getText().equals("")){
             SDT="0000000000";
+            txtSDT.setText(SDT);
+            isSDT=true;
         }
-        txtSDT.setText(SDT);
+        
 
         if (isSDT == false ) {
             if (!SDT.equals("")) {
@@ -1487,9 +1489,12 @@ public class DatPhongPnl extends javax.swing.JPanel {
         //Cập nhật tình trạng phòng
         phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
         datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
+        
         phongRender.setBackground(new Color(255,0,0));
         setPhongHoatDong();
         reLoadPhong();
+        tblAllDichVu.setEnabled(true);
+        jtpDichVuAll.setEnabled(true);
         setThongTinPhong(phongHienTai);                     
                           
     }//GEN-LAST:event_btnMoPhongActionPerformed
@@ -1535,6 +1540,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
     //Search sdt trong DB
     private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
         String SDT = txtSDT.getText();
+        if(txtSDT.getText().equals("")){
+            SDT="0000000000";
+            isSDT=true;
+            
+        }
         List<Object[]> data = datPhongController.getThongTinKH(SDT);
         if (data.size()<=0) {
             txtTenKhach.setText("");
@@ -1682,7 +1692,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         if(clickTamTinh==0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng tạm tính trước");
+            ThongBao.ThongBaoDon("Vui lòng tạm tính trước khi thanh toán", "Thông báo");
         }else {
             tongTien=tongTien+tienPhuThu;
             TinhTienFrm tinhTienFrm= new TinhTienFrm(null,true,tongTien);
@@ -1703,7 +1713,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     }else{
                         tinhTienFrm.txtTraLai.setText("0");
                     }
-                    ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
+                    
                     tongTien=0.0;
                     tienGio = 0.0;
                     tienDichVu = 0.0;
@@ -1717,47 +1727,6 @@ public class DatPhongPnl extends javax.swing.JPanel {
                                            
                 }});
             
-            //Button tính tiền không in hoá đơn
-            tinhTienFrm.btnThanhToan.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    int idPhieuThuePhong = phieuThuePhongController.layIdPhieuThuePhong(phongHienTai);
-                    int idHoaDonDichVu=0;
-                    HoaDon hd = new HoaDon();
-                    if(tienDichVu==0){
-                        hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
-                    }else{
-                        idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                        hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
-                    }
-                    hoaDonController.insert(hd);
-                    //Cập nhật tiền nợ của khách
-                    datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
-                    //đóng phiếu thuê phòng
-                    phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
-                    //Cập nhật lại tình trạng phòng
-                    datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
-                    //Đóng hoá đơn dịch vụ nếu có
-                    if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
-                    //reloadTable dịch vụ
-                    clearTable(tblSuDungDichVu);
-                    ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
-                    tongTien=0.0;
-                    tienGio = 0.0;
-                    tienDichVu = 0.0;
-                    tienPhuThu=0.0;
-                    tienNo=0.0;
-                    reLoadPhong();
-                    setNull();
-                    setNullTamTinh();
-                    phongHienTai=UNDEFINED_CONDITION;
-                    tinhTienFrm.setVisible(false);
-
-                    if(tienNo>tinhTienFrm.tongTien){
-                        tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tongTien));  
-                    }      
-                }
-            });  
 
             //Button tính tiền in hoá đơn
             tinhTienFrm.btnThanhToanIn.addMouseListener(new MouseAdapter() {
@@ -1793,6 +1762,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         }else{
                             XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonKhongDichVu.jrxml");
                         }
+                        ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
                         tongTien=0.0;
                         tienGio = 0.0;
                         tienDichVu = 0.0;
@@ -1814,14 +1784,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         int idHoaDonDichVu=0;
                         HoaDon hd = new HoaDon();
                         if(tienDichVu==0){
-                            hd = new HoaDon(0,Login.idNV,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                            hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
                         }else{
                             idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                            hd = new HoaDon(0,Login.idNV,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                            hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
                         }
-                        hoaDonController.insert(hd);
                         //Cập nhật tiền nợ của khách
                         datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
+                        hoaDonController.insert(hd);
+
                         //đóng phiếu thuê phòng
                         phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
                         //Cập nhật lại tình trạng phòng
@@ -1830,7 +1801,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
                         //reloadTable dịch vụ
                         clearTable(tblSuDungDichVu);
-
+                        ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
                         tongTien=0.0;
                         tienGio = 0.0;
                         tienDichVu = 0.0;
