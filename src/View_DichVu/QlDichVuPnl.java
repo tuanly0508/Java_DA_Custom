@@ -398,7 +398,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         if (chonDong == -1) {
             ThongBao.ThongBaoDon("Chọn dòng cần sửa", "Thông báo");
         } else {
-            int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn sửa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
+            int clickLuu = ThongBao.LuaChonFix("Xác nhận sửa ?", "");
             if (clickLuu == JOptionPane.YES_OPTION) {
                 StringBuilder sb = new StringBuilder();
                 

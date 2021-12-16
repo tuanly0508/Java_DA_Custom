@@ -16,7 +16,7 @@ import java.awt.Cursor;
  */
 public class Login extends javax.swing.JFrame {
 
-    public static String per ="User";
+    public static String per ="ADMIN";
     public static int idNV =1;
     public static String tenNV="Admin";
     

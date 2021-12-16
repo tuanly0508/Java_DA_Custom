@@ -19,6 +19,7 @@ import Model.HoaDon;
 import Model.KhachHang;
 import Model.PhieuDatPhong;
 import Model.PhieuThuePhong;
+import View_Login.Login;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
@@ -1460,9 +1461,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
         thoiGianMo=new Timestamp(date.getTime());
         String tenKhach = txtTenKhach.getText();
         String SDT = txtSDT.getText();
+        if(txtSDT.getText().equals("")){
+            SDT="0000000000";
+        }
+        txtSDT.setText(SDT);
 
         if (isSDT == false ) {
-            if (!SDT.equals("")) {               
+            if (!SDT.equals("")) {
                 //Thêm khách nếu là khách lần đầu
                 datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
             }
@@ -1470,11 +1475,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
         if (rdbGiaNgayLe.isSelected()) {
             //Chỉnh giá ngày lễ
-            phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,1);
+            phieuThuePhong = new PhieuThuePhong(0,SDT,Login.idNV,phongHienTai,thoiGianMo,null,tenKhach,1,1);
             phieuThuePhongController.insert(phieuThuePhong);
         }else {
             //Thêm phiếu thuê phòng
-            phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
+            phieuThuePhong = new PhieuThuePhong(0,SDT,Login.idNV,phongHienTai,thoiGianMo,null,tenKhach,1,0);
             phieuThuePhongController.insert(phieuThuePhong);
         }
        
@@ -1809,10 +1814,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         int idHoaDonDichVu=0;
                         HoaDon hd = new HoaDon();
                         if(tienDichVu==0){
-                            hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                            hd = new HoaDon(0,Login.idNV,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
                         }else{
                             idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                            hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                            hd = new HoaDon(0,Login.idNV,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
                         }
                         hoaDonController.insert(hd);
                         //Cập nhật tiền nợ của khách

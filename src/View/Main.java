@@ -37,39 +37,38 @@ public class Main extends javax.swing.JFrame {
     }
     
     public void init() {
-        khachHangPnl = new KhachHangPnl();
-        datPhongPnl = new DatPhongPnl();
-        nhanVienPnl = new NhanVienPnl();
-        nhapHangPnl = new NhapHangPnl();
-        thongKePnl = new ThongKePnl();
-        dichVuPnl =  new DichVuPnl();
-        
-        PhieuThuePhongController phieuThuePhongController = new PhieuThuePhongController(datPhongPnl);
-        PhieuDatPhongController phieuDatPhongController = new PhieuDatPhongController(datPhongPnl);
-        PhieuNhapHangController phieuNhapHangController = new PhieuNhapHangController(nhapHangPnl);
-        KhachHangController khachHangController = new KhachHangController(khachHangPnl);
-        GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
-        DatPhongController datPhongController = new DatPhongController(datPhongPnl);
-        NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
-        ThongKeController thongKeController = new ThongKeController(thongKePnl);
-        HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
-        DichVuController dichVuController = new DichVuController(dichVuPnl);
-        NhaCungCapController nhaCungCapController = new NhaCungCapController(nhapHangPnl);
         
         EventMenu event = new EventMenu() {
             @Override
             public void selected(int index) {
                 if (index == 0) {
+                    datPhongPnl=new DatPhongPnl();
+                    PhieuThuePhongController phieuThuePhongController = new PhieuThuePhongController(datPhongPnl);
+                    PhieuDatPhongController phieuDatPhongController = new PhieuDatPhongController(datPhongPnl);
+                    GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
+                    DatPhongController datPhongController = new DatPhongController(datPhongPnl);
+                    HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
                     showForm(datPhongPnl);
                 }else if (index == 1) {
+                    thongKePnl = new ThongKePnl();
+                    ThongKeController thongKeController = new ThongKeController(thongKePnl);
                     showForm(thongKePnl);
                 }else if (index == 2) {
+                    nhanVienPnl = new NhanVienPnl();
+                    NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
                     showForm(nhanVienPnl);
                 }else if (index == 3) {
+                    dichVuPnl =  new DichVuPnl();
+                    DichVuController dichVuController = new DichVuController(dichVuPnl);
                     showForm(dichVuPnl);
                 }else if (index == 4) {
+                    nhapHangPnl = new NhapHangPnl();
+                    PhieuNhapHangController phieuNhapHangController = new PhieuNhapHangController(nhapHangPnl);
+                    NhaCungCapController nhaCungCapController = new NhaCungCapController(nhapHangPnl);
                     showForm(nhapHangPnl);
                 }else if (index == 5) {
+                    khachHangPnl = new KhachHangPnl();
+                    KhachHangController khachHangController = new KhachHangController(khachHangPnl);
                     showForm(khachHangPnl);
                 }else {
                     Login lg = new Login();
@@ -81,9 +80,17 @@ public class Main extends javax.swing.JFrame {
         menu.initMenu(event);
         if(Login.per.equals("ADMIN")){
             ThongBao.ThongBaoDon("Bạn đã đăng nhập thành công với quyền Admin", "Đăng nhập");
+            thongKePnl = new ThongKePnl();
+            ThongKeController thongKeController = new ThongKeController(thongKePnl);
             showForm(thongKePnl);
         }else{
             ThongBao.ThongBaoDon("Bạn đã đăng nhập thành công với quyền User", "Đăng nhập");
+            datPhongPnl=new DatPhongPnl();
+            PhieuThuePhongController phieuThuePhongController = new PhieuThuePhongController(datPhongPnl);
+            PhieuDatPhongController phieuDatPhongController = new PhieuDatPhongController(datPhongPnl);
+            GiaNgayLeController giaNgayLeController = new GiaNgayLeController(datPhongPnl);
+            DatPhongController datPhongController = new DatPhongController(datPhongPnl);
+            HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
             showForm(datPhongPnl);
         }
     }
