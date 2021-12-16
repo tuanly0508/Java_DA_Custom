@@ -75,6 +75,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
     int phongCanDoi = UNDEFINED_CONDITION;
     int idGiaNgayLe = UNDEFINED_CONDITION;
     int click1 = UNDEFINED_CONDITION;
+    int clickTamTinh = UNDEFINED_CONDITION;
     boolean duocNo = false ;
     int soLuongDauTien =0;
     int loadPopup = 0;
@@ -117,6 +118,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         tblSuDungDichVu.setEnabled(false);
         jtpDichVuAll.setEnabled(false);
         tblAllDichVu.setEnabled(false);
+        clickTamTinh = 0;
         cssTableDichVu();
     }   
     
@@ -1610,6 +1612,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }else{
             hoaDonController.updateTienHoaDonDV(tienDichVu,(Integer.valueOf(data2.get(0)[0].toString())));
         }
+        clickTamTinh = 1;
     }//GEN-LAST:event_btnTamTinhActionPerformed
 
     private void btnGiaNgayLeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaNgayLeActionPerformed
@@ -1673,126 +1676,131 @@ public class DatPhongPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGiaNgayLeActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        tongTien=tongTien+tienPhuThu;
-        TinhTienFrm tinhTienFrm= new TinhTienFrm(null,true,tongTien);
-        //Nếu khách không được nợ thì ko nhập được
-        if(duocNo==false){
-            tinhTienFrm.txtTienNo.setEnabled(false);
+        if(clickTamTinh==0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng tạm tính trước");
+        }else {
+            tongTien=tongTien+tienPhuThu;
+            TinhTienFrm tinhTienFrm= new TinhTienFrm(null,true,tongTien);
+            //Nếu khách không được nợ thì ko nhập được
+            if(duocNo==false){
+                tinhTienFrm.txtTienNo.setEnabled(false);
+            }
+
+            tinhTienFrm.txtTongTien.setText(ChuyenDoi.SoString(tongTien));
+            tinhTienFrm.txtKhachDua.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    double khachDua = ChuyenDoi.SoDouble(tinhTienFrm.txtKhachDua.getText());
+                    tinhTienFrm.txtKhachDua.setText(ChuyenDoi.SoString(khachDua));
+                    double traLai = khachDua-tongTien;
+                    if(traLai>0){
+                        tinhTienFrm.txtTraLai.setText(ChuyenDoi.SoString(traLai));  
+                    }else{
+                        tinhTienFrm.txtTraLai.setText("0");  
+                    }           
+                }
+            });       
+
+            tinhTienFrm.txtTienNo.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    tienNo = ChuyenDoi.SoDouble(tinhTienFrm.txtTienNo.getText());
+                    tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tienNo));
+
+                    if(tienNo>tinhTienFrm.tongTien){
+                        tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tongTien));  
+                    }      
+                }
+            });  
+
+            //Button tính tiền in hoá đơn
+            tinhTienFrm.btnThanhToanIn.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        int idPhieuThuePhong = phieuThuePhongController.layIdPhieuThuePhong(phongHienTai);
+                        int idHoaDonDichVu=0;
+                        HoaDon hd = new HoaDon();
+                        if(tienDichVu==0){
+                            hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                        }else{
+                            idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
+                            hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                        }
+                        //Cập nhật tiền nợ của khách
+                        datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
+                        hoaDonController.insert(hd);
+
+                        //đóng phiếu thuê phòng
+                        phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
+                        //Cập nhật lại tình trạng phòng
+                        datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
+                        //Đóng hoá đơn dịch vụ nếu có
+                        if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
+                        //reloadTable dịch vụ
+                        clearTable(tblSuDungDichVu);
+
+                        //In hoá đơn
+                        int idHoaDon = hoaDonController.layIdHoaDon(idPhieuThuePhong);
+
+                        if(tienDichVu!=0){
+                            XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonDayDu.jrxml");
+                        }else{
+                            XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonKhongDichVu.jrxml");
+                        }
+                        tongTien=0.0;
+                        tienGio = 0.0;
+                        tienDichVu = 0.0;
+                        tienPhuThu=0.0;
+                        tienNo=0.0;
+                        reLoadPhong();
+                        setNull();
+                        setNullTamTinh();
+                        phongHienTai=UNDEFINED_CONDITION;
+                        tinhTienFrm.setVisible(false);
+
+                    }});
+
+                //Button tính tiền không in hoá đơn
+                tinhTienFrm.btnThanhToan.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        int idPhieuThuePhong = phieuThuePhongController.layIdPhieuThuePhong(phongHienTai);
+                        int idHoaDonDichVu=0;
+                        HoaDon hd = new HoaDon();
+                        if(tienDichVu==0){
+                            hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                        }else{
+                            idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
+                            hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                        }
+                        hoaDonController.insert(hd);
+                        //Cập nhật tiền nợ của khách
+                        datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
+                        //đóng phiếu thuê phòng
+                        phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
+                        //Cập nhật lại tình trạng phòng
+                        datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
+                        //Đóng hoá đơn dịch vụ nếu có
+                        if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
+                        //reloadTable dịch vụ
+                        clearTable(tblSuDungDichVu);
+
+                        tongTien=0.0;
+                        tienGio = 0.0;
+                        tienDichVu = 0.0;
+                        tienPhuThu=0.0;
+                        tienNo=0.0;
+                        reLoadPhong();
+                        setNull();
+                        setNullTamTinh();
+                        phongHienTai=UNDEFINED_CONDITION;
+                        tinhTienFrm.setVisible(false);
+
+                    }});
+
+            tinhTienFrm.setVisible(true);
+            clickTamTinh = 0;
         }
-        
-        tinhTienFrm.txtTongTien.setText(ChuyenDoi.SoString(tongTien));
-        tinhTienFrm.txtKhachDua.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                double khachDua = ChuyenDoi.SoDouble(tinhTienFrm.txtKhachDua.getText());
-                tinhTienFrm.txtKhachDua.setText(ChuyenDoi.SoString(khachDua));
-                double traLai = khachDua-tongTien;
-                if(traLai>0){
-                    tinhTienFrm.txtTraLai.setText(ChuyenDoi.SoString(traLai));  
-                }else{
-                    tinhTienFrm.txtTraLai.setText("0");  
-                }           
-            }
-        });       
-        
-        tinhTienFrm.txtTienNo.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                tienNo = ChuyenDoi.SoDouble(tinhTienFrm.txtTienNo.getText());
-                tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tienNo));
-                
-                if(tienNo>tinhTienFrm.tongTien){
-                    tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tongTien));  
-                }      
-            }
-        });  
-        
-        //Button tính tiền in hoá đơn
-        tinhTienFrm.btnThanhToanIn.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    int idPhieuThuePhong = phieuThuePhongController.layIdPhieuThuePhong(phongHienTai);
-                    int idHoaDonDichVu=0;
-                    HoaDon hd = new HoaDon();
-                    if(tienDichVu==0){
-                        hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
-                    }else{
-                        idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                        hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
-                    }
-                    //Cập nhật tiền nợ của khách
-                    datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
-                    hoaDonController.insert(hd);
-                    
-                    //đóng phiếu thuê phòng
-                    phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
-                    //Cập nhật lại tình trạng phòng
-                    datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
-                    //Đóng hoá đơn dịch vụ nếu có
-                    if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
-                    //reloadTable dịch vụ
-                    clearTable(tblSuDungDichVu);
-                    
-                    //In hoá đơn
-                    int idHoaDon = hoaDonController.layIdHoaDon(idPhieuThuePhong);
-                    
-                    if(tienDichVu!=0){
-                        XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonDayDu.jrxml");
-                    }else{
-                        XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonKhongDichVu.jrxml");
-                    }
-                    tongTien=0.0;
-                    tienGio = 0.0;
-                    tienDichVu = 0.0;
-                    tienPhuThu=0.0;
-                    tienNo=0.0;
-                    reLoadPhong();
-                    setNull();
-                    setNullTamTinh();
-                    phongHienTai=UNDEFINED_CONDITION;
-                    tinhTienFrm.setVisible(false);
-                                           
-                }});
-            
-            //Button tính tiền không in hoá đơn
-            tinhTienFrm.btnThanhToan.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    int idPhieuThuePhong = phieuThuePhongController.layIdPhieuThuePhong(phongHienTai);
-                    int idHoaDonDichVu=0;
-                    HoaDon hd = new HoaDon();
-                    if(tienDichVu==0){
-                        hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
-                    }else{
-                        idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
-                        hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
-                    }
-                    hoaDonController.insert(hd);
-                    //Cập nhật tiền nợ của khách
-                    datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
-                    //đóng phiếu thuê phòng
-                    phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
-                    //Cập nhật lại tình trạng phòng
-                    datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
-                    //Đóng hoá đơn dịch vụ nếu có
-                    if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
-                    //reloadTable dịch vụ
-                    clearTable(tblSuDungDichVu);
-                    
-                    tongTien=0.0;
-                    tienGio = 0.0;
-                    tienDichVu = 0.0;
-                    tienPhuThu=0.0;
-                    tienNo=0.0;
-                    reLoadPhong();
-                    setNull();
-                    setNullTamTinh();
-                    phongHienTai=UNDEFINED_CONDITION;
-                    tinhTienFrm.setVisible(false);
-
-                }});
-
-        tinhTienFrm.setVisible(true);
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblSuDungDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuDungDichVuMouseClicked
