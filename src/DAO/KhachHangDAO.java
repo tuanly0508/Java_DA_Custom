@@ -40,7 +40,13 @@ public class KhachHangDAO extends AbsDAO{
     }
     
     public Boolean layTinhTrangNo(String sdtKhach){
-        String query = "select traSau from Khachhang where sdtKhachHang="+sdtKhach+"";
+        String query;
+        if(sdtKhach.equals("")) {
+            query = "select traSau from Khachhang where sdtKhachHang=' ' ";
+        }else {
+            query = "select traSau from Khachhang where sdtKhachHang="+sdtKhach+"";
+        }
+        
         ResultSet rs = DBConnection.executeQuery(query);
         Boolean duocNo =false;
         try {
