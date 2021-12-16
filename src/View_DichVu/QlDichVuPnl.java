@@ -8,6 +8,7 @@ package View_DichVu;
 import Controller.DichVuController;
 import Help.ChuyenDoi;
 import Help.DataValidate;
+import Help.ThongBao;
 import Help.XuatExcel;
 import Model.DanhMuc;
 import Model.DichVu;
@@ -141,7 +142,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         });
 
         btnXuatDanhSach.setBackground(new java.awt.Color(120, 225, 220));
-        btnXuatDanhSach.setText("File");
+        btnXuatDanhSach.setText("Xuất File Excel");
         btnXuatDanhSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXuatDanhSachActionPerformed(evt);
@@ -161,7 +162,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTimNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundPanel3Layout.createSequentialGroup()
-                        .addComponent(btnXuatDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXuatDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -347,24 +348,23 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         if(sb.length() > 0){
             JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
         }else{
-            
             DichVu dv = new DichVu(0,idDanhMuc,idDonViTinh,tenDichVu,soLuongCon,giaBan,true);
             dichVuController.themDichVu(dv);
-            
+            ThongBao.ThongBaoDon("Thêm mới dịch vụ thành công", "Thông báo");
         }        
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int dongXoa = tblDichVu.getSelectedRow();
         if (dongXoa == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm cần xoá !");
+            ThongBao.ThongBaoDon("Vui lòng chọn dịch vụ cần xoá", "Thông báo");
         }else{
-            int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION) {
+            int click = ThongBao.LuaChonFix("Xác nhận xoá ?", "");
+            if (click == 1) {
                 int idDichVu = (Integer)tblDichVu.getValueAt(dongXoa, 0);
                 dichVuController.xoaDichVu(idDichVu);
             }
-            JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
+            ThongBao.ThongBaoDon("Xoá thành công !", "Thông báo");
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -396,7 +396,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int chonDong = tblDichVu.getSelectedRow();
         if (chonDong == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần sửa", "Thông báo");
         } else {
             int clickLuu = JOptionPane.showConfirmDialog(new Frame(),"Bạn có muốn sửa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
             if (clickLuu == JOptionPane.YES_OPTION) {
@@ -433,7 +433,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                     
                     DichVu dv = new DichVu(idDichVu,idDanhMuc,idDonViTinh,tenDichVu,soLuongCon,giaBan,true);
                     dichVuController.suaDichVu(dv);    
-                    
+                    ThongBao.ThongBaoDon("Cập nhật dịch vụ thành công", "Thông báo");
                 }    
             }
         }

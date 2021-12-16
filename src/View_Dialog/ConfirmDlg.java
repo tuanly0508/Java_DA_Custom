@@ -3,13 +3,15 @@ package View_Dialog;
 import javax.swing.InputMap;
 import javax.swing.KeyStroke;
 
-public class ThongBaoDlg extends javax.swing.JDialog {
+public class ConfirmDlg extends javax.swing.JDialog {
 
-    public ThongBaoDlg(java.awt.Frame parent, boolean modal) {
+    public static int choice = -1;
+    
+    public ConfirmDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        getRootPane().setDefaultButton(btnDatGia);
+        getRootPane().setDefaultButton(btnYes);
     }
     
     public void setNoiDung(String tieuDe , String noiDung){
@@ -17,6 +19,11 @@ public class ThongBaoDlg extends javax.swing.JDialog {
         lblNoiDung.setText(noiDung);
     }
     
+//    public void setNoiDung(String tieuDe , StringBuilder noiDung){
+//        this.setTitle(tieuDe);
+//        String text = "<html>"+noiDung.toString()+"</html>";
+//        lblNoiDung.setText(text);
+//    }
     
     
     @SuppressWarnings("unchecked")
@@ -25,9 +32,10 @@ public class ThongBaoDlg extends javax.swing.JDialog {
 
         roundPanel1 = new swing.RoundPanel();
         lblErr = new javax.swing.JLabel();
-        btnDatGia = new swing.Button();
+        btnYes = new swing.Button();
         jLabel3 = new javax.swing.JLabel();
         lblNoiDung = new javax.swing.JLabel();
+        btnYes1 = new swing.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -36,17 +44,25 @@ public class ThongBaoDlg extends javax.swing.JDialog {
         lblErr.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         lblErr.setForeground(new java.awt.Color(255, 0, 0));
 
-        btnDatGia.setBackground(new java.awt.Color(120, 225, 220));
-        btnDatGia.setText("OK");
-        btnDatGia.addActionListener(new java.awt.event.ActionListener() {
+        btnYes.setBackground(new java.awt.Color(120, 225, 220));
+        btnYes.setText("Không");
+        btnYes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDatGiaActionPerformed(evt);
+                btnYesActionPerformed(evt);
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/notifications.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/choose.png"))); // NOI18N
 
         lblNoiDung.setText("jLabel1");
+
+        btnYes1.setBackground(new java.awt.Color(120, 225, 220));
+        btnYes1.setText("Có");
+        btnYes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYes1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
@@ -55,20 +71,20 @@ public class ThongBaoDlg extends javax.swing.JDialog {
             .addGroup(roundPanel1Layout.createSequentialGroup()
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundPanel1Layout.createSequentialGroup()
-                        .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(roundPanel1Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(roundPanel1Layout.createSequentialGroup()
-                                .addGap(185, 185, 185)
-                                .addComponent(lblErr, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnDatGia, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(roundPanel1Layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(lblErr, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnYes1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         roundPanel1Layout.setVerticalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,9 +97,11 @@ public class ThongBaoDlg extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(lblNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)))
-                .addGap(12, 12, 12)
-                .addComponent(btnDatGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(169, 169, 169)
+                .addGap(23, 23, 23)
+                .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnYes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(158, 158, 158)
                 .addComponent(lblErr, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -101,13 +119,20 @@ public class ThongBaoDlg extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDatGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatGiaActionPerformed
+    private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
+        choice=-1;
         dispose();
-    }//GEN-LAST:event_btnDatGiaActionPerformed
+    }//GEN-LAST:event_btnYesActionPerformed
+
+    private void btnYes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYes1ActionPerformed
+        choice=1;
+        dispose();
+    }//GEN-LAST:event_btnYes1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public swing.Button btnDatGia;
+    public swing.Button btnYes;
+    public swing.Button btnYes1;
     private javax.swing.JLabel jLabel3;
     public javax.swing.JLabel lblErr;
     public javax.swing.JLabel lblNoiDung;

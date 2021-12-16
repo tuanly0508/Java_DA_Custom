@@ -1696,16 +1696,57 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     if(traLai>0){
                         tinhTienFrm.txtTraLai.setText(ChuyenDoi.SoString(traLai));  
                     }else{
-                        tinhTienFrm.txtTraLai.setText("0");  
-                    }           
-                }
-            });       
-
-            tinhTienFrm.txtTienNo.addKeyListener(new KeyAdapter() {
+                        XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonKhongDichVu.jrxml");
+                    }
+                    ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
+                    tongTien=0.0;
+                    tienGio = 0.0;
+                    tienDichVu = 0.0;
+                    tienPhuThu=0.0;
+                    tienNo=0.0;
+                    reLoadPhong();
+                    setNull();
+                    setNullTamTinh();
+                    phongHienTai=UNDEFINED_CONDITION;
+                    tinhTienFrm.setVisible(false);
+                                           
+                }});
+            
+            //Button tính tiền không in hoá đơn
+            tinhTienFrm.btnThanhToan.addMouseListener(new MouseAdapter() {
                 @Override
-                public void keyReleased(KeyEvent e) {
-                    tienNo = ChuyenDoi.SoDouble(tinhTienFrm.txtTienNo.getText());
-                    tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tienNo));
+                public void mousePressed(MouseEvent e) {
+                    int idPhieuThuePhong = phieuThuePhongController.layIdPhieuThuePhong(phongHienTai);
+                    int idHoaDonDichVu=0;
+                    HoaDon hd = new HoaDon();
+                    if(tienDichVu==0){
+                        hd = new HoaDon(0,1,null,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                    }else{
+                        idHoaDonDichVu = hoaDonController.getIdHoaDonDichVu(phongHienTai);
+                        hd = new HoaDon(0,1,idHoaDonDichVu,idPhieuThuePhong,tienGio,tienDichVu,tongTien,tienPhuThu,tienNo);
+                    }
+                    hoaDonController.insert(hd);
+                    //Cập nhật tiền nợ của khách
+                    datPhongController.capNhatTienNo(sdtKhach, tienNo,tongTien);
+                    //đóng phiếu thuê phòng
+                    phieuThuePhongController.dongPhieuThuePhong(idPhieuThuePhong);
+                    //Cập nhật lại tình trạng phòng
+                    datPhongController.updateTinhTrangPhong("Phòng còn trống", phongHienTai);
+                    //Đóng hoá đơn dịch vụ nếu có
+                    if(tienDichVu!=0) hoaDonController.offHoaDonDichVu(idHoaDonDichVu);
+                    //reloadTable dịch vụ
+                    clearTable(tblSuDungDichVu);
+                    ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
+                    tongTien=0.0;
+                    tienGio = 0.0;
+                    tienDichVu = 0.0;
+                    tienPhuThu=0.0;
+                    tienNo=0.0;
+                    reLoadPhong();
+                    setNull();
+                    setNullTamTinh();
+                    phongHienTai=UNDEFINED_CONDITION;
+                    tinhTienFrm.setVisible(false);
 
                     if(tienNo>tinhTienFrm.tongTien){
                         tinhTienFrm.txtTienNo.setText(ChuyenDoi.SoString(tongTien));  
@@ -1820,7 +1861,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         int soLuongCon = datPhongController.laySoLuongDichVu(idDichVu);
         
         if(soLuong>soLuongCon){
-            ThongBao.ThongBao("Số lượng không hợp lệ", "Thông Báo");
+            ThongBao.ThongBaoDon("Số lượng không hợp lệ", "Thông Báo");
         }else{
             if(data.get(0)[1].equals(phongHienTai)) {
                 SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
@@ -1859,10 +1900,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private void btnHuyDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDichVuActionPerformed
         int click = tblSuDungDichVu.getSelectedRow();
         if(click==-1){
-            ThongBao.ThongBao("Vui lòng chọn dịch vụ cần huỷ !", "Cảnh báo");
+            ThongBao.ThongBaoDon("Vui lòng chọn dịch vụ cần huỷ !", "Cảnh báo");
         }else{
-            int choice = ThongBao.LuaChon("Xác nhận huỷ dịch vụ?", "Xác nhận");
-            if(choice==0){
+            int choice = ThongBao.LuaChonFix("Xác nhận huỷ dịch vụ?", "");
+            if(choice==1){
                 
                 SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
                 SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

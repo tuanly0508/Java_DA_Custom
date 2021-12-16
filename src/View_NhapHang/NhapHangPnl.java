@@ -4,6 +4,7 @@ import Controller.NhaCungCapController;
 import Controller.PhieuNhapHangController;
 import Help.ChuyenDoi;
 import Help.DataValidate;
+import Help.ThongBao;
 import Help.XuatExcel;
 import Model.ChiTietPhieuNhap;
 import Model.DichVu;
@@ -36,6 +37,10 @@ public class NhapHangPnl extends javax.swing.JPanel {
     public NhapHangPnl() {
         initComponents();
         init();
+        btnThemChiTietPN.setEnabled(false);
+        btnXoaChiTietPN.setEnabled(false);
+        txtTenDichVu.setEnabled(false);
+        txtNhaCungCapPN.setEnabled(false);
     }
     
     public void init() {
@@ -179,6 +184,11 @@ public class NhapHangPnl extends javax.swing.JPanel {
 
         button10.setBorder(null);
         button10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel (1).png"))); // NOI18N
+        button10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button10ActionPerformed(evt);
+            }
+        });
 
         txtMaPN.setLabelText("Mã Phiếu Nhập");
 
@@ -416,6 +426,11 @@ public class NhapHangPnl extends javax.swing.JPanel {
 
         button12.setBorder(null);
         button12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/excel (1).png"))); // NOI18N
+        button12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout roundPanel3Layout = new javax.swing.GroupLayout(roundPanel3);
         roundPanel3.setLayout(roundPanel3Layout);
@@ -618,13 +633,14 @@ public class NhapHangPnl extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int dongXoa = tblNhaCungCap.getSelectedRow();
         if (dongXoa == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa !","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần xoá", "Thông báo");
         } else {        
-            int click = JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa không ?", "Thông báo",JOptionPane.YES_NO_OPTION);
-            if (click == JOptionPane.YES_OPTION) {
+            int click = ThongBao.LuaChonFix("Xác nhận xoá ?", "");
+            if (click == 1) {
                 nhaCungCapController.xoaNhaCungCap((Integer)tblNhaCungCap.getValueAt(dongXoa, 0));
+                ThongBao.ThongBaoDon("Xoá thành công !", "Thông báo");
             }
-            JOptionPane.showMessageDialog(new Frame(),"Xóa thành công !");
+            
         } 
 
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -632,10 +648,10 @@ public class NhapHangPnl extends javax.swing.JPanel {
     private void bntSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSuaActionPerformed
         int chonDong = tblNhaCungCap.getSelectedRow();
         if (chonDong == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần sửa !", "Thông báo");
         } else {
-            int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
-            if(update == JOptionPane.YES_OPTION){
+            int update = ThongBao.LuaChonFix("Xác nhận sửa ?", "");
+            if(update == 1){
                 StringBuilder sb = new StringBuilder();
                 
                 String tenNhaCungCap = txtNhaCungCap.getText();
@@ -658,7 +674,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
                     txtNhaCungCap.setText("");
                     txtDiaChi.setText("");
                     txtTienNo.setText("");
-                    JOptionPane.showMessageDialog(new Frame(),"Update success !!!");           
+                    ThongBao.ThongBaoDon("Cập nhật thành công", "Thông báo");       
                 }
             }
         }
@@ -686,6 +702,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
         }else{         
             nhaCungCapController.insert(tenNhaCungCap, SDTNhaCungCap, diaChi, tienNo);
+            ThongBao.ThongBaoDon("Thêm mới thành công", "Thông báo");
             txtSDT.setText("");
             txtNhaCungCap.setText("");
             txtDiaChi.setText("");
@@ -763,6 +780,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
             PhieuNhapDichVu pn = new PhieuNhapDichVu(maPhieuNhap,idNhaCungCap,1,timeNow,tongTien,tienNo,ghiChu,true);
             if(tienNo>0){
                 phieuNhapHangController.updateTienNoNCC(idNhaCungCap, tienNo);
+                ThongBao.ThongBaoDon("Cập nhật phiếu nhập thành công !", "Thông báo");
                 nhaCungCapController.loadList();
             }
             phieuNhapHangController.insert(pn);
@@ -778,10 +796,10 @@ public class NhapHangPnl extends javax.swing.JPanel {
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
         int chonDong = tblDanhSachPhieuNhap.getSelectedRow();
         if (chonDong == -1) {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa !!!","Thông báo", JOptionPane.ERROR_MESSAGE);
+            ThongBao.ThongBaoDon("Chọn dòng cần sửa", "Thông báo");
         } else {
-            int update = JOptionPane.showConfirmDialog(new Frame(), "Bạn có muốn sửa không?","Thông báo", JOptionPane.YES_NO_OPTION);
-            if(update == JOptionPane.YES_OPTION){
+            int update = ThongBao.LuaChonFix("Xác nhận sửa ?", "");
+            if(update == 1){
                 StringBuilder sb = new StringBuilder();
                 String nhaCungCap = txtNhaCungCapPN.getText();
                 DataValidate.checkEmpty(nhaCungCap, sb, "Nhà cung cấp không được để trống");
@@ -825,6 +843,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
                         nhaCungCapController.loadList();
                     }
                     phieuNhapHangController.update(pn);
+                    ThongBao.ThongBaoDon("Sửa thông tin phiếu nhập thành công !", "Thông báo");
                     idNhaCungCap=UNDEFINED_CONDITION;
                     txtNhaCungCapPN.setText("");
                     txtNgayNhapPN.setText("");
@@ -837,6 +856,8 @@ public class NhapHangPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSua1ActionPerformed
 
     private void tblDanhSachPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachPhieuNhapMouseClicked
+        btnThemChiTietPN.setEnabled(true);
+        btnXoaChiTietPN.setEnabled(true);
         int click = tblDanhSachPhieuNhap.getSelectedRow();
         
         txtNhaCungCapPN.setText(tblDanhSachPhieuNhap.getValueAt(click, 1).toString());
@@ -877,6 +898,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
  
         DonViTinh donViTinh =(DonViTinh) cbxDonVi.getSelectedItem();
         Integer idDonViTinh = donViTinh.getIdDonViTinh();
+        String tenDonVi = donViTinh.getTenDonVi();
         Integer giaTri =donViTinh.getGiaTri();
 //        Integer soLuong = Integer.parseInt(txtSoLuongDV.getText());
         Integer soLuong = 0;
@@ -906,11 +928,14 @@ public class NhapHangPnl extends javax.swing.JPanel {
             //Thêm chi tiết phiếu nhập mới
             ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap(maPhieuNhap,idDichVu,idDonViTinh,soLuong,giaNhap);
 
-            //Cập nhật lại số lượng
-            phieuNhapHangController.capNhatSoLuongDV(idDichVu, soLuongDV+(soLuong*giaTri));
-
+            if(!tenDonVi.equals("Kg")){
+                //Cập nhật lại số lượng
+                phieuNhapHangController.capNhatSoLuongDV(idDichVu, soLuongDV+(soLuong*giaTri));
+            }
+            
             phieuNhapHangController.themChiTietPN(ctpn);
             phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);    
+            ThongBao.ThongBaoDon("Thêm mới thành công", "Thông báo");
             //tính tổng tiền phiếu nhập
             Double tongGiaNhap =0.0;
             for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
@@ -924,21 +949,28 @@ public class NhapHangPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemChiTietPNActionPerformed
 
     private void btnXoaChiTietPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaChiTietPNActionPerformed
-        //Xoá chi tiết phiếu nhập
-        phieuNhapHangController.xoaChiTietPN(maPhieuNhap,idDichVuXoa);
-        System.out.println("mã: "+maPhieuNhap+"  "+idDichVuXoa);
-        //cập nhật lại sl dịch vụ
-        int soLuongDV = phieuNhapHangController.laySoLuongDV(idDichVuXoa);
-        phieuNhapHangController.capNhatSoLuongDV(idDichVuXoa,soLuongDV-giaTri);
-        
-        //tính tổng tiền phiếu nhập
-            Double tongGiaNhap =0.0;
-            for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
-                tongGiaNhap += ChuyenDoi.SoDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString())*(int)tblChiTietPhieuNhap.getValueAt(i, 2);
-            }
+        int chonDong = tblChiTietPhieuNhap.getSelectedRow();
+        if (chonDong == -1) {
+            ThongBao.ThongBaoDon("Chọn dòng cần Xoá", "Thông báo");
+        } else {
+            //Xoá chi tiết phiếu nhập
+            phieuNhapHangController.xoaChiTietPN(maPhieuNhap,idDichVuXoa);
+            System.out.println("mã: "+maPhieuNhap+"  "+idDichVuXoa);
+            //cập nhật lại sl dịch vụ
+            int soLuongDV = phieuNhapHangController.laySoLuongDV(idDichVuXoa);
+            phieuNhapHangController.capNhatSoLuongDV(idDichVuXoa,soLuongDV-giaTri);
+            ThongBao.ThongBaoDon("Xoá thành công", "Thông báo");
+            //tính tổng tiền phiếu nhập
+                Double tongGiaNhap =0.0;
+                for (int i = 0; i < tblChiTietPhieuNhap.getRowCount(); i++) {
+                    tongGiaNhap += ChuyenDoi.SoDouble(tblChiTietPhieuNhap.getValueAt(i, 3).toString())*(int)tblChiTietPhieuNhap.getValueAt(i, 2);
+                }
+                txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
             txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
-        txtTongGiaTri.setText(ChuyenDoi.SoString(tongGiaNhap));
-        phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);
+            phieuNhapHangController.loadChiTietPhieuNhap(maPhieuNhap);
+        }
+
+        
     }//GEN-LAST:event_btnXoaChiTietPNActionPerformed
 
     private void tblChiTietPhieuNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblChiTietPhieuNhapKeyPressed
@@ -947,7 +979,6 @@ public class NhapHangPnl extends javax.swing.JPanel {
 
     private void tblChiTietPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietPhieuNhapMouseClicked
         int click = tblChiTietPhieuNhap.getSelectedRow();
-        System.out.println(tblChiTietPhieuNhap.getValueAt(click,1).toString());
         idDichVuXoa =phieuNhapHangController.layIdDichVu(tblChiTietPhieuNhap.getValueAt(click,1).toString());
         String tenDonVi = tblChiTietPhieuNhap.getValueAt(click,4).toString();
         ArrayList<Integer> donVi = phieuNhapHangController.layIdDonVi(tenDonVi);
@@ -968,6 +999,14 @@ public class NhapHangPnl extends javax.swing.JPanel {
         double khachDua = ChuyenDoi.SoDouble(txtTongTienPN.getText());
         txtTongTienPN.setText(ChuyenDoi.SoString(khachDua));
     }//GEN-LAST:event_txtTongTienPNKeyReleased
+
+    private void button10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button10ActionPerformed
+        XuatExcel.xuat(tblDanhSachPhieuNhap);
+    }//GEN-LAST:event_button10ActionPerformed
+
+    private void button12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button12ActionPerformed
+        XuatExcel.xuat(tblChiTietPhieuNhap);
+    }//GEN-LAST:event_button12ActionPerformed
 
     
     public void CssTable(JScrollPane table) {
