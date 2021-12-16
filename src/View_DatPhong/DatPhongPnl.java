@@ -237,6 +237,15 @@ public class DatPhongPnl extends javax.swing.JPanel {
                                 datPhongDialog.cbxDatTruoc.setSelectedIndex(i);
                             }
                         }
+                        
+                        Date date2 = new Date();
+                        String datexxx = new SimpleDateFormat("yyyy-MM-dd").format(date2);
+                        Date date = new Date(pdp.getNgayDat().getTime());
+                        String datexxxx = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                        datPhongDialog.jdcNgayDatTruoc.setDate(date);
+                        if(datexxx.equals(datexxxx)) {
+                            datPhongDialog.btnMoPhong.setEnabled(true);
+                        }else datPhongDialog.btnMoPhong.setEnabled(false);
                     } 
                 });
 
@@ -261,6 +270,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                                 setNullDatPhongDiaglog();
                                 phongHienTai =0;
                                 datPhongDialog.dispose();
+                                ThongBao.ThongBaoDon("Huỷ phòng thành công", "Hủy phòng");
                             }
                         }                                                           
                     }                        
@@ -305,7 +315,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             Date date = new Date();
                             datPhongDialog.jdcNgayDatTruoc.setDate(date);
                             reLoadPhong();
-                            setNullDatPhongDiaglog();                            
+                            setNullDatPhongDiaglog();  
+                            ThongBao.ThongBaoDon("Đặt phòng thành công", "Đặt phòng");
                             datPhongDialog.dispose();
                             phongHienTai = 0;
                         }
