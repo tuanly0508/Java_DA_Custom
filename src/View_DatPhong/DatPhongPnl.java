@@ -57,7 +57,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class DatPhongPnl extends javax.swing.JPanel {
     private PhieuThuePhongController phieuThuePhongController;
@@ -177,6 +176,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     tblAllDichVu.setEnabled(false);
                     btnMoPhong.setEnabled(true);
                     btnBaoTri.setEnabled(true);
+                    datPhongDialog.btnMoPhong.setEnabled(true);
                 }else if (ttPhong.equals("Đang hoạt động")) {
                     phongCanDoi = idPhong;
                     setNullTamTinh();
@@ -187,6 +187,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     tblSuDungDichVu.setEnabled(true);
                     jtpDichVuAll.setEnabled(true);
                     tblAllDichVu.setEnabled(true);
+                    datPhongDialog.btnMoPhong.setEnabled(false);
                 }else if (ttPhong.equals("Phòng đặt trước")) {
                     loadTableSuDungDV(null);
                     setNullTamTinh();
@@ -211,6 +212,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 if (datPhongDialog == null) {                   
                     datPhongDialog = new DatPhongDlg(null,true);
                     setCombobox(datPhongDialog.cbxDatTruoc);                      
+                }
+                if(ttPhong.equals("Đang hoạt động")) {
+                    datPhongDialog.btnMoPhong.setEnabled(false);
+                }else {
+                    datPhongDialog.btnMoPhong.setEnabled(true);
                 }
                 
                 datPhongDialog.tblDatPhong.addMouseListener(new MouseAdapter() {
@@ -547,6 +553,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         txtThoiGianMo.setLabelText("Thời gian mở");
         roundPanel3.add(txtThoiGianMo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 190, -1));
 
+        txtTenKhach.setText("Khách vãng lai");
         txtTenKhach.setLabelText("Tên khách hàng");
         roundPanel3.add(txtTenKhach, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 190, 50));
 
@@ -573,6 +580,11 @@ public class DatPhongPnl extends javax.swing.JPanel {
         roundPanel3.add(btnDoiPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 82, 44));
 
         txtSDT.setLabelText("Số điện thoại");
+        txtSDT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSDTMouseClicked(evt);
+            }
+        });
         txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSDTKeyReleased(evt);
@@ -1443,40 +1455,38 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
     //Mở phòng
     private void btnMoPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoPhongActionPerformed
-        StringBuilder sb = new StringBuilder();
         Timestamp thoiGianMo = null;
         Date date = new Date();         
         thoiGianMo=new Timestamp(date.getTime());
         String tenKhach = txtTenKhach.getText();
-        DataValidate.checkEmpty(tenKhach, sb, "Tên không được để trống! ");
         String SDT = txtSDT.getText();
-        DataValidate.checkEmpty(SDT, sb, "Số điện thoại không được để trống! ");
-        DataValidate.checkSdtForm(SDT, sb);
-        if(sb.length() > 0){
-            JOptionPane.showMessageDialog(this, sb.toString(), "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
-            if (isSDT == false) {
+
+        if (isSDT == false ) {
+            if (!SDT.equals("")) {               
                 //Thêm khách nếu là khách lần đầu
                 datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
             }
-            if (rdbGiaNgayLe.isSelected()) {
-                //Chỉnh giá ngày lễ
-                phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,1);
-                phieuThuePhongController.insert(phieuThuePhong);
-            }else {
-                //Thêm phiếu thuê phòng
-                phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
-                phieuThuePhongController.insert(phieuThuePhong);
-            }
-            sdtKhach=SDT;
-            //Cập nhật tình trạng phòng
-            phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
-            datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
-            phongRender.setBackground(new Color(255,0,0));
-            setPhongHoatDong();
-            reLoadPhong();
-            setThongTinPhong(phongHienTai);                     
-        }                  
+        }
+
+        if (rdbGiaNgayLe.isSelected()) {
+            //Chỉnh giá ngày lễ
+            phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,1);
+            phieuThuePhongController.insert(phieuThuePhong);
+        }else {
+            //Thêm phiếu thuê phòng
+            phieuThuePhong = new PhieuThuePhong(0,SDT,1,phongHienTai,thoiGianMo,null,tenKhach,1,0);
+            phieuThuePhongController.insert(phieuThuePhong);
+        }
+       
+        sdtKhach=SDT;
+        //Cập nhật tình trạng phòng
+        phieuDatPhongController.updateTinhTrangPhieuDatPhong(0, phongHienTai);
+        datPhongController.updateTinhTrangPhong("Đang hoạt động",phongHienTai);
+        phongRender.setBackground(new Color(255,0,0));
+        setPhongHoatDong();
+        reLoadPhong();
+        setThongTinPhong(phongHienTai);                     
+                          
     }//GEN-LAST:event_btnMoPhongActionPerformed
 
     //Đổi phòng
@@ -1847,15 +1857,25 @@ public class DatPhongPnl extends javax.swing.JPanel {
         }else{
             int choice = ThongBao.LuaChon("Xác nhận huỷ dịch vụ?", "Xác nhận");
             if(choice==0){
-                int idDichVu =(int) tblSuDungDichVu.getValueAt(click, 6);
-                //huỷ dịch vụ
-                datPhongController.huyDichVu(idDichVu, tblSuDungDichVu.getValueAt(click, 3)+"00");
-                //cập nhật lại số lượng
-                int soLuongCon = datPhongController.laySoLuongDichVu(idDichVu);
-                datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon+soLuongDauTien);
                 
-                //load lại bảng danh sách dịch vụ 
-                loadAllTableDichVu();
+                SimpleDateFormat fromUser = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+                SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                String reformattedStr;
+                try {
+                    reformattedStr = myFormat.format(fromUser.parse(tblSuDungDichVu.getValueAt(click, 3).toString()));
+                    int idDichVu =(int) tblSuDungDichVu.getValueAt(click, 6);
+                    //huỷ dịch vụ
+                    datPhongController.huyDichVu(idDichVu,reformattedStr+".000");
+                    //cập nhật lại số lượng
+                    int soLuongCon = datPhongController.laySoLuongDichVu(idDichVu);
+                    datPhongController.capNhatSoLuongDichVu(idDichVu, soLuongCon+soLuongDauTien);
+
+                    //load lại bảng danh sách dịch vụ 
+                    loadAllTableDichVu();
+                } catch (ParseException ex) {
+                    Logger.getLogger(DatPhongPnl.class.getName()).log(Level.SEVERE, null, ex);
+                }            
             }
         }
     }//GEN-LAST:event_btnHuyDichVuActionPerformed
@@ -1868,6 +1888,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
         txtTongTien.setText(ChuyenDoi.SoString(tien));
                 
     }//GEN-LAST:event_txtTienPhuThuKeyReleased
+
+    private void txtSDTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSDTMouseClicked
+        txtTenKhach.setText("");
+    }//GEN-LAST:event_txtSDTMouseClicked
 
     public void themDichVu(JTable table) {
         table.addMouseListener(new MouseAdapter() {
@@ -2055,6 +2079,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         btnBaoTri.setVisible(true);
         btnTamTinh.setEnabled(false);
         btnThanhToan.setEnabled(false);
+        txtTenKhach.setText("Khách vãng lai");
     }
     
     public void setPhongBaoTri() {
