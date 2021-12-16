@@ -979,7 +979,6 @@ public class NhapHangPnl extends javax.swing.JPanel {
 
     private void tblChiTietPhieuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietPhieuNhapMouseClicked
         int click = tblChiTietPhieuNhap.getSelectedRow();
-        System.out.println(tblChiTietPhieuNhap.getValueAt(click,1).toString());
         idDichVuXoa =phieuNhapHangController.layIdDichVu(tblChiTietPhieuNhap.getValueAt(click,1).toString());
         String tenDonVi = tblChiTietPhieuNhap.getValueAt(click,4).toString();
         ArrayList<Integer> donVi = phieuNhapHangController.layIdDonVi(tenDonVi);

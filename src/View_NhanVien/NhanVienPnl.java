@@ -3,6 +3,7 @@ package View_NhanVien;
 import Controller.NhanVienController;
 import Help.DataValidate;
 import Help.ThongBao;
+import Help.XuatExcel;
 import java.util.List;
 import java.util.Date;
 import Model.NhanVien;
@@ -260,6 +261,11 @@ public class NhanVienPnl extends javax.swing.JPanel {
 
         button4.setBackground(new java.awt.Color(120, 225, 220));
         button4.setText("Xuất file");
+        button4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button4ActionPerformed(evt);
+            }
+        });
 
         button5.setBackground(new java.awt.Color(120, 225, 220));
         button5.setText("Gửi mail");
@@ -520,6 +526,10 @@ public class NhanVienPnl extends javax.swing.JPanel {
             }                
         }        
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        XuatExcel.xuat(tblNhanVien);
+    }//GEN-LAST:event_button4ActionPerformed
 
     
     

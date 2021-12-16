@@ -17,11 +17,6 @@ public class ThongBaoDlg extends javax.swing.JDialog {
         lblNoiDung.setText(noiDung);
     }
     
-//    public void setNoiDung(String tieuDe , StringBuilder noiDung){
-//        this.setTitle(tieuDe);
-//        String text = "<html>"+noiDung.toString()+"</html>";
-//        lblNoiDung.setText(text);
-//    }
     
     
     @SuppressWarnings("unchecked")

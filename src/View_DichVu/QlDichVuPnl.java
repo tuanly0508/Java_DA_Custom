@@ -142,7 +142,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         });
 
         btnXuatDanhSach.setBackground(new java.awt.Color(120, 225, 220));
-        btnXuatDanhSach.setText("File");
+        btnXuatDanhSach.setText("Xuất File Excel");
         btnXuatDanhSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXuatDanhSachActionPerformed(evt);
@@ -162,7 +162,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTimNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundPanel3Layout.createSequentialGroup()
-                        .addComponent(btnXuatDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnXuatDanhSach, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
