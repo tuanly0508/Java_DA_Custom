@@ -47,29 +47,31 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" pref="164" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="168" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblTenPhongDlg" max="32767" attributes="0"/>
+                          <Component id="lblTenPhongDlg" min="-2" pref="156" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" alignment="1" pref="330" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" pref="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cbxDatTruoc" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblErrCbx" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cbxDatTruoc" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblErrCbx" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtSDT" max="32767" attributes="0"/>
+                                  <Component id="jdcNgayDatTruoc" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="txtTenKhach" max="32767" attributes="0"/>
-                              <Component id="txtSDT" max="32767" attributes="0"/>
-                              <Component id="jdcNgayDatTruoc" max="32767" attributes="0"/>
+                              <Component id="txtTenKhach" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnMoPhong" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
-                              <Component id="rdbGiaNgayLe" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
                               <Component id="btnDatTruoc" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
                               <Component id="btnHuy" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="rdbGiaNgayLe" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -93,9 +95,9 @@
                       <Component id="rdbGiaNgayLe" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="txtTenKhach" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnMoPhong" min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="txtTenKhach" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -143,7 +145,7 @@
                     <Column editable="true" title="idPhong" type="java.lang.Object"/>
                     <Column editable="true" title="H&#x1ecd; v&#xe0; t&#xea;n" type="java.lang.Object"/>
                     <Column editable="true" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.Object"/>
-                    <Column editable="true" title="Th&#x1edd;i gian &#x111;&#x1eb7;t" type="java.lang.Object"/>
+                    <Column editable="true" title="Gi&#x1edd; &#x111;&#x1eb7;t" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -158,7 +160,7 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="120" minWidth="120" prefWidth="120" resizable="true">
+                    <Column maxWidth="110" minWidth="110" prefWidth="110" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>

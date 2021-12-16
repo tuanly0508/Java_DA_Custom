@@ -7,6 +7,7 @@ import Help.XuatExcel;
 import java.util.List;
 import java.util.Date;
 import Model.NhanVien;
+import java.awt.Color;
 import java.awt.Frame;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +15,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import swing.ScrollBar;
 
 public class NhanVienPnl extends javax.swing.JPanel {
     private NhanVienController nhanVienController;
@@ -23,6 +27,12 @@ public class NhanVienPnl extends javax.swing.JPanel {
         initComponents();
         jdcNgaySinh.setDateFormatString("dd-MM-yyyy");
         jdcNgayVao.setDateFormatString("dd-MM-yyyy");
+        
+        JPanel p = new JPanel();
+        jScrollPane1.setVerticalScrollBar(new ScrollBar());
+        jScrollPane1.getVerticalScrollBar().setBackground(Color.WHITE);
+        jScrollPane1.getViewport().setBackground(Color.WHITE);       
+        jScrollPane1.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
     }
     
 

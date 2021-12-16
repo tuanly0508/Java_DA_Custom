@@ -22,8 +22,8 @@ public class PhieuDatPhongController {
         pdpdao.updateTinhTrangPhieuDatPhong(trangThai,idPhong);
     }
     
-    public void updateNullPhieuDatPhong(int trangThai,int idPhong,int gioDatTruoc) {
-        pdpdao.updateNullPhieuDatPhong(trangThai,idPhong,gioDatTruoc);
+    public void updateNullPhieuDatPhong(int trangThai,int idPhong,int gioDatTruoc, String ngayDat) {
+        pdpdao.updateNullPhieuDatPhong(trangThai,idPhong,gioDatTruoc,ngayDat);
     }
     
     public List<Object[]> getPhieuDatPhong(int idPhong){

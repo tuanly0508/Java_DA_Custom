@@ -10,14 +10,14 @@ public class PhieuDatPhongDAO extends AbsDAO<PhieuDatPhong>{
         DBConnection.executeUpdate(query,trangThai, idPhong);
     }
     
-    public void updateNullPhieuDatPhong(int trangThai,int idPhong, int gioDatTruoc) {
-        String query = "update phieuDatPhong set tinhTrang = ? where idPhong = ? and thoiGianDat = ?";
+    public void updateNullPhieuDatPhong(int trangThai,int idPhong, int gioDatTruoc, String ngayDat) {
+        String query = "update phieuDatPhong set tinhTrang = ? where idPhong = ? and thoiGianDat = ? and ngayDat='"+ngayDat+"'";
         DBConnection.executeUpdate(query,trangThai, idPhong, gioDatTruoc);
     }
     
     public List<Object[]> getPhieuDatPhong(int idPhong) {
-        return getRawValues("select idPhieuDatPhong,idPhong,tenKhach,SDTKhachHang,b.tenHinhThuc from phieuDatPhong a join GioDatTruoc b "
-                            + "on a.thoiGianDat = b.idGioDatTruoc where idPhong = "+idPhong+" and tinhTrang = 1 ");
+        return getRawValues("select idPhieuDatPhong,idPhong,tenKhach,SDTKhachHang,b.tenHinhThuc,ngayDat from phieuDatPhong a join GioDatTruoc b "
+                            + "on a.thoiGianDat = b.idGioDatTruoc where idPhong = "+idPhong+" and tinhTrang = 1 order by ngayDat");
     }
     
     public List<Object[]> getAllPhieuDatPhong() {

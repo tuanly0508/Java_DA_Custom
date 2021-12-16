@@ -33,7 +33,9 @@ import java.sql.DriverManager;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.logging.Level;
@@ -119,7 +121,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jtpDichVuAll.setEnabled(false);
         tblAllDichVu.setEnabled(false);
         clickTamTinh = 0;
-        cssTableDichVu();
+        cssTableDichVu();       
     }   
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
@@ -211,7 +213,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                 phongHienTai = idPhong;
                 if (datPhongDialog == null) {                   
                     datPhongDialog = new DatPhongDlg(null,true);
-                    setCombobox(datPhongDialog.cbxDatTruoc);                      
+                    setCombobox(datPhongDialog.cbxDatTruoc);      
                 }
                 if(ttPhong.equals("Đang hoạt động")) {
                     datPhongDialog.btnMoPhong.setEnabled(false);
@@ -244,12 +246,17 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             if (tt.get(i)[0].equals(phongHienTai)) {
                                 GioDatTruoc g =(GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
                                 Integer idGioDatTruoc = g.getIdGioDatTruoc();
-
-                                phieuDatPhongController.updateNullPhieuDatPhong(0, phongHienTai,idGioDatTruoc);
+                                java.util.Date ngayDatTruoc = datPhongDialog.jdcNgayDatTruoc.getDate();
+                                java.sql.Date ngayDat = new java.sql.Date(ngayDatTruoc.getTime());
+                                String datexxx = new SimpleDateFormat("yyyy-MM-dd").format(ngayDat);
+                                
+                                phieuDatPhongController.updateNullPhieuDatPhong(0, phongHienTai,idGioDatTruoc,datexxx);
                                 p.btnDatTruoc.setBackground(new Color(255,255,255));
                                 reLoadPhong();
-                                List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(idPhong);           
+                                List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(idPhong);
                                 loadTable(datPhongDialog.tblDatPhong, data);
+                                Date date = new Date();
+                                datPhongDialog.jdcNgayDatTruoc.setDate(date);
                                 setNullDatPhongDiaglog();
                                 phongHienTai =0;
                                 datPhongDialog.dispose();
@@ -279,8 +286,9 @@ public class DatPhongPnl extends javax.swing.JPanel {
                         String tenKhach = datPhongDialog.txtTenKhach.getText();
                         String SDT = datPhongDialog.txtSDT.getText();
                         GioDatTruoc myCbb = (GioDatTruoc) datPhongDialog.cbxDatTruoc.getSelectedItem();
-                        String gio = myCbb.getTenHinhThuc();                        
-                        
+                        String gio = myCbb.getTenHinhThuc(); 
+                        java.util.Date ngayDatTruoc = datPhongDialog.jdcNgayDatTruoc.getDate();
+                        java.sql.Date ngayDat = new java.sql.Date(ngayDatTruoc.getTime());
                         Integer idDatTruoc = myCbb.getId();
                         if (idDatTruoc==1) {
                             datPhongDialog.lblErrCbx.setText("Chọn thời gian đặt");
@@ -288,11 +296,13 @@ public class DatPhongPnl extends javax.swing.JPanel {
                             if (isSDT == false) {
                                 datPhongController.insertKhachHang(SDT,tenKhach,0.0,0.0,0,null,1);
                             }
-                            phieuDatPhong = new PhieuDatPhong(0,SDT,phongHienTai,idDatTruoc,null,true,tenKhach);
+                            phieuDatPhong = new PhieuDatPhong(0,SDT,phongHienTai,idDatTruoc,null,true,tenKhach,ngayDat);
                             phieuDatPhongController.insert(phieuDatPhong);                                    
                             List<Object[]> data = phieuDatPhongController.getPhieuDatPhong(phongHienTai);
                             loadTable(datPhongDialog.tblDatPhong, data);
                             datPhongController.HienThiThoiGian(gio,tenKhach,SDT,phongHienTai);
+                            Date date = new Date();
+                            datPhongDialog.jdcNgayDatTruoc.setDate(date);
                             reLoadPhong();
                             setNullDatPhongDiaglog();                            
                             datPhongDialog.dispose();

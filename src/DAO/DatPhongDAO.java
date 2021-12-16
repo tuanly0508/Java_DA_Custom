@@ -4,6 +4,8 @@ import Help.DBConnection;
 import Model.Phong;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class DatPhongDAO extends AbsDAO<Phong>{
@@ -63,10 +65,18 @@ public class DatPhongDAO extends AbsDAO<Phong>{
     }
     
     public List<Object[]> getTinhTrangPDP(){
-        return getRawValues("select DISTINCT b.idPhong,tinhTrang,tenPhong,MIN(tenHinhThuc) tenHinhThuc from phieuDatPhong a right join phong b "
-                            + "on a.idPhong = b.idPhong join GioDatTruoc c on c.idGioDatTruoc = a.thoiGianDat where tinhTrang = 1 group "
-                            + "by b.idPhong,tinhTrang,tenPhong");
+        Date myDate = new Date();
+        String datexxx = new SimpleDateFormat("yyyy-MM-dd").format(myDate);
+        return getRawValues("select DISTINCT b.idPhong,tinhTrang,tenPhong,MIN(tenHinhThuc) tenHinhThuc from phieuDatPhong a right "
+                            + "join phong b on a.idPhong = b.idPhong join GioDatTruoc c on c.idGioDatTruoc = a.thoiGianDat where tinhTrang = 1 "
+                            + "and ngayDat='"+datexxx+"' group by b.idPhong,tinhTrang,tenPhong");
     }
+    
+//    public List<Object[]> getTinhTrangPDP(){
+//        return getRawValues("select DISTINCT b.idPhong,tinhTrang,tenPhong,MIN(tenHinhThuc) tenHinhThuc from phieuDatPhong a right join phong b "
+//                            + "on a.idPhong = b.idPhong join GioDatTruoc c on c.idGioDatTruoc = a.thoiGianDat where tinhTrang = 1 group "
+//                            + "by b.idPhong,tinhTrang,tenPhong");
+//    }
     
     public List<Object[]> getIdHoaDonDichVu(int idPhong){
         return getRawValues("select idDichVu, idPhong from chiTietDichVuSuDung a join hoaDonDichVu b on a.idHoaDonDichVu = b.idHoaDonDichVu "

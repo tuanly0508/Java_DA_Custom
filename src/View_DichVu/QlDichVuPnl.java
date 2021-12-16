@@ -13,10 +13,14 @@ import Help.XuatExcel;
 import Model.DanhMuc;
 import Model.DichVu;
 import Model.DonViTinh;
+import java.awt.Color;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import swing.ScrollBar;
 
 
 /**
@@ -31,6 +35,12 @@ public class QlDichVuPnl extends javax.swing.JPanel {
      */
     public QlDichVuPnl() {
         initComponents();
+        
+        JPanel p = new JPanel();
+        jScrollPane2.setVerticalScrollBar(new ScrollBar());
+        jScrollPane2.getVerticalScrollBar().setBackground(Color.WHITE);
+        jScrollPane2.getViewport().setBackground(Color.WHITE);       
+        jScrollPane2.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
     }
 
     
