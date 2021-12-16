@@ -1696,7 +1696,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
                     if(traLai>0){
                         tinhTienFrm.txtTraLai.setText(ChuyenDoi.SoString(traLai));  
                     }else{
-                        XuatHoaDon(idHoaDon,"/View_DatPhong/HoaDonKhongDichVu.jrxml");
+                        tinhTienFrm.txtTraLai.setText("0");
                     }
                     ThongBao.ThongBaoDon("Thanh toán thành công", "Thanh toán");
                     tongTien=0.0;

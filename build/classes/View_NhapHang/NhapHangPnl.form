@@ -307,6 +307,9 @@
                   <Image iconType="3" name="/icon/excel (1).png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button10ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="swing.TextField" name="txtMaPN">
               <Properties>
@@ -616,6 +619,9 @@
                   <Image iconType="3" name="/icon/excel (1).png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button12ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
