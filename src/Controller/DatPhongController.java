@@ -166,21 +166,23 @@ public class DatPhongController {
         
                         String timess = "" ;
 //                        System.out.println("1gio dat la:"+gio.substring(3));
-                        if(gio.substring(3).equals("00")){
+                        if(gio.substring(3).equals("0")){
                             timess=gioDat+"h30";
                         }
                         if(gio.substring(3).equals("30")){
-                            timess=Integer.valueOf(gio.substring(0, 2))+"h0";
+                            timess=gioDat+"h59";
                         }
 //                        System.out.println("gioThong Bao:"+timess);
                         Calendar cal = new GregorianCalendar();
                         int minute = cal.get(Calendar.MINUTE);
                         int hour = cal.get(Calendar.HOUR_OF_DAY);
                         String time =hour+"h"+minute;
-//                        System.out.println(hour+"h"+minute);
+                        System.out.println(hour+"h"+minute);
 
+                        System.out.println(timess);
+                        System.out.println(time);
+                        
                         if(timess.equals(time)){
-                            System.out.println(gio.equals(time));
                             TimesUp times = new TimesUp(null, true);
                             times.lblTenPhong.setText("Thông báo đặt trước phòng: "+ tenPhong);
                             times.txtGioDat.setText("Giờ đặt : "+ gio);
