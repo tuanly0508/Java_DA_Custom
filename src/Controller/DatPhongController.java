@@ -217,11 +217,11 @@ public class DatPhongController {
         
                         String timess = "" ;
 //                        System.out.println("1gio dat la:"+gio.substring(3));
-                        if(gio.substring(3).equals("00")){
+                        if(gio.substring(3).equals("0")){
                             timess=gioDat+"h30";
                         }
                         if(gio.substring(3).equals("30")){
-                            timess=Integer.valueOf(gio.substring(0, 2))+"h0";
+                            timess=gioDat+"h59";
                         }
 //                        System.out.println("gioThong Bao:"+timess);
                         Calendar cal = new GregorianCalendar();
