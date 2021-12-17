@@ -1711,7 +1711,7 @@ public class DatPhongPnl extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         if(clickTamTinh==0) {
-            ThongBao.ThongBaoDon("Vui lòng tạm tính trước khi thanh toán", "Thông báo");
+            this.btnTamTinhActionPerformed(evt);
         }else {
             tongTien=tongTien+tienPhuThu;
             TinhTienFrm tinhTienFrm= new TinhTienFrm(null,true,tongTien);
