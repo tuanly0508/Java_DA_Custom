@@ -9,6 +9,8 @@ import java.util.List;
 import Model.KhachHang;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,6 +28,25 @@ public class KhachHangPnl extends javax.swing.JPanel {
         jScrollPane1.getVerticalScrollBar().setBackground(Color.WHITE);
         jScrollPane1.getViewport().setBackground(Color.WHITE);       
         jScrollPane1.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        placeholderNhanVien();
+    }
+    
+    public void placeholderNhanVien() {
+        txtTimNhanVien.setText("Tìm khách hàng");
+        txtTimNhanVien.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTimNhanVien.getText().equals("Tìm khách hàng") || txtTimNhanVien.getText().equals(txtTimNhanVien.getText())) {
+                    txtTimNhanVien.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTimNhanVien.getText().isEmpty()) {
+                    txtTimNhanVien.setText("Tìm khách hàng");
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

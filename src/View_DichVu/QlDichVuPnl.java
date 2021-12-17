@@ -15,6 +15,8 @@ import Model.DichVu;
 import Model.DonViTinh;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -41,6 +43,7 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         jScrollPane2.getVerticalScrollBar().setBackground(Color.WHITE);
         jScrollPane2.getViewport().setBackground(Color.WHITE);       
         jScrollPane2.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        placeholderNhanVien();
     }
 
     
@@ -74,6 +77,24 @@ public class QlDichVuPnl extends javax.swing.JPanel {
             cbxDonViTinh.addItem(donViTinh);
         }
     }
+    
+    public void placeholderNhanVien() {
+        txtTimNhanVien.setText("Tìm dịch vụ");
+        txtTimNhanVien.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTimNhanVien.getText().equals("Tìm dịch vụ") || txtTimNhanVien.getText().equals(txtTimNhanVien.getText())) {
+                    txtTimNhanVien.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTimNhanVien.getText().isEmpty()) {
+                    txtTimNhanVien.setText("Tìm dịch vụ");
+                }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,7 +124,6 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         btnXoa = new swing.Button();
         cbxDanhMuc = new swing.ComboBoxSuggestion<>();
         cbxDonViTinh = new swing.ComboBoxSuggestion<>();
-        cbxDonViTinh1 = new swing.ComboBoxSuggestion<>();
 
         setBackground(new java.awt.Color(218, 232, 232));
         setMaximumSize(null);
@@ -246,10 +266,6 @@ public class QlDichVuPnl extends javax.swing.JPanel {
         cbxDonViTinh.setMinimumSize(new java.awt.Dimension(30, 22));
         cbxDonViTinh.setPreferredSize(new java.awt.Dimension(30, 22));
 
-        cbxDonViTinh1.setEditable(false);
-        cbxDonViTinh1.setMinimumSize(new java.awt.Dimension(30, 22));
-        cbxDonViTinh1.setPreferredSize(new java.awt.Dimension(30, 22));
-
         javax.swing.GroupLayout roundPanel4Layout = new javax.swing.GroupLayout(roundPanel4);
         roundPanel4.setLayout(roundPanel4Layout);
         roundPanel4Layout.setHorizontalGroup(
@@ -280,10 +296,6 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                             .addComponent(cbxDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbxDonViTinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(27, 27, 27))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cbxDonViTinh1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
         );
         roundPanel4Layout.setVerticalGroup(
             roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,8 +318,6 @@ public class QlDichVuPnl extends javax.swing.JPanel {
                 .addComponent(txtSoLuongCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(cbxDonViTinh1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(roundPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -490,7 +500,6 @@ public class QlDichVuPnl extends javax.swing.JPanel {
     private swing.Button btnXuatDanhSach;
     public swing.ComboBoxSuggestion<DanhMuc> cbxDanhMuc;
     public swing.ComboBoxSuggestion<DonViTinh> cbxDonViTinh;
-    public swing.ComboBoxSuggestion<DonViTinh> cbxDonViTinh1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

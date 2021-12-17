@@ -49,11 +49,11 @@ public class Main extends javax.swing.JFrame {
                     DatPhongController datPhongController = new DatPhongController(datPhongPnl);
                     HoaDonController hoaDonController = new HoaDonController(datPhongPnl);
                     showForm(datPhongPnl);
-                }else if (index == 1) {
+                }else if (index == 4) {
                     thongKePnl = new ThongKePnl();
                     ThongKeController thongKeController = new ThongKeController(thongKePnl);
                     showForm(thongKePnl);
-                }else if (index == 2) {
+                }else if (index == 5) {
                     nhanVienPnl = new NhanVienPnl();
                     NhanVienController nhanVienController = new NhanVienController(nhanVienPnl);
                     showForm(nhanVienPnl);
@@ -61,19 +61,22 @@ public class Main extends javax.swing.JFrame {
                     dichVuPnl =  new DichVuPnl();
                     DichVuController dichVuController = new DichVuController(dichVuPnl);
                     showForm(dichVuPnl);
-                }else if (index == 4) {
+                }else if (index == 1) {
                     nhapHangPnl = new NhapHangPnl();
                     PhieuNhapHangController phieuNhapHangController = new PhieuNhapHangController(nhapHangPnl);
                     NhaCungCapController nhaCungCapController = new NhaCungCapController(nhapHangPnl);
                     showForm(nhapHangPnl);
-                }else if (index == 5) {
+                }else if (index == 2) {
                     khachHangPnl = new KhachHangPnl();
                     KhachHangController khachHangController = new KhachHangController(khachHangPnl);
                     showForm(khachHangPnl);
                 }else {
-                    Login lg = new Login();
-                    lg.setVisible(true);
-                    dispose();
+                    int i =ThongBao.LuaChonFix("Bạn có muốn đăng xuất không ?","");
+                    if (i == 1) {
+                        Login lg = new Login();
+                        lg.setVisible(true);
+                        dispose();
+                    } 
                 }
             }
         };

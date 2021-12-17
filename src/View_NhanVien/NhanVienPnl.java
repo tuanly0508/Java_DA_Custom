@@ -8,12 +8,8 @@ import java.util.List;
 import java.util.Date;
 import Model.NhanVien;
 import java.awt.Color;
-import java.awt.Frame;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,9 +29,27 @@ public class NhanVienPnl extends javax.swing.JPanel {
         jScrollPane1.getVerticalScrollBar().setBackground(Color.WHITE);
         jScrollPane1.getViewport().setBackground(Color.WHITE);       
         jScrollPane1.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        
+        placeholderNhanVien();
     }
     
-
+    public void placeholderNhanVien() {
+        txtTimNhanVien.setText("Tìm nhân viên");
+        txtTimNhanVien.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTimNhanVien.getText().equals("Tìm nhân viên") || txtTimNhanVien.getText().equals(txtTimNhanVien.getText())) {
+                    txtTimNhanVien.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTimNhanVien.getText().isEmpty()) {
+                    txtTimNhanVien.setText("Tìm nhân viên");
+                }
+            }
+        });
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -93,7 +107,11 @@ public class NhanVienPnl extends javax.swing.JPanel {
 
         txtEmail.setLabelText("Email");
 
+        jdcNgaySinh.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel2.setText("Ngày Sinh");
+
+        jdcNgayVao.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Ngày vào làm");
 
@@ -164,11 +182,11 @@ public class NhanVienPnl extends javax.swing.JPanel {
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel2Layout.createSequentialGroup()
-                        .addComponent(bntXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bntXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(roundPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -258,12 +276,27 @@ public class NhanVienPnl extends javax.swing.JPanel {
             tblNhanVien.getColumnModel().getColumn(0).setMinWidth(0);
             tblNhanVien.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblNhanVien.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblNhanVien.getColumnModel().getColumn(1).setMinWidth(110);
+            tblNhanVien.getColumnModel().getColumn(1).setPreferredWidth(110);
+            tblNhanVien.getColumnModel().getColumn(1).setMaxWidth(110);
+            tblNhanVien.getColumnModel().getColumn(6).setMinWidth(150);
+            tblNhanVien.getColumnModel().getColumn(6).setPreferredWidth(150);
+            tblNhanVien.getColumnModel().getColumn(6).setMaxWidth(150);
             tblNhanVien.getColumnModel().getColumn(7).setMinWidth(0);
             tblNhanVien.getColumnModel().getColumn(7).setPreferredWidth(0);
             tblNhanVien.getColumnModel().getColumn(7).setMaxWidth(0);
             tblNhanVien.getColumnModel().getColumn(8).setMinWidth(0);
             tblNhanVien.getColumnModel().getColumn(8).setPreferredWidth(0);
             tblNhanVien.getColumnModel().getColumn(8).setMaxWidth(0);
+            tblNhanVien.getColumnModel().getColumn(10).setMinWidth(70);
+            tblNhanVien.getColumnModel().getColumn(10).setPreferredWidth(70);
+            tblNhanVien.getColumnModel().getColumn(10).setMaxWidth(70);
+            tblNhanVien.getColumnModel().getColumn(11).setMinWidth(0);
+            tblNhanVien.getColumnModel().getColumn(11).setPreferredWidth(0);
+            tblNhanVien.getColumnModel().getColumn(11).setMaxWidth(0);
+            tblNhanVien.getColumnModel().getColumn(12).setMinWidth(0);
+            tblNhanVien.getColumnModel().getColumn(12).setPreferredWidth(0);
+            tblNhanVien.getColumnModel().getColumn(12).setMaxWidth(0);
         }
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -286,7 +319,7 @@ public class NhanVienPnl extends javax.swing.JPanel {
             roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel3Layout.createSequentialGroup()
                 .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE)
                     .addGroup(roundPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

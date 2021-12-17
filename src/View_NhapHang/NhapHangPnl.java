@@ -13,6 +13,8 @@ import Model.PhieuNhapDichVu;
 import swing.ScrollBar;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +43,7 @@ public class NhapHangPnl extends javax.swing.JPanel {
         btnXoaChiTietPN.setEnabled(false);
         txtTenDichVu.setEnabled(false);
         txtNhaCungCapPN.setEnabled(false);
+        placeholderDichVu();
     }
     
     public void init() {
@@ -48,6 +51,24 @@ public class NhapHangPnl extends javax.swing.JPanel {
         CssTable(jScrollPane2);
         CssTable(jScrollPane3);
         CssTable(jScrollPane5);
+    }
+    
+    public void placeholderDichVu() {
+        txtTimDichVu.setText("Tìm dịch vụ");
+        txtTimDichVu.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTimDichVu.getText().equals("Tìm dịch vụ") || txtTimDichVu.getText().equals(txtTimDichVu.getText())) {
+                    txtTimDichVu.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTimDichVu.getText().isEmpty()) {
+                    txtTimDichVu.setText("Tìm dịch vụ");
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -407,9 +428,9 @@ public class NhapHangPnl extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel6Layout.createSequentialGroup()
-                        .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxDonVi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTenDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxDonVi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(roundPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtSoLuongDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

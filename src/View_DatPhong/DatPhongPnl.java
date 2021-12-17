@@ -11,7 +11,6 @@ import View_Dialog.DatPhongDlg;
 import View_Dialog.DoiPhongDlg;
 import View_Dialog.GiaNgayLeDlg;
 import Help.ChuyenDoi;
-import Help.DataValidate;
 import Help.ThongBao;
 import Model.GiaNgayLe;
 import Model.GioDatTruoc;
@@ -22,8 +21,9 @@ import Model.PhieuThuePhong;
 import View_Login.Login;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -34,9 +34,7 @@ import java.sql.DriverManager;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.logging.Level;
@@ -44,7 +42,6 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import static javax.swing.JComponent.UNDEFINED_CONDITION;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -75,10 +72,10 @@ public class DatPhongPnl extends javax.swing.JPanel {
     private Table table;
     int loaiPhongHienTai = UNDEFINED_CONDITION;   
     int phongHienTai = UNDEFINED_CONDITION;
+    int clickTamTinh = UNDEFINED_CONDITION;
     int phongCanDoi = UNDEFINED_CONDITION;
     int idGiaNgayLe = UNDEFINED_CONDITION;
-    int click1 = UNDEFINED_CONDITION;
-    int clickTamTinh = UNDEFINED_CONDITION;
+    int click1 = UNDEFINED_CONDITION;    
     boolean duocNo = false ;
     int soLuongDauTien =0;
     int loadPopup = 0;
@@ -122,7 +119,8 @@ public class DatPhongPnl extends javax.swing.JPanel {
         jtpDichVuAll.setEnabled(false);
         tblAllDichVu.setEnabled(false);
         clickTamTinh = 0;
-        cssTableDichVu();       
+        cssTableDichVu(); 
+        placeholderDichVu();
     }   
     
     public void loadPhong(List<Object[]> data,List<Object[]> data2,List<Object[]> data3) {
@@ -1937,6 +1935,24 @@ public class DatPhongPnl extends javax.swing.JPanel {
         txtTenKhach.setText("");
     }//GEN-LAST:event_txtSDTMouseClicked
 
+    public void placeholderDichVu() {
+        txtTimDichVu.setText("Tìm dịch vụ");
+        txtTimDichVu.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTimDichVu.getText().equals("Tìm dịch vụ") || txtTimDichVu.getText().equals(txtTimDichVu.getText())) {
+                    txtTimDichVu.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTimDichVu.getText().isEmpty()) {
+                    txtTimDichVu.setText("Tìm dịch vụ");
+                }
+            }
+        });
+    }
+    
     public void themDichVu(JTable table) {
         table.addMouseListener(new MouseAdapter() {
             @Override
