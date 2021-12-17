@@ -25,7 +25,7 @@ public class DichVuDAO extends AbsDAO<DichVu>{
     public List<Object[]> timDichVu(String tenDichVu) {
         return getRawValues("select idDichVu,tenDichVu,tenDanhMuc, tenDonVi,soluongcon, format(gia,'#,0') gia from dichVu a \n" +
                             "join donViTinh b on a.idDonViTinh = b.idDonViTinh\n" +
-                            "join danhMuc dm on dm.idDanhMuc=a.idDanhMuc where a.tinhTrang=1 and tenDichVu like N'%"+tenDichVu+"%'");
+                            "join danhMuc dm on dm.idDanhMuc=a.idDanhMuc where  tenDichVu like N'%"+tenDichVu+"%'");
     }
     
     public List<Object[]> getDichVuId(int idDanhMuc) {
